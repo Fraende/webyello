@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebYello — Websites that make people smile</title>
+<meta name="description" content="WebYello designs and builds beautiful, intuitive websites that turn visitors into customers. Design, development, and care — all in one friendly studio.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#FFC800;
+    --yellow-soft:#FFF3C4;
+    --coral:#FF5D73;
+    --purple:#6C4DF6;
+    --teal:#00C2A8;
+    --ink:#1D1B2E;
+    --ink-soft:#4E4B66;
+    --paper:#FFFDF5;
+    --radius:22px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'DM Sans',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Sora',sans-serif;line-height:1.15}
+  img{max-width:100%}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  .eyebrow{
+    display:inline-block;font-weight:700;font-size:.82rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--purple);
+    background:#EEE9FF;padding:6px 14px;border-radius:999px;margin-bottom:16px;
+  }
+  section{padding:96px 0}
+  .btn{
+    display:inline-block;font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;
+    padding:16px 32px;border-radius:999px;text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease;cursor:pointer;border:none;
+  }
+  .btn:hover{transform:translateY(-3px) rotate(-1deg)}
+  .btn-primary{background:var(--ink);color:#fff;box-shadow:0 6px 0 var(--yellow)}
+  .btn-primary:hover{box-shadow:0 9px 0 var(--yellow)}
+  .btn-ghost{background:transparent;color:var(--ink);border:3px solid var(--ink)}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;background:rgba(255,253,245,.9);
+    backdrop-filter:blur(10px);border-bottom:3px solid var(--ink);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1120px;margin:0 auto;gap:14px}
+  .logo{display:flex;align-items:center;text-decoration:none}
+  .logo-badge{height:42px;width:151px;display:block}
+  .nav-links{display:flex;gap:28px;align-items:center;list-style:none}
+  .nav-links a{text-decoration:none;font-weight:500;font-size:.95rem}
+  .nav-links a:hover{color:var(--purple)}
+  .nav-cta{background:var(--yellow);border:3px solid var(--ink);padding:9px 20px;border-radius:999px;font-weight:700;box-shadow:3px 3px 0 var(--ink);transition:all .15s}
+  .nav-cta:hover{box-shadow:1px 1px 0 var(--ink);transform:translate(2px,2px);color:var(--ink)!important}
+  .nav-right{display:flex;align-items:center;gap:14px}
+  .lang-toggle{
+    display:flex;border:3px solid var(--ink);border-radius:999px;overflow:hidden;
+    font-family:'Sora',sans-serif;font-weight:700;font-size:.82rem;
+  }
+  .lang-toggle button{
+    border:none;background:#fff;padding:7px 13px;cursor:pointer;
+    font:inherit;color:var(--ink-soft);
+  }
+  .lang-toggle button.active{background:var(--ink);color:var(--yellow)}
+  .menu-btn{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer}
+
+  /* HERO */
+  .hero{position:relative;padding:110px 0 130px;overflow:hidden}
+  .blob{position:absolute;border-radius:50%;filter:blur(2px);z-index:0;opacity:.55}
+  .blob-1{width:420px;height:420px;background:var(--yellow);top:-140px;right:-100px;border-radius:44% 56% 60% 40%/50% 44% 56% 50%}
+  .blob-2{width:260px;height:260px;background:#FFD9E0;bottom:-80px;left:-70px;border-radius:60% 40% 44% 56%/44% 60% 40% 56%}
+  .blob-3{width:150px;height:150px;background:#DFF8F3;top:40%;right:18%;border-radius:56% 44% 60% 40%/50% 56% 44% 50%}
+  .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  .hero h1{font-size:clamp(2.4rem,5.4vw,4rem);font-weight:800;margin-bottom:22px}
+  .hero h1 .hl{position:relative;white-space:nowrap}
+  .hero h1 .hl::after{
+    content:"";position:absolute;left:-2%;right:-2%;bottom:6%;height:38%;
+    background:var(--yellow);z-index:-1;border-radius:6px;transform:rotate(-1.5deg);
+  }
+  .hero p.lead{font-size:1.22rem;color:var(--ink-soft);margin-bottom:34px;max-width:34rem}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+  .hero-note{margin-top:18px;font-size:.9rem;color:var(--ink-soft)}
+  .hero-card{
+    background:#fff;border:3px solid var(--ink);border-radius:var(--radius);
+    box-shadow:10px 10px 0 var(--yellow);padding:10px;transform:rotate(2deg);
+  }
+  .hero-card .browser-bar{display:flex;gap:6px;padding:10px 12px;border-bottom:3px solid var(--ink)}
+  .browser-bar i{width:12px;height:12px;border-radius:50%;display:block;border:2px solid var(--ink)}
+  .browser-bar i:nth-child(1){background:var(--coral)}
+  .browser-bar i:nth-child(2){background:var(--yellow)}
+  .browser-bar i:nth-child(3){background:var(--teal)}
+  .hero-card svg{display:block;width:100%;height:auto;border-radius:0 0 14px 14px}
+
+  /* MARQUEE */
+  .marquee{background:var(--ink);color:var(--yellow);overflow:hidden;padding:14px 0;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+  .marquee-track{display:flex;gap:48px;white-space:nowrap;animation:scroll 22s linear infinite;font-family:'Sora',sans-serif;font-weight:700;font-size:1rem}
+  .marquee-track span{display:flex;align-items:center;gap:48px}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* SECTION HEADERS */
+  .sec-head{max-width:640px;margin-bottom:56px}
+  .sec-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:800;margin-bottom:14px}
+  .sec-head p{color:var(--ink-soft);font-size:1.08rem}
+
+  /* SERVICES */
+  .services{background:#fff;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .card{
+    background:var(--paper);border:3px solid var(--ink);border-radius:var(--radius);
+    padding:30px;transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .card:hover{transform:translateY(-6px) rotate(-.6deg);box-shadow:8px 8px 0 var(--card-c,var(--yellow))}
+  .card .icon{
+    width:56px;height:56px;border-radius:16px;border:3px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+    background:var(--card-c,var(--yellow));
+  }
+  .card .icon svg{width:28px;height:28px}
+  .card h3{font-size:1.2rem;margin-bottom:10px}
+  .card p{color:var(--ink-soft);font-size:.98rem}
+  .c-yellow{--card-c:var(--yellow)} .c-coral{--card-c:#FFB3BF} .c-purple{--card-c:#CCC1FB}
+  .c-teal{--card-c:#9BE8DC} .c-pink{--card-c:#FFD9E0} .c-lemon{--card-c:var(--yellow-soft)}
+
+  /* PROCESS */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;counter-reset:step}
+  .step{position:relative;padding:28px 24px 24px;border:3px dashed var(--ink);border-radius:var(--radius);background:#fff}
+  .step::before{
+    counter-increment:step;content:counter(step);
+    position:absolute;top:-22px;left:20px;width:44px;height:44px;border-radius:50%;
+    background:var(--yellow);border:3px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Sora',sans-serif;font-weight:800;font-size:1.1rem;
+  }
+  .step:nth-child(2)::before{background:#FFB3BF}
+  .step:nth-child(3)::before{background:#CCC1FB}
+  .step:nth-child(4)::before{background:#9BE8DC}
+  .step h3{font-size:1.05rem;margin:10px 0 8px}
+  .step p{font-size:.92rem;color:var(--ink-soft)}
+
+  /* PRICING */
+  .pricing{background:var(--ink);color:var(--paper)}
+  .pricing .sec-head h2{color:#fff}
+  .pricing .sec-head p{color:#B9B6CC}
+  .pricing .eyebrow{background:#332F52;color:var(--yellow)}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .plan{background:#26233F;border:3px solid var(--paper);border-radius:var(--radius);padding:30px;display:flex;flex-direction:column;transition:transform .18s ease}
+  .plan:hover{transform:translateY(-6px)}
+  .plan.featured{background:var(--yellow);color:var(--ink);border-color:var(--ink);box-shadow:8px 8px 0 #000}
+  .plan h3{font-size:1.25rem;color:#fff;margin-bottom:4px}
+  .plan.featured h3{color:var(--ink)}
+  .plan .p-for{font-size:.92rem;color:#B9B6CC;margin-bottom:18px}
+  .plan.featured .p-for{color:#5c4d00}
+  .plan .price{font-family:'Sora',sans-serif;font-weight:800;font-size:2rem;color:var(--yellow);margin-bottom:18px}
+  .plan.featured .price{color:var(--ink)}
+  .plan ul{list-style:none;margin-bottom:24px;flex:1}
+  .plan li{margin-bottom:10px;font-size:.95rem;color:#DDD9F0;padding-left:26px;position:relative}
+  .plan.featured li{color:var(--ink)}
+  .plan li::before{content:"\2713";position:absolute;left:0;font-weight:700;color:var(--yellow)}
+  .plan.featured li::before{color:var(--ink)}
+  .plan .btn{text-align:center}
+  .plan .btn-ghost{color:#fff;border-color:#fff}
+  .plan.featured .btn-ghost{color:var(--ink);border-color:var(--ink)}
+  .plan.featured .btn-primary{box-shadow:0 6px 0 #000}
+  .pop{display:inline-block;font-size:.75rem;font-weight:700;background:var(--ink);color:var(--yellow);padding:4px 12px;border-radius:999px;margin-bottom:12px;align-self:flex-start}
+  .care-strip{margin-top:34px;background:#26233F;border:3px dashed var(--paper);border-radius:var(--radius);padding:22px 28px}
+  .care-strip p{color:#DDD9F0;font-size:.98rem;margin:0}
+  .care-strip b{color:var(--yellow)}
+  .vat-note{margin-top:16px;font-size:.85rem;color:#8f8ba8}
+
+  /* CTA / CONTACT */
+  .contact{background:var(--yellow);border-top:3px solid var(--ink)}
+  .contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .contact h2{font-size:clamp(2rem,4vw,2.9rem);font-weight:800;margin-bottom:16px}
+  .contact p.lead{font-size:1.12rem;color:var(--ink);margin-bottom:26px;max-width:30rem}
+  .contact-list{list-style:none;font-weight:500}
+  .contact-list li{margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .contact-list .dot{width:12px;height:12px;border-radius:4px;background:var(--ink);display:inline-block;transform:rotate(12deg);flex-shrink:0}
+  form{background:var(--paper);border:3px solid var(--ink);border-radius:var(--radius);padding:34px;box-shadow:10px 10px 0 var(--ink)}
+  label{display:block;font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:6px}
+  input,textarea,select{
+    width:100%;padding:13px 16px;margin-bottom:18px;font-family:'DM Sans',sans-serif;font-size:1rem;
+    border:3px solid var(--ink);border-radius:14px;background:#fff;
+  }
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px #CCC1FB}
+  form .btn{width:100%}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:#B9B6CC;padding:40px 0}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px}
+  .foot .logo-badge{height:36px;width:130px}
+  .foot a{color:#B9B6CC;text-decoration:none;margin-left:22px;font-size:.92rem}
+  .foot a:hover{color:var(--yellow)}
+
+  @media(max-width:900px){
+    section{padding:72px 0}
+    .hero{padding:70px 0 90px}
+    .hero-inner{grid-template-columns:1fr}
+    .hero-card{max-width:480px;margin:0 auto}
+    .cards{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:1fr 1fr;row-gap:44px}
+    .plans{grid-template-columns:1fr}
+    .contact-inner{grid-template-columns:1fr}
+  }
+  @media(max-width:640px){
+    .nav-links{
+      display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;
+      background:var(--paper);border-bottom:3px solid var(--ink);padding:20px 24px;gap:16px;align-items:flex-start;
+    }
+    .nav-links.open{display:flex}
+    .menu-btn{display:block}
+    .cards{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr;row-gap:44px}
+  }
+</style>
+</head>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg"><symbol id="wyLogo" viewBox="0 0 2000 555"><rect x='10' y='10' width='1980' height='535' rx='115' fill='#F8C800' stroke='#1a1a1a' stroke-width='14'/>
+  <path d='M1046 32 H1863 Q1968 32 1968 137 V418 Q1968 523 1863 523 H1046 Z' fill='#1a1a1a'/>
+  <circle cx='205' cy='277' r='165' fill='none' stroke='#1a1a1a' stroke-width='17'/>
+  <circle cx='205' cy='277' r='125' fill='#1a1a1a'/>
+  <ellipse cx='205' cy='277' rx='55' ry='125' fill='none' stroke='#F8C800' stroke-width='14'/>
+  <line x1='97' y1='215' x2='313' y2='215' stroke='#F8C800' stroke-width='14'/>
+  <line x1='80' y1='277' x2='330' y2='277' stroke='#F8C800' stroke-width='14'/>
+  <line x1='97' y1='339' x2='313' y2='339' stroke='#F8C800' stroke-width='14'/>
+  <path d='M515.98 422L432.19 422L395.27 78.25L462.46 78.25L481.41 295.24L500.74 78.25L564.80 78.25L583.16 295.24L601.52 78.25L669.49 78.25L631.99 422L549.57 422L532.38 256.57L515.98 422M831.99 422L690 422L690 78.25L827.50 78.25L827.50 144.66L759.92 144.66L759.92 211.65L824.77 211.65L824.77 276.30L759.92 276.30L759.92 355.01L831.99 355.01L831.99 422M947.81 422L854.65 422L854.65 78.25L947.81 78.25Q985.31 78.25 1002.40 96.51Q1019.49 114.77 1019.49 156.77L1019.49 171.80Q1019.49 196.02 1010.80 211.06Q1002.11 226.10 984.34 230.79Q1007.58 236.65 1015.49 258.23Q1023.40 279.81 1023.40 310.87Q1023.40 344.27 1017.15 369.27Q1010.90 394.27 994.49 408.13Q978.09 422 947.81 422M921.84 131.38L921.84 207.74L935.90 207.74Q945.47 207.74 948.20 200.32Q950.94 192.90 950.94 182.55L950.94 147.98Q950.94 131.38 936.29 131.38L921.84 131.38M928.67 361.45Q955.43 361.45 955.43 336.06L955.43 293.09Q955.43 278.45 951.04 269.95Q946.64 261.45 934.53 261.45L921.84 261.45L921.84 361.06Q926.13 361.45 928.67 361.45' fill='#1a1a1a'/>
+  <path d='M1181.68 422L1116.84 422L1116.84 308.91L1061.95 78.25L1130.12 78.25L1149.26 194.66L1168.40 78.25L1236.37 78.25L1181.68 308.91L1181.68 422M1395.74 422L1253.75 422L1253.75 78.25L1391.25 78.25L1391.25 144.66L1323.67 144.66L1323.67 211.65L1388.52 211.65L1388.52 276.30L1323.67 276.30L1323.67 355.01L1395.74 355.01L1395.74 422M1557.85 422L1418.40 422L1418.40 78.25L1487.15 78.25L1487.15 363.41L1557.85 363.41L1557.85 422M1716.84 422L1577.38 422L1577.38 78.25L1646.13 78.25L1646.13 363.41L1716.84 363.41L1716.84 422M1818.40 425.13Q1777.19 425.13 1755.41 400.22Q1733.63 375.32 1733.63 328.25L1733.63 164.97Q1733.63 120.83 1755.21 97.98Q1776.80 75.13 1818.40 75.13Q1860 75.13 1881.58 97.98Q1903.16 120.83 1903.16 164.97L1903.16 328.25Q1903.16 375.32 1881.39 400.22Q1859.61 425.13 1818.40 425.13M1818.98 361.84Q1834.61 361.84 1834.61 331.57L1834.61 163.80Q1834.61 138.41 1819.38 138.41Q1802.19 138.41 1802.19 164.38L1802.19 331.96Q1802.19 347.98 1806.09 354.91Q1810 361.84 1818.98 361.84' fill='#F8C800'/></symbol></svg>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#top" aria-label="WebYello"><svg class="logo-badge"><use href="#wyLogo"/></svg></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services" data-i18n="nav_services">Services</a></li>
+      <li><a href="#process" data-i18n="nav_process">Process</a></li>
+      <li><a href="#pricing" data-i18n="nav_pricing">Pricing</a></li>
+      <li><a class="nav-cta" href="#contact" data-i18n="nav_cta">Start a project</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button id="btnEn" onclick="setLang('en')">EN</button>
+        <button id="btnFi" onclick="setLang('fi')">FI</button>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="wrap hero-inner">
+    <div>
+      <span class="eyebrow" data-i18n="hero_eyebrow">Website design &amp; development studio</span>
+      <h1 data-i18n="hero_h1">Websites that make people <span class="hl">smile</span> — and click.</h1>
+      <p class="lead" data-i18n="hero_lead">WebYello designs and builds beautiful, intuitive websites that turn curious visitors into happy customers. Big agency polish, small studio heart.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contact" data-i18n="hero_cta1">Let's build yours</a>
+        <a class="btn btn-ghost" href="#pricing" data-i18n="hero_cta2">See pricing</a>
+      </div>
+      <p class="hero-note" data-i18n="hero_note">✓ Free 30-minute discovery call &nbsp;·&nbsp; ✓ No jargon, ever</p>
+    </div>
+    <div class="hero-card" aria-hidden="true">
+      <div class="browser-bar"><i></i><i></i><i></i></div>
+      <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="260" fill="#FFFDF5"/>
+        <rect x="24" y="24" width="120" height="14" rx="7" fill="#1D1B2E"/>
+        <rect x="24" y="52" width="200" height="26" rx="8" fill="#FFC800"/>
+        <rect x="24" y="90" width="240" height="10" rx="5" fill="#D9D6E8"/>
+        <rect x="24" y="108" width="180" height="10" rx="5" fill="#D9D6E8"/>
+        <rect x="24" y="136" width="96" height="30" rx="15" fill="#1D1B2E"/>
+        <circle cx="330" cy="80" r="46" fill="#FF5D73"/>
+        <circle cx="330" cy="80" r="46" fill="none" stroke="#1D1B2E" stroke-width="4"/>
+        <rect x="280" y="150" width="96" height="66" rx="12" fill="#6C4DF6"/>
+        <rect x="24" y="190" width="72" height="46" rx="10" fill="#00C2A8"/>
+        <rect x="108" y="190" width="72" height="46" rx="10" fill="#FFC800"/>
+        <rect x="192" y="190" width="72" height="46" rx="10" fill="#FFD9E0"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span data-i18n="marquee">DESIGN ✦ DEVELOPMENT ✦ BRANDING ✦ E-COMMERCE ✦ SEO ✦ CARE PLANS ✦&nbsp;</span>
+    <span data-i18n="marquee">DESIGN ✦ DEVELOPMENT ✦ BRANDING ✦ E-COMMERCE ✦ SEO ✦ CARE PLANS ✦&nbsp;</span>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="sv_eyebrow">What we do</span>
+      <h2 data-i18n="sv_h2">Everything your website needs, under one sunny roof.</h2>
+      <p data-i18n="sv_p">From first sketch to launch day (and long after), we handle the whole journey so you can focus on running your business.</p>
+    </div>
+    <div class="cards">
+      <div class="card c-yellow">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1D1B2E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+        <h3 data-i18n="sv1_t">Website Design</h3>
+        <p data-i18n="sv1_p">Custom designs that capture your personality and guide visitors exactly where you want them — no templates, no cookie cutters.</p>
+      </div>
+      <div class="card c-coral">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1D1B2E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <h3 data-i18n="sv2_t">Web Development</h3>
+        <p data-i18n="sv2_p">Fast, secure, standards-compliant builds that work flawlessly on every device — from quick landing pages to complex platforms.</p>
+      </div>
+      <div class="card c-purple">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1D1B2E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1.5"/><circle cx="19" cy="21" r="1.5"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg></div>
+        <h3 data-i18n="sv3_t">E-commerce</h3>
+        <p data-i18n="sv3_p">Online stores that make buying a breeze — smooth checkout, smart product pages, and integrations with the tools you already use.</p>
+      </div>
+      <div class="card c-teal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1D1B2E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg></div>
+        <h3 data-i18n="sv4_t">SEO &amp; Performance</h3>
+        <p data-i18n="sv4_p">Lightning-fast load times and search-friendly structure, so the right people actually find you — and stick around.</p>
+      </div>
+      <div class="card c-pink">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1D1B2E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 6.9H21l-5.4 4.2 2 6.9-5.6-4.2L6.4 20l2-6.9L3 8.9h6.6z"/></svg></div>
+        <h3 data-i18n="sv5_t">Branding &amp; Identity</h3>
+        <p data-i18n="sv5_p">Logos, colors, and voice that feel unmistakably you — a consistent identity across your website and beyond.</p>
+      </div>
+      <div class="card c-lemon">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1D1B2E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3 data-i18n="sv6_t">Care &amp; Support</h3>
+        <p data-i18n="sv6_p">Updates, backups, security, and tweaks handled for you every month — your site stays fresh while you sleep easy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="pr_eyebrow">How it works</span>
+      <h2 data-i18n="pr_h2">A friendly process with zero surprises.</h2>
+      <p data-i18n="pr_p">Four clear steps from "nice to meet you" to "we're live!" — you'll always know exactly where your project stands.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <h3 data-i18n="st1_t">Discover</h3>
+        <p data-i18n="st1_p">We chat about your goals, audience, and style over a free discovery call. You talk, we listen (and take a lot of notes).</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="st2_t">Design</h3>
+        <p data-i18n="st2_p">You get clickable mockups to react to — we refine together until the design feels exactly right.</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="st3_t">Build</h3>
+        <p data-i18n="st3_p">We turn the design into a fast, responsive, pixel-perfect website, with progress previews along the way.</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="st4_t">Launch &amp; grow</h3>
+        <p data-i18n="st4_p">We go live, pop the confetti, and stick around with care plans, analytics, and improvements.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow" data-i18n="pc_eyebrow">Pricing</span>
+      <h2 data-i18n="pc_h2">Clear packages, honest prices.</h2>
+      <p data-i18n="pc_p">We're a brand-new studio, and we say it out loud: no imaginary portfolio, no invented reviews. What you get instead is founder-level attention on every single project — and pricing to match.</p>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <h3 data-i18n="p1_t">Launch</h3>
+        <div class="p-for" data-i18n="p1_for">For getting online fast</div>
+        <div class="price" data-i18n="p1_price">from €690</div>
+        <ul>
+          <li data-i18n="p1_f1">One polished one-page website</li>
+          <li data-i18n="p1_f2">Mobile-first and lightning fast</li>
+          <li data-i18n="p1_f3">Contact form and map</li>
+          <li data-i18n="p1_f4">Basic SEO setup</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact" data-i18n="p_cta1">Ask for a quote</a>
+      </div>
+      <div class="plan featured">
+        <span class="pop" data-i18n="p2_pop">Most popular</span>
+        <h3 data-i18n="p2_t">Business</h3>
+        <div class="p-for" data-i18n="p2_for">For a complete company site</div>
+        <div class="price" data-i18n="p2_price">from €1,390</div>
+        <ul>
+          <li data-i18n="p2_f1">Up to 5 custom-designed pages</li>
+          <li data-i18n="p2_f2">Bilingual (FI/EN) structure</li>
+          <li data-i18n="p2_f3">Blog or news section</li>
+          <li data-i18n="p2_f4">SEO and analytics setup</li>
+        </ul>
+        <a class="btn btn-primary" href="#contact" data-i18n="p_cta2">Ask for a quote</a>
+      </div>
+      <div class="plan">
+        <h3 data-i18n="p3_t">Store</h3>
+        <div class="p-for" data-i18n="p3_for">For selling online</div>
+        <div class="price" data-i18n="p3_price">from €2,490</div>
+        <ul>
+          <li data-i18n="p3_f1">Full online store</li>
+          <li data-i18n="p3_f2">Payments and shipping set up</li>
+          <li data-i18n="p3_f3">Product page templates</li>
+          <li data-i18n="p3_f4">Training so you can run it yourself</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact" data-i18n="p_cta3">Ask for a quote</a>
+      </div>
+    </div>
+    <div class="care-strip">
+      <p data-i18n="pcare"><b>Care plan — €59/month:</b> updates, backups, security and small changes handled for you, so your site stays fresh.</p>
+    </div>
+    <p class="vat-note" data-i18n="pc_vat">Prices exclude VAT (25.5%). Every project starts with a free discovery call and a fixed quote — no surprises.</p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-inner">
+    <div>
+      <span class="eyebrow" style="background:#fff" data-i18n="ct_eyebrow">Say hello</span>
+      <h2 data-i18n="ct_h2">Ready to give your business the website it deserves?</h2>
+      <p class="lead" data-i18n="ct_lead">Tell us a little about your project and we'll get back to you within one business day with ideas, honest advice, and a clear quote.</p>
+      <ul class="contact-list">
+        <li><span class="dot"></span> <span>hello@webyello.com</span></li>
+        <li><span class="dot"></span> <span data-i18n="ct_l2">Free 30-minute discovery call</span></li>
+        <li><span class="dot"></span> <span data-i18n="ct_l3">Clear, fixed-price quotes</span></li>
+      </ul>
+    </div>
+    <form id="contactForm">
+      <label for="name" data-i18n="f_name">Your name</label>
+      <input id="name" type="text" placeholder="Jane Doe" data-i18n-ph="f_name_ph" required>
+      <label for="email" data-i18n="f_email">Email</label>
+      <input id="email" type="email" placeholder="jane@example.com" data-i18n-ph="f_email_ph" required>
+      <label for="type" data-i18n="f_type">What do you need?</label>
+      <select id="type">
+        <option data-i18n="f_o1">A brand-new website</option>
+        <option data-i18n="f_o2">A redesign of my current site</option>
+        <option data-i18n="f_o3">An online store</option>
+        <option data-i18n="f_o4">Ongoing care &amp; support</option>
+        <option data-i18n="f_o5">Something else</option>
+      </select>
+      <label for="msg" data-i18n="f_msg">Tell us about your project</label>
+      <textarea id="msg" rows="4" placeholder="We run a small bakery and need a site that smells as good as our bread…" data-i18n-ph="f_msg_ph"></textarea>
+      <button class="btn btn-primary" type="submit" data-i18n="f_send">Send it our way →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <a class="logo" href="#top" aria-label="WebYello"><svg class="logo-badge"><use href="#wyLogo"/></svg></a>
+    <div>
+      <a href="#services" data-i18n="nav_services">Services</a>
+      <a href="#pricing" data-i18n="nav_pricing">Pricing</a>
+      <a href="#contact" data-i18n="ft_contact">Contact</a>
+    </div>
+    <small data-i18n="ft_copy">© 2026 WebYello. Made with plenty of yellow.</small>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  const btn=document.getElementById('menuBtn'),links=document.getElementById('navLinks');
+  btn.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+  // ---- i18n ----
+  const I18N={en:{},fi:{
+    nav_services:"Palvelut",nav_process:"Prosessi",nav_pricing:"Hinnat",nav_cta:"Aloita projekti",
+    hero_eyebrow:"Verkkosivujen suunnittelu- ja kehitysstudio",
+    hero_h1:'Verkkosivut, jotka saavat ihmiset <span class="hl">hymyilemään</span> — ja klikkaamaan.',
+    hero_lead:"WebYello suunnittelee ja rakentaa kauniita, intuitiivisia verkkosivuja, jotka muuttavat uteliaat kävijät tyytyväisiksi asiakkaiksi. Ison toimiston laatu, pienen studion sydän.",
+    hero_cta1:"Rakennetaan omasi",hero_cta2:"Katso hinnat",
+    hero_note:"✓ Maksuton 30 minuutin kartoituspuhelu &nbsp;·&nbsp; ✓ Ei ammattislangia, koskaan",
+    marquee:"SUUNNITTELU ✦ KEHITYS ✦ BRÄNDÄYS ✦ VERKKOKAUPPA ✦ SEO ✦ YLLÄPITO ✦&nbsp;",
+    sv_eyebrow:"Mitä teemme",sv_h2:"Kaikki mitä verkkosivusi tarvitsee, saman aurinkoisen katon alla.",
+    sv_p:"Ensimmäisestä luonnoksesta julkaisupäivään (ja pitkälle sen jälkeen) hoidamme koko matkan, jotta sinä voit keskittyä liiketoimintaasi.",
+    sv1_t:"Verkkosivujen suunnittelu",sv1_p:"Räätälöidyt ulkoasut, jotka vangitsevat persoonallisuutesi ja ohjaavat kävijät juuri sinne, minne haluat — ei valmispohjia.",
+    sv2_t:"Web-kehitys",sv2_p:"Nopeat, turvalliset ja standardien mukaiset toteutukset, jotka toimivat moitteettomasti kaikilla laitteilla — laskeutumissivuista laajoihin alustoihin.",
+    sv3_t:"Verkkokauppa",sv3_p:"Verkkokaupat, joissa ostaminen on helppoa — sujuva kassa, fiksut tuotesivut ja integraatiot työkaluihin, joita jo käytät.",
+    sv4_t:"SEO &amp; suorituskyky",sv4_p:"Salamannopeat latausajat ja hakukoneystävällinen rakenne, jotta oikeat ihmiset löytävät sinut — ja jäävät.",
+    sv5_t:"Brändäys &amp; ilme",sv5_p:"Logot, värit ja äänensävy, jotka tuntuvat erehtymättömästi sinulta — yhtenäinen ilme verkkosivuilla ja niiden ulkopuolella.",
+    sv6_t:"Ylläpito &amp; tuki",sv6_p:"Päivitykset, varmuuskopiot, tietoturva ja pikkufiksaukset hoidettuna joka kuukausi — sivustosi pysyy tuoreena ja sinä nukut yösi rauhassa.",
+    pr_eyebrow:"Näin se toimii",pr_h2:"Mutkaton prosessi ilman yllätyksiä.",
+    pr_p:"Neljä selkeää vaihetta \"hauska tavata\" -hetkestä \"olemme livenä!\" -hetkeen — tiedät aina, missä projektisi on menossa.",
+    st1_t:"Kartoitus",st1_p:"Juttelemme tavoitteistasi, yleisöstäsi ja tyylistäsi maksuttomalla kartoituspuhelulla. Sinä puhut, me kuuntelemme (ja teemme paljon muistiinpanoja).",
+    st2_t:"Suunnittelu",st2_p:"Saat klikkailtavat mallit kommentoitavaksi — hiomme yhdessä, kunnes ulkoasu tuntuu juuri oikealta.",
+    st3_t:"Toteutus",st3_p:"Muutamme suunnitelman nopeaksi, responsiiviseksi ja pikseleitä myöten viimeistellyksi sivustoksi — näet edistymisen matkan varrella.",
+    st4_t:"Julkaisu &amp; kasvu",st4_p:"Julkaisemme, poksautamme konfetit ja jäämme rinnallesi ylläpidon, analytiikan ja jatkokehityksen kanssa.",
+    pc_eyebrow:"Hinnasto",pc_h2:"Selkeät paketit, rehelliset hinnat.",
+    pc_p:"Olemme upouusi studio, ja sanomme sen suoraan: ei keksittyä portfoliota eikä tekaistuja arvosteluja. Sen sijaan saat perustajan täyden huomion jokaiseen projektiin — ja hinnat sen mukaan.",
+    p1_t:"Startti",p1_for:"Kun haluat nopeasti verkkoon",p1_price:"alk. 690 €",
+    p1_f1:"Viimeistelty yhden sivun sivusto",p1_f2:"Mobiiliystävällinen ja salamannopea",p1_f3:"Yhteydenottolomake ja kartta",p1_f4:"SEO-perusasetukset",
+    p2_pop:"Suosituin",p2_t:"Yrityssivut",p2_for:"Kokonainen yrityssivusto",p2_price:"alk. 1 390 €",
+    p2_f1:"Jopa 5 räätälöityä sivua",p2_f2:"Kaksikielinen (FI/EN) rakenne",p2_f3:"Blogi- tai uutisosio",p2_f4:"SEO- ja analytiikka-asetukset",
+    p3_t:"Verkkokauppa",p3_for:"Kun haluat myydä verkossa",p3_price:"alk. 2 490 €",
+    p3_f1:"Täysi verkkokauppa",p3_f2:"Maksut ja toimitukset valmiiksi",p3_f3:"Tuotesivupohjat",p3_f4:"Koulutus, jotta pyörität kauppaa itse",
+    p_cta1:"Pyydä tarjous",p_cta2:"Pyydä tarjous",p_cta3:"Pyydä tarjous",
+    pcare:"<b>Ylläpitopaketti — 59 €/kk:</b> päivitykset, varmuuskopiot, tietoturva ja pienet muutokset hoidettuna puolestasi — sivustosi pysyy tuoreena.",
+    pc_vat:"Hintoihin lisätään alv (25,5 %). Jokainen projekti alkaa maksuttomalla kartoituspuhelulla ja kiinteällä tarjouksella — ei yllätyksiä.",
+    ct_eyebrow:"Sano hei",ct_h2:"Valmis antamaan yrityksellesi verkkosivut, jotka se ansaitsee?",
+    ct_lead:"Kerro hieman projektistasi, niin palaamme asiaan yhden arkipäivän kuluessa — ideoiden, rehellisten neuvojen ja selkeän tarjouksen kera.",
+    ct_l2:"Maksuton 30 minuutin kartoituspuhelu",ct_l3:"Selkeät kiinteähintaiset tarjoukset",
+    f_name:"Nimesi",f_name_ph:"Maija Meikäläinen",
+    f_email:"Sähköposti",f_email_ph:"maija@esimerkki.fi",
+    f_type:"Mitä tarvitset?",
+    f_o1:"Kokonaan uudet verkkosivut",f_o2:"Nykyisen sivuston uudistuksen",f_o3:"Verkkokaupan",f_o4:"Jatkuvaa ylläpitoa &amp; tukea",f_o5:"Jotain muuta",
+    f_msg:"Kerro projektistasi",
+    f_msg_ph:"Pyöritämme pientä leipomoa ja tarvitsemme sivut, jotka tuoksuvat yhtä hyvältä kuin leipämme…",
+    f_send:"Lähetä matkaan →",
+    ft_contact:"Yhteystiedot",ft_copy:"© 2026 WebYello. Tehty suurella määrällä keltaista.",
+    _title:"WebYello — Verkkosivut, jotka saavat hymyilemään",
+    _thanks:"🎉 Kiitos! Palaamme asiaan yhden arkipäivän kuluessa."
+  }};
+  I18N.en._title="WebYello — Websites that make people smile";
+  I18N.en._thanks="🎉 Thanks! We'll be in touch within one business day.";
+
+  // Capture English defaults from the markup
+  document.querySelectorAll('[data-i18n]').forEach(el=>{I18N.en[el.dataset.i18n]??=el.innerHTML});
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{I18N.en[el.dataset.i18nPh]??=el.placeholder});
+
+  let lang='en';
+  function setLang(l){
+    lang=l;
+    const d=I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const v=d[el.dataset.i18n]; if(v!=null) el.innerHTML=v;
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+      const v=d[el.dataset.i18nPh]; if(v!=null) el.placeholder=v;
+    });
+    document.documentElement.lang=l;
+    document.title=d._title;
+    document.getElementById('btnEn').classList.toggle('active',l==='en');
+    document.getElementById('btnFi').classList.toggle('active',l==='fi');
+  }
+  // Default: Finnish for Finnish browsers, English otherwise
+  setLang((navigator.language||'').toLowerCase().startsWith('fi')?'fi':'en');
+
+  // Contact form
+  document.getElementById('contactForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    this.innerHTML='<h3 style="font-size:1.4rem">'+I18N[lang]._thanks+'</h3>';
+  });
+</script>
+</body>
+</html>
