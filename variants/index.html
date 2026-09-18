@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WebYello — Design variants</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,'Segoe UI',sans-serif;background:#1a1a1a;color:#eee;padding:40px 24px}
+  h1{font-size:1.3rem;margin:0 0 6px}
+  p.intro{margin:0 0 36px;color:#999;font-size:.95rem;max-width:640px}
+  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto}
+  .card{background:#232323;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+  .card .swatch{height:8px}
+  .a .swatch{background:linear-gradient(90deg,#2452C6,#E14328,#F2B705)}
+  .b .swatch{background:linear-gradient(90deg,#0B2C4D,#8FE0F2,#FF7A29)}
+  .c .swatch{background:linear-gradient(90deg,#FF3B81,#0078BF,#EFE9DC)}
+  .card .body{padding:22px 24px;flex:1;display:flex;flex-direction:column}
+  .card h2{font-size:1.1rem;margin:0 0 10px}
+  .card p{font-size:.9rem;color:#bbb;line-height:1.5;flex:1}
+  .card a{display:inline-block;margin-top:16px;padding:11px 18px;background:#fff;color:#111;text-decoration:none;border-radius:999px;font-size:.88rem;font-weight:600;text-align:center}
+  @media(max-width:900px){.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<h1>WebYello — three visual directions</h1>
+<p class="intro">Same real content (services, process, pricing, contact form) as the live site, each rebuilt in a fully distinct visual identity for comparison. Open each in its own tab for the truest side-by-side look.</p>
+<div class="cols">
+  <div class="card a">
+    <div class="swatch"></div>
+    <div class="body">
+      <h2>A — Nordic Print</h2>
+      <p>Flat color-blocked "fabric swatch" system in cobalt, poppy, and mustard — grounded in Nordic/Finnish textile and print design. Familjen Grotesk display type, no shadows, no borders beyond hairlines.</p>
+      <a href="/variants/nordic.html">Open Nordic Print ↗</a>
+    </div>
+  </div>
+  <div class="card b">
+    <div class="swatch"></div>
+    <div class="body">
+      <h2>B — Workshop Blueprint</h2>
+      <p>Dark blueprint-navy technical-drawing world — grid paper background, corner registration marks, dimension lines, spec-sheet pricing. Ties directly to "we build your website."</p>
+      <a href="/variants/blueprint.html">Open Blueprint ↗</a>
+    </div>
+  </div>
+  <div class="card c">
+    <div class="swatch"></div>
+    <div class="body">
+      <h2>C — Riso Zine</h2>
+      <p>Risograph-print duotone (fluorescent pink + blue, multiply overlap), halftone texture, tilted ticket-stub cards. Playful, indie-studio energy.</p>
+      <a href="/variants/riso.html">Open Riso Zine ↗</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

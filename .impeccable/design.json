@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-18T00:00:00Z",
+  "title": "Design System: WebYello",
+  "extensions": {
+    "colorMeta": {
+      "riso-yellow": { "role": "primary", "displayName": "Riso Yellow", "canonical": "#F7C600", "tonalRamp": ["#3d3100", "#7c6300", "#bb9600", "#f9c800", "#ffd839", "#ffe477", "#fff1b6", "#fffdf5"] },
+      "riso-yellow-ink": { "role": "primary-text-safe", "displayName": "Yellow Ink", "canonical": "#8A6D00" },
+      "riso-blue": { "role": "secondary", "displayName": "Riso Blue", "canonical": "#0078BF", "tonalRamp": ["#00263d", "#004e7c", "#0075bb", "#009df9", "#39b5ff", "#77cdff", "#b6e4ff", "#f5fbff"] },
+      "overlap-olive": { "role": "tertiary", "displayName": "Overlap Olive", "canonical": "#5B8C3E", "tonalRamp": ["#1c2a13", "#385626", "#548139", "#70ad4c", "#92c276", "#b5d5a1", "#d7e9cd", "#f9fcf8"] },
+      "uncoated-paper": { "role": "neutral", "displayName": "Uncoated Paper", "canonical": "#E4E6E2", "tonalRamp": ["#1f211c", "#3e4339", "#5d6456", "#7d8673", "#9ca395", "#bbc0b6", "#dbddd8", "#fafafa"] },
+      "riso-black": { "role": "neutral", "displayName": "Riso Black", "canonical": "#1A1A1A" },
+      "ink-muted": { "role": "neutral-text", "displayName": "Ink Muted", "canonical": "#404040" },
+      "ink-faint": { "role": "neutral-text", "displayName": "Ink Faint", "canonical": "#5A5A5A" },
+      "paper-muted": { "role": "neutral-text", "displayName": "Paper Muted", "canonical": "#C9C9C9" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headline, section headings, card titles, prices, buttons, badges." },
+      "body": { "displayName": "Body", "purpose": "Paragraph copy and form fields." }
+    },
+    "shadows": [
+      { "name": "card-accent", "value": "5px 5px 0 var(--accent)", "purpose": "Services ticket depth, accent color cycles yellow/blue/olive per card." },
+      { "name": "pricing-accent", "value": "6px 6px 0 var(--ink)", "purpose": "Pricing plan depth; ink for featured plan, olive for the rest." },
+      { "name": "button-accent", "value": "4px 4px 0 var(--ink)", "purpose": "Primary/secondary button depth." }
+    ],
+    "motion": [
+      { "name": "hover-lift", "value": "translateY(-2px) / translateY(-4px)", "purpose": "Buttons lift 2px on hover; cards lift 4px. No easing curve beyond the browser default 150ms ease." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "900px" },
+      { "name": "sm", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main call-to-action button, yellow fill with a hard ink shadow.",
+      "html": "<a class=\"ds-btn ds-btn-primary\" href=\"#\">Let's build yours</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; padding: 14px 28px; border-radius: 6px; font-size: 1rem; cursor: pointer; border: 2.5px solid #1A1A1A; transition: transform 0.15s ease; } .ds-btn:hover { transform: translateY(-2px); } .ds-btn-primary { background: #F7C600; color: #1A1A1A; box-shadow: 4px 4px 0 #1A1A1A; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary/low-emphasis button, transparent with an ink border.",
+      "html": "<a class=\"ds-btn ds-btn-ghost\" href=\"#\">See pricing</a>",
+      "css": ".ds-btn-ghost { background: transparent; color: #1A1A1A; box-shadow: none; }"
+    },
+    {
+      "name": "Service Ticket",
+      "kind": "card",
+      "refersTo": "card-ticket",
+      "description": "A services-grid card styled like a torn ticket stub, with a perforation dot and a colored hard shadow.",
+      "html": "<div class=\"ds-ticket\"><h3>Website Design</h3><p>Custom designs that capture your personality.</p></div>",
+      "css": ".ds-ticket { background: #fff; border: 2.5px solid #1A1A1A; border-radius: 10px; padding: 26px 22px; position: relative; transform: rotate(-1deg); box-shadow: 5px 5px 0 #F7C600; } .ds-ticket::before { content: ''; position: absolute; top: -9px; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; background: #E4E6E2; border: 2.5px solid #1A1A1A; border-radius: 50%; } .ds-ticket h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.15rem; margin-bottom: 8px; } .ds-ticket p { font-family: 'Karla', sans-serif; font-size: 0.92rem; color: #4A4A4A; }"
+    },
+    {
+      "name": "Featured Pricing Plan",
+      "kind": "card",
+      "refersTo": "card-pricing-featured",
+      "description": "The highlighted pricing tier: full yellow fill, ink text, corner ribbon badge instead of a kicker label.",
+      "html": "<div class=\"ds-plan-feat\"><span class=\"ds-pop\">Most popular</span><h3>Business</h3><div class=\"ds-price\">from &euro;1,390</div></div>",
+      "css": ".ds-plan-feat { background: #F7C600; color: #1A1A1A; border: 2.5px solid #1A1A1A; border-radius: 10px; padding: 28px 24px; position: relative; transform: rotate(-1deg); box-shadow: 6px 6px 0 #1A1A1A; } .ds-pop { position: absolute; top: -12px; right: 18px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 0.72rem; font-weight: 700; background: #1A1A1A; color: #E4E6E2; padding: 5px 12px; border-radius: 999px; transform: rotate(-4deg); } .ds-plan-feat h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.25rem; } .ds-price { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.9rem; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": null,
+      "description": "Form field: ink border, blue focus state, no glow ring.",
+      "html": "<label class=\"ds-label\" for=\"ds-name\">Your name</label><input class=\"ds-input\" id=\"ds-name\" type=\"text\" placeholder=\"Jane Doe\">",
+      "css": ".ds-label { display: block; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 0.88rem; margin-bottom: 6px; } .ds-input { width: 100%; padding: 12px 14px; font-family: 'Karla', sans-serif; font-size: 1rem; border: 2.5px solid #1A1A1A; border-radius: 8px; background: #fff; } .ds-input:focus { outline: none; border-color: #0078BF; }"
+    },
+    {
+      "name": "Language Toggle",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Pill-shaped two-option switch used for the EN/FI language control.",
+      "html": "<div class=\"ds-lang\" role=\"group\"><button class=\"ds-lang-btn active\">EN</button><button class=\"ds-lang-btn\">FI</button></div>",
+      "css": ".ds-lang { display: flex; border: 2.5px solid #1A1A1A; border-radius: 999px; overflow: hidden; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 0.8rem; } .ds-lang-btn { border: none; background: #fff; padding: 8px 13px; cursor: pointer; font: inherit; color: #1A1A1A; } .ds-lang-btn.active { background: #1A1A1A; color: #E4E6E2; }"
+    },
+    {
+      "name": "Logo Badge",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "The site wordmark: an image asset (/logo.png), not a CSS-drawn text mark. Yellow-and-black rounded badge with a dog mascot, transparent corners. 40px tall in the nav, 32px in the footer.",
+      "html": "<img class=\"ds-logo-badge\" src=\"/logo.png\" alt=\"WebYello\">",
+      "css": ".ds-logo-badge { height: 40px; width: auto; display: block; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Riso Print Desk",
+    "overview": "WebYello's site reads like something pulled fresh off a risograph — a small print shop's duplicator loaded with exactly two ink drums, printing slightly out of register so the two colors overlap into a third wherever they meet. The drums are now yellow and blue, chosen to match the studio's own logo mark (a yellow-and-black badge with a dog mascot); their overlap prints a warm olive-green rather than the system's earlier pink-and-blue-made-purple. This is the system's second recoloring: it first replaced an original neobrutalist yellow-and-black identity with a pink/blue duotone, then swapped pink for yellow to align with the logo — deliberately returning toward yellow, but through the same light, airy, two-drum mechanism rather than reverting to the old heavy black-on-cream neobrutalist look.",
+    "keyCharacteristics": [
+      "Exactly two saturated inks (yellow, blue) plus their overlap (olive) — never a fourth first-class color",
+      "Flat, zero-blur, offset color shadows standing in for depth (stickers peeling off the page)",
+      "Alternating small rotations (±1–2°) on adjacent cards so nothing lines up too perfectly",
+      "Cool, gray-green uncoated paper as neutral ground — deliberately not cream, even with yellow leading",
+      "No kicker/eyebrow labels above any heading, anywhere",
+      "The nav/footer logo now matches the page palette natively"
+    ],
+    "rules": [
+      { "name": "The Two-Drum Rule", "body": "The entire page is built from exactly two saturated inks plus what happens when they overlap. The drums themselves can change (they already have, twice); the rule that there are only ever two has not.", "section": "colors" },
+      { "name": "The No-Cream Rule", "body": "Neutral ground is a cool uncoated paper (#E4E6E2), never a warm off-white/cream — holds even now that the primary accent is warm yellow.", "section": "colors" },
+      { "name": "The No-Eyebrow Rule", "body": "No small tracked label ever sits directly above a heading as its own block. If a section needs a category word, it goes in a corner badge or nowhere — never as a kicker.", "section": "typography" },
+      { "name": "The No-Blur Rule", "body": "Nothing in this system ever combines a shadow with blur or a soft glow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep the color vocabulary to exactly yellow, blue, and their olive overlap.",
+      "Do use uncoated paper (#E4E6E2) as the neutral ground, never a warm cream.",
+      "Do give every shadow a hard, zero-blur edge.",
+      "Do put any featured/popular badge in a corner ribbon, never stacked above a heading.",
+      "Do keep body copy in Karla and every headline/label in Bricolage Grotesque.",
+      "Do use yellow-ink (#8A6D00), never full-saturation yellow, for small text."
+    ],
+    "donts": [
+      "Don't add a kicker or eyebrow label above any heading, page-level or component-level.",
+      "Don't soften a shadow with blur, or combine a shadow with a glow.",
+      "Don't introduce a fourth accent color.",
+      "Don't use sharp or fully pill-shaped corners on cards.",
+      "Don't revert to the original neobrutalist yellow-and-black system just because yellow is back — the light paper ground and two-drum mechanic are what keep this airy."
+    ]
+  }
+}

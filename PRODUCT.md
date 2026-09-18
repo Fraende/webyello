@@ -31,9 +31,8 @@ Client journey: free 30-minute discovery call → clickable design mockups the c
 
 ## Brand Commitments
 
-- Name: **WebYello**. Tagline: "Websites that make people smile — and click." Sign-off: "Made with plenty of yellow."
-- Visual tokens already defined in code: `--yellow #FFC800`, `--yellow-soft #FFF3C4`, `--coral #FF5D73`, `--purple #6C4DF6`, `--teal #00C2A8`, `--ink #1D1B2E`, `--ink-soft #4E4B66`, `--paper #FFFDF5`; 22px corner radius on cards/buttons.
-- Typography: Sora (headings), DM Sans (body).
+- Name: **WebYello**. Tagline: "Websites that make people smile — and click." Sign-off: "Made with plenty of pink and blue."
+- Visual identity (palette, type, component language) is owned by [DESIGN.md](DESIGN.md) — current identity is "The Riso Print Desk" (risograph pink/blue duotone), replacing an earlier neobrutalist yellow-and-black identity. Do not restate token values here; update DESIGN.md when the identity changes.
 - Bilingual EN/FI parity is a standing commitment, not a one-off feature.
 
 ## Evidence on Hand
