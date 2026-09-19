@@ -40,12 +40,18 @@ nav{border-bottom:3px solid var(--ink);background:var(--paper);position:sticky;t
 .hero-note{font-size:.9rem;color:var(--ink-faint);animation:heroFadeUp .42s cubic-bezier(.16,1,.3,1) .37s both}
 .hero-art{position:relative;height:340px}
 .hero-art .blob{position:absolute;border-radius:50%;mix-blend-mode:multiply}
-.hero-art .blob:not(.b3){animation:registerIn .65s cubic-bezier(.16,1,.3,1) .12s both}
+/* Register in once, then drift forever: each drum circles its own small loop, in opposite directions, so the olive overlap keeps sliding */
+.hero-art .b1{animation:registerIn .65s cubic-bezier(.16,1,.3,1) .12s both,orbitCW 19s linear .8s infinite}
+.hero-art .b2{animation:registerIn .65s cubic-bezier(.16,1,.3,1) .12s both,orbitCCW 23s linear .8s infinite}
 .b1{width:220px;height:220px;background:var(--yellow);top:10px;right:60px;--from:translate(-34px,-22px)}
 .b2{width:220px;height:220px;background:var(--blue);top:70px;right:0;--from:translate(34px,22px)}
-.b3{width:70px;height:70px;border:2.5px solid var(--ink);border-radius:50%;top:230px;right:170px;background:var(--paper);animation:heroFadeUp .45s cubic-bezier(.16,1,.3,1) .5s both}
+.b3{width:70px;height:70px;border:2.5px solid var(--ink);border-radius:50%;top:230px;right:170px;background:var(--paper);animation:heroFadeUp .45s cubic-bezier(.16,1,.3,1) .5s both,bob 7s ease-in-out 1s infinite alternate}
 @keyframes heroFadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 @keyframes registerIn{from{opacity:0;transform:var(--from)}to{opacity:1;transform:translate(0,0)}}
+/* Both loops start at translate(0,0), so they hand over from registerIn without a jump */
+@keyframes orbitCW{from{transform:translate(0,-14px) rotate(0deg) translate(0,14px)}to{transform:translate(0,-14px) rotate(360deg) translate(0,14px)}}
+@keyframes orbitCCW{from{transform:translate(0,14px) rotate(0deg) translate(0,-14px)}to{transform:translate(0,14px) rotate(-360deg) translate(0,-14px)}}
+@keyframes bob{from{transform:translateY(0)}to{transform:translateY(-9px)}}
 @keyframes inkStamp{to{clip-path:inset(0 0 0 0)}}
 
 .sec-head{max-width:640px;margin-bottom:50px;position:relative}
