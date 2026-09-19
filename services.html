@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="fi" data-title-en="Services — WebYello" data-title-fi="Palvelut — WebYello">
+<html lang="en" data-title-en="Services — WebYello" data-title-fi="Palvelut — WebYello">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Palvelut — WebYello</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<script>/* Finnish is the default and the markup is English: hide the page until site.js has translated it, so nobody sees English flash first */(function(){try{var q=new URLSearchParams(location.search).get('lang'),s=localStorage.getItem('wy-lang'),l=(q==='en'||q==='fi')?q:s;if(l!=='en'){var d=document.documentElement;d.classList.add('i18n-pending');setTimeout(function(){d.classList.remove('i18n-pending')},2500)}}catch(e){}})()</script>
+<title>Services — WebYello</title>
 <meta name="description" content="Website design, development, e-commerce, SEO, branding and care from WebYello — a friendly Finnish web studio for small businesses.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -14,9 +15,10 @@
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<nav>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<nav aria-label="Main" data-i18n-aria="aria_nav">
   <div class="nav-inner">
-    <a class="wordmark" href="/"><img class="logo-badge" src="/logo.png" alt="WebYello"></a>
+    <a class="wordmark" href="/"><img class="logo-badge" src="/logo-480.png" width="480" height="160" alt="WebYello"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="/services.html" aria-current="page" data-i18n="nav_services">Services</a></li>
       <li><a href="/process.html" data-i18n="nav_process">Process</a></li>
@@ -24,16 +26,16 @@
       <li><a class="btn btn-yellow" href="#contact" data-i18n="nav_cta">Start a project</a></li>
     </ul>
     <div class="nav-right">
-      <div class="lang-toggle" role="group" aria-label="Language">
+      <div class="lang-toggle" role="group" aria-label="Language" data-i18n-aria="aria_lang">
         <button id="btnEn" onclick="setLang('en')" aria-pressed="false">EN</button>
         <button id="btnFi" onclick="setLang('fi')" aria-pressed="true">FI</button>
       </div>
-      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" data-i18n-aria="aria_menu" aria-expanded="false" aria-controls="navLinks">☰</button>
     </div>
   </div>
 </nav>
 
-<main>
+<main id="main" tabindex="-1">
 <header class="page-head">
   <div class="wrap">
     <div>
@@ -45,6 +47,7 @@
 </header>
 <section>
   <div class="wrap">
+    <h2 class="sr-only" data-i18n="sr_services">Our services</h2>
     <div class="tickets">
       <div class="ticket t1"><h3 data-i18n="sv1_t">Website Design</h3><p data-i18n="sv1_p">Custom designs that capture your personality and guide visitors exactly where you want them — no templates, no cookie cutters.</p></div>
       <div class="ticket t2"><h3 data-i18n="sv2_t">Web Development</h3><p data-i18n="sv2_p">Fast, secure, standards-compliant builds that work flawlessly on every device — from quick landing pages to complex platforms.</p></div>
@@ -71,9 +74,9 @@
     </div>
     <form id="contactForm">
       <label for="name" data-i18n="f_name">Your name</label>
-      <input id="name" type="text" placeholder="Jane Doe" data-i18n-ph="f_name_ph" autocomplete="name" required>
+      <input id="name" type="text" maxlength="100" placeholder="Jane Doe" data-i18n-ph="f_name_ph" autocomplete="name" required>
       <label for="email" data-i18n="f_email">Email</label>
-      <input id="email" type="email" placeholder="jane@example.com" data-i18n-ph="f_email_ph" autocomplete="email" required>
+      <input id="email" type="email" maxlength="200" placeholder="jane@example.com" data-i18n-ph="f_email_ph" autocomplete="email" required>
       <label for="type" data-i18n="f_type">What do you need?</label>
       <select id="type">
         <option data-i18n="f_o1">A brand-new website</option>
@@ -83,7 +86,7 @@
         <option data-i18n="f_o5">Something else</option>
       </select>
       <label for="msg" data-i18n="f_msg">Tell us about your project</label>
-      <textarea id="msg" rows="4" placeholder="We run a small bakery and need a site that smells as good as our bread…" data-i18n-ph="f_msg_ph" required></textarea>
+      <textarea id="msg" rows="4" maxlength="5000" placeholder="We run a small bakery and need a site that smells as good as our bread…" data-i18n-ph="f_msg_ph" required></textarea>
       <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
       <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
       <button class="btn btn-yellow" type="submit" data-i18n="f_send">Send it our way</button>
@@ -96,7 +99,7 @@
 
 <footer>
   <div class="wrap foot">
-    <span class="wordmark"><img class="logo-badge" src="/logo.png" alt="WebYello"></span>
+    <span class="wordmark"><img class="logo-badge" src="/logo-480.png" width="480" height="160" alt="WebYello"></span>
     <div class="foot-links">
       <a href="/services.html" data-i18n="nav_services">Services</a>
       <a href="/process.html" data-i18n="nav_process">Process</a>
@@ -106,6 +109,10 @@
     <small data-i18n="ft_copy">© 2026 WebYello. Made with plenty of yellow.</small>
   </div>
 </footer>
+
+<div class="dock" id="dock">
+  <a class="btn btn-yellow" id="dockGo" href="#contact" data-i18n="nav_cta">Start a project</a>
+</div>
 
 <script src="/site.js"></script>
 </body>

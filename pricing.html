@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="fi" data-title-en="Pricing — WebYello" data-title-fi="Hinnat — WebYello">
+<html lang="en" data-title-en="Pricing — WebYello" data-title-fi="Hinnat — WebYello">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hinnat — WebYello</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<script>/* Finnish is the default and the markup is English: hide the page until site.js has translated it, so nobody sees English flash first */(function(){try{var q=new URLSearchParams(location.search).get('lang'),s=localStorage.getItem('wy-lang'),l=(q==='en'||q==='fi')?q:s;if(l!=='en'){var d=document.documentElement;d.classList.add('i18n-pending');setTimeout(function(){d.classList.remove('i18n-pending')},2500)}}catch(e){}})()</script>
+<title>Pricing — WebYello</title>
 <meta name="description" content="Clear packages and honest fixed prices: Launch from €690, Business from €1,390, Store from €2,490, Care plan €59/month. Build your own quote.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -14,9 +15,10 @@
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<nav>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<nav aria-label="Main" data-i18n-aria="aria_nav">
   <div class="nav-inner">
-    <a class="wordmark" href="/"><img class="logo-badge" src="/logo.png" alt="WebYello"></a>
+    <a class="wordmark" href="/"><img class="logo-badge" src="/logo-480.png" width="480" height="160" alt="WebYello"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="/services.html" data-i18n="nav_services">Services</a></li>
       <li><a href="/process.html" data-i18n="nav_process">Process</a></li>
@@ -24,27 +26,29 @@
       <li><a class="btn btn-yellow" href="#contact" data-i18n="nav_cta">Start a project</a></li>
     </ul>
     <div class="nav-right">
-      <div class="lang-toggle" role="group" aria-label="Language">
+      <div class="lang-toggle" role="group" aria-label="Language" data-i18n-aria="aria_lang">
         <button id="btnEn" onclick="setLang('en')" aria-pressed="false">EN</button>
         <button id="btnFi" onclick="setLang('fi')" aria-pressed="true">FI</button>
       </div>
-      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" data-i18n-aria="aria_menu" aria-expanded="false" aria-controls="navLinks">☰</button>
     </div>
   </div>
 </nav>
 
-<main>
+<main id="main" tabindex="-1">
 <header class="page-head">
   <div class="wrap">
     <div>
       <h1 data-i18n="pc_h2">Clear packages, honest prices.</h1>
       <p data-i18n="pc_p">We're a brand-new studio, and we say it out loud: no imaginary portfolio, no invented reviews. What you get instead is founder-level attention on every single project — and pricing to match.</p>
+      <p class="ph-jump"><a href="#quote" data-i18n="ph_quote">Build your own quote ↓</a></p>
     </div>
     <div class="ph-art" aria-hidden="true"><span class="blob ph1"></span><span class="blob ph2"></span></div>
   </div>
 </header>
 <section id="pricing">
   <div class="wrap">
+    <h2 class="sr-only" data-i18n="sr_packages">Packages</h2>
     <div class="plans">
       <div class="plan">
         <h3 data-i18n="p1_t">Launch</h3><div class="for" data-i18n="p1_for">For getting online fast</div><div class="price" data-i18n="p1_price">from €690</div>
@@ -105,7 +109,7 @@
         <fieldset>
           <legend data-i18n="qm_more">Anything extra?</legend>
           <div class="chips">
-            <label class="chip"><input type="checkbox" name="qmExtra" value="bil"><span data-i18n="qm_x_bil">Multilingual site</span></label>
+            <label class="chip"><input type="checkbox" name="qmExtra" value="multi"><span data-i18n="qm_x_multi">Multilingual site</span></label>
             <label class="chip"><input type="checkbox" name="qmExtra" value="blog"><span data-i18n="qm_x_blog">Blog or news</span></label>
             <label class="chip"><input type="checkbox" name="qmExtra" value="ana"><span data-i18n="qm_x_ana">SEO &amp; analytics</span></label>
             <label class="chip"><input type="checkbox" name="qmCare" value="care"><span data-i18n="qm_x_care">Care plan</span></label>
@@ -139,9 +143,9 @@
     </div>
     <form id="contactForm">
       <label for="name" data-i18n="f_name">Your name</label>
-      <input id="name" type="text" placeholder="Jane Doe" data-i18n-ph="f_name_ph" autocomplete="name" required>
+      <input id="name" type="text" maxlength="100" placeholder="Jane Doe" data-i18n-ph="f_name_ph" autocomplete="name" required>
       <label for="email" data-i18n="f_email">Email</label>
-      <input id="email" type="email" placeholder="jane@example.com" data-i18n-ph="f_email_ph" autocomplete="email" required>
+      <input id="email" type="email" maxlength="200" placeholder="jane@example.com" data-i18n-ph="f_email_ph" autocomplete="email" required>
       <label for="type" data-i18n="f_type">What do you need?</label>
       <select id="type">
         <option data-i18n="f_o1">A brand-new website</option>
@@ -151,7 +155,7 @@
         <option data-i18n="f_o5">Something else</option>
       </select>
       <label for="msg" data-i18n="f_msg">Tell us about your project</label>
-      <textarea id="msg" rows="4" placeholder="We run a small bakery and need a site that smells as good as our bread…" data-i18n-ph="f_msg_ph" required></textarea>
+      <textarea id="msg" rows="4" maxlength="5000" placeholder="We run a small bakery and need a site that smells as good as our bread…" data-i18n-ph="f_msg_ph" required></textarea>
       <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
       <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
       <button class="btn btn-yellow" type="submit" data-i18n="f_send">Send it our way</button>
@@ -164,7 +168,7 @@
 
 <footer>
   <div class="wrap foot">
-    <span class="wordmark"><img class="logo-badge" src="/logo.png" alt="WebYello"></span>
+    <span class="wordmark"><img class="logo-badge" src="/logo-480.png" width="480" height="160" alt="WebYello"></span>
     <div class="foot-links">
       <a href="/services.html" data-i18n="nav_services">Services</a>
       <a href="/process.html" data-i18n="nav_process">Process</a>
@@ -174,6 +178,11 @@
     <small data-i18n="ft_copy">© 2026 WebYello. Made with plenty of yellow.</small>
   </div>
 </footer>
+
+<div class="dock" id="dock">
+  <span class="dock-info" id="dockInfo" aria-hidden="true"></span>
+  <a class="btn btn-yellow" id="dockGo" href="#contact" data-i18n="dock_quote">Send this quote</a>
+</div>
 
 <script src="/site.js"></script>
 <script src="/quote.js"></script>

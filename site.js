@@ -15,7 +15,7 @@ const I18N={en:{},fi:{
   hero_badge:"uusi studio<br>per. 2026",
   hero_h1:'Verkkosivut, jotka saavat ihmiset <mark>hymyilemään</mark> — ja klikkaamaan.',
   hero_lead:"WebYello suunnittelee ja rakentaa kauniita, intuitiivisia verkkosivuja, jotka muuttavat uteliaat kävijät tyytyväisiksi asiakkaiksi. Ison toimiston laatu, pienen studion sydän.",
-  hero_cta1:"Rakennetaan omasi",hero_cta2:"Katso hinnat",
+  hero_cta1:"Luonnostele sivustosi",hero_cta2:"Katso hinnat",
   hero_note:"Maksuton 30 minuutin kartoituspuhelu · Ei ammattislangia, koskaan",
   sv_h2:"Kaikki mitä verkkosivusi tarvitsee, saman aurinkoisen katon alla.",
   sv_p:"Ensimmäisestä luonnoksesta julkaisupäivään (ja pitkälle sen jälkeen) hoidamme koko matkan, jotta sinä voit keskittyä liiketoimintaasi.",
@@ -73,11 +73,15 @@ Object.assign(I18N.fi,{
 // Strings for the multi-page structure
 Object.assign(I18N.fi,{
   hm_h2:"Tutustu rauhassa.",
-  hm_sv_p:"Suunnittelu, kehitys, verkkokaupat, SEO, brändäys ja ylläpito — kaikki saman katon alla.",
-  hm_pr_p:"Neljä mutkatonta vaihetta tervehdyksestä julkaisuun, ilman yllätyksiä.",
+  hm_sv_t:"Kaikki saman katon alla",hm_pr_t:"Neljä askelta, ei yllätyksiä",hm_pc_t:"Kiinteät, rehelliset hinnat",
+  hm_sv_p:"Suunnittelu, kehitys, verkkokaupat, SEO, brändäys ja ylläpito.",
+  hm_pr_p:"Kartoitus, suunnittelu, toteutus, julkaisu. Tiedät aina, missä projektisi on.",
   hm_pc_p:"Startti alk. 690 €, Yrityssivut alk. 1 390 €, Verkkokauppa alk. 2 490 €. Aina kiinteä tarjous.",
   hm_sv_more:"Katso palvelut →",hm_pr_more:"Katso prosessi →",hm_pc_more:"Katso hinnat →",
-  nx_process:"Katso miten se toimii →",nx_pricing:"Katso mitä se maksaa →"
+  nx_process:"Katso miten se toimii →",nx_pricing:"Katso mitä se maksaa →",
+  skip:"Siirry sisältöön",aria_nav:"Päävalikko",aria_lang:"Kieli",aria_menu:"Avaa valikko",
+  sr_services:"Palvelumme",sr_steps:"Neljä vaihetta",sr_packages:"Paketit",
+  ph_quote:"Rakenna oma tarjous ↓",dock_quote:"Lähetä tarjous"
 });
 
 // Every page registers hooks here; they run after each language change (first=true on page load)
@@ -91,6 +95,9 @@ function setLang(l,first){
   });
   document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
     const v=d[el.dataset.i18nPh]; if(v!=null) el.placeholder=v;
+  });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
+    const v=d[el.dataset.i18nAria]; if(v!=null) el.setAttribute('aria-label',v);
   });
   document.documentElement.lang=l;
   const ds=document.documentElement.dataset;
@@ -107,9 +114,14 @@ function setLang(l,first){
 document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('[data-i18n]').forEach(el=>{I18N.en[el.dataset.i18n]??=el.innerHTML});
   document.querySelectorAll('[data-i18n-ph]').forEach(el=>{I18N.en[el.dataset.i18nPh]??=el.placeholder});
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>{I18N.en[el.dataset.i18nAria]??=el.getAttribute('aria-label')});
   let saved=null;
   try{ saved=localStorage.getItem('wy-lang'); }catch(e){}
+  // ?lang=en / ?lang=fi makes a language linkable (e.g. from an English email signature) and is remembered
+  const asked=new URLSearchParams(location.search).get('lang');
+  if(asked==='en'||asked==='fi'){ saved=asked; try{ localStorage.setItem('wy-lang',asked); }catch(e){} }
   setLang(saved==='en'?'en':'fi',true);
+  document.documentElement.classList.remove('i18n-pending');
 });
 
 
@@ -135,6 +147,7 @@ contactForm.addEventListener('submit',async function(e){
   try{
     const res=await fetch('/api/contact',{
       method:'POST',
+      signal:window.AbortSignal&&AbortSignal.timeout?AbortSignal.timeout(15000):undefined,
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         name:document.getElementById('name').value,
@@ -147,7 +160,7 @@ contactForm.addEventListener('submit',async function(e){
       })
     });
     if(!res.ok) throw new Error('HTTP '+res.status);
-    contactForm.innerHTML='<div class="success" role="status" tabindex="-1"><div class="success-badge" aria-hidden="true">&#10003;</div><h3>'+d.f_success_h+'</h3><p>'+d.f_success_p+'</p></div>';
+    contactForm.innerHTML='<div class="success" role="status" tabindex="-1"><div class="success-badge" aria-hidden="true"><span class="tick"></span></div><h3>'+d.f_success_h+'</h3><p>'+d.f_success_p+'</p></div>';
     contactForm.querySelector('.success').focus();
   }catch(err){
     // keep everything they typed so they can simply try again
@@ -178,3 +191,17 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
   },{threshold:.15, rootMargin:'0px 0px -8% 0px'});
   revealEls.forEach(function(el){ io.observe(el); });
 }
+
+// The phone dock steps aside while the contact form is on screen
+(function(){
+  const dock=document.getElementById('dock'),contact=document.getElementById('contact');
+  if(!dock||!contact||!('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function(es){ dock.classList.toggle('hide',es[0].isIntersecting); }).observe(contact);
+})();
+
+// The hero spheres drift forever; stop them while they are scrolled out of view
+(function(){
+  const art=document.querySelector('.hero-art');
+  if(!art||!('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function(es){ art.classList.toggle('paused',!es[0].isIntersecting); }).observe(art);
+})();

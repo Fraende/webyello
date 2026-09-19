@@ -38,7 +38,14 @@ const SK_FALLBACK={en:'Your business',fi:'Yrityksesi nimi'};
 const skEl=id=>document.getElementById(id);
 
 function skSlug(name){
-  const s=name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,24).replace(/-+$/,'');
+  const full=name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  let s=full;
+  if(s.length>24){
+    s=s.slice(0,24);
+    const cut=s.lastIndexOf('-');
+    if(full[24]!=='-'&&cut>8) s=s.slice(0,cut); // don't leave half a word ("...-p.fi")
+    s=s.replace(/-+$/,'');
+  }
   return (s||(lang==='fi'?'yritys':'yourbusiness'))+'.fi';
 }
 function skType(){ return document.querySelector('input[name=skType]:checked').value; }

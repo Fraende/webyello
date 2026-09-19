@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="fi" data-title-en="WebYello — Websites that make people smile" data-title-fi="WebYello — Verkkosivut, jotka saavat hymyilemään">
+<html lang="en" data-title-en="WebYello — Websites that make people smile" data-title-fi="WebYello — Verkkosivut, jotka saavat hymyilemään">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WebYello — Verkkosivut, jotka saavat hymyilemään</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<script>/* Finnish is the default and the markup is English: hide the page until site.js has translated it, so nobody sees English flash first */(function(){try{var q=new URLSearchParams(location.search).get('lang'),s=localStorage.getItem('wy-lang'),l=(q==='en'||q==='fi')?q:s;if(l!=='en'){var d=document.documentElement;d.classList.add('i18n-pending');setTimeout(function(){d.classList.remove('i18n-pending')},2500)}}catch(e){}})()</script>
+<title>WebYello — Websites that make people smile</title>
 <meta name="description" content="WebYello designs and builds beautiful, intuitive websites that turn visitors into customers. Design, development, and care — all in one friendly studio.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -14,9 +15,10 @@
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<nav>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<nav aria-label="Main" data-i18n-aria="aria_nav">
   <div class="nav-inner">
-    <a class="wordmark" href="/"><img class="logo-badge" src="/logo.png" alt="WebYello"></a>
+    <a class="wordmark" href="/"><img class="logo-badge" src="/logo-480.png" width="480" height="160" alt="WebYello"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="/services.html" data-i18n="nav_services">Services</a></li>
       <li><a href="/process.html" data-i18n="nav_process">Process</a></li>
@@ -24,16 +26,16 @@
       <li><a class="btn btn-yellow" href="#contact" data-i18n="nav_cta">Start a project</a></li>
     </ul>
     <div class="nav-right">
-      <div class="lang-toggle" role="group" aria-label="Language">
+      <div class="lang-toggle" role="group" aria-label="Language" data-i18n-aria="aria_lang">
         <button id="btnEn" onclick="setLang('en')" aria-pressed="false">EN</button>
         <button id="btnFi" onclick="setLang('fi')" aria-pressed="true">FI</button>
       </div>
-      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" data-i18n-aria="aria_menu" aria-expanded="false" aria-controls="navLinks">☰</button>
     </div>
   </div>
 </nav>
 
-<main>
+<main id="main" tabindex="-1">
 <header class="hero" id="top">
   <div class="halftone" style="right:0;top:0;width:50%;left:auto" aria-hidden="true"></div>
   <div class="wrap">
@@ -42,7 +44,7 @@
       <h1 data-i18n="hero_h1">Websites that make people <mark>smile</mark> — and click.</h1>
       <p data-i18n="hero_lead">WebYello designs and builds beautiful, intuitive websites that turn curious visitors into happy customers. Big agency polish, small studio heart.</p>
       <div class="hero-ctas">
-        <a class="btn btn-yellow" href="#contact" data-i18n="hero_cta1">Let's build yours</a>
+        <a class="btn btn-yellow" href="#sketch" data-i18n="hero_cta1">Sketch your website</a>
         <a class="btn btn-line" href="/pricing.html" data-i18n="hero_cta2">See pricing</a>
       </div>
       <p class="hero-note" data-i18n="hero_note">Free 30-minute discovery call · No jargon, ever</p>
@@ -63,9 +65,11 @@
     </div>
     <div class="sketch-grid">
       <div class="sketch-controls">
-        <label for="skName" data-i18n="sk_name">Your business name</label>
-        <input id="skName" type="text" maxlength="40" autocomplete="organization" placeholder="Aamun Leipomo" data-i18n-ph="sk_name_ph">
-        <fieldset>
+        <div class="sk-name">
+          <label for="skName" data-i18n="sk_name">Your business name</label>
+          <input id="skName" type="text" maxlength="40" autocomplete="organization" placeholder="Aamun Leipomo" data-i18n-ph="sk_name_ph">
+        </div>
+        <fieldset class="sk-type">
           <legend data-i18n="sk_type">What do you do?</legend>
           <div class="chips" id="skChips">
             <label class="chip"><input type="radio" name="skType" value="bakery" checked><span data-i18n="sk_t_bakery">Bakery</span></label>
@@ -108,9 +112,9 @@
   <div class="wrap">
     <div class="sec-head"><h2 data-i18n="hm_h2">Have a look around.</h2></div>
     <div class="tickets">
-      <a class="ticket t1" href="/services.html"><h3 data-i18n="nav_services">Services</h3><p data-i18n="hm_sv_p">Design, development, stores, SEO, branding and care — all under one roof.</p><span class="more" data-i18n="hm_sv_more">See services →</span></a>
-      <a class="ticket t2" href="/process.html"><h3 data-i18n="nav_process">Process</h3><p data-i18n="hm_pr_p">Four friendly steps from hello to launch, with no surprises.</p><span class="more" data-i18n="hm_pr_more">See the process →</span></a>
-      <a class="ticket t3" href="/pricing.html"><h3 data-i18n="nav_pricing">Pricing</h3><p data-i18n="hm_pc_p">Launch from €690, Business from €1,390, Store from €2,490. Always a fixed quote.</p><span class="more" data-i18n="hm_pc_more">See pricing →</span></a>
+      <a class="ticket t1" href="/services.html"><h3 data-i18n="hm_sv_t">Everything under one roof</h3><p data-i18n="hm_sv_p">Design, development, stores, SEO, branding and care.</p><span class="more" data-i18n="hm_sv_more">See services →</span></a>
+      <a class="ticket t2" href="/process.html"><h3 data-i18n="hm_pr_t">Four steps, no surprises</h3><p data-i18n="hm_pr_p">Discover, design, build, launch. You always know where your project stands.</p><span class="more" data-i18n="hm_pr_more">See the process →</span></a>
+      <a class="ticket t3" href="/pricing.html"><h3 data-i18n="hm_pc_t">Fixed, honest prices</h3><p data-i18n="hm_pc_p">Launch from €690, Business from €1,390, Store from €2,490. Always a fixed quote.</p><span class="more" data-i18n="hm_pc_more">See pricing →</span></a>
     </div>
   </div>
 </section>
@@ -129,9 +133,9 @@
     </div>
     <form id="contactForm">
       <label for="name" data-i18n="f_name">Your name</label>
-      <input id="name" type="text" placeholder="Jane Doe" data-i18n-ph="f_name_ph" autocomplete="name" required>
+      <input id="name" type="text" maxlength="100" placeholder="Jane Doe" data-i18n-ph="f_name_ph" autocomplete="name" required>
       <label for="email" data-i18n="f_email">Email</label>
-      <input id="email" type="email" placeholder="jane@example.com" data-i18n-ph="f_email_ph" autocomplete="email" required>
+      <input id="email" type="email" maxlength="200" placeholder="jane@example.com" data-i18n-ph="f_email_ph" autocomplete="email" required>
       <label for="type" data-i18n="f_type">What do you need?</label>
       <select id="type">
         <option data-i18n="f_o1">A brand-new website</option>
@@ -141,7 +145,7 @@
         <option data-i18n="f_o5">Something else</option>
       </select>
       <label for="msg" data-i18n="f_msg">Tell us about your project</label>
-      <textarea id="msg" rows="4" placeholder="We run a small bakery and need a site that smells as good as our bread…" data-i18n-ph="f_msg_ph" required></textarea>
+      <textarea id="msg" rows="4" maxlength="5000" placeholder="We run a small bakery and need a site that smells as good as our bread…" data-i18n-ph="f_msg_ph" required></textarea>
       <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
       <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
       <button class="btn btn-yellow" type="submit" data-i18n="f_send">Send it our way</button>
@@ -154,7 +158,7 @@
 
 <footer>
   <div class="wrap foot">
-    <span class="wordmark"><img class="logo-badge" src="/logo.png" alt="WebYello"></span>
+    <span class="wordmark"><img class="logo-badge" src="/logo-480.png" width="480" height="160" alt="WebYello"></span>
     <div class="foot-links">
       <a href="/services.html" data-i18n="nav_services">Services</a>
       <a href="/process.html" data-i18n="nav_process">Process</a>
@@ -164,6 +168,10 @@
     <small data-i18n="ft_copy">© 2026 WebYello. Made with plenty of yellow.</small>
   </div>
 </footer>
+
+<div class="dock" id="dock">
+  <a class="btn btn-yellow" id="dockGo" href="#contact" data-i18n="nav_cta">Start a project</a>
+</div>
 
 <script src="/site.js"></script>
 <script src="/sketch.js"></script>

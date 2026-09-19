@@ -8,7 +8,7 @@ Object.assign(I18N.fi,{
   qm_s2:"Jopa viisi sivua",qm_s2d:"Kokonainen yrityssivusto",
   qm_s3:"Verkkokauppa",qm_s3d:"Myy tuotteitasi ja vastaanota maksuja",
   qm_more:"Jotain extraa?",
-  qm_x_bil:"Monikielinen sivusto",qm_x_blog:"Blogi tai uutiset",qm_x_ana:"SEO &amp; analytiikka",qm_x_care:"Ylläpitopaketti",
+  qm_x_multi:"Monikielinen sivusto",qm_x_blog:"Blogi tai uutiset",qm_x_ana:"SEO &amp; analytiikka",qm_x_care:"Ylläpitopaketti",
   qm_cta:"Lähetä tämä WebYellolle",
   qm_fine:"Ensin maksuton 30 minuutin puhelu, sitten kiinteä tarjous. Täältä ei lähde mitään."
 });
@@ -19,21 +19,21 @@ I18N.en.qm_name_ph="Sunrise Bakery";
 const QM={
   en:{title:'Your quote',forWho:'for ',from:'from ',incl:'in the package',quoted:'quoted on the call',care:'Care plan',mo:'/month',total:'Total to start',vat:'excl. VAT · with 25.5% VAT ≈ ',extraQ:'Extras on top of the Store package are quoted on the call.',
       up:l=>l+' is part of the Business package, so we moved you up.',down:'One page can’t include those, so we unticked them.',
-      live:(p,t)=>p+' package, '+t,x:{bil:'Multilingual site',blog:'Blog or news',ana:'SEO & analytics'},nfmt:n=>'€'+n.toLocaleString('en-US')},
+      live:(p,t)=>p+' package, '+t,x:{multi:'Multilingual site',blog:'Blog or news',ana:'SEO & analytics'},nfmt:n=>'€'+n.toLocaleString('en-US')},
   fi:{title:'Tarjouksesi',forWho:'yritykselle ',from:'alk. ',incl:'paketissa',quoted:'hinnoitellaan puhelussa',care:'Ylläpitopaketti',mo:'/kk',total:'Yhteensä alkuun',vat:'alv 0 % · alv 25,5 % mukana ≈ ',extraQ:'Verkkokauppapaketin päälle tulevat lisät hinnoitellaan puhelussa.',
       up:l=>l+' kuuluu Yrityssivut-pakettiin, joten siirsimme sinut sinne.',down:'Yhden sivun pakettiin ne eivät kuulu, joten poistimme valinnat.',
-      live:(p,t)=>p+'-paketti, '+t,x:{bil:'Monikielinen sivusto',blog:'Blogi tai uutiset',ana:'SEO & analytiikka'},nfmt:n=>n.toLocaleString('fi-FI')+' €'}
+      live:(p,t)=>p+'-paketti, '+t,x:{multi:'Monikielinen sivusto',blog:'Blogi tai uutiset',ana:'SEO & analytiikka'},nfmt:n=>n.toLocaleString('fi-FI')+' €'}
 };
 const PRICE={launch:690,business:1390,store:2490};
 const PKG={launch:{name:'p1_t',f:['p1_f1','p1_f2','p1_f3','p1_f4']},business:{name:'p2_t',f:['p2_f1','p2_f2','p2_f3','p2_f4']},store:{name:'p3_t',f:['p3_f1','p3_f2','p3_f3','p3_f4']}};
-const EXTRA_FEAT={bil:'p2_f2',blog:'p2_f3',ana:'p2_f4'};
+const EXTRA_FEAT={multi:'p2_f2',blog:'p2_f3',ana:'p2_f4'};
 const CARE=59,VAT=1.255;
-const q={size:'launch',extras:{bil:false,blog:false,ana:false},care:false,touched:false};
+const q={size:'launch',extras:{multi:false,blog:false,ana:false},care:false,touched:false};
 let qPrev={tier:null,keys:{}};
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let qNote=null; // a function, so the note is re-worded when the language changes
 const qmNote=fn=>{ qNote=fn||null; skEl('qmNote').textContent=qNote?qNote():''; };
-const anyExtra=()=>q.extras.bil||q.extras.blog||q.extras.ana;
+const anyExtra=()=>q.extras.multi||q.extras.blog||q.extras.ana;
 
 function renderQuote(animate){
   const d=I18N[lang],m=QM[lang],name=skEl('qmName').value.trim();
@@ -42,11 +42,11 @@ function renderQuote(animate){
   const isNew=k=>animate&&!qPrev.keys[k]?' new':'';
   const keys={};
   let lines='';
-  ['bil','blog','ana'].forEach(k=>{
+  ['multi','blog','ana'].forEach(k=>{
     if(!q.extras[k]) return;
     keys[k]=1;
     const tag=tier==='store'?'<span class="tag q">'+m.quoted+'</span>':'<span class="tag">'+m.incl+'</span>';
-    lines+='<li class="ask'+isNew(k)+'"><span aria-hidden="true">✓</span><span>'+m.x[k]+'</span>'+tag+'</li>';
+    lines+='<li class="ask'+isNew(k)+'"><span class="tick" aria-hidden="true"></span><span>'+m.x[k]+'</span>'+tag+'</li>';
   });
   PKG[tier].f.forEach(fk=>{
     const k=Object.keys(EXTRA_FEAT).find(x=>EXTRA_FEAT[x]===fk);
@@ -67,12 +67,18 @@ function renderQuote(animate){
   skEl('qmNote').textContent=qNote?qNote():'';
   qPrev={tier:tier,keys:keys};
   skEl('qmLive').textContent=m.live(pkgName,m.from+m.nfmt(total)+(q.care?' + '+m.nfmt(CARE)+m.mo:''));
+  const dockInfo=document.getElementById('dockInfo');
+  if(dockInfo){
+    const name=document.createElement('span'),price=document.createElement('b');
+    name.textContent=pkgName; price.textContent=m.from+m.nfmt(total);
+    dockInfo.replaceChildren(name,price);
+  }
 }
 
 document.querySelectorAll('input[name=qmSize]').forEach(r=>r.addEventListener('change',function(){
   q.touched=true; q.size=this.value; qmNote();
   if(q.size==='launch'&&anyExtra()){
-    q.extras={bil:false,blog:false,ana:false};
+    q.extras={multi:false,blog:false,ana:false};
     document.querySelectorAll('input[name=qmExtra]').forEach(c=>{c.checked=false;});
     qmNote(()=>QM[lang].down);
   }
@@ -106,24 +112,34 @@ document.querySelectorAll('[data-qm-size]').forEach(a=>a.addEventListener('click
   document.querySelector('input[name=qmSize][value='+this.dataset.qmSize+']').click();
 }));
 
-// Hand the whole thing to the contact form, so the first message is already a brief
-skEl('qmGo').addEventListener('click',function(){
+// The brief the contact form starts with, worded in the current language
+function qmBrief(){
   const d=I18N[lang],m=QM[lang],name=skEl('qmName').value.trim();
   const trade=TRADE[stored().type],label=trade?trade[lang]:'';
   const pkg=d[PKG[q.size].name].replace(/&amp;/g,'&');
-  const extras=['bil','blog','ana'].filter(k=>q.extras[k]).map(k=>m.x[k]);
+  const extras=['multi','blog','ana'].filter(k=>q.extras[k]).map(k=>m.x[k]);
   const price=m.from+m.nfmt(PRICE[q.size]);
   let who;
   if(lang==='fi') who=name?'Yritykseni on '+name+(label?' ('+label+')':'')+'. ':(label?'Toimin alalla: '+label+'. ':'');
   else who=name?'My business is '+name+(label?' ('+label+')':'')+'. ':(label?'I work in: '+label+'. ':'');
-  const msg=lang==='fi'
+  return lang==='fi'
     ? 'Hei! '+who+'Kokosin tarjouksen: '+pkg+' ('+price+', alv 0 %)'+(extras.length?', lisäksi '+extras.join(', '):'')+(q.care?' ja ylläpitopaketti':'')+'. Jutellaan!'
-    : 'Hi! '+who+'I built a quote: '+pkg+' ('+price+', excl. VAT)'+(extras.length?' with '+extras.join(', '):'')+(q.care?' plus the care plan':'')+'. Let’s talk!';
+    : 'Hi! '+who+'I built a quote: '+pkg+' ('+price+', excl. VAT)'+(extras.length?' with '+extras.join(', '):'')+(q.care?' plus the care plan':'')+'. Let\u2019s talk!';
+}
+
+// Hand the whole thing to the contact form, so the first message is already a brief.
+// Text the visitor has typed or edited is never overwritten; only an empty box or our own untouched brief is.
+function qmHandoff(){
   const ta=skEl('msg');
-  if(!ta.value||ta.dataset.skFilled){ ta.value=msg; ta.dataset.skFilled='1'; }
+  if(!ta.value||(ta.dataset.auto!==undefined&&ta.value===ta.dataset.auto)){
+    const msg=qmBrief(); ta.value=msg; ta.dataset.auto=msg;
+  }
   skEl('type').selectedIndex=q.size==='store'?2:0;
   setTimeout(()=>skEl('name').focus({preventScroll:true}),450);
-});
+}
+skEl('qmGo').addEventListener('click',qmHandoff);
+const dockGo=document.getElementById('dockGo');
+if(dockGo) dockGo.addEventListener('click',qmHandoff);
 
 langHooks.push(function(l,first){
   if(first){
@@ -133,6 +149,10 @@ langHooks.push(function(l,first){
       q.size='store';
       document.querySelector('input[name=qmSize][value=store]').checked=true;
     }
+  }else{
+    // an untouched brief follows the language switch
+    const ta=skEl('msg');
+    if(ta.dataset.auto!==undefined&&ta.value===ta.dataset.auto){ const msg=qmBrief(); ta.value=msg; ta.dataset.auto=msg; }
   }
   renderQuote(false);
 });
