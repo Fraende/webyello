@@ -36,7 +36,7 @@ const I18N={en:{},fi:{
   p1_t:"Startti",p1_for:"Kun haluat nopeasti verkkoon",p1_price:"alk. 690 €",
   p1_f1:"Viimeistelty yhden sivun sivusto",p1_f2:"Mobiiliystävällinen ja salamannopea",p1_f3:"Yhteydenottolomake ja kartta",p1_f4:"SEO-perusasetukset",
   p2_pop:"Suosituin",p2_t:"Yrityssivut",p2_for:"Kokonainen yrityssivusto",p2_price:"alk. 1 390 €",
-  p2_f1:"Jopa 5 räätälöityä sivua",p2_f2:"Kaksikielinen (FI/EN) rakenne",p2_f3:"Blogi- tai uutisosio",p2_f4:"SEO- ja analytiikka-asetukset",
+  p2_f1:"Jopa 5 räätälöityä sivua",p2_f2:"Monikielinen sivustorakenne",p2_f3:"Blogi- tai uutisosio",p2_f4:"SEO- ja analytiikka-asetukset",
   p3_t:"Verkkokauppa",p3_for:"Kun haluat myydä verkossa",p3_price:"alk. 2 490 €",
   p3_f1:"Täysi verkkokauppa",p3_f2:"Maksut ja toimitukset valmiiksi",p3_f3:"Tuotesivupohjat",p3_f4:"Koulutus, jotta pyörität kauppaa itse",
   p_cta1:"Rakenna tarjous",p_cta2:"Rakenna tarjous",p_cta3:"Rakenna tarjous",

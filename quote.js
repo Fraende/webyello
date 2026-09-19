@@ -8,7 +8,7 @@ Object.assign(I18N.fi,{
   qm_s2:"Jopa viisi sivua",qm_s2d:"Kokonainen yrityssivusto",
   qm_s3:"Verkkokauppa",qm_s3d:"Myy tuotteitasi ja vastaanota maksuja",
   qm_more:"Jotain extraa?",
-  qm_x_bil:"Suomi + englanti",qm_x_blog:"Blogi tai uutiset",qm_x_ana:"SEO &amp; analytiikka",qm_x_care:"Ylläpitopaketti",
+  qm_x_bil:"Monikielinen sivusto",qm_x_blog:"Blogi tai uutiset",qm_x_ana:"SEO &amp; analytiikka",qm_x_care:"Ylläpitopaketti",
   qm_cta:"Lähetä tämä WebYellolle",
   qm_fine:"Ensin maksuton 30 minuutin puhelu, sitten kiinteä tarjous. Täältä ei lähde mitään."
 });
@@ -19,10 +19,10 @@ I18N.en.qm_name_ph="Sunrise Bakery";
 const QM={
   en:{title:'Your quote',forWho:'for ',from:'from ',incl:'in the package',quoted:'quoted on the call',care:'Care plan',mo:'/month',total:'Total to start',vat:'excl. VAT · with 25.5% VAT ≈ ',extraQ:'Extras on top of the Store package are quoted on the call.',
       up:l=>l+' is part of the Business package, so we moved you up.',down:'One page can’t include those, so we unticked them.',
-      live:(p,t)=>p+' package, '+t,x:{bil:'Finnish + English',blog:'Blog or news',ana:'SEO & analytics'},nfmt:n=>'€'+n.toLocaleString('en-US')},
+      live:(p,t)=>p+' package, '+t,x:{bil:'Multilingual site',blog:'Blog or news',ana:'SEO & analytics'},nfmt:n=>'€'+n.toLocaleString('en-US')},
   fi:{title:'Tarjouksesi',forWho:'yritykselle ',from:'alk. ',incl:'paketissa',quoted:'hinnoitellaan puhelussa',care:'Ylläpitopaketti',mo:'/kk',total:'Yhteensä alkuun',vat:'alv 0 % · alv 25,5 % mukana ≈ ',extraQ:'Verkkokauppapaketin päälle tulevat lisät hinnoitellaan puhelussa.',
       up:l=>l+' kuuluu Yrityssivut-pakettiin, joten siirsimme sinut sinne.',down:'Yhden sivun pakettiin ne eivät kuulu, joten poistimme valinnat.',
-      live:(p,t)=>p+'-paketti, '+t,x:{bil:'Suomi + englanti',blog:'Blogi tai uutiset',ana:'SEO & analytiikka'},nfmt:n=>n.toLocaleString('fi-FI')+' €'}
+      live:(p,t)=>p+'-paketti, '+t,x:{bil:'Monikielinen sivusto',blog:'Blogi tai uutiset',ana:'SEO & analytiikka'},nfmt:n=>n.toLocaleString('fi-FI')+' €'}
 };
 const PRICE={launch:690,business:1390,store:2490};
 const PKG={launch:{name:'p1_t',f:['p1_f1','p1_f2','p1_f3','p1_f4']},business:{name:'p2_t',f:['p2_f1','p2_f2','p2_f3','p2_f4']},store:{name:'p3_t',f:['p3_f1','p3_f2','p3_f3','p3_f4']}};
