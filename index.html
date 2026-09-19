@@ -34,7 +34,7 @@
   nav{border-bottom:3px solid var(--ink);background:var(--paper);position:sticky;top:0;z-index:50}
   .nav-inner{max-width:1140px;margin:0 auto;padding:16px 26px;display:flex;align-items:center;justify-content:space-between;gap:14px}
   .wordmark{display:flex;align-items:center}
-  .logo-badge{height:40px;width:auto;display:block}
+  .logo-badge{height:clamp(44px,7vw,80px);width:auto;display:block}
   .foot .logo-badge{height:32px}
   .nav-links{display:flex;gap:22px;list-style:none;align-items:center;font-weight:600;font-size:.95rem;text-transform:uppercase;letter-spacing:.03em}
   .nav-links a:not(.btn){display:inline-flex;align-items:center;padding:10px 2px}
@@ -63,11 +63,13 @@
   @keyframes inkStamp{to{clip-path:inset(0 0 0 0)}}
 
   .sec-head{max-width:640px;margin-bottom:50px;position:relative}
+  .sec-head,#contactForm,.contact-inner>div{transition:opacity .5s cubic-bezier(.16,1,.3,1)}
+  .sec-head.pre-reveal,.ticket.pre-reveal,.card.pre-reveal,.plan.pre-reveal,#contactForm.pre-reveal,.contact-inner>div.pre-reveal{opacity:0}
   .sec-head h2{font-size:clamp(1.85rem,3vw,2.4rem);margin-bottom:12px}
   .sec-head p{color:var(--ink-muted);font-size:1.02rem}
 
   .tickets{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .ticket{background:#fff;border:2.5px solid var(--ink);border-radius:10px;padding:26px 22px;position:relative;transition:transform .15s}
+  .ticket{background:#fff;border:2.5px solid var(--ink);border-radius:10px;padding:26px 22px;position:relative;transition:transform .15s,opacity .5s cubic-bezier(.16,1,.3,1)}
   .ticket:nth-child(odd){transform:rotate(-1deg)}
   .ticket:nth-child(even){transform:rotate(1deg)}
   .ticket:hover{transform:translateY(-4px)}
@@ -84,7 +86,7 @@
   .process{background:var(--ink);color:var(--paper)}
   .process .sec-head p{color:var(--paper-muted)}
   .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-  .card{background:var(--paper);color:var(--ink);border-radius:8px;padding:24px 22px;min-width:220px;flex:1;position:relative;border:2.5px solid var(--ink);transition:transform .15s}
+  .card{background:var(--paper);color:var(--ink);border-radius:8px;padding:24px 22px;min-width:220px;flex:1;position:relative;border:2.5px solid var(--ink);transition:transform .15s,opacity .5s cubic-bezier(.16,1,.3,1)}
   .card:nth-child(1){transform:rotate(-2deg)}
   .card:nth-child(2){transform:rotate(1.5deg)}
   .card:nth-child(3){transform:rotate(-1.5deg)}
@@ -95,7 +97,7 @@
   .card p{font-size:.9rem;color:var(--ink-muted)}
 
   .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .plan{background:#fff;border:2.5px solid var(--ink);border-radius:10px;padding:28px 24px;display:flex;flex-direction:column;position:relative;transition:transform .15s}
+  .plan{background:#fff;border:2.5px solid var(--ink);border-radius:10px;padding:28px 24px;display:flex;flex-direction:column;position:relative;transition:transform .15s,opacity .5s cubic-bezier(.16,1,.3,1)}
   .plan:hover{transform:translateY(-4px)}
   .plan.feat{background:var(--yellow);color:var(--ink);transform:rotate(-1deg);box-shadow:6px 6px 0 var(--ink)}
   .plan.feat:hover{transform:translateY(-4px) rotate(-1deg)}
@@ -157,6 +159,7 @@
     .btn:hover,.ticket:hover,.card:hover,.plan:hover,.plan.feat:hover{transform:none}
     .badge,.hero h1,.hero p,.hero-ctas,.hero-note,.hero-art .blob,.b3{animation:none}
     .hero h1 mark{animation:none;clip-path:none}
+    .sec-head.pre-reveal,.ticket.pre-reveal,.card.pre-reveal,.plan.pre-reveal,#contactForm.pre-reveal,.contact-inner>div.pre-reveal{opacity:1}
   }
 </style>
 </head>
@@ -432,6 +435,27 @@
     this.innerHTML='<div class="success" role="status" tabindex="-1"><div class="success-badge" aria-hidden="true">&#10003;</div><h3>'+d.f_success_h+'</h3><p>'+d.f_success_p+'</p></div>';
     this.querySelector('.success').focus();
   });
+
+  // Fade sections in as they scroll into view
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    const revealEls = document.querySelectorAll('.sec-head, .ticket, .card, .plan, #contactForm, .contact-inner > div');
+    revealEls.forEach(function(el){
+      const siblingIndex = Array.prototype.indexOf.call(el.parentElement.children, el);
+      el.style.transitionDelay = (siblingIndex%3)*70 + 'ms';
+      el.classList.add('pre-reveal');
+    });
+    const io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          const el = entry.target;
+          el.classList.remove('pre-reveal');
+          io.unobserve(el);
+          setTimeout(function(){ el.style.transitionDelay=''; },700);
+        }
+      });
+    },{threshold:.15, rootMargin:'0px 0px -8% 0px'});
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
 </script>
 </body>
 </html>
