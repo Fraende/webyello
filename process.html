@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fi" data-title-en="Process — WebYello" data-title-fi="Prosessi — WebYello">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prosessi — WebYello</title>
+<meta name="description" content="How a WebYello project works: discover, design, build, launch and grow — four clear steps with no surprises.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="wordmark" href="/"><img class="logo-badge" src="/logo.png" alt="WebYello"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/services.html" data-i18n="nav_services">Services</a></li>
+      <li><a href="/process.html" aria-current="page" data-i18n="nav_process">Process</a></li>
+      <li><a href="/pricing.html" data-i18n="nav_pricing">Pricing</a></li>
+      <li><a class="btn btn-yellow" href="#contact" data-i18n="nav_cta">Start a project</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button id="btnEn" onclick="setLang('en')" aria-pressed="false">EN</button>
+        <button id="btnFi" onclick="setLang('fi')" aria-pressed="true">FI</button>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+<div class="process">
+<header class="page-head">
+  <div class="wrap">
+    <div>
+      <h1 data-i18n="pr_h2">A friendly process with zero surprises.</h1>
+      <p data-i18n="pr_p">Four clear steps from "nice to meet you" to "we're live!" — you'll always know exactly where your project stands.</p>
+    </div>
+  </div>
+</header>
+<section>
+  <div class="wrap">
+    <div class="strip">
+      <div class="card"><div class="n">1</div><h3 data-i18n="st1_t">Discover</h3><p data-i18n="st1_p">We chat about your goals, audience, and style over a free discovery call. You talk, we listen (and take a lot of notes).</p></div>
+      <div class="card"><div class="n">2</div><h3 data-i18n="st2_t">Design</h3><p data-i18n="st2_p">You get clickable mockups to react to — we refine together until the design feels exactly right.</p></div>
+      <div class="card"><div class="n">3</div><h3 data-i18n="st3_t">Build</h3><p data-i18n="st3_p">We turn the design into a fast, responsive, pixel-perfect website, with progress previews along the way.</p></div>
+      <div class="card"><div class="n">4</div><h3 data-i18n="st4_t">Launch &amp; grow</h3><p data-i18n="st4_p">We go live, pop the confetti, and stick around with care plans, analytics, and improvements.</p></div>
+    </div>
+    <p class="next-link"><a href="/pricing.html" data-i18n="nx_pricing">See what it costs →</a></p>
+  </div>
+</section>
+</div>
+
+<section id="contact" class="contact">
+  <div class="halftone" style="left:0;bottom:0;width:40%;top:auto;height:60%" aria-hidden="true"></div>
+  <div class="wrap contact-inner">
+    <div>
+      <h2 data-i18n="ct_h2">Ready to give your business the website it deserves?</h2>
+      <p class="lead" data-i18n="ct_lead">Tell us a little about your project and we'll get back to you within one business day with ideas, honest advice, and a clear quote.</p>
+      <ul class="contact-list">
+        <li><a href="mailto:hello@webyello.com">hello@webyello.com</a></li>
+        <li data-i18n="ct_l2">Free 30-minute discovery call</li>
+        <li data-i18n="ct_l3">Clear, fixed-price quotes</li>
+      </ul>
+    </div>
+    <form id="contactForm">
+      <label for="name" data-i18n="f_name">Your name</label>
+      <input id="name" type="text" placeholder="Jane Doe" data-i18n-ph="f_name_ph" autocomplete="name" required>
+      <label for="email" data-i18n="f_email">Email</label>
+      <input id="email" type="email" placeholder="jane@example.com" data-i18n-ph="f_email_ph" autocomplete="email" required>
+      <label for="type" data-i18n="f_type">What do you need?</label>
+      <select id="type">
+        <option data-i18n="f_o1">A brand-new website</option>
+        <option data-i18n="f_o2">A redesign of my current site</option>
+        <option data-i18n="f_o3">An online store</option>
+        <option data-i18n="f_o4">Ongoing care &amp; support</option>
+        <option data-i18n="f_o5">Something else</option>
+      </select>
+      <label for="msg" data-i18n="f_msg">Tell us about your project</label>
+      <textarea id="msg" rows="4" placeholder="We run a small bakery and need a site that smells as good as our bread…" data-i18n-ph="f_msg_ph" required></textarea>
+      <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      <button class="btn btn-yellow" type="submit" data-i18n="f_send">Send it our way</button>
+      <small class="form-fine" data-i18n="f_privacy">We use your details only to reply to you.</small>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="wordmark"><img class="logo-badge" src="/logo.png" alt="WebYello"></span>
+    <div class="foot-links">
+      <a href="/services.html" data-i18n="nav_services">Services</a>
+      <a href="/process.html" data-i18n="nav_process">Process</a>
+      <a href="/pricing.html" data-i18n="nav_pricing">Pricing</a>
+      <a href="#contact" data-i18n="ft_contact">Contact</a>
+    </div>
+    <small data-i18n="ft_copy">© 2026 WebYello. Made with plenty of yellow.</small>
+  </div>
+</footer>
+
+<script src="/site.js"></script>
+</body>
+</html>

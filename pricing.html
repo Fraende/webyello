@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fi" data-title-en="Pricing — WebYello" data-title-fi="Hinnat — WebYello">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hinnat — WebYello</title>
+<meta name="description" content="Clear packages and honest fixed prices: Launch from €690, Business from €1,390, Store from €2,490, Care plan €59/month. Build your own quote.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="wordmark" href="/"><img class="logo-badge" src="/logo.png" alt="WebYello"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/services.html" data-i18n="nav_services">Services</a></li>
+      <li><a href="/process.html" data-i18n="nav_process">Process</a></li>
+      <li><a href="/pricing.html" aria-current="page" data-i18n="nav_pricing">Pricing</a></li>
+      <li><a class="btn btn-yellow" href="#contact" data-i18n="nav_cta">Start a project</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button id="btnEn" onclick="setLang('en')" aria-pressed="false">EN</button>
+        <button id="btnFi" onclick="setLang('fi')" aria-pressed="true">FI</button>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+<header class="page-head">
+  <div class="wrap">
+    <div>
+      <h1 data-i18n="pc_h2">Clear packages, honest prices.</h1>
+      <p data-i18n="pc_p">We're a brand-new studio, and we say it out loud: no imaginary portfolio, no invented reviews. What you get instead is founder-level attention on every single project — and pricing to match.</p>
+    </div>
+    <div class="ph-art" aria-hidden="true"><span class="blob ph1"></span><span class="blob ph2"></span></div>
+  </div>
+</header>
+<section id="pricing">
+  <div class="wrap">
+    <div class="plans">
+      <div class="plan">
+        <h3 data-i18n="p1_t">Launch</h3><div class="for" data-i18n="p1_for">For getting online fast</div><div class="price" data-i18n="p1_price">from €690</div>
+        <ul>
+          <li data-i18n="p1_f1">One polished one-page website</li>
+          <li data-i18n="p1_f2">Mobile-first and lightning fast</li>
+          <li data-i18n="p1_f3">Contact form and map</li>
+          <li data-i18n="p1_f4">Basic SEO setup</li>
+        </ul>
+        <a class="btn btn-line" href="#quote" data-qm-size="launch" data-i18n="p_cta1">Build this quote</a>
+      </div>
+      <div class="plan feat">
+        <span class="pop" data-i18n="p2_pop">Most popular</span>
+        <h3 data-i18n="p2_t">Business</h3><div class="for" data-i18n="p2_for">For a complete company site</div><div class="price" data-i18n="p2_price">from €1,390</div>
+        <ul>
+          <li data-i18n="p2_f1">Up to 5 custom-designed pages</li>
+          <li data-i18n="p2_f2">Bilingual (FI/EN) structure</li>
+          <li data-i18n="p2_f3">Blog or news section</li>
+          <li data-i18n="p2_f4">SEO and analytics setup</li>
+        </ul>
+        <a class="btn" style="background:var(--paper);color:var(--ink)" href="#quote" data-qm-size="business" data-i18n="p_cta2">Build this quote</a>
+      </div>
+      <div class="plan">
+        <h3 data-i18n="p3_t">Store</h3><div class="for" data-i18n="p3_for">For selling online</div><div class="price" data-i18n="p3_price">from €2,490</div>
+        <ul>
+          <li data-i18n="p3_f1">Full online store</li>
+          <li data-i18n="p3_f2">Payments and shipping set up</li>
+          <li data-i18n="p3_f3">Product page templates</li>
+          <li data-i18n="p3_f4">Training so you can run it yourself</li>
+        </ul>
+        <a class="btn btn-line" href="#quote" data-qm-size="store" data-i18n="p_cta3">Build this quote</a>
+      </div>
+    </div>
+    <div class="care" data-i18n="pcare"><b>Care plan — €59/month:</b> updates, backups, security and small changes handled for you, so your site stays fresh.</div>
+    <p class="vat" data-i18n="pc_vat">Prices exclude VAT (25.5%). Every project starts with a free discovery call and a fixed quote — no surprises.</p>
+  </div>
+</section>
+
+<section id="quote" class="quote">
+  <div class="halftone" style="right:0;bottom:0;width:38%;top:auto;height:55%;left:auto" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="qm_h2">Build your quote and watch the price print.</h2>
+      <p data-i18n="qm_p">Pick what you need. We only use our real package prices, so what you see is where the call starts — no hidden extras.</p>
+    </div>
+    <div class="quote-grid">
+      <div class="quote-controls">
+        <label for="qmName" data-i18n="qm_name">Your business name (optional)</label>
+        <input id="qmName" type="text" maxlength="40" autocomplete="organization" placeholder="Aamun Leipomo" data-i18n-ph="qm_name_ph">
+        <fieldset>
+          <legend data-i18n="qm_size">How big is your project?</legend>
+          <div class="sizes">
+            <label class="size"><input type="radio" name="qmSize" value="launch" checked><span class="size-in"><b data-i18n="qm_s1">One page</b><small data-i18n="qm_s1d">One polished page that says it all</small><em data-qm-price="launch"></em></span></label>
+            <label class="size"><input type="radio" name="qmSize" value="business"><span class="size-in"><b data-i18n="qm_s2">Up to five pages</b><small data-i18n="qm_s2d">A complete company website</small><em data-qm-price="business"></em></span></label>
+            <label class="size"><input type="radio" name="qmSize" value="store"><span class="size-in"><b data-i18n="qm_s3">Online store</b><small data-i18n="qm_s3d">Sell your products, take payments</small><em data-qm-price="store"></em></span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend data-i18n="qm_more">Anything extra?</legend>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="qmExtra" value="bil"><span data-i18n="qm_x_bil">Finnish + English</span></label>
+            <label class="chip"><input type="checkbox" name="qmExtra" value="blog"><span data-i18n="qm_x_blog">Blog or news</span></label>
+            <label class="chip"><input type="checkbox" name="qmExtra" value="ana"><span data-i18n="qm_x_ana">SEO &amp; analytics</span></label>
+            <label class="chip"><input type="checkbox" name="qmCare" value="care"><span data-i18n="qm_x_care">Care plan</span></label>
+          </div>
+        </fieldset>
+        <p class="qm-note" id="qmNote"></p>
+      </div>
+      <div class="receipt-wrap">
+        <div class="receipt" id="qmReceipt">
+          <div id="qmBody"></div>
+          <a class="btn btn-yellow" href="#contact" id="qmGo" data-i18n="qm_cta">Send this to WebYello</a>
+          <small class="r-fine" data-i18n="qm_fine">Free 30-minute call first, then a fixed quote. Nothing is sent from here.</small>
+        </div>
+        <p class="sr-only" id="qmLive" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="halftone" style="left:0;bottom:0;width:40%;top:auto;height:60%" aria-hidden="true"></div>
+  <div class="wrap contact-inner">
+    <div>
+      <h2 data-i18n="ct_h2">Ready to give your business the website it deserves?</h2>
+      <p class="lead" data-i18n="ct_lead">Tell us a little about your project and we'll get back to you within one business day with ideas, honest advice, and a clear quote.</p>
+      <ul class="contact-list">
+        <li><a href="mailto:hello@webyello.com">hello@webyello.com</a></li>
+        <li data-i18n="ct_l2">Free 30-minute discovery call</li>
+        <li data-i18n="ct_l3">Clear, fixed-price quotes</li>
+      </ul>
+    </div>
+    <form id="contactForm">
+      <label for="name" data-i18n="f_name">Your name</label>
+      <input id="name" type="text" placeholder="Jane Doe" data-i18n-ph="f_name_ph" autocomplete="name" required>
+      <label for="email" data-i18n="f_email">Email</label>
+      <input id="email" type="email" placeholder="jane@example.com" data-i18n-ph="f_email_ph" autocomplete="email" required>
+      <label for="type" data-i18n="f_type">What do you need?</label>
+      <select id="type">
+        <option data-i18n="f_o1">A brand-new website</option>
+        <option data-i18n="f_o2">A redesign of my current site</option>
+        <option data-i18n="f_o3">An online store</option>
+        <option data-i18n="f_o4">Ongoing care &amp; support</option>
+        <option data-i18n="f_o5">Something else</option>
+      </select>
+      <label for="msg" data-i18n="f_msg">Tell us about your project</label>
+      <textarea id="msg" rows="4" placeholder="We run a small bakery and need a site that smells as good as our bread…" data-i18n-ph="f_msg_ph" required></textarea>
+      <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      <button class="btn btn-yellow" type="submit" data-i18n="f_send">Send it our way</button>
+      <small class="form-fine" data-i18n="f_privacy">We use your details only to reply to you.</small>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="wordmark"><img class="logo-badge" src="/logo.png" alt="WebYello"></span>
+    <div class="foot-links">
+      <a href="/services.html" data-i18n="nav_services">Services</a>
+      <a href="/process.html" data-i18n="nav_process">Process</a>
+      <a href="/pricing.html" data-i18n="nav_pricing">Pricing</a>
+      <a href="#contact" data-i18n="ft_contact">Contact</a>
+    </div>
+    <small data-i18n="ft_copy">© 2026 WebYello. Made with plenty of yellow.</small>
+  </div>
+</footer>
+
+<script src="/site.js"></script>
+<script src="/quote.js"></script>
+</body>
+</html>

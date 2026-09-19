@@ -125,7 +125,7 @@ Two inks and what they make when they overlap — nothing else is a first-class 
 
 Single content column capped at `max-width: 1140px` (`.wrap`), with 26px side gutters below that width. Section vertical rhythm is a flat 84px top and bottom, uninterrupted by an internal scale — density comes from the card grids inside each section, not from varying section padding.
 
-Card grids use CSS Grid with a shared border as the gutter (services/process: `gap: 24px`/`22px`) rather than whitespace alone. Two responsive breaks: 900px collapses 3–4 column grids to 2, hides the hero illustration, and stacks the contact form under its copy; 640px collapses everything to a single column and swaps the inline nav for a slide-down sheet under a hamburger.
+Card grids use CSS Grid with a shared border as the gutter (services/process: `gap: 24px`/`22px`) rather than whitespace alone. Two responsive breaks (plus a 1000px step that drops the four process cards to two columns): 900px collapses 3–4 column grids to 2, hides the hero illustration, and stacks the contact form under its copy; 640px collapses everything to a single column and swaps the inline nav for a slide-down sheet under a hamburger.
 
 ## Elevation & Depth
 
@@ -157,6 +157,22 @@ Gently rounded rectangles (6–10px radius) bordered everywhere in a consistent 
 - **Process card:** paper fill, same border/radius language, a large yellow-ink numeral leading each card, alternating tilt.
 - **Pricing plan:** white fill (yellow fill for the featured plan), olive hard shadow (ink shadow if featured), corner ribbon badge for "Most popular" — never a label above the heading.
 - **Internal padding:** 22–30px depending on card size.
+
+### Sub-page Header
+- **Where:** top of `services`, `pricing` (and `process`, without art). An h1 in Headline scale up to `3rem`, one lead paragraph, and a small two-blob yellow/blue multiply overlap on the right (hidden below 640px) that registers in like the hero's. On the dark process page the blobs are omitted, because multiply on ink reads as black.
+- **Rule:** pages open with the header and go straight to content; no eyebrow above the h1 (the No-Eyebrow Rule holds on every page).
+- **Nav state:** the current page's nav link gets a 3px ink underline (`aria-current="page"`); it must not rely on yellow, which is too faint on paper.
+- **Link tickets:** on the homepage, the three "have a look around" tickets are whole-card links reusing the services ticket (tilt, perforation dot, colored hard shadow) with an underlined "See … →" line.
+
+### Interactive Sketch (`#sketch`)
+- **Section:** the one full-bleed riso-blue section, bordered top and bottom in 3px ink. White text on it stays at full white (never a tint) to hold contrast on the blue.
+- **Sketch window:** white browser frame, 2.5px ink border, `8px 8px 0` yellow hard shadow, +1° tilt, a dashed "just a sketch" stamp on the corner. Inside, only yellow, blue and their multiply-overlap appear; layouts and which ink leads vary by trade.
+- **Chips (trade / extras):** pill toggles with a 2.5px ink border and `3px 3px 0` ink shadow; selected = yellow fill and pressed-in shadow. Checkbox chips add a "✓" so selection never relies on color alone. Real radio/checkbox inputs sit invisibly on top, so focus rings are drawn on the chip (white on blue, blue on white).
+
+### Quote Receipt (`#quote`)
+- **Receipt:** white ticket in the same perforation-dot language as the services tickets, `6px 6px 0` blue shadow, -1° tilt, dashed ink rules between package, lines and total. The total is a yellow "stamp" that re-prints (clip-path wipe, no blur) whenever the package changes.
+- **Size cards:** full-width rows with a 2.5px border and `4px 4px 0` ink shadow; selected = yellow fill.
+- **Content rule:** the receipt may only show published package prices (see PRODUCT.md). Anything not priced is labelled "quoted on the call", never estimated.
 
 ### Inputs / Fields
 - **Style:** 2.5px ink border, 8px radius, white fill.
