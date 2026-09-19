@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fi" data-title-en="Services — WebYello" data-title-fi="Palvelut — WebYello">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palvelut — WebYello</title>
+<meta name="description" content="Website design, development, e-commerce, SEO, branding and care from WebYello — a friendly Finnish web studio for small businesses.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="wordmark" href="/"><img class="logo-badge" src="/logo.png" alt="WebYello"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/services.html" aria-current="page" data-i18n="nav_services">Services</a></li>
+      <li><a href="/process.html" data-i18n="nav_process">Process</a></li>
+      <li><a href="/pricing.html" data-i18n="nav_pricing">Pricing</a></li>
+      <li><a class="btn btn-yellow" href="#contact" data-i18n="nav_cta">Start a project</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button id="btnEn" onclick="setLang('en')" aria-pressed="false">EN</button>
+        <button id="btnFi" onclick="setLang('fi')" aria-pressed="true">FI</button>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+<header class="page-head">
+  <div class="wrap">
+    <div>
+      <h1 data-i18n="sv_h2">Everything your website needs, under one sunny roof.</h1>
+      <p data-i18n="sv_p">From first sketch to launch day (and long after), we handle the whole journey so you can focus on running your business.</p>
+    </div>
+    <div class="ph-art" aria-hidden="true"><span class="blob ph1"></span><span class="blob ph2"></span></div>
+  </div>
+</header>
+<section>
+  <div class="wrap">
+    <div class="tickets">
+      <div class="ticket t1"><h3 data-i18n="sv1_t">Website Design</h3><p data-i18n="sv1_p">Custom designs that capture your personality and guide visitors exactly where you want them — no templates, no cookie cutters.</p></div>
+      <div class="ticket t2"><h3 data-i18n="sv2_t">Web Development</h3><p data-i18n="sv2_p">Fast, secure, standards-compliant builds that work flawlessly on every device — from quick landing pages to complex platforms.</p></div>
+      <div class="ticket t3"><h3 data-i18n="sv3_t">E-commerce</h3><p data-i18n="sv3_p">Online stores that make buying a breeze — smooth checkout, smart product pages, and integrations with the tools you already use.</p></div>
+      <div class="ticket t4"><h3 data-i18n="sv4_t">SEO &amp; Performance</h3><p data-i18n="sv4_p">Lightning-fast load times and search-friendly structure, so the right people actually find you — and stick around.</p></div>
+      <div class="ticket t5"><h3 data-i18n="sv5_t">Branding &amp; Identity</h3><p data-i18n="sv5_p">Logos, colors, and voice that feel unmistakably you — a consistent identity across your website and beyond.</p></div>
+      <div class="ticket t6"><h3 data-i18n="sv6_t">Care &amp; Support</h3><p data-i18n="sv6_p">Updates, backups, security, and tweaks handled for you every month — your site stays fresh while you sleep easy.</p></div>
+    </div>
+    <p class="next-link"><a href="/process.html" data-i18n="nx_process">See how it works →</a></p>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="halftone" style="left:0;bottom:0;width:40%;top:auto;height:60%" aria-hidden="true"></div>
+  <div class="wrap contact-inner">
+    <div>
+      <h2 data-i18n="ct_h2">Ready to give your business the website it deserves?</h2>
+      <p class="lead" data-i18n="ct_lead">Tell us a little about your project and we'll get back to you within one business day with ideas, honest advice, and a clear quote.</p>
+      <ul class="contact-list">
+        <li><a href="mailto:hello@webyello.com">hello@webyello.com</a></li>
+        <li data-i18n="ct_l2">Free 30-minute discovery call</li>
+        <li data-i18n="ct_l3">Clear, fixed-price quotes</li>
+      </ul>
+    </div>
+    <form id="contactForm">
+      <label for="name" data-i18n="f_name">Your name</label>
+      <input id="name" type="text" placeholder="Jane Doe" data-i18n-ph="f_name_ph" autocomplete="name" required>
+      <label for="email" data-i18n="f_email">Email</label>
+      <input id="email" type="email" placeholder="jane@example.com" data-i18n-ph="f_email_ph" autocomplete="email" required>
+      <label for="type" data-i18n="f_type">What do you need?</label>
+      <select id="type">
+        <option data-i18n="f_o1">A brand-new website</option>
+        <option data-i18n="f_o2">A redesign of my current site</option>
+        <option data-i18n="f_o3">An online store</option>
+        <option data-i18n="f_o4">Ongoing care &amp; support</option>
+        <option data-i18n="f_o5">Something else</option>
+      </select>
+      <label for="msg" data-i18n="f_msg">Tell us about your project</label>
+      <textarea id="msg" rows="4" placeholder="We run a small bakery and need a site that smells as good as our bread…" data-i18n-ph="f_msg_ph" required></textarea>
+      <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      <button class="btn btn-yellow" type="submit" data-i18n="f_send">Send it our way</button>
+      <small class="form-fine" data-i18n="f_privacy">We use your details only to reply to you.</small>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="wordmark"><img class="logo-badge" src="/logo.png" alt="WebYello"></span>
+    <div class="foot-links">
+      <a href="/services.html" data-i18n="nav_services">Services</a>
+      <a href="/process.html" data-i18n="nav_process">Process</a>
+      <a href="/pricing.html" data-i18n="nav_pricing">Pricing</a>
+      <a href="#contact" data-i18n="ft_contact">Contact</a>
+    </div>
+    <small data-i18n="ft_copy">© 2026 WebYello. Made with plenty of yellow.</small>
+  </div>
+</footer>
+
+<script src="/site.js"></script>
+</body>
+</html>

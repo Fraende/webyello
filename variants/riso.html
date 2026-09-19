@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebYello — Riso Zine variant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#E4E6E2; --ink:#1A1A1A; --pink:#FF3B81; --pink-ink:#E32C6E; --blue:#0078BF; --purple:#7A3FA0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Karla',sans-serif;color:var(--ink);background:var(--paper);line-height:1.6}
+  h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;line-height:1.05}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 26px}
+  section{padding:84px 0}
+  .halftone{background-image:radial-gradient(var(--ink) 1px,transparent 1.4px);background-size:9px 9px;opacity:.08;position:absolute;inset:0}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;padding:14px 28px;border-radius:6px;font-size:1rem;cursor:pointer;border:2.5px solid var(--ink)}
+  .btn-pink{background:var(--pink);color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+  .btn-blue{background:var(--blue);color:var(--paper);box-shadow:4px 4px 0 var(--ink)}
+  .btn-line{background:transparent;color:var(--ink)}
+
+  nav{border-bottom:3px solid var(--ink);background:var(--paper)}
+  .nav-inner{max-width:1140px;margin:0 auto;padding:18px 26px;display:flex;align-items:center;justify-content:space-between}
+  .wordmark{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.35rem;display:flex;align-items:center;gap:8px}
+  .wordmark .dot{width:10px;height:10px;border-radius:50%;background:var(--pink);display:inline-block}
+  .nav-links{display:flex;gap:26px;list-style:none;align-items:center;font-weight:600;font-size:.95rem;text-transform:uppercase;letter-spacing:.03em}
+
+  .hero{position:relative;overflow:hidden;padding:100px 0 90px}
+  .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .8fr;gap:40px;align-items:center}
+  .badge{display:inline-flex;align-items:center;justify-content:center;width:100px;height:100px;border-radius:50%;border:2.5px dashed var(--ink);font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.74rem;text-align:center;text-transform:uppercase;transform:rotate(-8deg);margin-bottom:22px;padding:8px;line-height:1.25}
+  .hero h1{font-size:clamp(2.3rem,4.6vw,3.6rem);font-weight:800;margin-bottom:20px}
+  .hero h1 mark{background:var(--pink);color:var(--ink);padding:0 8px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+  .hero p{font-size:1.12rem;max-width:32rem;margin-bottom:28px;color:#3A3A3A}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+  .hero-note{font-size:.9rem;color:#5A5A5A}
+  .hero-art{position:relative;height:340px}
+  .hero-art .blob{position:absolute;border-radius:50%;mix-blend-mode:multiply}
+  .b1{width:220px;height:220px;background:var(--pink);top:10px;right:60px}
+  .b2{width:220px;height:220px;background:var(--blue);top:70px;right:0}
+  .b3{width:70px;height:70px;border:2.5px solid var(--ink);border-radius:50%;top:230px;right:170px;background:var(--paper)}
+
+  .sec-head{max-width:640px;margin-bottom:50px;position:relative}
+  .sec-head h2{font-size:clamp(1.85rem,3vw,2.4rem);margin-bottom:12px}
+  .sec-head p{color:#4A4A4A;font-size:1.02rem}
+
+  .tickets{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .ticket{background:#fff;border:2.5px solid var(--ink);border-radius:10px;padding:26px 22px;position:relative;transition:transform .15s}
+  .ticket:nth-child(odd){transform:rotate(-1deg)}
+  .ticket:nth-child(even){transform:rotate(1deg)}
+  .ticket::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:16px;height:16px;background:var(--paper);border:2.5px solid var(--ink);border-radius:50%}
+  .ticket h3{font-size:1.15rem;margin-bottom:8px}
+  .ticket p{font-size:.92rem;color:#4A4A4A}
+  .t1{box-shadow:5px 5px 0 var(--pink)}
+  .t2{box-shadow:5px 5px 0 var(--blue)}
+  .t3{box-shadow:5px 5px 0 var(--purple)}
+  .t4{box-shadow:5px 5px 0 var(--pink)}
+  .t5{box-shadow:5px 5px 0 var(--blue)}
+  .t6{box-shadow:5px 5px 0 var(--purple)}
+
+  .process{background:var(--ink);color:var(--paper)}
+  .process .sec-head p{color:#C9C9C9}
+  .strip{display:flex;gap:22px;overflow-x:auto;padding-bottom:6px}
+  .card{background:var(--paper);color:var(--ink);border-radius:8px;padding:24px 22px;min-width:220px;flex:1;position:relative;border:2.5px solid var(--ink)}
+  .card:nth-child(1){transform:rotate(-2deg)}
+  .card:nth-child(2){transform:rotate(1.5deg)}
+  .card:nth-child(3){transform:rotate(-1.5deg)}
+  .card:nth-child(4){transform:rotate(2deg)}
+  .card .n{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.4rem;color:var(--pink-ink);margin-bottom:10px}
+  .card h3{font-size:1.05rem;margin-bottom:8px}
+  .card p{font-size:.9rem;color:#4A4A4A}
+
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .plan{background:#fff;border:2.5px solid var(--ink);border-radius:10px;padding:28px 24px;display:flex;flex-direction:column;position:relative}
+  .plan.feat{background:var(--pink);color:var(--ink);transform:rotate(-1deg);box-shadow:6px 6px 0 var(--ink)}
+  .plan:not(.feat){box-shadow:6px 6px 0 var(--purple)}
+  .pop{position:absolute;top:-12px;right:18px;font-family:'Bricolage Grotesque',sans-serif;font-size:.72rem;font-weight:700;background:var(--ink);color:var(--paper);padding:5px 12px;border-radius:999px;transform:rotate(-4deg)}
+  .plan h3{font-size:1.25rem;margin-bottom:4px}
+  .plan .for{font-size:.9rem;opacity:.75;margin-bottom:16px}
+  .plan .price{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.9rem;margin-bottom:18px}
+  .plan ul{list-style:none;margin-bottom:22px;flex:1}
+  .plan li{margin-bottom:9px;font-size:.93rem;padding-left:20px;position:relative}
+  .plan li::before{content:"✂";position:absolute;left:0;font-size:.8rem}
+  .care{margin-top:30px;background:var(--blue);color:#fff;border:2.5px solid var(--ink);border-radius:10px;padding:20px 26px;font-size:.95rem}
+  .vat{margin-top:16px;font-size:.85rem;color:#5A5A5A}
+
+  .contact{background:#fff;border-top:3px solid var(--ink);position:relative;overflow:hidden}
+  .contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start;position:relative;z-index:1}
+  .contact h2{font-size:clamp(1.9rem,3.4vw,2.5rem);margin-bottom:16px}
+  .contact p.lead{font-size:1.05rem;max-width:30rem;margin-bottom:22px;color:#3A3A3A}
+  .contact-list{list-style:none;font-weight:600}
+  .contact-list li{margin-bottom:10px}
+  form{background:var(--paper);border:2.5px solid var(--ink);border-radius:10px;padding:28px;box-shadow:6px 6px 0 var(--pink)}
+  label{display:block;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:.88rem;margin-bottom:6px}
+  input,textarea{width:100%;padding:12px 14px;margin-bottom:16px;font-family:'Karla',sans-serif;font-size:1rem;border:2.5px solid var(--ink);border-radius:8px;background:#fff}
+  input:focus,textarea:focus{outline:none;border-color:var(--blue)}
+  form .btn{width:100%;justify-content:center}
+
+  footer{background:var(--ink);color:var(--paper);padding:30px 0;text-align:center;font-size:.9rem}
+
+  @media(max-width:900px){
+    .hero .wrap{grid-template-columns:1fr}
+    .hero-art{display:none}
+    .tickets{grid-template-columns:1fr 1fr}
+    .plans{grid-template-columns:1fr}
+    .contact-inner{grid-template-columns:1fr}
+    .strip{flex-wrap:wrap;overflow-x:visible}
+    .card{min-width:45%}
+  }
+  @media(max-width:640px){
+    .tickets,.plans{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .card{min-width:100%}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="wordmark" href="#"><span class="dot"></span>WebYello</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a class="btn btn-pink" href="#contact">Start a project</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="halftone" style="right:0;top:0;width:50%;left:auto"></div>
+  <div class="wrap">
+    <div>
+      <span class="badge">new studio<br>est. 2026</span>
+      <h1>Websites that make people <mark>smile</mark> — and click.</h1>
+      <p>WebYello designs and builds beautiful, intuitive websites that turn curious visitors into happy customers. Big agency polish, small studio heart.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-pink" href="#contact">Let's build yours</a>
+        <a class="btn btn-line" href="#pricing">See pricing</a>
+      </div>
+      <p class="hero-note">Free 30-minute discovery call · No jargon, ever</p>
+    </div>
+    <div class="hero-art">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+    </div>
+  </div>
+</header>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Everything your website needs, under one sunny roof.</h2>
+      <p>From first sketch to launch day (and long after), we handle the whole journey so you can focus on running your business.</p>
+    </div>
+    <div class="tickets">
+      <div class="ticket t1"><h3>Website Design</h3><p>Custom designs that capture your personality and guide visitors exactly where you want them — no templates, no cookie cutters.</p></div>
+      <div class="ticket t2"><h3>Web Development</h3><p>Fast, secure, standards-compliant builds that work flawlessly on every device — from quick landing pages to complex platforms.</p></div>
+      <div class="ticket t3"><h3>E-commerce</h3><p>Online stores that make buying a breeze — smooth checkout, smart product pages, and integrations with the tools you already use.</p></div>
+      <div class="ticket t4"><h3>SEO &amp; Performance</h3><p>Lightning-fast load times and search-friendly structure, so the right people actually find you — and stick around.</p></div>
+      <div class="ticket t5"><h3>Branding &amp; Identity</h3><p>Logos, colors, and voice that feel unmistakably you — a consistent identity across your website and beyond.</p></div>
+      <div class="ticket t6"><h3>Care &amp; Support</h3><p>Updates, backups, security, and tweaks handled for you every month — your site stays fresh while you sleep easy.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="process" class="process">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>A friendly process with zero surprises.</h2>
+      <p>Four clear steps from "nice to meet you" to "we're live!" — you'll always know exactly where your project stands.</p>
+    </div>
+    <div class="strip">
+      <div class="card"><div class="n">1</div><h3>Discover</h3><p>We chat about your goals, audience, and style over a free discovery call. You talk, we listen (and take a lot of notes).</p></div>
+      <div class="card"><div class="n">2</div><h3>Design</h3><p>You get clickable mockups to react to — we refine together until the design feels exactly right.</p></div>
+      <div class="card"><div class="n">3</div><h3>Build</h3><p>We turn the design into a fast, responsive, pixel-perfect website, with progress previews along the way.</p></div>
+      <div class="card"><div class="n">4</div><h3>Launch &amp; grow</h3><p>We go live, pop the confetti, and stick around with care plans, analytics, and improvements.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Clear packages, honest prices.</h2>
+      <p>We're a brand-new studio, and we say it out loud: no imaginary portfolio, no invented reviews. What you get instead is founder-level attention on every single project — and pricing to match.</p>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <h3>Launch</h3><div class="for">For getting online fast</div><div class="price">from €690</div>
+        <ul><li>One polished one-page website</li><li>Mobile-first and lightning fast</li><li>Contact form and map</li><li>Basic SEO setup</li></ul>
+        <a class="btn btn-line" href="#contact">Ask for a quote</a>
+      </div>
+      <div class="plan feat">
+        <span class="pop">Most popular</span>
+        <h3>Business</h3><div class="for">For a complete company site</div><div class="price">from €1,390</div>
+        <ul><li>Up to 5 custom-designed pages</li><li>Bilingual (FI/EN) structure</li><li>Blog or news section</li><li>SEO and analytics setup</li></ul>
+        <a class="btn" style="background:var(--paper);color:var(--ink)" href="#contact">Ask for a quote</a>
+      </div>
+      <div class="plan">
+        <h3>Store</h3><div class="for">For selling online</div><div class="price">from €2,490</div>
+        <ul><li>Full online store</li><li>Payments and shipping set up</li><li>Product page templates</li><li>Training so you can run it yourself</li></ul>
+        <a class="btn btn-line" href="#contact">Ask for a quote</a>
+      </div>
+    </div>
+    <div class="care"><b>Care plan — €59/month:</b> updates, backups, security and small changes handled for you, so your site stays fresh.</div>
+    <p class="vat">Prices exclude VAT (25.5%). Every project starts with a free discovery call and a fixed quote — no surprises.</p>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="halftone" style="left:0;bottom:0;width:40%;top:auto;height:60%"></div>
+  <div class="wrap contact-inner">
+    <div>
+      <h2>Ready to give your business the website it deserves?</h2>
+      <p class="lead">Tell us a little about your project and we'll get back to you within one business day with ideas, honest advice, and a clear quote.</p>
+      <ul class="contact-list">
+        <li><a href="mailto:hello@webyello.com">hello@webyello.com</a></li>
+        <li>Free 30-minute discovery call</li>
+        <li>Clear, fixed-price quotes</li>
+      </ul>
+    </div>
+    <form onsubmit="event.preventDefault();this.innerHTML='<h3>Thanks! We\'ll be in touch within one business day.</h3>'">
+      <label for="n3">Your name</label>
+      <input id="n3" type="text" autocomplete="name" required>
+      <label for="e3">Email</label>
+      <input id="e3" type="email" autocomplete="email" required>
+      <label for="m3">Tell us about your project</label>
+      <textarea id="m3" rows="4"></textarea>
+      <button class="btn btn-pink" type="submit">Send it our way</button>
+    </form>
+  </div>
+</section>
+
+<footer><span class="wordmark" style="display:inline-flex;color:var(--paper)"><span class="dot"></span>WebYello</span> — © 2026</footer>
+</body>
+</html>
