@@ -2,10 +2,10 @@
 //
 // Environment variables (set in Vercel → Project → Settings → Environment Variables):
 //   RESEND_API_KEY  required. From resend.com → API Keys.
-//   CONTACT_TO      optional. Where enquiries go. Default: hello@webyello.com
+//   CONTACT_TO      optional. Where enquiries go. Default: info@webyello.fi
 //   CONTACT_FROM    optional. Sender. Default: "WebYello <onboarding@resend.dev>" (Resend's shared test sender,
-//                   which can only deliver to the address your Resend account was created with). Once webyello.com
-//                   is verified in Resend, use e.g. "WebYello <hello@webyello.com>".
+//                   which can only deliver to the address your Resend account was created with). Once webyello.fi
+//                   is verified in Resend, use e.g. "WebYello <info@webyello.fi>".
 
 const LIMITS = { name: 100, email: 200, type: 100, msg: 5000 };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -72,7 +72,7 @@ module.exports = async function handler(req, res) {
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         from: process.env.CONTACT_FROM || 'WebYello <onboarding@resend.dev>',
-        to: [process.env.CONTACT_TO || 'hello@webyello.com'],
+        to: [process.env.CONTACT_TO || 'info@webyello.fi'],
         reply_to: email, // hitting Reply in your inbox answers the visitor
         subject: oneLine(`New enquiry from ${name}` + (type ? ` — ${type}` : '')).slice(0, 200),
         text,
