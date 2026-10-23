@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>WebYello — Demot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#E7E9E3;--ink:#16171C;--cobalt:#2452C6;--poppy:#CA3C24;--mustard:#F2B705;--white:#FBFAF5;--slate:#657188}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Work Sans',sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}
+  h1,h2,h3{font-family:'Familjen Grotesk',sans-serif;line-height:1.05;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+  nav{border-bottom:2px solid var(--ink)}
+  .nav-inner{max-width:1160px;margin:0 auto;padding:20px 28px;display:flex;justify-content:space-between;align-items:center}
+  .wordmark{font-family:'Familjen Grotesk',sans-serif;font-weight:700;font-size:1.3rem}
+  .wordmark span{color:var(--poppy)}
+  .nav-links{display:flex;gap:28px;list-style:none;font-weight:500}
+  header{padding:72px 0 40px}
+  header .kicker{display:inline-block;background:var(--mustard);padding:4px 12px;font-weight:600;font-size:.9rem;margin-bottom:18px}
+  header h1{font-size:clamp(2.2rem,4vw,3.4rem);font-weight:700;max-width:18ch;margin-bottom:18px}
+  header p{font-size:1.1rem;max-width:44ch;color:var(--slate)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;padding:24px 0 96px}
+  .card{background:var(--white);border:2px solid var(--ink);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:12px}
+  .card h2{font-size:1.4rem;font-weight:700}
+  .card p{color:var(--slate);font-size:.98rem}
+  .card .tag{align-self:flex-start;font-size:.8rem;font-weight:600;border:2px solid var(--ink);border-radius:999px;padding:3px 10px}
+  .card .open{margin-top:auto;font-weight:600;color:var(--cobalt)}
+  .empty{grid-column:1/-1;border:2px dashed var(--ink);border-radius:14px;padding:48px;text-align:center;color:var(--slate)}
+  footer{border-top:2px solid var(--ink);padding:24px 0;font-size:.9rem;color:var(--slate)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="wordmark" href="/">Web<span>Yello</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Etusivu</a></li>
+      <li><a href="/services.html">Palvelut</a></li>
+      <li><a href="/pricing.html">Hinnat</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header>
+    <span class="kicker">Esittely</span>
+    <h1>Demosivut</h1>
+    <p>Näyttävät esimerkit siitä, miltä sivusi voisi näyttää. Jokainen demo on oma sivustonsa.</p>
+  </header>
+
+  <section class="grid" aria-label="Demot">
+    <div class="empty">
+      <p>Ensimmäinen demo on tulossa pian.</p>
+    </div>
+    <!-- Lisää jokainen demo tähän korttina:
+    <a class="card" href="https://DEMO-URL" target="_blank" rel="noopener">
+      <span class="tag">Yksisivuinen</span>
+      <h2>Asiakkaan nimi</h2>
+      <p>Lyhyt kuvaus demosta.</p>
+      <span class="open">Avaa demo →</span>
+    </a>
+    -->
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">WebYello · Demot ovat esimerkkejä eivätkä ole asiakasviitteitä.</div>
+</footer>
+</body>
+</html>
