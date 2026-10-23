@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-label="Pohjoismainen maisema: kuusia, järvi ja matala keltainen aurinko">
+  <rect width="1200" height="600" fill="#E7E9E3"/>
+  <!-- low mustard sun -->
+  <circle cx="860" cy="330" r="120" fill="#F2B705"/>
+  <!-- far hills -->
+  <path d="M0 400 Q180 330 360 380 T720 360 T1050 370 T1200 340 L1200 600 L0 600 Z" fill="#B9C0B2"/>
+  <!-- lake -->
+  <rect x="0" y="430" width="1200" height="170" fill="#2452C6"/>
+  <!-- sun reflection bars on lake -->
+  <rect x="800" y="446" width="120" height="6" fill="#F2B705"/>
+  <rect x="770" y="466" width="180" height="5" fill="#F2B705"/>
+  <rect x="830" y="486" width="90" height="4" fill="#F2B705"/>
+  <!-- near shore -->
+  <path d="M0 430 Q300 420 600 432 T1200 425 L1200 440 Q900 450 600 442 T0 448 Z" fill="#16171C" opacity="0.15"/>
+  <!-- spruce silhouettes (left group) -->
+  <g fill="#16171C">
+    <polygon points="90,430 130,300 170,430 150,430 180,360 152,360 186,290 118,290 150,250 116,290 84,290 118,360 90,360 124,430"/>
+    <polygon points="200,430 228,340 256,430 240,430 262,380 238,380 258,330 220,330 240,290 212,330 196,330 220,380 198,380 216,430"/>
+    <polygon points="290,440 316,370 342,440 330,440 350,400 330,400 346,350 310,350 326,320 306,350 290,350 306,400 288,400 304,440"/>
+    <polygon points="20,460 46,400 72,460 60,460 78,425 60,425 74,395 40,395 52,370 34,395 22,395 36,425 20,425 34,460"/>
+  </g>
+  <!-- spruce silhouettes (right group, smaller) -->
+  <g fill="#16171C">
+    <polygon points="980,430 1004,370 1028,430 1016,430 1034,398 1016,398 1028,368 1002,368 1014,340 992,368 980,368 992,398 976,398 994,430"/>
+    <polygon points="1080,440 1100,390 1120,440 1110,440 1124,416 1110,416 1120,394 1098,394 1108,372 1090,394 1080,394 1092,416 1078,416 1090,440"/>
+  </g>
+  <!-- small cobalt accent: ink dot as a 'sun-shadow' ring -->
+  <circle cx="860" cy="330" r="120" fill="none" stroke="#16171C" stroke-width="2" opacity="0.2"/>
+</svg>
