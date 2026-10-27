@@ -86,6 +86,19 @@ Object.assign(I18N.fi,{
   ph_quote:"Rakenna oma tarjous ↓",dock_quote:"Lähetä tarjous"
 });
 
+// Demos page
+Object.assign(I18N.fi,{
+  nav_demos:"Demot",sr_demos:"Demot",
+  dm_h1:"Demosivut, joita voit klikkailla.",
+  dm_p:"Jokainen demo on oikea, toimiva verkkosivu, joka on tehty samalla tavalla kuin sinun sivusi tehtäisiin. Ne ovat esimerkkejä eivätkä asiakasviitteitä — olemme uusi studio emmekä keksi portfoliota.",
+  dm_open:"Avaa demo →",
+  dm_t1_tag:"Yksisivuinen",dm_t1_t:"Testisivu",
+  dm_t1_p:"Yksinkertainen yhden sivun esimerkki, jolla tarkistamme, miltä demo näyttää ja toimii kaikilla näytöillä.",
+  dm_next_t:"Seuraava demo voisi olla sinun.",
+  dm_next_p:"Lisää demoja on tulossa. Kerro yrityksestäsi, niin luonnostelemme ensimmäisen version maksuttomassa kartoituspuhelussa.",
+  dm_next_more:"Aloita projekti →"
+});
+
 // Every page registers hooks here; they run after each language change (first=true on page load)
 const langHooks=[];
 let lang='fi';

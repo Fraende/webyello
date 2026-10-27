@@ -317,6 +317,27 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 .receipt .btn{width:100%}
 .r-fine{display:block;margin-top:12px;font-size:.88rem;color:var(--muted-foreground);text-align:center}
 
+/* ---- Demos ---- */
+.demos{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+.demo{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);transition:border-color .15s}
+.demo:hover{border-color:var(--foreground)}
+.demo-shot{display:flex;flex-direction:column;background:var(--muted);border-bottom:1px solid var(--border);padding:0 0 28px;min-height:200px}
+.demo-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--border);background:var(--card)}
+.demo-bar i{width:9px;height:9px;border:2px solid var(--foreground);flex:none}
+.demo-bar b{margin-left:8px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:500;font-size:.74rem;color:var(--muted-foreground);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.demo-h{margin:auto 24px 0;font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-size:2.6rem;line-height:.95;letter-spacing:-.03em}
+.demo-rule{display:block;margin:8px 24px 0;width:45%;height:10px;background:var(--primary)}
+.demo-body{display:flex;flex-direction:column;gap:8px;padding:24px;flex:1}
+.demo-tag{align-self:flex-start;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--foreground);padding:2px 8px}
+.demo h3{font-size:1.3rem;font-weight:700}
+.demo p{font-size:.98rem;color:var(--muted-foreground)}
+.demo .more{margin-top:auto;padding-top:8px;font-weight:700;color:var(--link);text-decoration:underline;text-underline-offset:4px}
+.demo-next{background:var(--secondary);border:2px dashed var(--foreground);justify-content:center}
+.demo-next .demo-body{justify-content:center;flex:0 1 auto}
+.demo-next p{color:var(--foreground)}
+.demo-next .more{color:var(--foreground)}
+@media(max-width:640px){.demos{grid-template-columns:1fr}}
+
 /* ---- Phone dock ---- */
 .dock{display:none}
 
