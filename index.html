@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Karla:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -37,10 +37,9 @@
 
 <main id="main" tabindex="-1">
 <header class="hero" id="top">
-  <div class="halftone" style="right:0;top:0;width:50%;left:auto" aria-hidden="true"></div>
   <div class="wrap">
-    <div>
-      <span class="badge" data-i18n="hero_badge">new studio<br>est. 2026</span>
+    <div class="hero-copy">
+      <span class="badge" data-i18n="hero_badge">New studio · est. 2026</span>
       <h1 data-i18n="hero_h1">Websites that make people <mark>smile</mark> — and click.</h1>
       <p data-i18n="hero_lead">WebYello designs and builds beautiful, intuitive websites that turn curious visitors into happy customers. Big agency polish, small studio heart.</p>
       <div class="hero-ctas">
@@ -49,10 +48,16 @@
       </div>
       <p class="hero-note" data-i18n="hero_note">Free 30-minute discovery call · No jargon, ever</p>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <div class="blob b1"></div>
-      <div class="blob b2"></div>
-      <div class="blob b3"></div>
+    <div class="hero-panel">
+      <div class="perf" id="perf">
+        <h2 data-i18n="perf_h">This page, measured</h2>
+        <dl>
+          <dt data-i18n="perf_load">Fully loaded</dt><dd id="perfLoad">…</dd>
+          <dt data-i18n="perf_fcp">First content</dt><dd id="perfFcp">…</dd>
+          <dt data-i18n="perf_bytes">Page weight</dt><dd id="perfBytes">…</dd>
+        </dl>
+        <p data-i18n="perf_note">Measured just now in your own browser. Every site we build is held to the same numbers.</p>
+      </div>
     </div>
   </div>
 </header>
@@ -87,7 +92,7 @@
         <small data-i18n="sk_note">Nothing is sent anywhere — this stays in your browser.</small>
       </div>
       <div class="mock-wrap">
-        <span class="mock-stamp" aria-hidden="true" data-i18n="sk_stamp">just a<br>sketch</span>
+        <span class="mock-stamp" aria-hidden="true" data-i18n="sk_stamp">Just a sketch</span>
         <div class="mock" role="img" id="skMock" aria-label="">
           <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><span class="mock-url" id="skUrl"></span></div>
           <div class="m-page" id="skPage" aria-hidden="true">
@@ -120,7 +125,6 @@
 </section>
 
 <section id="contact" class="contact">
-  <div class="halftone" style="left:0;bottom:0;width:40%;top:auto;height:60%" aria-hidden="true"></div>
   <div class="wrap contact-inner">
     <div>
       <h2 data-i18n="ct_h2">Ready to give your business the website it deserves?</h2>

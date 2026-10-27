@@ -12,7 +12,9 @@ links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
 
 const I18N={en:{},fi:{
   nav_services:"Palvelut",nav_process:"Prosessi",nav_pricing:"Hinnat",nav_cta:"Aloita projekti",
-  hero_badge:"uusi studio<br>per. 2026",
+  hero_badge:"Uusi studio · per. 2026",
+  perf_h:"Tämän sivun mittaus",perf_load:"Täysin ladattu",perf_fcp:"Ensimmäinen sisältö",perf_bytes:"Sivun koko",
+  perf_note:"Mitattu juuri nyt omassa selaimessasi. Jokainen tekemämme sivusto pidetään samoissa luvuissa.",
   hero_h1:'Verkkosivut, jotka saavat ihmiset <mark>hymyilemään</mark> — ja klikkaamaan.',
   hero_lead:"WebYello suunnittelee ja rakentaa kauniita, intuitiivisia verkkosivuja, jotka muuttavat uteliaat kävijät tyytyväisiksi asiakkaiksi. Ison toimiston laatu, pienen studion sydän.",
   hero_cta1:"Luonnostele sivustosi",hero_cta2:"Katso hinnat",
@@ -199,9 +201,37 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
   new IntersectionObserver(function(es){ dock.classList.toggle('hide',es[0].isIntersecting); }).observe(contact);
 })();
 
-// The hero spheres drift forever; stop them while they are scrolled out of view
+// The site proves its own speed: measure this very page in the visitor's browser (home page only)
 (function(){
-  const art=document.querySelector('.hero-art');
-  if(!art||!('IntersectionObserver' in window)) return;
-  new IntersectionObserver(function(es){ art.classList.toggle('paused',!es[0].isIntersecting); }).observe(art);
+  const out={load:document.getElementById('perfLoad'),fcp:document.getElementById('perfFcp'),bytes:document.getElementById('perfBytes')};
+  if(!out.load||!window.performance||!performance.getEntriesByType) return;
+  const v={load:null,fcp:null,bytes:null};
+  const num=(n,d)=>{ const s=n.toFixed(d); return lang==='fi'?s.replace('.',','):s; };
+  const sec=ms=>ms==null?'—':num(ms/1000,2)+' s';
+  const kb=b=>b==null?'—':(b<1024*1024?num(b/1024,0)+(lang==='fi'?' kt':' KB'):num(b/1048576,2)+(lang==='fi'?' Mt':' MB'));
+  function render(){ out.load.textContent=sec(v.load); out.fcp.textContent=sec(v.fcp); out.bytes.textContent=kb(v.bytes); }
+  // compressed size of everything the page fetched (cross-origin files that hide their size count as 0)
+  function weight(){
+    let total=0;
+    const nav=performance.getEntriesByType('navigation')[0];
+    if(nav) total+=nav.encodedBodySize||0;
+    performance.getEntriesByType('resource').forEach(r=>{ total+=r.encodedBodySize||0; });
+    return total||null;
+  }
+  try{
+    new PerformanceObserver(function(list){
+      list.getEntries().forEach(e=>{ if(e.name==='first-contentful-paint'){ v.fcp=e.startTime; render(); } });
+    }).observe({type:'paint',buffered:true});
+  }catch(e){}
+  function onLoad(){
+    setTimeout(function(){
+      const nav=performance.getEntriesByType('navigation')[0];
+      v.load=nav&&nav.loadEventStart?nav.loadEventStart:null;
+      v.bytes=weight();
+      if(v.fcp==null){ const p=performance.getEntriesByName('first-contentful-paint')[0]; if(p) v.fcp=p.startTime; }
+      render();
+    },0);
+  }
+  if(document.readyState==='complete') onLoad(); else window.addEventListener('load',onLoad);
+  langHooks.push(render);
 })();
