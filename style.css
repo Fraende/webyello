@@ -1,9 +1,32 @@
-:root{
-  --paper:#E4E6E2; --ink:#1A1A1A; --yellow:#F7C600; --yellow-ink:#8A6D00; --blue:#0078BF; --olive:#5B8C3E;
-  --ink-muted:#404040; --ink-faint:#5A5A5A; --paper-muted:#C9C9C9;
-    --surface:#fff; --on-blue:#fff;              /* white stock: raised surfaces, and text on riso blue */
-    --focus:var(--blue); --selected:var(--yellow); /* roles: blue = structure/focus, yellow = act/selected */
-    --check:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.8' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+:root {
+  --background: oklch(0.985 0.006 92);
+  --foreground: oklch(0.20 0.03 92);
+  --card: oklch(1.00 0 0);
+  --primary: oklch(0.84 0.163 92);
+  --primary-foreground: oklch(0.20 0.03 92);
+  --secondary: oklch(0.95 0.06 92);
+  --accent: oklch(0.94 0.06 92);
+  --muted: oklch(0.96 0.012 92);
+  --muted-foreground: oklch(0.50 0.03 92);
+  --border: oklch(0.91 0.015 92);
+  --ring: oklch(0.52 0.101 92);
+  --destructive: oklch(0.55 0.20 27);
+  --radius: 0;
+}
+
+.dark {
+  --background: oklch(0.17 0.026 92);
+  --foreground: oklch(0.965 0.008 92);
+  --card: oklch(0.21 0.03 92);
+  --primary: oklch(0.78 0.151 92);
+  --primary-foreground: oklch(0.20 0.03 92);
+  --secondary: oklch(0.28 0.054 92);
+  --accent: oklch(0.31 0.06 92);
+  --muted: oklch(0.26 0.025 92);
+  --muted-foreground: oklch(0.72 0.03 92);
+  --border: oklch(0.31 0.03 92);
+  --ring: oklch(0.78 0.151 92);
+  --destructive: oklch(0.68 0.19 27);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
