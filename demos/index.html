@@ -1,78 +1,136 @@
 <!DOCTYPE html>
-<html lang="fi">
+<html lang="en" data-title-en="Demos — WebYello" data-title-fi="Demot — WebYello">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>WebYello — Demot</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<script>/* Finnish is the default and the markup is English: hide the page until site.js has translated it, so nobody sees English flash first */(function(){try{var q=new URLSearchParams(location.search).get('lang'),s=localStorage.getItem('wy-lang'),l=(q==='en'||q==='fi')?q:s;if(l!=='en'){var d=document.documentElement;d.classList.add('i18n-pending');setTimeout(function(){d.classList.remove('i18n-pending')},2500)}}catch(e){}})()</script>
+<title>Demos — WebYello</title>
+<meta name="description" content="Demo sites built by WebYello: see how a fast, clear small-business website looks and works before you order one.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{--paper:#E7E9E3;--ink:#16171C;--cobalt:#2452C6;--poppy:#CA3C24;--mustard:#F2B705;--white:#FBFAF5;--slate:#657188}
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Work Sans',sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}
-  h1,h2,h3{font-family:'Familjen Grotesk',sans-serif;line-height:1.05;letter-spacing:-.01em}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1160px;margin:0 auto;padding:0 28px}
-  nav{border-bottom:2px solid var(--ink)}
-  .nav-inner{max-width:1160px;margin:0 auto;padding:20px 28px;display:flex;justify-content:space-between;align-items:center}
-  .wordmark{font-family:'Familjen Grotesk',sans-serif;font-weight:700;font-size:1.3rem}
-  .wordmark span{color:var(--poppy)}
-  .nav-links{display:flex;gap:28px;list-style:none;font-weight:500}
-  header{padding:72px 0 40px}
-  header .kicker{display:inline-block;background:var(--mustard);padding:4px 12px;font-weight:600;font-size:.9rem;margin-bottom:18px}
-  header h1{font-size:clamp(2.2rem,4vw,3.4rem);font-weight:700;max-width:18ch;margin-bottom:18px}
-  header p{font-size:1.1rem;max-width:44ch;color:var(--slate)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;padding:24px 0 96px}
-  .card{background:var(--white);border:2px solid var(--ink);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:12px}
-  .card h2{font-size:1.4rem;font-weight:700}
-  .card p{color:var(--slate);font-size:.98rem}
-  .card .tag{align-self:flex-start;font-size:.8rem;font-weight:600;border:2px solid var(--ink);border-radius:999px;padding:3px 10px}
-  .card .open{margin-top:auto;font-weight:600;color:var(--cobalt)}
-  .empty{grid-column:1/-1;border:2px dashed var(--ink);border-radius:14px;padding:48px;text-align:center;color:var(--slate)}
-  footer{border-top:2px solid var(--ink);padding:24px 0;font-size:.9rem;color:var(--slate)}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Karla:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<nav>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<nav aria-label="Main" data-i18n-aria="aria_nav">
   <div class="nav-inner">
-    <a class="wordmark" href="/">Web<span>Yello</span></a>
-    <ul class="nav-links">
-      <li><a href="/">Etusivu</a></li>
-      <li><a href="/services.html">Palvelut</a></li>
-      <li><a href="/pricing.html">Hinnat</a></li>
+    <a class="wordmark" href="/"><img class="logo-badge" src="/logo-480.png" width="480" height="160" alt="WebYello"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/services.html" data-i18n="nav_services">Services</a></li>
+      <li><a href="/demos/" aria-current="page" data-i18n="nav_demos">Demos</a></li>
+      <li><a href="/process.html" data-i18n="nav_process">Process</a></li>
+      <li><a href="/pricing.html" data-i18n="nav_pricing">Pricing</a></li>
+      <li><a class="btn btn-yellow" href="#contact" data-i18n="nav_cta">Start a project</a></li>
     </ul>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language" data-i18n-aria="aria_lang">
+        <button id="btnEn" onclick="setLang('en')" aria-pressed="false">EN</button>
+        <button id="btnFi" onclick="setLang('fi')" aria-pressed="true">FI</button>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" data-i18n-aria="aria_menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+    </div>
   </div>
 </nav>
 
-<main class="wrap">
-  <header>
-    <span class="kicker">Esittely</span>
-    <h1>Demosivut</h1>
-    <p>Näyttävät esimerkit siitä, miltä sivusi voisi näyttää. Jokainen demo on oma sivustonsa.</p>
-  </header>
+<main id="main" tabindex="-1">
+<header class="page-head">
+  <div class="wrap">
+    <div>
+      <h1 data-i18n="dm_h1">Demo sites you can click through.</h1>
+      <p data-i18n="dm_p">Each demo is a real, working website, built the same way as yours would be. They are examples, not client references — we're a new studio and we don't invent a portfolio.</p>
+    </div>
+    <div class="ph-art" aria-hidden="true"><span class="blob ph1"></span><span class="blob ph2"></span></div>
+  </div>
+</header>
+<section>
+  <div class="wrap">
+    <h2 class="sr-only" data-i18n="sr_demos">Demos</h2>
+    <div class="demos">
+      <!-- One card per demo. Copy this block, change the link, tag, name and text, and add the Finnish strings to site.js.
+           External demo: href="https://…" target="_blank" rel="noopener" -->
+      <a class="demo" href="/demos/test-site/">
+        <div class="demo-shot" aria-hidden="true"><span class="demo-bar"><i></i><i></i><i></i><b>webyello.fi/demos/test-site</b></span><span class="demo-h">Testisivu</span><span class="demo-rule"></span></div>
+        <div class="demo-body">
+          <span class="demo-tag" data-i18n="dm_t1_tag">One page</span>
+          <h3 data-i18n="dm_t1_t">Test site</h3>
+          <p data-i18n="dm_t1_p">A simple one-page example we use to check how a demo looks and works on every screen.</p>
+          <span class="more" data-i18n="dm_open">Open the demo →</span>
+        </div>
+      </a>
+      <a class="demo demo-next" href="#contact">
+        <div class="demo-body">
+          <h3 data-i18n="dm_next_t">The next demo could be yours.</h3>
+          <p data-i18n="dm_next_p">More demos are on the way. Tell us about your business and we'll sketch the first version on the free discovery call.</p>
+          <span class="more" data-i18n="dm_next_more">Start a project →</span>
+        </div>
+      </a>
+    </div>
+    <p class="next-link"><a href="/pricing.html" data-i18n="nx_pricing">See what it costs →</a></p>
+  </div>
+</section>
 
-  <section class="grid" aria-label="Demot">
-    <a class="card" href="/demos/test-site/">
-      <span class="tag">Yksisivuinen</span>
-      <h2>Testisivu</h2>
-      <p>Yksinkertainen esimerkkisivu, jolla tarkistetaan demon ulkoasu ja toiminta.</p>
-      <span class="open">Avaa demo →</span>
-    </a>
-    <!-- Lisää jokainen demo tähän korttina:
-    <a class="card" href="https://DEMO-URL" target="_blank" rel="noopener">
-      <span class="tag">Yksisivuinen</span>
-      <h2>Asiakkaan nimi</h2>
-      <p>Lyhyt kuvaus demosta.</p>
-      <span class="open">Avaa demo →</span>
-    </a>
-    -->
-  </section>
+<section id="contact" class="contact">
+  <div class="wrap contact-inner">
+    <div>
+      <h2 data-i18n="ct_h2">Ready to give your business the website it deserves?</h2>
+      <p class="lead" data-i18n="ct_lead">Tell us a little about your project and we'll get back to you within one business day with ideas, honest advice, and a clear quote.</p>
+      <ul class="contact-list">
+        <li><a href="mailto:info@webyello.fi">info@webyello.fi</a></li>
+        <li data-i18n="ct_l2">Free 30-minute discovery call</li>
+        <li data-i18n="ct_l3">Clear, fixed-price quotes</li>
+      </ul>
+    </div>
+    <form id="contactForm">
+      <label for="name" data-i18n="f_name">Your name</label>
+      <input id="name" type="text" maxlength="100" placeholder="Jane Doe" data-i18n-ph="f_name_ph" autocomplete="name" required>
+      <label for="email" data-i18n="f_email">Email</label>
+      <input id="email" type="email" maxlength="200" placeholder="jane@example.com" data-i18n-ph="f_email_ph" autocomplete="email" required>
+      <label for="type" data-i18n="f_type">What do you need?</label>
+      <select id="type">
+        <option data-i18n="f_o1">A brand-new website</option>
+        <option data-i18n="f_o2">A redesign of my current site</option>
+        <option data-i18n="f_o3">An online store</option>
+        <option data-i18n="f_o4">Ongoing care &amp; support</option>
+        <option data-i18n="f_o5">Something else</option>
+      </select>
+      <label for="msg" data-i18n="f_msg">Tell us about your project</label>
+      <textarea id="msg" rows="4" maxlength="5000" placeholder="We run a small bakery and need a site that smells as good as our bread…" data-i18n-ph="f_msg_ph" required></textarea>
+      <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      <button class="btn btn-yellow" type="submit" data-i18n="f_send">Send it our way</button>
+      <small class="form-fine" data-i18n="f_privacy">We use your details only to reply to you.</small>
+    </form>
+  </div>
+</section>
+
 </main>
 
 <footer>
-  <div class="wrap">WebYello · Demot ovat esimerkkejä eivätkä ole asiakasviitteitä.</div>
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <span class="wordmark"><img class="logo-badge" src="/logo-480.png" width="480" height="160" alt="WebYello"></span>
+      <span class="foot-by">by NetYello</span>
+    </div>
+    <div class="foot-links">
+      <a href="/services.html" data-i18n="nav_services">Services</a>
+      <a href="/demos/" data-i18n="nav_demos">Demos</a>
+      <a href="/process.html" data-i18n="nav_process">Process</a>
+      <a href="/pricing.html" data-i18n="nav_pricing">Pricing</a>
+      <a href="#contact" data-i18n="ft_contact">Contact</a>
+    </div>
+    <small data-i18n="ft_copy">© 2026 WebYello. Made with plenty of yellow.</small>
+  </div>
 </footer>
+
+<div class="dock" id="dock">
+  <a class="btn btn-yellow" id="dockGo" href="#contact" data-i18n="nav_cta">Start a project</a>
+</div>
+
+<script src="/shader-bg.js" defer></script>
+<script src="/site.js"></script>
 </body>
 </html>

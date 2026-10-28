@@ -7,7 +7,7 @@ Object.assign(I18N.fi,{
   sk_t_bakery:"Leipomo",sk_t_hair:"Kampaamo &amp; parturi",sk_t_trades:"Remontit &amp; korjaukset",sk_t_coach:"Valmentaja &amp; konsultti",sk_t_cafe:"Kahvila &amp; ravintola",sk_t_shop:"Pieni verkkokauppa",sk_t_other:"Jotain muuta",
   sk_cta:"Paljonko se maksaisi?",
   sk_note:"Mitään ei lähetetä minnekään — tämä pysyy selaimessasi.",
-  sk_stamp:"vain<br>luonnos"
+  sk_stamp:"Vain luonnos"
 });
 I18N.en.sk_name_ph="Sunrise Bakery";
 

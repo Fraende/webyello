@@ -12,7 +12,10 @@ links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
 
 const I18N={en:{},fi:{
   nav_services:"Palvelut",nav_process:"Prosessi",nav_pricing:"Hinnat",nav_cta:"Aloita projekti",
-  hero_badge:"uusi studio<br>per. 2026",
+  hero_badge:"Uusi studio · per. 2026",
+  perf_h:"Tämän sivun mittaus",perf_load:"Täysin ladattu",perf_fcp:"Ensimmäinen sisältö",perf_bytes:"Sivun koko",
+  perf_note:"Mitattu juuri nyt omassa selaimessasi. Jokainen tekemämme sivusto pidetään samoissa luvuissa.",
+  hero_alt:"Kuvitus: viittaan pukeutunut kulkija kävelee aavikon poikki kohti valtavaa kiviporttia, joka on selainikkunan muotoinen ja jonka sisällä on tähtitaivas. Kivinen hiiren osoitin leijuu taivaalla ja kivikaaret nousevat hiekasta kuin Wi-Fi-aallot.",
   hero_h1:'Verkkosivut, jotka saavat ihmiset <mark>hymyilemään</mark> — ja klikkaamaan.',
   hero_lead:"WebYello suunnittelee ja rakentaa kauniita, intuitiivisia verkkosivuja, jotka muuttavat uteliaat kävijät tyytyväisiksi asiakkaiksi. Ison toimiston laatu, pienen studion sydän.",
   hero_cta1:"Luonnostele sivustosi",hero_cta2:"Katso hinnat",
@@ -84,6 +87,19 @@ Object.assign(I18N.fi,{
   ph_quote:"Rakenna oma tarjous ↓",dock_quote:"Lähetä tarjous"
 });
 
+// Demos page
+Object.assign(I18N.fi,{
+  nav_demos:"Demot",sr_demos:"Demot",
+  dm_h1:"Demosivut, joita voit klikkailla.",
+  dm_p:"Jokainen demo on oikea, toimiva verkkosivu, joka on tehty samalla tavalla kuin sinun sivusi tehtäisiin. Ne ovat esimerkkejä eivätkä asiakasviitteitä — olemme uusi studio emmekä keksi portfoliota.",
+  dm_open:"Avaa demo →",
+  dm_t1_tag:"Yksisivuinen",dm_t1_t:"Testisivu",
+  dm_t1_p:"Yksinkertainen yhden sivun esimerkki, jolla tarkistamme, miltä demo näyttää ja toimii kaikilla näytöillä.",
+  dm_next_t:"Seuraava demo voisi olla sinun.",
+  dm_next_p:"Lisää demoja on tulossa. Kerro yrityksestäsi, niin luonnostelemme ensimmäisen version maksuttomassa kartoituspuhelussa.",
+  dm_next_more:"Aloita projekti →"
+});
+
 // Every page registers hooks here; they run after each language change (first=true on page load)
 const langHooks=[];
 let lang='fi';
@@ -98,6 +114,9 @@ function setLang(l,first){
   });
   document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
     const v=d[el.dataset.i18nAria]; if(v!=null) el.setAttribute('aria-label',v);
+  });
+  document.querySelectorAll('[data-i18n-alt]').forEach(el=>{
+    const v=d[el.dataset.i18nAlt]; if(v!=null) el.alt=v;
   });
   document.documentElement.lang=l;
   const ds=document.documentElement.dataset;
@@ -115,6 +134,7 @@ document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('[data-i18n]').forEach(el=>{I18N.en[el.dataset.i18n]??=el.innerHTML});
   document.querySelectorAll('[data-i18n-ph]').forEach(el=>{I18N.en[el.dataset.i18nPh]??=el.placeholder});
   document.querySelectorAll('[data-i18n-aria]').forEach(el=>{I18N.en[el.dataset.i18nAria]??=el.getAttribute('aria-label')});
+  document.querySelectorAll('[data-i18n-alt]').forEach(el=>{I18N.en[el.dataset.i18nAlt]??=el.alt});
   let saved=null;
   try{ saved=localStorage.getItem('wy-lang'); }catch(e){}
   // ?lang=en / ?lang=fi makes a language linkable (e.g. from an English email signature) and is remembered
@@ -199,9 +219,37 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
   new IntersectionObserver(function(es){ dock.classList.toggle('hide',es[0].isIntersecting); }).observe(contact);
 })();
 
-// The hero spheres drift forever; stop them while they are scrolled out of view
+// The site proves its own speed: measure this very page in the visitor's browser (home page only)
 (function(){
-  const art=document.querySelector('.hero-art');
-  if(!art||!('IntersectionObserver' in window)) return;
-  new IntersectionObserver(function(es){ art.classList.toggle('paused',!es[0].isIntersecting); }).observe(art);
+  const out={load:document.getElementById('perfLoad'),fcp:document.getElementById('perfFcp'),bytes:document.getElementById('perfBytes')};
+  if(!out.load||!window.performance||!performance.getEntriesByType) return;
+  const v={load:null,fcp:null,bytes:null};
+  const num=(n,d)=>{ const s=n.toFixed(d); return lang==='fi'?s.replace('.',','):s; };
+  const sec=ms=>ms==null?'—':num(ms/1000,2)+' s';
+  const kb=b=>b==null?'—':(b<1024*1024?num(b/1024,0)+(lang==='fi'?' kt':' KB'):num(b/1048576,2)+(lang==='fi'?' Mt':' MB'));
+  function render(){ out.load.textContent=sec(v.load); out.fcp.textContent=sec(v.fcp); out.bytes.textContent=kb(v.bytes); }
+  // compressed size of everything the page fetched (cross-origin files that hide their size count as 0)
+  function weight(){
+    let total=0;
+    const nav=performance.getEntriesByType('navigation')[0];
+    if(nav) total+=nav.encodedBodySize||0;
+    performance.getEntriesByType('resource').forEach(r=>{ total+=r.encodedBodySize||0; });
+    return total||null;
+  }
+  try{
+    new PerformanceObserver(function(list){
+      list.getEntries().forEach(e=>{ if(e.name==='first-contentful-paint'){ v.fcp=e.startTime; render(); } });
+    }).observe({type:'paint',buffered:true});
+  }catch(e){}
+  function onLoad(){
+    setTimeout(function(){
+      const nav=performance.getEntriesByType('navigation')[0];
+      v.load=nav&&nav.loadEventStart?nav.loadEventStart:null;
+      v.bytes=weight();
+      if(v.fcp==null){ const p=performance.getEntriesByName('first-contentful-paint')[0]; if(p) v.fcp=p.startTime; }
+      render();
+    },0);
+  }
+  if(document.readyState==='complete') onLoad(); else window.addEventListener('load',onLoad);
+  langHooks.push(render);
 })();
