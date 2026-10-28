@@ -95,6 +95,8 @@ Object.assign(I18N.fi,{
   dm_open:"Avaa demo →",
   dm_t1_tag:"Yksisivuinen",dm_t1_t:"Testisivu",
   dm_t1_p:"Yksinkertainen yhden sivun esimerkki, jolla tarkistamme, miltä demo näyttää ja toimii kaikilla näytöillä.",
+  dm_t2_tag:"Esittelysivu",dm_t2_t:"Aamurusko (aurinkosähkö)",
+  dm_t2_p:"Kuvitteellisen aurinkosähköyrityksen sivusto, jossa on aamu/yö-vaihtokytkin, tuotteet, asiakastarinat ja tarjouslomake.",
   dm_next_t:"Seuraava demo voisi olla sinun.",
   dm_next_p:"Lisää demoja on tulossa. Kerro yrityksestäsi, niin luonnostelemme ensimmäisen version maksuttomassa kartoituspuhelussa.",
   dm_next_more:"Aloita projekti →"

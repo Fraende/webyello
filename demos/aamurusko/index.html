@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fi" data-scene="morning">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aamurusko – aurinkosähköä aamusta yöhön</title>
+<meta name="description" content="Aamurusko suunnittelee ja asentaa aurinkosähköjärjestelmiä ja akkuvarastoja suomalaisiin koteihin.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#F4F2EC">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230D1117'/%3E%3Ccircle cx='16' cy='18' r='7' fill='%23E8B923'/%3E%3Cpath d='M4 24h24' stroke='%23E8B923' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="assets/scene-aamu.svg" fetchpriority="high">
+<link rel="stylesheet" href="styles.css">
+<script>
+  // Set the scene before first paint: saved choice, else the visitor's colour-scheme preference.
+  (function () {
+    var s = "morning";
+    try {
+      var v = localStorage.getItem("aamurusko-scene");
+      if (v === "morning" || v === "night") s = v;
+      else if (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches) s = "night";
+    } catch (e) {}
+    document.documentElement.setAttribute("data-scene", s);
+  })();
+</script>
+</head>
+<body>
+<a class="skip" href="#sisalto">Siirry sisältöön</a>
+
+<header class="bar" id="bar">
+  <a class="brand" href="#top" aria-label="Aamurusko, etusivu">
+    <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><circle cx="16" cy="19" r="7" fill="currentColor"/><path d="M3 25h26M16 5v4M6 10l3 3M26 10l-3 3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="square"/></svg>
+    <span>Aamurusko</span>
+  </a>
+  <nav class="links" aria-label="Päävalikko">
+    <a href="#toimintatapa">Toimintatapa</a>
+    <a href="#aamusta-yohon">Aamusta yöhön</a>
+    <a href="#tuotteet">Tuotteet</a>
+    <a href="#tarinat">Asiakkaat</a>
+    <a href="#ukk">UKK</a>
+    <a class="cta" href="#tarjous">Pyydä tarjous</a>
+  </nav>
+  <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Avaa valikko">
+    <span></span><span></span>
+  </button>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <a href="#toimintatapa">Toimintatapa</a>
+  <a href="#aamusta-yohon">Aamusta yöhön</a>
+  <a href="#tuotteet">Tuotteet</a>
+  <a href="#tarinat">Asiakkaat</a>
+  <a href="#ukk">UKK</a>
+  <a href="#tarjous">Pyydä tarjous</a>
+</div>
+
+<main id="sisalto">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero-bg" aria-hidden="true">
+      <img class="scene scene-morning" src="assets/scene-aamu.svg" alt="" width="1600" height="1000" fetchpriority="high" decoding="async">
+      <img class="scene scene-night" src="assets/scene-yo.svg" alt="" width="1600" height="1000" decoding="async">
+      <div class="shade shade-bottom"></div>
+      <div class="shade shade-top"></div>
+      <div class="shade shade-vignette"></div>
+    </div>
+
+    <div class="hero-inner">
+      <h1 class="display">Oma aurinkosähkö,<br><span class="muted">aamusta yöhön</span></h1>
+
+      <div class="toggle" role="group" aria-label="Aamu tai yö">
+        <button type="button" data-set="morning" aria-pressed="true">
+          <strong>Aamu</strong><small>Katto tuottaa</small>
+        </button>
+        <button type="button" data-set="night" aria-pressed="false">
+          <strong>Yö</strong><small>Akku kantaa</small>
+        </button>
+      </div>
+
+      <p class="lede" id="lede">Aamurusko suunnittelee ja asentaa aurinkosähköjärjestelmiä suomalaisiin koteihin. Päivällä katto tuottaa, illalla ja yöllä akku jatkaa.</p>
+      <a class="button hero-cta" href="#tarjous">Pyydä tarjous</a>
+    </div>
+  </section>
+
+  <!-- 01 TOIMINTATAPA -->
+  <section class="band" id="toimintatapa">
+    <div class="wrap">
+      <aside class="rail reveal">
+        <p class="eyebrow"><span>01</span><i></i><b>Toimintatapa</b></p>
+        <p class="rail-note">Neljä vaihetta, ei yllätyksiä.</p>
+      </aside>
+      <div class="col">
+        <h2 class="display h2 reveal">Kartoituksesta seurantaan <span class="muted">yhdellä tekijällä.</span></h2>
+        <ol class="steps">
+          <li class="reveal"><span>01</span><div><h3>Kartoitus</h3><p>Katsomme katon, suunnan, varjostukset ja kulutuksesi. Saat kiinteän tarjouksen.</p></div></li>
+          <li class="reveal"><span>02</span><div><h3>Suunnittelu</h3><p>Mitoitamme paneelit ja akun todelliseen tarpeeseen, emme katon maksimikokoon.</p></div></li>
+          <li class="reveal"><span>03</span><div><h3>Asennus</h3><p>Asennus, sähkötyöt ja ilmoitukset hoituvat samalta tiimiltä.</p></div></li>
+          <li class="reveal"><span>04</span><div><h3>Seuranta</h3><p>Seuraat tuotantoa ja kulutusta puhelimesta. Huolto on sovittu valmiiksi.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 AAMUSTA YÖHÖN -->
+  <section class="band" id="aamusta-yohon">
+    <div class="wrap">
+      <aside class="rail reveal">
+        <p class="eyebrow"><span>02</span><i></i><b>Aamusta yöhön</b></p>
+        <p class="rail-note">Sama koti, kaksi hetkeä.</p>
+      </aside>
+      <div class="col">
+        <h2 class="display h2 reveal">Päivä tuottaa. <span class="muted">Yö käyttää.</span></h2>
+        <div class="figures">
+          <figure class="reveal">
+            <div class="frame"><img src="assets/scene-aamu.svg" alt="Piirros: aamuaurinko nousee järven yllä, rannalla mökki ja katolla aurinkopaneelit" loading="lazy" width="1600" height="1000" decoding="async"></div>
+            <figcaption><span>Aamu: katto tuottaa</span><small>Havainnekuva</small></figcaption>
+            <p class="cap">Päivän tuotanto kattaa kodin kulutuksen. Ylijäämä latautuu akkuun.</p>
+          </figure>
+          <figure class="reveal">
+            <div class="frame"><img src="assets/scene-yo.svg" alt="Piirros: yötaivaalla revontulet ja kuu, mökin ikkunoissa valo" loading="lazy" width="1600" height="1000" decoding="async"></div>
+            <figcaption><span>Yö: akku kantaa</span><small>Havainnekuva</small></figcaption>
+            <p class="cap">Illan ja yön sähkö tulee akusta. Verkosta otetaan vain se, mikä puuttuu.</p>
+          </figure>
+        </div>
+        <p class="pull reveal">Tuota päivällä. Käytä illalla. Pidä yö valoisana.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 TUOTTEET -->
+  <section class="band" id="tuotteet">
+    <div class="wrap">
+      <aside class="rail reveal">
+        <p class="eyebrow"><span>03</span><i></i><b>Tuotteet</b></p>
+        <p class="rail-note">Kolme osaa, yksi järjestelmä.</p>
+      </aside>
+      <div class="col">
+        <h2 class="display h2 reveal">Kaikki, mitä koti <span class="muted">tarvitsee auringosta.</span></h2>
+        <div class="products">
+          <article class="product reveal">
+            <h3>Kattopaketti</h3>
+            <p>Paneelit, vaihtosuuntaaja, telineet ja asennus avaimet käteen.</p>
+            <dl class="specs">
+              <div><dt>Paneelit</dt><dd>Mustat, 430 W</dd></div>
+              <div><dt>Koko</dt><dd>4–15 kW</dd></div>
+              <div><dt>Seuranta</dt><dd>Sovellus mukana</dd></div>
+              <div><dt>Takuu</dt><dd>Laitteille 12 v</dd></div>
+            </dl>
+          </article>
+          <article class="product reveal">
+            <h3>Akkuvarasto</h3>
+            <p>Tallentaa päivän ylijäämän illan ja yön käyttöön. Toimii myös varavoimana.</p>
+            <dl class="specs">
+              <div><dt>Kapasiteetti</dt><dd>5–20 kWh</dd></div>
+              <div><dt>Sijoitus</dt><dd>Sisälle tai ulos</dd></div>
+              <div><dt>Varavoima</dt><dd>Sähkökatkon varalle</dd></div>
+              <div><dt>Laajennus</dt><dd>Moduuleittain</dd></div>
+            </dl>
+          </article>
+          <article class="product reveal">
+            <h3>Latauspiste</h3>
+            <p>Sähköauto latautuu päivällä omalla sähköllä. Älykäs lataus seuraa tuotantoa.</p>
+            <dl class="specs">
+              <div><dt>Teho</dt><dd>7,4 / 11 kW</dd></div>
+              <div><dt>Ohjaus</dt><dd>Aurinko-ohjattu</dd></div>
+              <div><dt>Liitin</dt><dd>Type 2</dd></div>
+              <div><dt>Asennus</dt><dd>Katon kanssa</dd></div>
+            </dl>
+          </article>
+        </div>
+        <p class="note reveal">Tekniset tiedot ovat suuntaa antavia. Lopullinen mitoitus tehdään kohteen kartoituksessa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 ASIAKASTARINAT -->
+  <section class="band" id="tarinat">
+    <div class="wrap">
+      <aside class="rail reveal">
+        <p class="eyebrow"><span>04</span><i></i><b>Asiakkaat</b></p>
+        <p class="rail-note">Esimerkkitarinoita kodeista.</p>
+      </aside>
+      <div class="col">
+        <h2 class="display h2 reveal">Kotit, joissa katto <span class="muted">tekee töitä.</span></h2>
+        <div class="stories">
+          <figure class="story reveal">
+            <blockquote><p>”Akku riittää illasta aamuun lähes aina. Sähkölasku pieneni selvästi jo ensimmäisenä kesänä.”</p></blockquote>
+            <figcaption><span>Omakotitalo, Espoo</span><small>Kattopaketti ja akku · esimerkkitarina</small></figcaption>
+          </figure>
+          <figure class="story reveal">
+            <blockquote><p>”Latasimme sähköauton kesällä pelkästään omalla sähköllä. Asennus oli siisti ja ohjeet selkeät.”</p></blockquote>
+            <figcaption><span>Rivitalo, Tampere</span><small>Kattopaketti ja latauspiste · esimerkkitarina</small></figcaption>
+          </figure>
+          <figure class="story reveal">
+            <blockquote><p>”Sähkökatko ei näkynyt meillä mitenkään. Jääkaappi ja valot pysyivät päällä.”</p></blockquote>
+            <figcaption><span>Maatila, Pohjanmaa</span><small>Akkuvarasto · esimerkkitarina</small></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 UKK -->
+  <section class="band" id="ukk">
+    <div class="wrap">
+      <aside class="rail reveal">
+        <p class="eyebrow"><span>05</span><i></i><b>UKK</b></p>
+        <p class="rail-note">Lyhyet vastaukset.</p>
+      </aside>
+      <div class="col">
+        <h2 class="display h2 reveal">Usein kysyttyä, <span class="muted">lyhyesti.</span></h2>
+        <div class="faq">
+          <details class="reveal"><summary>Tuottavatko paneelit talvella?<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><p>Vähän. Suomessa tuotanto painottuu kevääseen, kesään ja alkusyksyyn. Mitoitus tehdään vuoden kulutuksen mukaan.</p></details>
+          <details class="reveal"><summary>Tarvitaanko akkua?<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><p>Ei aina. Akku kannattaa, jos kulutus painottuu iltaan ja yöhön. Käymme asian läpi kartoituksessa.</p></details>
+          <details class="reveal"><summary>Tarvitaanko lupa?<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><p>Lupatarve riippuu kunnasta ja kohteesta. Selvitämme sen ja hoidamme tarvittavat ilmoitukset.</p></details>
+        </div>
+        <p class="note reveal">Vastaukset ovat yleisiä. Tarkennamme ne aina kohteesi mukaan.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 TARJOUS -->
+  <section class="band" id="tarjous">
+    <div class="wrap">
+      <aside class="rail reveal">
+        <p class="eyebrow"><span>06</span><i></i><b>Tarjous</b></p>
+        <p class="rail-note">Vastaamme yhden arkipäivän kuluessa.</p>
+      </aside>
+      <div class="col">
+        <h2 class="display h2 reveal">Pyydä tarjous <span class="muted">kotiisi.</span></h2>
+        <p class="body reveal">Kerro kohteesta muutama tieto. Kartoitus on maksuton, ja saat kiinteän tarjouksen ilman velvoitetta.</p>
+        <form class="quote reveal" id="quote" novalidate>
+          <div class="field"><label for="f-name">Nimi</label><input id="f-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label for="f-email">Sähköposti</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="f-phone">Puhelin <span>(valinnainen)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+          <div class="field"><label for="f-city">Paikkakunta</label><input id="f-city" name="city" autocomplete="address-level2" required></div>
+          <div class="field"><label for="f-type">Kohde</label>
+            <select id="f-type" name="type"><option>Omakotitalo</option><option>Rivi- tai paritalo</option><option>Maatila tai yritys</option><option>Vapaa-ajan asunto</option></select></div>
+          <div class="field"><label for="f-year">Sähkönkulutus vuodessa <span>(kWh, jos tiedossa)</span></label><input id="f-year" name="kwh" inputmode="numeric"></div>
+          <fieldset class="field wide"><legend>Mitä haluat?</legend>
+            <label class="check"><input type="checkbox" name="w" value="katto" checked> Aurinkopaneelit</label>
+            <label class="check"><input type="checkbox" name="w" value="akku"> Akkuvarasto</label>
+            <label class="check"><input type="checkbox" name="w" value="lataus"> Latauspiste</label>
+          </fieldset>
+          <div class="field wide"><label for="f-msg">Lisätietoja <span>(valinnainen)</span></label><textarea id="f-msg" name="msg" rows="4"></textarea></div>
+          <div class="wide"><button class="button" type="submit">Lähetä tarjouspyyntö</button><p class="form-status" id="form-status" role="status" aria-live="polite"></p></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <p><strong>Aamurusko</strong> · aurinkosähköä aamusta yöhön</p>
+    <p class="muted">Kuvitteellinen yritys. Sivusto: <a href="mailto:info@webyello.fi">WebYello</a> · <a href="/demos/">Kaikki demot</a></p>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
