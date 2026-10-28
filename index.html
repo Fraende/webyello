@@ -37,7 +37,12 @@
 </nav>
 
 <main id="main" tabindex="-1">
-<header class="hero" id="top">
+<header class="hero hero-scene" id="top">
+  <picture class="hero-bg">
+    <source type="image/avif" srcset="/img/hero-gateway-640.avif 640w, /img/hero-gateway-960.avif 960w, /img/hero-gateway-1280.avif 1280w" sizes="(max-width: 900px) 100vw, min(52vw, 700px)">
+    <source type="image/webp" srcset="/img/hero-gateway-640.webp 640w, /img/hero-gateway-960.webp 960w, /img/hero-gateway-1280.webp 1280w" sizes="(max-width: 900px) 100vw, min(52vw, 700px)">
+    <img src="/img/hero-gateway-960.jpg" width="960" height="1200" fetchpriority="high" decoding="async" data-i18n-alt="hero_alt" alt="Illustration: a cloaked traveller walks across a desert toward a giant stone gateway shaped like a browser window, with a starry night sky inside it. A stone mouse pointer floats overhead and stone arches rise like Wi-Fi waves.">
+  </picture>
   <div class="wrap">
     <div class="hero-copy">
       <span class="badge" data-i18n="hero_badge">New studio · est. 2026</span>
@@ -48,13 +53,6 @@
         <a class="btn btn-line" href="/pricing.html" data-i18n="hero_cta2">See pricing</a>
       </div>
       <p class="hero-note" data-i18n="hero_note">Free 30-minute discovery call · No jargon, ever</p>
-    </div>
-    <div class="hero-panel">
-      <picture class="hero-art">
-        <source type="image/avif" srcset="/img/hero-gateway-640.avif 640w, /img/hero-gateway-960.avif 960w, /img/hero-gateway-1280.avif 1280w" sizes="(max-width: 900px) min(calc(100vw - 64px), 528px), 480px">
-        <source type="image/webp" srcset="/img/hero-gateway-640.webp 640w, /img/hero-gateway-960.webp 960w, /img/hero-gateway-1280.webp 1280w" sizes="(max-width: 900px) min(calc(100vw - 64px), 528px), 480px">
-        <img src="/img/hero-gateway-960.jpg" width="960" height="1200" fetchpriority="high" decoding="async" data-i18n-alt="hero_alt" alt="Illustration: a cloaked traveller walks across a desert toward a giant stone gateway shaped like a browser window, with a starry night sky inside it. A stone mouse pointer floats overhead and stone arches rise like Wi-Fi waves.">
-      </picture>
       <div class="perf" id="perf">
         <h2 data-i18n="perf_h">This page, measured</h2>
         <dl>

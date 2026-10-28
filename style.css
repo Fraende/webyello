@@ -104,8 +104,32 @@ nav{border-bottom:1px solid var(--border);background:var(--background);position:
 
 /* ---- Home hero ---- */
 .hero{padding:72px 0 88px}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:stretch}
 .hero-copy{display:flex;flex-direction:column;justify-content:center}
+
+/* Home hero: the illustration is the header's background. It is anchored to the right at full
+   height; its left edge fades into a sky-and-sand gradient sampled from the drawing (horizon at
+   58%), so the desert runs the full width. It is a daylight picture, so the hero keeps the light
+   tokens in both themes. */
+.hero-scene{
+  --background:oklch(0.985 0.006 92);--foreground:oklch(0.20 0.03 92);--card:oklch(1 0 0);
+  --primary:oklch(0.84 0.163 92);--primary-foreground:oklch(0.20 0.03 92);--muted-foreground:oklch(0.38 0.03 92);
+  --border:oklch(0.85 0.03 92);--ring:oklch(0.45 0.101 92);--accent:oklch(0.94 0.06 92);
+  /* the drawing's horizon is 60% down a 4:5 image, i.e. half its width up from its bottom edge */
+  --sky:#f4e9c9;--sand:#f3ca7b;--img-w:min(52vw,700px);
+  color-scheme:light;color:var(--foreground);position:relative;overflow:hidden;
+  background:linear-gradient(to top,var(--sand) 0,var(--sand) calc(var(--img-w)*.47),#ead7a4 calc(var(--img-w)*.5),var(--sky) calc(var(--img-w)*.53),var(--sky) 100%);
+  min-height:calc(var(--img-w)*1.25);display:flex;align-items:center;padding:72px 0;border-bottom:1px solid #d9b25f
+}
+.hero-bg{position:absolute;right:0;bottom:0;width:var(--img-w);aspect-ratio:4/5;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 10%);mask-image:linear-gradient(to right,transparent 0,#000 10%)}
+.hero-bg img{display:block;width:100%;height:100%;object-fit:cover}
+.hero-scene .wrap{position:relative;width:100%}
+.hero-scene .hero-copy{max-width:min(560px,44vw)}
+.hero-scene .btn-yellow{border-color:var(--primary-foreground)}
+.hero-scene .btn-line{background:var(--sky)}
+.hero-scene .btn-line:hover{background:var(--foreground)}
+.hero-scene .perf{margin-top:32px;max-width:440px;border-width:2px}
+.hero-scene .perf p{margin:0;max-width:none;font-size:.82rem;animation:none}
 .badge{align-self:flex-start;display:inline-block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:500;font-size:.85rem;color:var(--muted-foreground);margin-bottom:20px;animation:heroFadeUp .42s cubic-bezier(.16,1,.3,1) both}
 .hero h1{font-size:clamp(2.4rem,5.2vw,4rem);font-weight:800;letter-spacing:-.02em;line-height:1;margin-bottom:24px;animation:heroFadeUp .42s cubic-bezier(.16,1,.3,1) .07s both}
 .hero h1 mark{background:var(--primary);color:var(--primary-foreground);padding:0 .12em;box-decoration-break:clone;-webkit-box-decoration-break:clone;clip-path:inset(0 100% 0 0);animation:inkStamp .35s cubic-bezier(.16,1,.3,1) .6s both}
@@ -115,9 +139,6 @@ nav{border-bottom:1px solid var(--border);background:var(--background);position:
 
 /* The gold panel: this page measures itself */
 /* The gold panel: a comic-panel illustration over a readout of this page's own speed */
-.hero-panel{background:var(--primary);padding:16px;display:flex;flex-direction:column;gap:16px;align-self:center;animation:heroFadeUp .5s cubic-bezier(.16,1,.3,1) .12s both}
-.hero-art{display:block;border:3px solid var(--primary-foreground);background:#efe3bf}
-.hero-art img{display:block;width:100%;height:auto}
 .perf{background:var(--card);color:var(--foreground);border:3px solid var(--primary-foreground);padding:16px 18px}
 .perf h2{font-family:'Karla',system-ui,sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
 .perf dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:10px;border-top:1px solid var(--border);padding-top:10px}
@@ -347,8 +368,11 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 /* ---- Responsive ---- */
 @media(max-width:1000px) and (min-width:641px){.strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){
-  .hero .wrap{grid-template-columns:1fr}
-  .hero-panel{max-width:560px;width:100%;justify-self:start}
+  .hero-scene{flex-direction:column;align-items:stretch;min-height:0;padding:48px 0 0;background:var(--sky)}
+  .hero-scene .hero-copy{max-width:640px}
+  .hero-bg{order:2;position:relative;height:auto;width:100%;max-height:760px;margin-top:32px;aspect-ratio:auto;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 8%);mask-image:linear-gradient(to bottom,transparent 0,#000 8%)}
+  .hero-bg img{object-position:50% 35%}
   .tickets{grid-template-columns:repeat(2,minmax(0,1fr))}
   .plans{grid-template-columns:1fr;gap:40px}
   .contact-inner{grid-template-columns:1fr}
@@ -371,8 +395,7 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 @media(max-width:640px){
   section{padding:64px 0}
   .wrap,.nav-inner{padding-left:16px;padding-right:16px}
-  .hero{padding:40px 0 56px}
-  .hero-panel{padding:16px}
+  .hero-scene{padding-top:40px}
   .tickets,.strip{grid-template-columns:1fr}
   .page-head{padding-top:48px}
   .page-head .wrap{grid-template-columns:1fr}
@@ -392,7 +415,7 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 /* ---- Motion off ---- */
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .badge,.hero h1,.hero p,.hero-ctas,.hero-panel,.page-head h1,.page-head p,
+  .badge,.hero h1,.hero p,.hero-ctas,.page-head h1,.page-head p,
   .m-page.print .m-art b,.m-page.print .m-h,.m-page.print .m-sub,.m-page.print .m-cta,.m-page.print .m-card,
   .r-lines li.new,.r-care.new,.r-total mark.stamp{animation:none}
   .hero h1 mark{animation:none;clip-path:none}
