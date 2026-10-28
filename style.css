@@ -425,3 +425,20 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 
 /* ---- Language: hide until translated (see the inline script in each page) ---- */
 html.i18n-pending body{opacity:0}
+
+/* ---- Animated background (shader-bg.js): one fixed WebGL canvas behind every page ----
+   Sections, sub-page headers and the footer become veils of their own colour so the shader shows
+   through. The shader is mostly dark (luminance .02–.75), so the veil is set per theme to keep text
+   contrast: light 92% (muted text ≥4.7:1), dark 84% (muted ≥5.2:1, link ≥4.7:1). In light mode the
+   blue link would drop under 4.5:1 on a veil, so links that sit directly on one use ink text with a
+   blue underline. Cards, the nav, the dock and the home illustration stay solid. */
+html{background:var(--background)}
+.bg-shader{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;display:block;pointer-events:none}
+html.has-bg-shader{--veil:92%;--veil-link:var(--foreground)}
+html.has-bg-shader.dark{--veil:84%;--veil-link:var(--link)}
+@media (prefers-color-scheme:dark){html.has-bg-shader:not(.light){--veil:84%;--veil-link:var(--link)}}
+html.has-bg-shader body{background:transparent}
+html.has-bg-shader section,html.has-bg-shader .page-head,html.has-bg-shader footer{background:color-mix(in srgb,var(--background) var(--veil),transparent)}
+html.has-bg-shader .sketch{background:color-mix(in srgb,var(--secondary) var(--veil),transparent)}
+html.has-bg-shader .quote{background:color-mix(in srgb,var(--muted) var(--veil),transparent)}
+html.has-bg-shader .ph-jump a,html.has-bg-shader .next-link a,html.has-bg-shader .contact-list a{color:var(--veil-link);text-decoration-color:var(--link);text-decoration-thickness:2px}
