@@ -15,6 +15,7 @@ const I18N={en:{},fi:{
   hero_badge:"Uusi studio · per. 2026",
   perf_h:"Tämän sivun mittaus",perf_load:"Täysin ladattu",perf_fcp:"Ensimmäinen sisältö",perf_bytes:"Sivun koko",
   perf_note:"Mitattu juuri nyt omassa selaimessasi. Jokainen tekemämme sivusto pidetään samoissa luvuissa.",
+  hero_alt:"Kuvitus: viittaan pukeutunut kulkija kävelee aavikon poikki kohti valtavaa kiviporttia, joka on selainikkunan muotoinen ja jonka sisällä on tähtitaivas. Kivinen hiiren osoitin leijuu taivaalla ja kivikaaret nousevat hiekasta kuin Wi-Fi-aallot.",
   hero_h1:'Verkkosivut, jotka saavat ihmiset <mark>hymyilemään</mark> — ja klikkaamaan.',
   hero_lead:"WebYello suunnittelee ja rakentaa kauniita, intuitiivisia verkkosivuja, jotka muuttavat uteliaat kävijät tyytyväisiksi asiakkaiksi. Ison toimiston laatu, pienen studion sydän.",
   hero_cta1:"Luonnostele sivustosi",hero_cta2:"Katso hinnat",
@@ -114,6 +115,9 @@ function setLang(l,first){
   document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
     const v=d[el.dataset.i18nAria]; if(v!=null) el.setAttribute('aria-label',v);
   });
+  document.querySelectorAll('[data-i18n-alt]').forEach(el=>{
+    const v=d[el.dataset.i18nAlt]; if(v!=null) el.alt=v;
+  });
   document.documentElement.lang=l;
   const ds=document.documentElement.dataset;
   document.title=(l==='fi'?ds.titleFi:ds.titleEn)||document.title;
@@ -130,6 +134,7 @@ document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('[data-i18n]').forEach(el=>{I18N.en[el.dataset.i18n]??=el.innerHTML});
   document.querySelectorAll('[data-i18n-ph]').forEach(el=>{I18N.en[el.dataset.i18nPh]??=el.placeholder});
   document.querySelectorAll('[data-i18n-aria]').forEach(el=>{I18N.en[el.dataset.i18nAria]??=el.getAttribute('aria-label')});
+  document.querySelectorAll('[data-i18n-alt]').forEach(el=>{I18N.en[el.dataset.i18nAlt]??=el.alt});
   let saved=null;
   try{ saved=localStorage.getItem('wy-lang'); }catch(e){}
   // ?lang=en / ?lang=fi makes a language linkable (e.g. from an English email signature) and is remembered

@@ -114,13 +114,16 @@ nav{border-bottom:1px solid var(--border);background:var(--background);position:
 .hero p.hero-note{font-size:.92rem;margin-bottom:0;color:var(--muted-foreground)}
 
 /* The gold panel: this page measures itself */
-.hero-panel{background:var(--primary);padding:32px;display:flex;flex-direction:column;justify-content:flex-end;min-height:380px;animation:heroFadeUp .5s cubic-bezier(.16,1,.3,1) .12s both}
-.perf{background:var(--card);color:var(--foreground);border:1px solid var(--border);padding:24px}
-.perf h2{font-family:'Karla',system-ui,sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
-.perf dl{display:grid;grid-template-columns:1fr auto;margin-bottom:12px}
-.perf dt,.perf dd{border-top:1px solid var(--border);padding:12px 0;font-size:.95rem}
-.perf dd{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:500;text-align:right;font-variant-numeric:tabular-nums}
-.perf p{font-size:.88rem;line-height:1.45;color:var(--muted-foreground)}
+/* The gold panel: a comic-panel illustration over a readout of this page's own speed */
+.hero-panel{background:var(--primary);padding:16px;display:flex;flex-direction:column;gap:16px;align-self:center;animation:heroFadeUp .5s cubic-bezier(.16,1,.3,1) .12s both}
+.hero-art{display:block;border:3px solid var(--primary-foreground);background:#efe3bf}
+.hero-art img{display:block;width:100%;height:auto}
+.perf{background:var(--card);color:var(--foreground);border:3px solid var(--primary-foreground);padding:16px 18px}
+.perf h2{font-family:'Karla',system-ui,sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.perf dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:10px;border-top:1px solid var(--border);padding-top:10px}
+.perf dt{font-size:.8rem;line-height:1.25;color:var(--muted-foreground)}
+.perf dd{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:500;font-size:1.05rem;margin-top:4px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.perf p{font-size:.82rem;line-height:1.4;color:var(--muted-foreground)}
 
 @keyframes heroFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes inkStamp{to{clip-path:inset(0 0 0 0)}}
@@ -345,7 +348,7 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 @media(max-width:1000px) and (min-width:641px){.strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){
   .hero .wrap{grid-template-columns:1fr}
-  .hero-panel{min-height:0}
+  .hero-panel{max-width:560px;width:100%;justify-self:start}
   .tickets{grid-template-columns:repeat(2,minmax(0,1fr))}
   .plans{grid-template-columns:1fr;gap:40px}
   .contact-inner{grid-template-columns:1fr}
