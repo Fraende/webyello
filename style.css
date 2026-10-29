@@ -237,6 +237,9 @@ footer{border-top:1px solid var(--border);padding:32px 0}
 .foot .logo-badge{height:32px}
 .foot-brand{display:flex;flex-direction:column;align-items:center;gap:4px}
 .foot-by{font-weight:700;font-size:.85rem;line-height:1;color:var(--muted-foreground)}
+.foot-legal{display:flex;flex-direction:column;align-items:flex-end;gap:2px;text-align:right}
+.foot-biz{font-size:.8rem}
+@media(max-width:640px){.foot-legal{align-items:center;text-align:center;width:100%}}
 .foot-links a{display:inline-flex;align-items:center;min-height:44px;margin-left:20px;font-size:.95rem;font-weight:700}
 .foot-links a:hover{text-decoration:underline;text-underline-offset:4px}
 footer small{color:var(--muted-foreground);font-size:.88rem}
