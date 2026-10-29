@@ -1,3 +1,9 @@
+/* Self-hosted fonts (OFL via Fontsource): no requests to Google, so no visitor IP leaves for a third party */
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:800;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-800-normal.woff2) format('woff2')}
+@font-face{font-family:'Karla';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/karla-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Karla';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/karla-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/ibm-plex-mono-latin-500-normal.woff2) format('woff2')}
 /* WebYello — Accessible Gold (21st.dev, @dhxwhy) with two overrides: square corners and riso-blue links.
    Tokens mirror the WebYello Design System. Everything below reads these, nothing else. */
 :root {
