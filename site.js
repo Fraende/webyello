@@ -56,7 +56,7 @@ const I18N={en:{},fi:{
   f_msg_ph:"Pyöritämme pientä leipomoa ja tarvitsemme sivut, jotka tuoksuvat yhtä hyvältä kuin leipämme…",
   f_send:"Lähetä matkaan →",
   ft_contact:"Yhteystiedot",ft_copy:"© 2026 NetYello. Tehty suurella määrällä keltaista.",
-  ft_by:"WebYello on NetYello-palvelu",ft_biz:"NetYello · Y-tunnus 2301971-6 · ALV-tunnus FI23019716",
+  ft_by:"WebYello on NetYello-palvelu",ft_privacy:"Tietosuoja",pv_h1:"Tietosuojaseloste",pv_p:"Mitä keräämme, miksi, kuka tietoja käsittelee ja mitkä ovat oikeutesi. Lyhyesti: ei evästeitä, ei seurantaa.",ft_biz:"NetYello · Y-tunnus 2301971-6 · ALV-tunnus FI23019716",
   f_success_h:"Kiitos — viesti meni perille.",
   f_success_p:"Käymme sen läpi ja palaamme asiaan yhden arkipäivän kuluessa ideoiden, rehellisten neuvojen ja kiinteän tarjouksen kera. Pidä silmällä sähköpostiasi.",
   f_err_required:"Tämä kenttä on pakollinen.",
@@ -71,7 +71,7 @@ I18N.en.f_err_send='Sorry, that didn\u2019t go through. Please try again, or ema
 Object.assign(I18N.fi,{
   f_sending:"Lähetetään…",
   f_err_send:'Valitettavasti lähetys ei onnistunut. Yritä uudelleen tai kirjoita osoitteeseen <a href="mailto:info@webyello.fi">info@webyello.fi</a>.',
-  f_privacy:"NetYello käyttää tietojasi vain vastataksemme sinulle."
+  f_privacy:'NetYello käyttää tietojasi vain vastataksemme sinulle. <a href="/privacy.html">Tietosuojaseloste</a>'
 });
 
 // Strings for the multi-page structure

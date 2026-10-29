@@ -237,6 +237,14 @@ footer{border-top:1px solid var(--border);padding:32px 0}
 .foot .logo-badge{height:32px}
 .foot-brand{display:flex;flex-direction:column;align-items:center;gap:4px}
 .foot-by{font-weight:700;font-size:.85rem;line-height:1;color:var(--muted-foreground)}
+html[lang="fi"] .l-en,html[lang="en"] .l-fi{display:none}
+.legal{max-width:46rem}
+.legal h2{font-size:1.25rem;margin:32px 0 8px}
+.legal p,.legal li{line-height:1.6}
+.legal ul{padding-left:1.2rem;margin:8px 0}
+.legal li{margin:6px 0}
+.legal code{font-family:"IBM Plex Mono",monospace;font-size:.9em}
+.form-fine a{text-decoration:underline;text-underline-offset:3px}
 .foot-legal{display:flex;flex-direction:column;align-items:flex-end;gap:2px;text-align:right}
 .foot-biz{font-size:.8rem}
 @media(max-width:640px){.foot-legal{align-items:center;text-align:center;width:100%}}
