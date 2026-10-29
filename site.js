@@ -98,6 +98,9 @@ Object.assign(I18N.fi,{
   dm_t1_p:"Kuvitteellinen kahvila Helsingin Kalliossa: menu, aukioloajat, joissa tämä päivä korostuu, ja yhteystiedot.",
   dm_t2_tag:"Esittelysivu",dm_t2_t:"Aamurusko (aurinkosähkö)",
   dm_t2_p:"Kuvitteellisen aurinkosähköyrityksen sivusto, jossa on aamu/yö-vaihtokytkin, tuotteet, asiakastarinat ja tarjouslomake.",
+  dm_t3_tag: "Monisivuinen",
+  dm_t3_t: "Vääntö Garage (autokorjaamo ja tuning)",
+  dm_t3_p: "Kuvitteellinen auto- ja tuning-korjaamo, jossa on dyno-käyrä, klikattava konehuone, työlistan suunnittelija ja ajanvaraus.",
   dm_next_t:"Seuraava demo voisi olla sinun.",
   dm_next_p:"Lisää demoja on tulossa. Kerro yrityksestäsi, niin luonnostelemme ensimmäisen version maksuttomassa kartoituspuhelussa.",
   dm_next_more:"Aloita projekti →"
