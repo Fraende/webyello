@@ -67,10 +67,10 @@ I18N.en.f_success_p="We'll read it over and get back to you within one business 
 I18N.en.f_err_required="This field is required.";
 I18N.en.f_err_email="Please enter a valid email address.";
 I18N.en.f_sending="Sending…";
-I18N.en.f_err_send='Sorry, that didn\u2019t go through. Please try again, or email <a href="mailto:info@webyello.fi">info@webyello.fi</a>.';
+I18N.en.f_err_send='Sorry, that didn\u2019t go through. Please try again, or email <a href="mailto:info@netyello.com">info@netyello.com</a>.';
 Object.assign(I18N.fi,{
   f_sending:"Lähetetään…",
-  f_err_send:'Valitettavasti lähetys ei onnistunut. Yritä uudelleen tai kirjoita osoitteeseen <a href="mailto:info@webyello.fi">info@webyello.fi</a>.',
+  f_err_send:'Valitettavasti lähetys ei onnistunut. Yritä uudelleen tai kirjoita osoitteeseen <a href="mailto:info@netyello.com">info@netyello.com</a>.',
   f_privacy:'NetYello käyttää tietojasi vain vastataksemme sinulle. <a href="/privacy.html">Tietosuojaseloste</a>'
 });
 
