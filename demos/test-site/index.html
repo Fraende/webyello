@@ -1,35 +1,284 @@
-<!DOCTYPE html>
+<!doctype html>
+<!--
+  Kahvila Hiillos: kuvitteellinen demosivu, tehnyt WebYello.
+  Ulkoasu mukailee 8B:n ilmaista florist-website-template-pohjaa (MIT): https://github.com/8bsite/florist-website-template
+  Värit ja fontit (Brygada 1918, TikTok Sans, Google Fonts / OFL) ovat sieltä; koodi on kirjoitettu uudelleen.
+-->
 <html lang="fi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Testisivu — WebYello</title>
+<title>Kahvila Hiillos — kahvia, leivonnaisia ja lounasta Kalliossa</title>
+<meta name="description" content="Kahvila Hiillos on kuvitteellinen kahvila Kalliossa, Helsingissä: hitaasti paahdettua kahvia, päivän leivonnaisia ja arkilounas. WebYellon demosivu.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23331917'/%3E%3Ctext x='32' y='45' font-size='40' text-anchor='middle' font-family='Georgia,serif' fill='%23fc72c4'%3EH%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400;0,500;0,600;1,400;1,500&family=TikTok+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root{--paper:#E7E9E3;--ink:#16171C;--cobalt:#2452C6;--mustard:#F2B705;--slate:#4F5669}
+  :root{
+    --color-1:#eecbc0;   /* vaalea poskipuna: sivun tausta */
+    --color-2:#331917;   /* suklaa: teksti ja tummat osiot */
+    --color-3:#fc72c4;   /* pinkki: korosteet tummalla pohjalla */
+    --color-4:#a0146c;   /* magenta: linkit ja korosteet vaalealla pohjalla */
+    --font-1:"TikTok Sans",Arial,sans-serif;
+    --font-2:"Brygada 1918",Georgia,serif;
+    --space-1:clamp(16px,2vw,28px);
+    --pad-x:clamp(20px,5vw,80px);
+  }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Work Sans',sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-1);background:var(--color-1);color:var(--color-2);line-height:1.6;font-size:1.0625rem;-webkit-font-smoothing:antialiased}
   a{color:inherit}
-  :focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
-  main{flex:1;display:grid;align-content:center;padding:clamp(48px,10vh,120px) clamp(24px,6vw,96px)}
-  h1{font-family:'Familjen Grotesk',sans-serif;font-weight:700;font-size:clamp(3rem,11vw,9rem);line-height:.95;letter-spacing:-.03em;max-width:9ch}
-  h1 .rule{display:block;width:min(18rem,60%);height:.18em;background:var(--mustard);margin-top:.12em}
-  p.lead{font-size:clamp(1.05rem,1.6vw,1.25rem);max-width:38ch;margin-top:40px;color:var(--slate)}
-  .actions{margin-top:48px}
-  .link{font-weight:600;font-size:1rem;color:var(--ink);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
-  .link:hover{color:var(--cobalt)}
-  footer{padding:24px clamp(24px,6vw,96px);font-size:.9rem;color:var(--slate)}
+  :focus-visible{outline:3px solid var(--color-4);outline-offset:3px}
+  .dark :focus-visible{outline-color:var(--color-3)}
+  .skip{position:absolute;left:-9999px;top:8px;background:var(--color-2);color:var(--color-1);padding:10px 16px;z-index:20}
+  .skip:focus{left:8px}
+
+  /* nav */
+  .nav{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:20px var(--pad-x)}
+  .nav__brand{font-family:var(--font-2);font-weight:600;font-size:1.35rem;text-decoration:none;letter-spacing:-.01em}
+  .nav__links{display:flex;gap:clamp(16px,3vw,36px);list-style:none;font-weight:500;font-size:.98rem}
+  .nav__links a{text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
+  .nav__links a:hover{border-bottom-color:var(--color-4)}
+
+  /* hero */
+  .hero{position:relative;isolation:isolate;overflow:hidden;min-height:min(88svh,820px);display:flex;flex-direction:column;justify-content:space-between;gap:clamp(32px,6vh,72px);padding:clamp(28px,6vh,72px) var(--pad-x) clamp(36px,7vh,88px)}
+  .hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:72% 60%;z-index:-2}
+  .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(51,25,23,.82) 0%,rgba(51,25,23,.5) 45%,rgba(51,25,23,.08) 100%),linear-gradient(0deg,rgba(51,25,23,.55) 0%,rgba(51,25,23,0) 45%)}
+  .hero__mark{font-family:var(--font-2);font-weight:500;font-size:clamp(4.5rem,17vw,15rem);line-height:.85;letter-spacing:-.045em;margin-left:-.04em;color:var(--color-1)}
+  .hero__row{display:flex;flex-direction:column;align-items:flex-start;gap:28px}
+  .hero__tag{font-family:var(--font-2);font-size:clamp(1.5rem,3.2vw,2.5rem);line-height:1.15;max-width:18ch;color:var(--color-1)}
+  .hero__tag em{color:var(--color-3);font-style:italic}
+  .actions{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+  .btn{display:inline-block;background:var(--color-2);color:var(--color-1);padding:15px 28px;border-radius:999px;font-weight:700;text-decoration:none;transition:background .2s,color .2s}
+  .btn:hover{background:var(--color-3);color:var(--color-2)}
+  .hero .btn{background:var(--color-1);color:var(--color-2)}
+  .hero .btn:hover{background:var(--color-3)}
+  .link{font-weight:700;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+  .link:hover{color:var(--color-4)}
+  .hero .link{color:var(--color-1)}
+  .hero .link:hover{color:var(--color-3)}
+
+  /* dark bands */
+  .dark{background:var(--color-2);color:var(--color-1)}
+  .label{font-size:.82rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+  .dark .label{color:var(--color-3)}
+  .light .label{color:var(--color-4)}
+
+  .statement{padding:clamp(56px,10vh,120px) var(--pad-x);display:grid;gap:28px}
+  .statement p.lead{font-family:var(--font-2);font-size:clamp(1.6rem,3.6vw,3rem);line-height:1.2;max-width:28ch}
+  .statement .ribbon{font-family:var(--font-2);font-style:italic;font-size:clamp(3.5rem,13vw,11rem);line-height:.9;color:var(--color-3);letter-spacing:-.03em}
+
+  /* sections */
+  section.light{padding:clamp(56px,10vh,120px) var(--pad-x)}
+  h2{font-family:var(--font-2);font-weight:500;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.025em;margin:10px 0 clamp(28px,5vh,56px)}
+
+  /* menu */
+  .menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(32px,5vw,72px)}
+  .menu h3{font-family:var(--font-2);font-weight:600;font-size:1.7rem;padding-bottom:12px;border-bottom:2px solid var(--color-2);margin-bottom:6px}
+  .menu__note{font-size:.9rem;color:var(--color-4);font-weight:500;margin-top:10px}
+  .menu ul{list-style:none}
+  .menu li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid rgba(51,25,23,.22)}
+  .menu li span.price{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .menu li small{display:block;font-size:.88rem;opacity:.78}
+  .fine{font-size:.9rem;margin-top:clamp(24px,4vh,40px);opacity:.8}
+
+  /* hours */
+  .hours{padding:clamp(56px,10vh,120px) var(--pad-x);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(32px,6vw,96px);align-items:start}
+  .hours h2{margin-bottom:0}
+  .hours__today{font-family:var(--font-2);font-size:clamp(1.3rem,2.4vw,1.9rem);margin-top:24px;color:var(--color-3);min-height:1.3em}
+  .hours dl{display:grid}
+  .hours dl div{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid rgba(238,203,192,.28);font-size:1.15rem}
+  .hours dt{font-weight:500}
+  .hours dd{font-weight:700;font-variant-numeric:tabular-nums}
+  .hours dl div.is-today{color:var(--color-3)}
+  .hours dl div.is-today dt::after{content:" · tänään";font-weight:400;font-size:.9rem}
+
+  /* contact */
+  .contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(32px,6vw,96px)}
+  .contact address{font-style:normal;font-size:1.2rem;line-height:1.7}
+  .contact address a{color:var(--color-4);font-weight:700}
+  .contact address a:hover{color:var(--color-2)}
+  .map{min-height:260px;border:2px solid var(--color-2);border-radius:20px;display:grid;place-items:center;text-align:center;padding:24px;background:repeating-linear-gradient(45deg,transparent 0 14px,rgba(160,20,108,.09) 14px 15px)}
+  .map p{font-family:var(--font-2);font-size:1.3rem;max-width:20ch}
+  .map small{display:block;font-family:var(--font-1);font-size:.85rem;margin-top:8px;opacity:.8}
+
+  /* footer */
+  footer{padding:36px var(--pad-x) 44px;font-size:.92rem;display:grid;gap:10px}
+  footer .perf{color:var(--color-3);font-variant-numeric:tabular-nums}
+  footer a{color:var(--color-1)}
+  footer a:hover{color:var(--color-3)}
+
+  /* liike */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .btn{transition:none}
+  }
+  @media (max-width:560px){
+    .nav__links{gap:14px;font-size:.9rem}
+    .hero{min-height:min(84svh,700px)}
+    .hero__img{object-position:78% 62%}
+    .hero::before{background:linear-gradient(180deg,rgba(51,25,23,.7) 0%,rgba(51,25,23,.1) 35%,rgba(51,25,23,.35) 60%,rgba(51,25,23,.88) 100%)}
+  }
 </style>
 </head>
 <body>
-<main>
-  <h1>Testisivu<span class="rule" aria-hidden="true"></span></h1>
-  <p class="lead">Tämä on yksinkertainen esimerkkisivu. Sitä käytetään tarkistamaan, miltä demo näyttää ja toimii.</p>
-  <p class="actions"><a class="link" href="/demos/">Takaisin demoihin</a></p>
+<a class="skip" href="#main">Siirry sisältöön</a>
+
+<header class="nav">
+  <a class="nav__brand" href="#top">Hiillos</a>
+  <nav aria-label="Päävalikko">
+    <ul class="nav__links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#auki">Aukioloajat</a></li>
+      <li><a href="#yhteys">Yhteys</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero dark" id="top" aria-label="Kahvila Hiillos">
+    <img class="hero__img" src="hero.webp" width="1344" height="752" alt="Glaseerattu korvapuusti lautasella ja höyryävä kahvikuppi puupöydällä" fetchpriority="high" decoding="async">
+    <h1 class="hero__mark">Hiillos</h1>
+    <div class="hero__row">
+      <p class="hero__tag">Kahvia, leivonnaisia ja <em>lounasta</em> Kalliossa.</p>
+      <div class="actions">
+        <a class="btn" href="#menu">Katso menu</a>
+        <a class="link" href="#auki">Aukioloajat</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="statement dark" aria-labelledby="stmt">
+    <p class="label" id="stmt">Kahvila</p>
+    <p class="lead reveal">Hiillos on pieni kahvila, jossa kahvi paahdetaan hitaasti ja pullat leivotaan joka aamu. Tule hakemaan mukaan tai istahda hetkeksi.</p>
+    <p class="ribbon reveal" aria-hidden="true">hitaasti paahdettu</p>
+  </section>
+
+  <section class="light" id="menu" aria-labelledby="menu-title">
+    <p class="label">Menu</p>
+    <h2 id="menu-title">Tänään tarjolla</h2>
+    <div class="menu">
+      <div class="reveal">
+        <h3>Kahvit</h3>
+        <ul>
+          <li><span>Suodatinkahvi</span><span class="price">3,50 €</span></li>
+          <li><span>Espresso</span><span class="price">3,20 €</span></li>
+          <li><span>Cappuccino</span><span class="price">4,60 €</span></li>
+          <li><span>Latte</span><span class="price">4,90 €</span></li>
+          <li><span>Kardemummalatte</span><span class="price">5,20 €</span></li>
+          <li><span>Kuuma suklaa</span><span class="price">4,80 €</span></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <h3>Leivonnaiset</h3>
+        <ul>
+          <li><span>Korvapuusti</span><span class="price">3,90 €</span></li>
+          <li><span>Kardemummasämpylä</span><span class="price">3,50 €</span></li>
+          <li><span>Mustikkapiirakka</span><span class="price">4,80 €</span></li>
+          <li><span>Suklaabrownie<small>gluteeniton</small></span><span class="price">4,50 €</span></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <h3>Lounas</h3>
+        <ul>
+          <li><span>Päivän keitto ja leipä</span><span class="price">11,90 €</span></li>
+          <li><span>Lohivoileipä</span><span class="price">9,50 €</span></li>
+          <li><span>Kasvispiirakka ja salaatti</span><span class="price">10,50 €</span></li>
+        </ul>
+        <p class="menu__note">Lounas ma–pe klo 11–14</p>
+      </div>
+    </div>
+    <p class="fine">Hinnat ovat esimerkkejä. Kerro allergioista tiskillä.</p>
+  </section>
+
+  <section class="hours dark" id="auki" aria-labelledby="auki-title">
+    <div>
+      <p class="label">Aukioloajat</p>
+      <h2 id="auki-title">Tervetuloa</h2>
+      <p class="hours__today" id="today" aria-live="polite"></p>
+    </div>
+    <dl>
+      <div data-days="1,2,3,4,5"><dt>Maanantai–perjantai</dt><dd>7–18</dd></div>
+      <div data-days="6"><dt>Lauantai</dt><dd>9–17</dd></div>
+      <div data-days="0"><dt>Sunnuntai</dt><dd>10–16</dd></div>
+    </dl>
+  </section>
+
+  <section class="light" id="yhteys" aria-labelledby="yhteys-title">
+    <p class="label">Yhteys</p>
+    <h2 id="yhteys-title">Löydät meidät Kalliosta</h2>
+    <div class="contact">
+      <address class="reveal">
+        Kahvila Hiillos<br>
+        Esimerkkikatu 12<br>
+        00530 Helsinki<br><br>
+        <a href="mailto:hei@hiillos.example">hei@hiillos.example</a><br>
+        <span>puh. 040 000 0000</span>
+      </address>
+      <div class="map reveal" role="img" aria-label="Karttapaikka, lisätään myöhemmin">
+        <p>Karttapaikka<small>Lisätään, kun osoite on oikea.</small></p>
+      </div>
+    </div>
+  </section>
 </main>
-<footer>WebYello · Testisivu, ei asiakassivu.</footer>
+
+<footer class="dark">
+  <p><a href="/demos/">Takaisin demoihin</a></p>
+  <p>Kuvitteellinen kahvila ja demosivu, ei oikea yritys. Tehty suurella määrällä keltaista: <a href="https://webyello.fi">WebYello</a>.</p>
+  <p class="perf" id="perf" aria-live="off"></p>
+</footer>
+
+<script>
+(function(){
+  /* näytä tämän päivän aukioloaika Helsingin ajassa */
+  try{
+    var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+    var wd=new Intl.DateTimeFormat('en-US',{weekday:'short',timeZone:'Europe/Helsinki'}).format(new Date());
+    var day=map[wd];
+    var rows=document.querySelectorAll('.hours dl div');
+    for(var i=0;i<rows.length;i++){
+      var days=rows[i].getAttribute('data-days').split(',').map(Number);
+      if(days.indexOf(day)>-1){
+        rows[i].classList.add('is-today');
+        document.getElementById('today').textContent='Tänään auki '+rows[i].querySelector('dd').textContent.replace('–',' – ')+'.';
+      }
+    }
+  }catch(e){}
+
+  /* hienovarainen esiin ilmestyminen */
+  var els=document.querySelectorAll('.reveal');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce||!('IntersectionObserver' in window)){
+    for(var j=0;j<els.length;j++)els[j].classList.add('in');
+  }else{
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+    },{threshold:.15});
+    els.forEach(function(el){io.observe(el);});
+  }
+
+  /* sivu todistaa oman nopeutensa */
+  window.addEventListener('load',function(){
+    setTimeout(function(){
+      try{
+        var n=performance.getEntriesByType('navigation')[0];
+        if(!n)return;
+        var ms=Math.round(n.loadEventStart>0?n.loadEventStart:n.domContentLoadedEventEnd);
+        var fcp=performance.getEntriesByName('first-contentful-paint')[0];
+        var kb=n.transferSize?(n.transferSize/1024).toFixed(1).replace('.',',')+' kt':null;
+        var parts=['Lataus '+ms+' ms'];
+        if(fcp)parts.push('ensimmäinen sisältö '+Math.round(fcp.startTime)+' ms');
+        if(kb)parts.push('HTML '+kb);
+        document.getElementById('perf').textContent=parts.join(' · ');
+      }catch(e){}
+    },0);
+  });
+})();
+</script>
 </body>
 </html>
