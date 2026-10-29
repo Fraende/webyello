@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Varaa aika – Vääntö Garage</title>
+<meta name="description" content="Varaa aika Vääntö Garagelle: valitse palvelut, kerro autosta ja valitse sopiva aika.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#090B0D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23090B0D'/%3E%3Cpath d='M6 22a10 10 0 1 1 20 0' stroke='%23FF5A1F' stroke-width='3' fill='none'/%3E%3Cpath d='M16 22l6-8' stroke='%2322E3CB' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#sisalto">Siirry sisältöön</a>
+<header class="hdr solid"><div class="wrap">
+  <a class="logo" href="index.html" aria-label="Vääntö Garage, etusivu">
+    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect width="34" height="34" fill="#12171B" stroke="#252E35"/><path d="M7 24a10 10 0 1 1 20 0" stroke="#FF5A1F" stroke-width="3"/><path d="M17 24l6-9" stroke="#22E3CB" stroke-width="3"/></svg>
+    <span>Vääntö <b>Garage</b></span></a>
+  <a class="btn ghost sm" href="index.html">← Takaisin</a>
+</div></header>
+
+<main id="sisalto" class="book"><div class="wrap" style="max-width:900px">
+  <p class="tag o">Ajanvaraus</p>
+  <h1 style="font-size:clamp(2.4rem,7vw,4.6rem);margin:12px 0 0">Varaa aika</h1>
+  <p class="lead" style="margin-top:14px">Neljä lyhyttä askelta. Vahvistamme ajan viestillä, kun olemme katsoneet tiedot.</p>
+
+  <ol class="stepper" id="stepper" aria-label="Varauksen vaiheet">
+    <li class="on"><b>1</b><span>Palvelut</span></li>
+    <li><b>2</b><span>Auto</span></li>
+    <li><b>3</b><span>Aika</span></li>
+    <li><b>4</b><span>Tiedot</span></li>
+  </ol>
+
+  <form class="panel" id="form" novalidate>
+    <section class="stp" data-s="0" style="padding:0">
+      <h2 style="font-size:1.4rem;margin:0 0 6px">Mitä autolle tehdään?</h2>
+      <p class="lead" style="font-size:.95rem;margin-bottom:20px">Valitse yksi tai useampi. Tarkennetaan vielä mittauksessa.</p>
+      <div class="opts" id="svcOpts"></div>
+      <p class="err" id="e0" role="alert"></p>
+    </section>
+
+    <section class="stp" data-s="1" style="padding:0" hidden>
+      <h2 style="font-size:1.4rem;margin:0 0 20px">Kerro autosta</h2>
+      <div class="fgrid">
+        <div class="field"><label for="make">Merkki ja malli</label><input id="make" name="make" autocomplete="off" placeholder="esim. VW Golf GTI"></div>
+        <div class="field"><label for="year">Vuosimalli</label><input id="year" name="year" inputmode="numeric" maxlength="4" placeholder="2018"></div>
+        <div class="field"><label for="fuel">Polttoaine</label><select id="fuel" name="fuel"><option value="">Valitse</option><option>Bensiini</option><option>Diesel</option><option>Hybridi</option></select></div>
+        <div class="field"><label for="km">Ajettu (km)</label><input id="km" name="km" inputmode="numeric" placeholder="esim. 120000"></div>
+      </div>
+      <div class="field"><label for="note">Mitä haluat tehdä? Onko autossa jo muutoksia?</label><textarea id="note" name="note" rows="4" placeholder="Kerro lyhyesti. Esim. ohjelmisto jo päivitetty, vaihdetut osat."></textarea></div>
+      <p class="err" id="e1" role="alert"></p>
+    </section>
+
+    <section class="stp" data-s="2" style="padding:0" hidden>
+      <h2 style="font-size:1.4rem;margin:0 0 6px">Valitse aika</h2>
+      <p class="lead" style="font-size:.95rem;margin-bottom:20px">Esimerkkiaikoja arkipäiville. Harmaat ajat on jo varattu.</p>
+      <div class="cal" id="cal" role="group" aria-label="Päivävalinta"></div>
+      <div class="slots" id="slots" role="group" aria-label="Kellonaika"></div>
+      <p class="err" id="e2" role="alert" style="margin-top:12px"></p>
+    </section>
+
+    <section class="stp" data-s="3" style="padding:0" hidden>
+      <h2 style="font-size:1.4rem;margin:0 0 20px">Yhteystiedot</h2>
+      <div class="summary" id="sum"></div>
+      <div class="fgrid">
+        <div class="field"><label for="name">Nimi</label><input id="name" name="name" autocomplete="name"></div>
+        <div class="field"><label for="phone">Puhelin</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+      </div>
+      <div class="field"><label for="email">Sähköposti</label><input id="email" name="email" type="email" autocomplete="email"></div>
+      <label class="check"><input type="checkbox" id="consent"><span>Hyväksyn, että tietojani käytetään varauksen käsittelyyn. Lue <a href="tietosuoja.html" target="_blank" rel="noopener">tietosuojaseloste</a>.</span></label>
+      <p class="err" id="e3" role="alert"></p>
+      <p class="disclaimer">Demo: lomaketta ei lähetetä mihinkään, eikä tietoja tallenneta.</p>
+    </section>
+
+    <section id="done" hidden>
+      <div class="done-box">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg>
+        <h2 style="font-size:1.8rem;margin-bottom:10px">Varaus valmis (demo)</h2>
+        <p class="lead" style="margin:0 auto 20px;max-width:46ch" id="doneTxt"></p>
+        <p class="disclaimer">Tämä on demosivusto: mitään ei ole lähetetty tai tallennettu.</p>
+        <p style="margin-top:22px"><a class="btn ghost" href="index.html">Takaisin etusivulle</a></p>
+      </div>
+    </section>
+
+    <div class="nav-row" id="navRow">
+      <button class="btn ghost" type="button" id="back" hidden>← Takaisin</button>
+      <button class="btn" type="button" id="next" style="margin-left:auto">Seuraava →</button>
+    </div>
+  </form>
+</div></main>
+
+<footer><div class="wrap foot">
+  <div><p><strong style="color:var(--ink)">Vääntö Garage</strong> · korjaamo ja virityspaja</p>
+  <p class="muted" style="margin-top:8px">Kuvitteellinen yritys. Sivusto: <a href="mailto:info@webyello.fi">WebYello</a></p></div>
+  <nav aria-label="Alavalikko"><a href="index.html">Etusivu</a><a href="tietosuoja.html">Tietosuoja</a></nav>
+</div></footer>
+<script src="book.js" defer></script>
+</body>
+</html>

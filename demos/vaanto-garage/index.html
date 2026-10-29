@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vääntö Garage – korjaamo ja virityspaja</title>
+<meta name="description" content="Vääntö Garage on korjaamo ja virityspaja autoista kiinnostuneille: huolto, diagnostiikka, ECU-viritys ja dyno-mittaus. Mitataan, ei arvata.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#090B0D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23090B0D'/%3E%3Cpath d='M6 22a10 10 0 1 1 20 0' stroke='%23FF5A1F' stroke-width='3' fill='none'/%3E%3Cpath d='M16 22l6-8' stroke='%2322E3CB' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="assets/hero-1600.webp" imagesrcset="assets/hero-800.webp 800w, assets/hero-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">
+<link rel="stylesheet" href="style.css">
+<noscript><style>.rv{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+<a class="skip" href="#sisalto">Siirry sisältöön</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Vääntö Garage, etusivu">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect width="34" height="34" fill="#12171B" stroke="#252E35"/><path d="M7 24a10 10 0 1 1 20 0" stroke="#FF5A1F" stroke-width="3"/><path d="M17 24l6-9" stroke="#22E3CB" stroke-width="3"/></svg>
+      <span>Vääntö <b>Garage</b></span>
+    </a>
+    <button class="burger" id="burger" aria-label="Valikko" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+    <nav class="nav" id="nav" aria-label="Päävalikko">
+      <a href="#palvelut">Palvelut</a>
+      <a href="#viritys">Viritys</a>
+      <a href="#moottoritila">Moottoritila</a>
+      <a href="#varit">Värit</a>
+      <a href="#tyolista">Työlista</a>
+      <a class="btn sm" href="varaus.html">Varaa aika</a>
+    </nav>
+  </div>
+</header>
+
+<main id="sisalto">
+<section class="hero" id="top">
+  <div class="hero-media">
+    <img src="assets/hero-1600.webp" srcset="assets/hero-800.webp 800w, assets/hero-1600.webp 1600w" sizes="100vw" alt="Mattaharmaa viritetty hatchback korjaamossa hämärässä, lattiassa heijastuksia" width="1600" height="905" fetchpriority="high">
+    <video id="heroVid" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" style="position:absolute;inset:0;opacity:0;transition:opacity 1.2s"></video>
+  </div>
+  <div class="wrap">
+    <p class="tag o rv">Korjaamo · Virityspaja · Mittaus</p>
+    <h1 class="rv d1"><span>Mitataan.</span><span><em>Ei arvata.</em></span></h1>
+    <p class="lead rv d2">Huolto, diagnostiikka ja ECU-viritys autoille, joita rakastetaan. Jokainen muutos mitataan ennen ja jälkeen, jotta tiedät mitä sait.</p>
+    <div class="hero-cta rv d3">
+      <a class="btn" href="varaus.html">Varaa mittaus</a>
+      <button class="btn ghost" id="startEngine" type="button" aria-describedby="soundNote">▶ Käynnistä moottori</button>
+    </div>
+    <p class="perf-note" id="soundNote">Painike toistaa synteettisen moottoriäänen. Ääni alkaa vasta kun painat.</p>
+    <div class="perf rv d3" role="group" aria-label="Tämän sivun mitattu suorituskyky">
+      <div><small>Latausaika</small><strong id="pLoad">–<i>ms</i></strong></div>
+      <div><small>Ensimmäinen sisältö</small><strong id="pFcp">–<i>ms</i></strong></div>
+      <div><small>Siirretty</small><strong id="pBytes">–<i>kt</i></strong></div>
+    </div>
+    <p class="perf-note">Luvut mitataan selaimessa juuri tältä sivulta. Taustavideo ladataan vasta mittauksen jälkeen.</p>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div>
+  <span>ECU-viritys</span><span>Dyno-mittaus</span><span>Diagnostiikka</span><span>Jarrut</span><span>Alusta</span><span>Huolto</span><span>Imu ja pako</span><span>Kalvotus</span>
+  <span>ECU-viritys</span><span>Dyno-mittaus</span><span>Diagnostiikka</span><span>Jarrut</span><span>Alusta</span><span>Huolto</span><span>Imu ja pako</span><span>Kalvotus</span>
+</div></div>
+
+<section id="palvelut">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="tag rv">01 / Palvelut</p>
+      <h2 class="rv d1">Kaikki mitä autosi tarvitsee</h2>
+      <p class="lead rv d2">Avaa kortti nähdäksesi mitä palvelu sisältää. Valitse sopivat palvelut, niin ne siirtyvät suoraan ajanvaraukseen.</p>
+    </div>
+    <div class="svc-grid" id="svcGrid"></div>
+    <p class="disclaimer mono" style="margin-top:14px;color:var(--mute);font-size:.75rem">Hinnat sovitaan aina kiinteänä tarjouksena mittauksen jälkeen.</p>
+  </div>
+</section>
+
+<section id="viritys" style="background:var(--bg2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="tag o rv">02 / Viritys</p>
+      <h2 class="rv d1">Näe mitä viritys tekee</h2>
+      <p class="lead rv d2">Valitse taso ja vedä kursoria käyrällä. Näet teho- ja vääntöindeksin jokaisella kierrosluvulla.</p>
+    </div>
+    <div class="dyno rv">
+      <div class="stage-tabs" role="tablist" aria-label="Viritystaso" id="stageTabs"></div>
+      <div class="chart-box">
+        <div class="chart-top">
+          <div class="legend"><span><i style="background:var(--mute)"></i>Alkuperäinen</span><span><i style="background:var(--accent)"></i>Viritetty</span><span><i style="background:var(--tele);height:2px"></i>Vääntö (katkoviiva)</span></div>
+          <button class="btn ghost sm" id="replay" type="button">↻ Toista</button>
+        </div>
+        <canvas id="dynoCv" role="img" aria-label="Havainnollistava teho- ja vääntökäyrä alkuperäiselle ja viritetylle autolle"></canvas>
+        <input class="rpm" id="rpm" type="range" min="2000" max="7000" step="50" value="4500" aria-label="Kierrosluku">
+        <div class="readout" aria-live="polite">
+          <div><small>Kierrokset</small><strong id="rRpm">4500</strong></div>
+          <div><small>Teho-indeksi</small><strong class="o" id="rPow">–</strong></div>
+          <div><small>Vääntö-indeksi</small><strong class="g" id="rTq">–</strong></div>
+          <div><small>Ero alkuperäiseen</small><strong id="rDelta">–</strong></div>
+        </div>
+        <p class="disclaimer">Havainnollistava malli, ei todellinen mittaus. Indeksi 100 = alkuperäisen auton huipputeho. Todellinen tulos riippuu autosta ja mitataan aina ennen ja jälkeen työn.</p>
+      </div>
+    </div>
+    <div style="margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line)" class="rv pair">
+      <figure style="position:relative;background:#000"><img src="assets/dyno-1600.webp" srcset="assets/dyno-800.webp 800w, assets/dyno-1600.webp 1600w" sizes="(max-width:980px) 100vw, 620px" alt="Auto kiinnitettynä dynamometrillä, takana näytöillä tehokäyrät" width="1600" height="905" loading="lazy" style="width:100%;aspect-ratio:16/10;object-fit:cover"><figcaption class="mono" style="position:absolute;left:16px;bottom:14px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;text-shadow:0 1px 8px #000">Rullatesti</figcaption></figure>
+      <figure style="position:relative;background:#000"><img src="assets/ecu-1400.webp" srcset="assets/ecu-700.webp 700w, assets/ecu-1400.webp 1400w" sizes="(max-width:980px) 100vw, 620px" alt="Mekaanikon kädet liittämässä diagnostiikkakaapelia auton OBD-liittimeen, kannettavan näytöllä käyriä" width="1400" height="930" loading="lazy" style="width:100%;aspect-ratio:16/10;object-fit:cover"><figcaption class="mono" style="position:absolute;left:16px;bottom:14px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;text-shadow:0 1px 8px #000">Ohjelmisto ja lokit</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="moottoritila">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="tag rv">03 / Moottoritila</p>
+      <h2 class="rv d1">Tutki moottoritilaa</h2>
+      <p class="lead rv d2">Klikkaa numeroituja pisteitä. Kerromme mitä osa tekee ja mitä siitä tarkistetaan ennen viritystä.</p>
+    </div>
+    <div class="engine rv" id="engine">
+      <img src="assets/engine-1600.webp" srcset="assets/engine-800.webp 800w, assets/engine-1600.webp 1600w" sizes="(max-width:1240px) 100vw, 1240px" alt="Turboahdetun nelisylinterisen moottorin moottoritila ylhäältä, kiillotetut ahtoilmaputket ja ilmansuodatin" width="1600" height="905" loading="lazy">
+      <div class="hot-card" id="hotCard" aria-live="polite"><span class="tag" id="hotNo">Valitse piste</span><h3 id="hotTitle">Aloita klikkaamalla</h3><p id="hotText">Pisteet on merkitty kuvaan numeroilla 1–7.</p></div>
+    </div>
+    <p class="engine-hint">Pisteet toimivat myös näppäimistöllä: Tab siirtyy pisteelle, Enter avaa selityksen.</p>
+  </div>
+</section>
+
+<section id="varit" style="background:var(--bg2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="tag o rv">04 / Kalvotus ja maalaus</p>
+      <h2 class="rv d1">Valitse väri</h2>
+      <p class="lead rv d2">Kalvotamme ja maalaamme. Vaihda väriä ja katso miltä sama auto näyttää eri sävyissä.</p>
+    </div>
+    <div class="studio rv">
+      <div class="stage-img" id="stageImg">
+        <img class="on" data-c="graphite" src="assets/hero-1600.webp" srcset="assets/hero-800.webp 800w, assets/hero-1600.webp 1600w" sizes="(max-width:980px) 100vw, 900px" alt="Auto satiinin grafiitinharmaana" width="1600" height="905" loading="lazy">
+        <img data-c="orange" src="assets/orange-1600.webp" srcset="assets/orange-800.webp 800w, assets/orange-1600.webp 1600w" sizes="(max-width:980px) 100vw, 900px" alt="Sama auto satiinin oranssina" width="1600" height="905" loading="lazy">
+        <img data-c="blue" src="assets/blue-1600.webp" srcset="assets/blue-800.webp 800w, assets/blue-1600.webp 1600w" sizes="(max-width:980px) 100vw, 900px" alt="Sama auto kiiltävän siniseksi maalattuna" width="1600" height="905" loading="lazy">
+      </div>
+      <div class="swatches" role="group" aria-label="Värivalinta">
+        <button class="sw" type="button" data-c="graphite" aria-pressed="true"><i style="background:#4a4e53"></i><div><b>Grafiitti</b><span>Satiini</span></div></button>
+        <button class="sw" type="button" data-c="orange" aria-pressed="false"><i style="background:#ff5a1f"></i><div><b>Signaalioranssi</b><span>Satiini</span></div></button>
+        <button class="sw" type="button" data-c="blue" aria-pressed="false"><i style="background:#1456c9"></i><div><b>Kilpasininen</b><span>Kiiltävä</span></div></button>
+        <p class="disclaimer">Kuvat ovat havainnekuvia. Todellinen sävy valitaan värimallien kanssa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tyolista">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="tag rv">05 / Työlista</p>
+      <h2 class="rv d1">Rakenna autosi työlista</h2>
+      <p class="lead rv d2">Kerro käyttötarkoitus ja tavoitteet. Ehdotamme palvelut, joilla pääset sinne, ja voit viedä listan suoraan varaukseen.</p>
+    </div>
+    <div class="planner rv">
+      <div>
+        <div class="q"><h3>Auton polttoaine</h3><div class="chips" data-q="fuel">
+          <button class="chip" type="button" data-v="bensa" aria-pressed="false">Bensiini</button>
+          <button class="chip" type="button" data-v="diesel" aria-pressed="false">Diesel</button>
+          <button class="chip" type="button" data-v="hybridi" aria-pressed="false">Hybridi</button>
+        </div></div>
+        <div class="q"><h3>Käyttö</h3><div class="chips" data-q="use">
+          <button class="chip" type="button" data-v="katu" aria-pressed="false">Arki ja katu</button>
+          <button class="chip" type="button" data-v="talvi" aria-pressed="false">Talviajo</button>
+          <button class="chip" type="button" data-v="rata" aria-pressed="false">Rata ja ajopäivät</button>
+          <button class="chip" type="button" data-v="show" aria-pressed="false">Näyttelyauto</button>
+        </div></div>
+        <div class="q"><h3>Tavoitteet (monta voi valita)</h3><div class="chips" data-q="goal" data-multi="1">
+          <button class="chip" type="button" data-v="teho" aria-pressed="false">Lisää tehoa</button>
+          <button class="chip" type="button" data-v="jarrut" aria-pressed="false">Paremmat jarrut</button>
+          <button class="chip" type="button" data-v="hallinta" aria-pressed="false">Tarkempi ajettavuus</button>
+          <button class="chip" type="button" data-v="vika" aria-pressed="false">Selvitä vika</button>
+          <button class="chip" type="button" data-v="luotettava" aria-pressed="false">Luotettavuus</button>
+          <button class="chip" type="button" data-v="ulkonako" aria-pressed="false">Ulkonäkö</button>
+        </div></div>
+      </div>
+      <div class="result" id="planOut" aria-live="polite"><p class="empty">Valitse vähintään yksi tavoite, niin työlista ilmestyy tähän.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="prosessi" style="background:var(--bg2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="tag o rv">06 / Näin se toimii</p>
+      <h2 class="rv d1">Neljä askelta</h2>
+    </div>
+    <div class="steps">
+      <div class="step rv"><h3>Varaa aika</h3><p>Valitse palvelu ja sopiva aika. Kerro mitä haluat.</p><span class="bar"></span></div>
+      <div class="step rv d1"><h3>Mittaus ja diagnoosi</h3><p>Luemme viat ja mittaamme lähtötilanteen, jotta tiedetään missä mennään.</p><span class="bar"></span></div>
+      <div class="step rv d2"><h3>Suunnitelma ja tarjous</h3><p>Käymme työt läpi ja annamme kiinteän tarjouksen. Mikään ei yllätä laskussa.</p><span class="bar"></span></div>
+      <div class="step rv d3"><h3>Työ ja jälkimittaus</h3><p>Teemme työn ja mittaamme uudestaan. Näet eron mittauksesta.</p><span class="bar"></span></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:60px 0 110px" id="katsastus">
+  <div class="wrap">
+    <div class="notice rv">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 4v5c0 5-4 8-9 9-5-1-9-4-9-9V7z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+      <div><h3>Katsastus ja laillisuus</h3><p style="margin-top:6px">Osa muutoksista edellyttää muutoskatsastusta tai ilmoitusta. Käymme ne läpi ennen työn aloitusta, jotta auto pysyy tieliikennekelpoisena. Rata- ja kilpailukäyttöön tehtävät muutokset kerrotaan omana kokonaisuutenaan.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="bgimg"><img src="assets/garage-1600.webp" srcset="assets/garage-800.webp 800w, assets/garage-1600.webp 1600w" sizes="100vw" alt="Korjaamon ulkokuva talvi-iltana, lasiovien takana autoja nostimilla" width="1600" height="905" loading="lazy"></div>
+  <div class="wrap">
+    <p class="tag o rv">Valmis?</p>
+    <h2 class="rv d1" style="max-width:14ch">Kerro mitä autolle pitäisi tehdä</h2>
+    <p class="lead rv d2" style="margin-bottom:30px;color:#C9D2D8">Varaus kestää alle minuutin. Vastaamme viestiisi, kun olemme katsoneet tiedot.</p>
+    <a class="btn rv d3" href="varaus.html">Varaa aika</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <p><strong style="color:var(--ink)">Vääntö Garage</strong> · korjaamo ja virityspaja</p>
+      <p class="muted" style="margin-top:8px">Kuvitteellinen yritys, kuvat tekoälyllä luotuja. Sivusto: <a href="mailto:info@webyello.fi">WebYello</a></p>
+    </div>
+    <nav aria-label="Alavalikko"><a href="varaus.html">Varaa aika</a><a href="tietosuoja.html">Tietosuoja</a></nav>
+  </div>
+</footer>
+
+<button class="gauge" id="gauge" type="button" aria-label="Kierroslukumittari. Käynnistä moottori painamalla.">
+  <svg viewBox="0 0 140 140" aria-hidden="true">
+    <circle cx="70" cy="70" r="66" fill="none" stroke="#252E35" stroke-width="1"/>
+    <g id="ticks"></g>
+    <path d="M70 70 L70 22" stroke="#FF5A1F" stroke-width="3" stroke-linecap="round" class="needle" id="needle"/>
+    <circle cx="70" cy="70" r="8" fill="#12171B" stroke="#FF5A1F" stroke-width="2"/>
+    <text x="70" y="108" text-anchor="middle" class="gear" fill="#EEF2F4" id="gearTxt">N</text>
+    <text x="70" y="124" text-anchor="middle" font-family="ui-monospace,monospace" font-size="8" fill="#97A3AB" letter-spacing="1.5">x1000 R/MIN</text>
+  </svg>
+</button>
+<div class="gauge-tip" id="gTip">Vieritys kääntää mittaria. Klikkaa niin moottori käynnistyy.</div>
+
+<script src="app.js" defer></script>
+</body>
+</html>
