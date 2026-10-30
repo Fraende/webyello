@@ -101,6 +101,9 @@ Object.assign(I18N.fi,{
   dm_t3_tag: "Monisivuinen",
   dm_t3_t: "Vääntö Garage (autokorjaamo ja tuning)",
   dm_t3_p: "Kuvitteellinen auto- ja tuning-korjaamo, jossa on dyno-käyrä, klikattava konehuone, työlistan suunnittelija ja ajanvaraus.",
+  dm_t4_tag:"Ajanvaraus + kauppa",
+  dm_t4_t:"Kampaamo Helmi",
+  dm_t4_p:"Kuvitteellinen art deco -henkinen kampaamo Helsingissä: parallaksi-siluetti, nelivaiheinen ajanvaraus ja pieni tuotekauppa ostoskoreineen.",
   dm_next_t:"Seuraava demo voisi olla sinun.",
   dm_next_p:"Lisää demoja on tulossa. Kerro yrityksestäsi, niin luonnostelemme ensimmäisen version maksuttomassa kartoituspuhelussa.",
   dm_next_more:"Aloita projekti →"
