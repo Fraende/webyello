@@ -198,7 +198,7 @@
     { x: 22, y: 90, t: "Intercooler", d: "Jäähdyttää ahtoilmaa. Viileämpi ilma tarkoittaa tasaisempaa tehoa ja pienempää koputusriskiä." },
     { x: 43, y: 26, t: "Sytytyspuolat", d: "Sytytyksen kunto ratkaisee kestääkö moottori kuorman. Tarkistetaan aina ennen mittausta." }
   ];
-  var eng = $("#engine");
+  var eng = $("#engine"), stage = $("#engineStage");
   HOT.forEach(function (h, i) {
     var b = document.createElement("button"); b.className = "hot"; b.type = "button";
     b.style.left = h.x + "%"; b.style.top = h.y + "%"; b.textContent = i + 1;
@@ -207,7 +207,7 @@
       $$(".hot", eng).forEach(function (x) { x.setAttribute("aria-expanded", "false"); }); b.setAttribute("aria-expanded", "true");
       $("#hotNo").textContent = "Kohde " + (i + 1) + " / " + HOT.length; $("#hotTitle").textContent = h.t; $("#hotText").textContent = h.d;
     });
-    eng.appendChild(b);
+    stage.appendChild(b);
   });
 
   /* ---------- värit ---------- */
