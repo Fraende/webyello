@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="fi">
+<!--
+  Kampaamo Helmi: kuvitteellinen demosivu, tehnyt WebYello.
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#141414">
+<title>Kampaamo Helmi – Helsinki</title>
+<meta name="description" content="Kampaamo Helmi on kuvitteellinen art deco -henkinen kampaamo Helsingissä: leikkaukset, värit, hoidot, ajanvaraus ja tuotekauppa. WebYellon demosivu.">
+<style>
+@font-face{font-family:'Poiret One';font-style:normal;font-weight:400;font-display:swap;src:url(/demos/helmi/fonts/poiret-one-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:300;font-display:swap;src:url(/demos/helmi/fonts/josefin-sans-latin-300-normal.woff2) format('woff2')}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:400;font-display:swap;src:url(/demos/helmi/fonts/josefin-sans-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:600;font-display:swap;src:url(/demos/helmi/fonts/josefin-sans-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Josefin Sans';font-style:normal;font-weight:700;font-display:swap;src:url(/demos/helmi/fonts/josefin-sans-latin-700-normal.woff2) format('woff2')}
+:root{--ink:#141414;--ink2:#2a2620;--gold:#C9A227;--gold2:#E3C766;--cream:#F4EEE1;--paper:#FBF8F1;--emerald:#1F4D3F;--muted:#6b6355;--line:rgba(201,162,39,.45);
+  --display:"Poiret One",Georgia,serif;--body:"Josefin Sans",system-ui,sans-serif;--ease:cubic-bezier(.22,1,.36,1)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{width:min(1160px,100% - 32px);margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(20,20,20,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);color:var(--cream)}
+.nav{display:flex;align-items:center;gap:24px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-size:26px;letter-spacing:.12em;color:var(--cream);white-space:nowrap}
+.logo svg{width:34px;height:22px;flex:none}
+.menu{display:flex;gap:22px;margin-left:auto;list-style:none;padding:0;font-size:14px;letter-spacing:.14em;text-transform:uppercase}
+.menu a{text-decoration:none;opacity:.85}
+.menu a:hover{opacity:1;color:var(--gold2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 24px;border:1px solid var(--gold);background:var(--gold);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;transition:background .25s,color .25s,transform .15s;clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0 calc(100% - 10px),0 10px)}
+.btn:hover{background:var(--gold2)}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:var(--gold);clip-path:none}
+.btn.ghost:hover{background:var(--gold);color:var(--ink)}
+.btn.dark{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.btn.dark:hover{background:var(--ink2)}
+.cartbtn{position:relative;background:none;border:0;padding:6px;color:var(--cream)}
+.cartbtn b{position:absolute;top:-2px;right:-4px;min-width:18px;height:18px;border-radius:9px;background:var(--gold);color:var(--ink);font-size:11px;display:grid;place-items:center;padding:0 4px}
+.burger{display:none;background:none;border:0;color:var(--cream);padding:6px}
+@media (max-width:900px){
+  .menu{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--ink);border-bottom:1px solid var(--line)}
+  .menu.open{display:flex}
+  .menu a{display:block;padding:14px 20px;border-top:1px solid rgba(201,162,39,.15)}
+  .burger{display:block;margin-left:auto}
+  .nav .btn{height:38px;padding:0 12px;font-size:11px;white-space:nowrap;letter-spacing:.1em}
+  .logo{font-size:22px}
+}
+
+/* hero */
+.hero{position:relative;background:var(--ink);color:var(--cream);overflow:hidden;min-height:calc(100svh - 68px);display:flex;flex-direction:column}
+.hero-copy{position:relative;z-index:3;text-align:center;padding:clamp(40px,8vh,90px) 16px 0}
+.eyebrow{font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2)}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(3rem,1.6rem + 7vw,7.5rem);line-height:.95;letter-spacing:.06em;margin:.2em 0 .1em}
+.pearls{display:flex;justify-content:center;gap:9px;margin:14px 0 18px}
+.pearls i{width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#e9e1cf 45%,#b8ad95);box-shadow:0 0 6px rgba(255,255,255,.25)}
+.pearls i:nth-child(odd){width:6px;height:6px;margin-top:1.5px}
+.hero p.lead{max-width:34rem;margin:0 auto;font-size:clamp(1rem,.9rem + .4vw,1.2rem);font-weight:300;color:rgba(244,238,225,.85)}
+.cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:28px}
+.scene{position:relative;flex:1;min-height:max(300px,min(34vw,520px));margin-top:10px}
+.scene svg{position:absolute;inset:auto 0 0 0;width:100%;height:100%}
+.scene [data-depth]{will-change:transform;transition:transform .5s var(--ease)}
+.ray{stroke-dasharray:720;stroke-dashoffset:720;animation:draw 1.8s var(--ease) forwards;animation-delay:calc(var(--i) * 45ms + .2s)}
+.arc{stroke-dasharray:1200;stroke-dashoffset:1200;animation:draw 2.2s var(--ease) forwards .1s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.rise{opacity:0;transform:translateY(16px);animation:rise .9s var(--ease) forwards;animation-delay:calc(var(--d,0) * 120ms + .3s)}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* sections */
+section{padding:clamp(64px,9vw,120px) 0}
+.sec-head{text-align:center;margin-bottom:clamp(36px,5vw,56px)}
+.sec-head h2{font-family:var(--display);font-weight:400;font-size:clamp(2.3rem,1.5rem + 3vw,3.8rem);letter-spacing:.06em;line-height:1.05;margin:.2em 0}
+.fan{width:70px;height:36px;margin:0 auto;color:var(--gold)}
+.sec-head p{max-width:36rem;margin:10px auto 0;color:var(--muted)}
+.dark{background:var(--ink);color:var(--cream)}
+.dark .sec-head p{color:rgba(244,238,225,.7)}
+
+/* services */
+.price-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.pcard{position:relative;background:var(--paper);padding:36px 30px 30px;border:1px solid var(--line)}
+.pcard::before{content:"";position:absolute;inset:7px;border:1px solid var(--line);pointer-events:none}
+.pcard h3{font-family:var(--display);font-weight:400;font-size:30px;letter-spacing:.08em;text-align:center;margin:0 0 18px}
+.pcard ul{list-style:none;padding:0;margin:0}
+.pcard li{display:flex;align-items:baseline;gap:8px;padding:11px 0;border-bottom:1px solid rgba(201,162,39,.3)}
+.pcard li:last-child{border-bottom:0}
+.pcard li span{flex:1;display:flex;align-items:baseline;gap:8px}
+.pcard li span::after{content:"";flex:1;border-bottom:1px dotted rgba(20,20,20,.3);transform:translateY(-4px)}
+.pcard li small{color:var(--muted);font-size:13px;white-space:nowrap}
+.pcard li b{font-weight:600;white-space:nowrap}
+.note{text-align:center;color:var(--muted);font-size:14px;margin-top:22px}
+
+/* stylists */
+.stylists{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:34px}
+.stylist{text-align:center}
+.arch{position:relative;aspect-ratio:3/4;border-radius:999px 999px 0 0;overflow:hidden;border:1px solid var(--gold);padding:8px;background:var(--ink)}
+.arch-in{width:100%;height:100%;border-radius:999px 999px 0 0;overflow:hidden;position:relative}
+.arch svg{width:100%;height:100%}
+.stylist h3{font-family:var(--display);font-weight:400;font-size:30px;letter-spacing:.08em;margin:18px 0 0}
+.stylist p{margin:4px 0 14px;color:rgba(244,238,225,.7);font-size:15px}
+.linkgold{background:none;border:0;border-bottom:1px solid var(--gold);color:var(--gold2);padding:2px 0;letter-spacing:.14em;text-transform:uppercase;font-size:13px;font-weight:600}
+.linkgold:hover{color:var(--cream)}
+
+/* booking */
+.book{max-width:960px;margin:0 auto;background:var(--paper);border:1px solid var(--gold);position:relative;padding:clamp(20px,4vw,40px)}
+.book::before,.book::after{content:"";position:absolute;width:36px;height:36px;border:2px solid var(--gold)}
+.book::before{top:-8px;left:-8px;border-right:0;border-bottom:0}
+.book::after{bottom:-8px;right:-8px;border-left:0;border-top:0}
+.steps{display:flex;justify-content:center;gap:clamp(8px,3vw,28px);list-style:none;padding:0;margin:0 0 28px;counter-reset:s}
+.steps li{display:flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.steps li::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:32px;height:32px;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);background:rgba(201,162,39,.25);color:var(--ink);font-size:12px;font-weight:600}
+.steps li[aria-current=step]{color:var(--ink);font-weight:600}
+.steps li[aria-current=step]::before{background:var(--gold)}
+.steps li.done::before{background:var(--ink);color:var(--gold2)}
+@media (max-width:640px){.steps li span{display:none}}
+.panel h3{font-family:var(--display);font-weight:400;font-size:28px;letter-spacing:.06em;margin:0 0 16px;text-align:center}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.opt{display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;padding:16px 18px;border:1px solid rgba(20,20,20,.15);background:#fff;transition:border-color .2s,background .2s,transform .15s}
+.opt:hover{border-color:var(--gold)}
+.opt[aria-pressed=true]{border-color:var(--ink);background:var(--ink);color:var(--cream)}
+.opt small{display:block;color:var(--muted);font-size:13px}
+.opt[aria-pressed=true] small{color:var(--gold2)}
+.opt b{font-weight:600;white-space:nowrap}
+.dates{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.date{flex:none;width:64px;padding:10px 0;border:1px solid rgba(20,20,20,.15);background:#fff;text-align:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.date b{display:block;font-family:var(--display);font-size:26px;letter-spacing:0;line-height:1.1}
+.date:disabled{opacity:.35;cursor:default}
+.date[aria-pressed=true]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.date[aria-pressed=true] b{color:var(--gold2)}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:8px;margin-top:18px;min-height:96px}
+.slot{height:44px;border:1px solid var(--gold);background:transparent;font-weight:600;transition:background .2s}
+.slot:hover{background:var(--gold)}
+.slot:disabled{border-color:rgba(20,20,20,.12);color:rgba(20,20,20,.3);text-decoration:line-through;cursor:default;background:transparent}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:24px 0}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:26px;flex-wrap:wrap}
+.summary{font-size:14px;color:var(--muted)}
+.form{display:grid;gap:14px;max-width:480px;margin:0 auto}
+.form label{display:block;font-size:13px;font-weight:600;letter-spacing:.06em;margin-bottom:5px}
+.form input,.form textarea{width:100%;padding:12px 14px;border:1px solid rgba(20,20,20,.2);background:#fff;font:inherit;font-size:16px}
+.form input:focus,.form textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,.2)}
+.err{color:#a3261b;font-size:13px;margin-top:4px}
+.recap{border:1px dashed var(--gold);padding:14px 16px;font-size:15px;background:#fff}
+.ticket{position:relative;display:grid;grid-template-columns:110px 1fr;max-width:560px;margin:0 auto;background:#fff;border:1px solid var(--gold);
+  -webkit-mask:radial-gradient(circle 11px at 110px 0,transparent 97%,#000 100%) top/100% 51% no-repeat,radial-gradient(circle 11px at 110px 100%,transparent 97%,#000 100%) bottom/100% 51% no-repeat;
+  mask:radial-gradient(circle 11px at 110px 0,transparent 97%,#000 100%) top/100% 51% no-repeat,radial-gradient(circle 11px at 110px 100%,transparent 97%,#000 100%) bottom/100% 51% no-repeat;animation:flip .6s var(--ease)}
+@keyframes flip{from{transform:perspective(900px) rotateX(-80deg);opacity:0}to{transform:none;opacity:1}}
+.stub{background:var(--ink);color:var(--gold2);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 6px;border-right:2px dashed var(--gold);text-transform:uppercase;letter-spacing:.14em;font-size:12px}
+.stub b{font-family:var(--display);font-size:54px;line-height:1;letter-spacing:0;color:var(--cream)}
+.tbody{position:relative;padding:22px 22px 20px}
+.tbody h3{font-family:var(--display);font-weight:400;font-size:30px;margin:0 0 8px;text-align:left}
+.tbody p{margin:4px 0;font-size:15px;color:var(--muted);padding-right:70px}
+.tbody p b{color:var(--ink)}
+.stamp{position:absolute;right:10px;top:8px;width:92px;height:92px;color:var(--gold);transform:rotate(-12deg);opacity:0;animation:stamp .4s cubic-bezier(.3,0,.25,1) .5s forwards}
+@keyframes stamp{0%{transform:rotate(-28deg) scale(1.8);opacity:0}65%{transform:rotate(-12deg) scale(.92);opacity:.95}100%{transform:rotate(-12deg) scale(1);opacity:.9}}
+.tbody .bar{margin-top:14px;justify-content:flex-start}
+@media (max-width:520px){.ticket{grid-template-columns:82px 1fr;-webkit-mask:none;mask:none}.stub b{font-size:40px}.tbody p{padding-right:0}.stamp{width:70px;height:70px;top:auto;bottom:70px}}
+
+/* shop */
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px}
+.product{position:relative;color:var(--ink);background:var(--paper);border:1px solid var(--line);overflow:hidden}
+.product.in{animation:lift .6s var(--ease) both;animation-delay:calc(var(--i) * 80ms)}
+@keyframes lift{from{transform:translateY(14px)}to{transform:none}}
+.pimg{position:relative;aspect-ratio:1;background:radial-gradient(circle at 50% 75%,#efe6d0,#e4d9bf);overflow:hidden}
+.pimg svg{width:100%;height:100%;transition:transform .6s var(--ease)}
+.pimg .rays{position:absolute;inset:0;opacity:.0;transition:opacity .5s}
+.product:hover .pimg svg.item,.product:focus-within .pimg svg.item{transform:scale(1.07) translateY(-4px)}
+.product:hover .rays,.product:focus-within .rays{opacity:1}
+.pinfo{padding:18px 18px 20px;position:relative;background:var(--paper)}
+.pinfo h3{font-family:var(--display);font-weight:400;font-size:24px;letter-spacing:.04em;margin:0}
+.pinfo .price{font-weight:600;margin-top:2px}
+.pdetail{position:absolute;left:0;right:0;bottom:100%;background:rgba(20,20,20,.92);color:var(--cream);padding:14px 18px;font-size:14px;line-height:1.5;transform:translateY(100%);opacity:0;transition:transform .45s var(--ease),opacity .3s}
+.product:hover .pdetail,.product:focus-within .pdetail{transform:none;opacity:1}
+.pinfo .btn{width:100%;margin-top:14px;height:42px}
+@media (hover:none){.pdetail{position:static;transform:none;opacity:1;background:transparent;color:var(--muted);padding:6px 0 0}}
+
+/* cart */
+.drawer{position:fixed;inset:0;z-index:80;pointer-events:none}
+.drawer .scrim{position:absolute;inset:0;background:rgba(20,20,20,.5);opacity:0;transition:opacity .3s}
+.drawer aside{position:absolute;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--cream);transform:translateX(100%);transition:transform .4s var(--ease);display:flex;flex-direction:column;border-left:1px solid var(--gold)}
+.drawer.open{pointer-events:auto}
+.drawer.open .scrim{opacity:1}
+.drawer.open aside{transform:none}
+.dhead{display:flex;align-items:center;justify-content:space-between;padding:20px;border-bottom:1px solid var(--line)}
+.dhead h2{font-family:var(--display);font-weight:400;font-size:30px;margin:0}
+.x{background:none;border:0;font-size:28px;line-height:1;padding:4px 8px}
+.lines{flex:1;overflow-y:auto;padding:8px 20px;list-style:none;margin:0}
+.lines li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(201,162,39,.3)}
+.lines li div{flex:1}
+.qty{display:flex;align-items:center;border:1px solid rgba(20,20,20,.2)}
+.qty button{background:none;border:0;width:30px;height:30px}
+.qty span{min-width:22px;text-align:center}
+.dfoot{padding:20px;border-top:1px solid var(--line)}
+.total{display:flex;justify-content:space-between;font-size:18px;margin-bottom:14px}
+.dfoot .btn{width:100%}
+.dfoot small{display:block;margin-top:10px;color:var(--muted);text-align:center}
+.toast{position:fixed;left:50%;bottom:24px;z-index:90;transform:translate(-50%,120px);background:var(--ink);color:var(--cream);padding:12px 20px;border:1px solid var(--gold);font-size:15px;transition:transform .4s var(--ease)}
+.toast.show{transform:translate(-50%,0)}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px}
+.tile{position:relative;overflow:hidden;border:1px solid var(--line);background:var(--ink)}
+.tile:nth-child(1){grid-area:1/1/3/3}.tile:nth-child(2){grid-area:1/3}.tile:nth-child(3){grid-area:1/4/3/5}
+.tile:nth-child(4){grid-area:2/3}.tile:nth-child(5){grid-area:3/1}.tile:nth-child(6){grid-area:3/2/4/5}
+.tile svg{width:100%;height:100%}
+.tile span{position:absolute;left:12px;bottom:10px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);background:rgba(20,20,20,.7);padding:4px 8px}
+@media (max-width:760px){.gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}.gallery .tile{grid-area:auto}.gallery .tile:nth-child(1),.gallery .tile:nth-child(6){grid-column:span 2}}
+
+/* visit */
+.visit{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:stretch}
+.map{border:1px solid var(--gold);min-height:340px;background:#ddd}
+.info{background:var(--paper);border:1px solid var(--line);padding:30px}
+.info h3{font-family:var(--display);font-weight:400;font-size:26px;margin:0 0 8px;letter-spacing:.06em}
+.info dl{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:0 0 22px}
+.info dt{font-weight:600}
+.info dd{margin:0}
+@media (max-width:820px){.visit{grid-template-columns:1fr}}
+
+/* footer */
+footer{background:var(--ink);color:rgba(244,238,225,.8);padding:0 0 30px;font-size:14px}
+.border{height:28px;color:var(--gold)}
+.border svg{width:100%;height:100%}
+.fgrid{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;padding-top:28px}
+.social{display:flex;gap:14px;list-style:none;padding:0;margin:0}
+.social a{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line);color:var(--gold2);transform:rotate(45deg);transition:background .2s}
+.social a svg{transform:rotate(-45deg);width:18px;height:18px}
+.social a:hover{background:var(--gold);color:var(--ink)}
+.made{text-align:center;margin:24px auto 0;padding:0 16px;max-width:60rem;font-size:13px;color:rgba(244,238,225,.55)}
+.made a{color:var(--gold2)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .ray,.arc{stroke-dashoffset:0}.rise{opacity:1;transform:none}.product{opacity:1;transform:none}.stamp{opacity:.9}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap nav" aria-label="Päävalikko">
+    <a class="logo" href="#top" aria-label="Kampaamo Helmi, etusivulle">
+      <svg viewBox="0 0 34 22" fill="none" stroke="#C9A227" stroke-width="1.4" aria-hidden="true"><path d="M2 21a15 15 0 0130 0"/><path d="M17 21L5 9M17 21L11 5M17 21V3M17 21l6-16M17 21l12-12"/><circle cx="17" cy="21" r="2" fill="#F4EEE1" stroke="none"/></svg>
+      HELMI
+    </a>
+    <button class="burger" aria-expanded="false" aria-controls="menu" aria-label="Avaa valikko"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
+    <ul class="menu" id="menu">
+      <li><a href="#palvelut">Palvelut</a></li>
+      <li><a href="#kampaajat">Kampaajat</a></li>
+      <li><a href="#kauppa">Kauppa</a></li>
+      <li><a href="#galleria">Galleria</a></li>
+      <li><a href="#yhteys">Yhteystiedot</a></li>
+    </ul>
+    <button class="cartbtn" id="cartOpen" aria-label="Ostoskori, 0 tuotetta"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg><b id="cartCount">0</b></button>
+    <a class="btn" href="#varaa">Varaa aika</a>
+  </nav>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero" aria-labelledby="h1" style="padding:0">
+  <div class="hero-copy">
+    <div class="eyebrow rise" style="--d:0">Kampaamo · Helsinki</div>
+    <h1 id="h1" class="rise" style="--d:1">Kampaamo Helmi</h1>
+    <div class="pearls rise" style="--d:2" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="lead rise" style="--d:3">Leikkaukset, värit ja hoidot ripauksella kultaa. Varaa aika verkossa muutamassa sekunnissa.</p>
+    <div class="cta rise" style="--d:4">
+      <a class="btn" href="#varaa">Varaa aika</a>
+      <a class="btn ghost" href="#kauppa">Kauppa</a>
+    </div>
+  </div>
+  <div class="scene" id="scene" aria-hidden="true">
+    <svg viewBox="0 130 1200 390" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#2a2110"/><stop offset="1" stop-color="#141414"/></linearGradient>
+      </defs>
+      <rect width="1200" height="520" fill="url(#sky)"/>
+      <!-- back: sunburst -->
+      <g data-depth="0.2" id="burst" fill="none" stroke="#C9A227">
+        <path class="arc" d="M360 470a240 240 0 01480 0" stroke-width="1.2" opacity=".9"/>
+        <path class="arc" d="M260 470a340 340 0 01680 0" stroke-width="1" opacity=".55"/>
+        <path class="arc" d="M160 470a440 440 0 01880 0" stroke-width=".8" opacity=".35"/>
+        <path class="arc" d="M450 470a150 150 0 01300 0" stroke-width="1.6" opacity="1"/>
+      </g>
+      <!-- middle: Kallio church + station tower -->
+      <g data-depth="0.5" fill="#3a3122">
+        <path d="M60 470V400h60v-30h40v100zM120 470V430h50v40z"/>
+        <!-- Kallio church -->
+        <path d="M220 470V360h30V250l20-40 20 40v110h30v110z"/>
+        <path d="M262 214h16v-14h-16z"/>
+        <path d="M300 470V390h70l20-24 20 24v80z"/>
+        <!-- railway station -->
+        <path d="M790 470V395h170v75z"/>
+        <path d="M900 395V230h44v165z"/>
+        <path d="M896 230h52l-6-22h-40z"/>
+        <path d="M908 208h28v-24h-28z"/>
+        <circle cx="922" cy="262" r="12" fill="#C9A227" opacity=".7"/>
+        <path d="M1010 470V420h80v-20h50v70z"/>
+      </g>
+      <!-- front: Cathedral + Uspenski -->
+      <g data-depth="1" fill="#0d0d0d">
+        <!-- Helsinki Cathedral -->
+        <path d="M455 470V368h290v102z"/>
+        <path d="M480 368l120-48 120 48z"/>
+        <path d="M545 330V270h110v60z"/>
+        <path d="M532 274h136v-10H532z"/>
+        <path d="M548 264a52 52 0 01104 0z"/>
+        <path d="M594 212h12v-26h-12z"/><path d="M592 190h16l-8-14z"/>
+        <path d="M466 368v-34h40v34z"/><path d="M466 334a20 20 0 0140 0z"/><path d="M482 314h8v-12h-8z"/>
+        <path d="M694 368v-34h40v34z"/><path d="M694 334a20 20 0 0140 0z"/><path d="M710 314h8v-12h-8z"/>
+        <g fill="#C9A227" opacity=".55"><rect x="500" y="388" width="6" height="64"/><rect x="530" y="388" width="6" height="64"/><rect x="560" y="388" width="6" height="64"/><rect x="590" y="388" width="6" height="64"/><rect x="620" y="388" width="6" height="64"/><rect x="650" y="388" width="6" height="64"/><rect x="680" y="388" width="6" height="64"/></g>
+        <path d="M420 470v-20h360v20z"/>
+        <!-- Uspenski -->
+        <path d="M1010 470V380h130v90z"/>
+        <path d="M1050 380V330h50v50z"/>
+        <path d="M1075 330c-22-8-26-30 0-48 26 18 22 40 0 48z"/>
+        <path d="M1073 284h4v-22h-4z"/><path d="M1068 270h14v3h-14z"/>
+        <path d="M1018 380v-26h22v26z"/><path d="M1029 354c-12-4-14-16 0-26 14 10 12 22 0 26z"/>
+        <path d="M1110 380v-26h22v26z"/><path d="M1121 354c-12-4-14-16 0-26 14 10 12 22 0 26z"/>
+        <!-- foreground waterline -->
+        <path d="M0 520V470h1200v50z"/>
+      </g>
+      <g data-depth="1.3" stroke="#C9A227" stroke-width="1" opacity=".5">
+        <path d="M0 482h1200M140 494h300M760 494h320M420 506h360"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="palvelut" aria-labelledby="h-palvelut">
+  <div class="wrap">
+    <div class="sec-head">
+      <svg class="fan" viewBox="0 0 70 36" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 35a30 30 0 0160 0M15 35a20 20 0 0140 0M35 35V3M35 35L12 12M35 35l23-23M35 35L22 6M35 35l13-29"/></svg>
+      <h2 id="h-palvelut">Palvelut ja hinnat</h2>
+      <p>Hinnat sisältävät alv:n. Lopullinen hinta riippuu hiusten pituudesta ja tuuheudesta, ja kampaaja kertoo sen aina ennen aloittamista.</p>
+    </div>
+    <div class="price-cards" id="priceCards"></div>
+    <p class="note">Esittelysivuston hinnat ovat esimerkkejä.</p>
+  </div>
+</section>
+
+<!-- STYLISTS -->
+<section id="kampaajat" class="dark" aria-labelledby="h-kampaajat">
+  <div class="wrap">
+    <div class="sec-head">
+      <svg class="fan" viewBox="0 0 70 36" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 35a30 30 0 0160 0M15 35a20 20 0 0140 0M35 35V3M35 35L12 12M35 35l23-23M35 35L22 6M35 35l13-29"/></svg>
+      <h2 id="h-kampaajat">Kampaajamme</h2>
+      <p>Kolme käsiparia, kolme erikoisalaa. Valitse oma suosikkisi tai anna meidän valita.</p>
+    </div>
+    <div class="stylists" id="stylists"></div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="varaa" aria-labelledby="h-varaa">
+  <div class="wrap">
+    <div class="sec-head">
+      <svg class="fan" viewBox="0 0 70 36" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 35a30 30 0 0160 0M15 35a20 20 0 0140 0M35 35V3M35 35L12 12M35 35l23-23M35 35L22 6M35 35l13-29"/></svg>
+      <h2 id="h-varaa">Varaa aika</h2>
+      <p>Palvelu, kampaaja ja aika. Vahvistus tulee heti.</p>
+    </div>
+    <div class="book">
+      <ol class="steps" id="steps">
+        <li><span>Palvelu</span></li><li><span>Kampaaja</span></li><li><span>Aika</span></li><li><span>Tiedot</span></li>
+      </ol>
+      <div id="panel" class="panel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section id="kauppa" class="dark" aria-labelledby="h-kauppa">
+  <div class="wrap">
+    <div class="sec-head">
+      <svg class="fan" viewBox="0 0 70 36" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 35a30 30 0 0160 0M15 35a20 20 0 0140 0M35 35V3M35 35L12 12M35 35l23-23M35 35L22 6M35 35l13-29"/></svg>
+      <h2 id="h-kauppa">Helmen kauppa</h2>
+      <p>Samat tuotteet, joita käytämme tuolissa. Nouda kampaamosta tai tilaa kotiin.</p>
+    </div>
+    <div class="products" id="products"></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="galleria" aria-labelledby="h-galleria">
+  <div class="wrap">
+    <div class="sec-head">
+      <svg class="fan" viewBox="0 0 70 36" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 35a30 30 0 0160 0M15 35a20 20 0 0140 0M35 35V3M35 35L12 12M35 35l23-23M35 35L22 6M35 35l13-29"/></svg>
+      <h2 id="h-galleria">Ennen ja jälkeen</h2>
+      <p>Tähän tulevat oikeat asiakaskuvat. Esittelysivustolla paikoilla on kuvituskuvia.</p>
+    </div>
+    <div class="gallery" id="gallery"></div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="yhteys" class="dark" aria-labelledby="h-yhteys">
+  <div class="wrap">
+    <div class="sec-head">
+      <svg class="fan" viewBox="0 0 70 36" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 35a30 30 0 0160 0M15 35a20 20 0 0140 0M35 35V3M35 35L12 12M35 35l23-23M35 35L22 6M35 35l13-29"/></svg>
+      <h2 id="h-yhteys">Tervetuloa</h2>
+    </div>
+    <div class="visit">
+      <div class="map" style="display:grid;place-items:center;background:#1d1a14;color:var(--cream);text-align:center;padding:24px"><div><svg viewBox="0 0 70 36" style="width:90px;margin:0 auto 14px;color:var(--gold)" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 35a30 30 0 0160 0M15 35a20 20 0 0140 0M35 35V3M35 35L12 12M35 35l23-23M35 35L22 6M35 35l13-29"/></svg><p style="font-family:var(--display);font-size:28px;margin:0">Helsingin keskusta</p><p style="margin:6px 0 16px;color:rgba(244,238,225,.7)">Kartta avautuu OpenStreetMapissa.</p><a class="btn ghost" href="https://www.openstreetmap.org/?mlat=60.1697&amp;mlon=24.9522#map=16/60.1697/24.9522" target="_blank" rel="noopener">Avaa kartta</a></div></div>
+      <div class="info" style="color:var(--ink)">
+        <h3>Aukioloajat</h3>
+        <dl>
+          <dt>Ti–Pe</dt><dd>10–19</dd>
+          <dt>La</dt><dd>10–16</dd>
+          <dt>Su–Ma</dt><dd>Suljettu</dd>
+        </dl>
+        <h3>Yhteystiedot</h3>
+        <p style="margin:0 0 4px">Esimerkkikatu 1, 00170 Helsinki</p>
+        <p style="margin:0 0 4px"><a href="tel:+358000000000">+358 00 000 0000</a></p>
+        <p style="margin:0 0 20px"><a href="mailto:info@example.com">info@example.com</a></p>
+        <a class="btn dark" href="#varaa">Varaa aika</a>
+        <p style="font-size:13px;color:var(--muted);margin:14px 0 0">Esittelysivuston osoite ja yhteystiedot ovat paikkamerkkejä.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="border" aria-hidden="true">
+    <svg viewBox="0 0 1200 28" preserveAspectRatio="none"><defs><pattern id="deco" width="40" height="28" patternUnits="userSpaceOnUse"><path d="M0 27h40M20 27V8M20 27L8 15M20 27l12-12M4 27a16 16 0 0132 0" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="20" cy="5" r="2.2" fill="#F4EEE1"/></pattern></defs><rect width="1200" height="28" fill="url(#deco)"/></svg>
+  </div>
+  <div class="wrap fgrid">
+    <a class="logo" href="#top" aria-label="Kampaamo Helmi, ylös">
+      <svg viewBox="0 0 34 22" fill="none" stroke="#C9A227" stroke-width="1.4" aria-hidden="true"><path d="M2 21a15 15 0 0130 0"/><path d="M17 21L5 9M17 21L11 5M17 21V3M17 21l6-16M17 21l12-12"/><circle cx="17" cy="21" r="2" fill="#F4EEE1" stroke="none"/></svg>
+      KAMPAAMO HELMI
+    </a>
+    <ul class="social" aria-label="Some">
+      <li><a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></li>
+      <li><a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 8h3V4h-3a4 4 0 00-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a></li>
+      <li><a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3v12a4 4 0 11-4-4M14 3c0 3 2 5 5 5"/></svg></a></li>
+    </ul>
+    <span>© 2026 Kampaamo Helmi</span>
+  </div>
+  <p class="made">Kuvitteellinen kampaamo ja demosivu, ei oikea yritys. Varaukset ja tilaukset eivät lähde minnekään. Sivusto: <a href="/">WebYello</a> · <a href="/demos/">Kaikki demot</a></p>
+</footer>
+
+<!-- cart drawer -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="scrim" data-close></div>
+  <aside role="dialog" aria-modal="true" aria-labelledby="h-cart">
+    <div class="dhead"><h2 id="h-cart">Ostoskori</h2><button class="x" data-close aria-label="Sulje ostoskori">×</button></div>
+    <ul class="lines" id="lines"></ul>
+    <div class="dfoot">
+      <div class="total"><span>Yhteensä</span><b id="total">0,00 €</b></div>
+      <button class="btn dark" id="checkout">Kassalle</button>
+      <small id="checkoutNote">Esittelysivustolla kassa ei veloita mitään.</small>
+    </div>
+  </aside>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+"use strict";
+var $ = function(s,r){return (r||document).querySelector(s)};
+var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+var eur = function(n){return n.toFixed(2).replace(".",",")+" €"};
+
+/* ---------- data ---------- */
+var SERVICES = [
+  {cat:"Leikkaukset", items:[
+    {id:"leikkaus", name:"Hiustenleikkaus", min:45, price:59},
+    {id:"lyhyt", name:"Lyhyiden hiusten leikkaus", min:30, price:45},
+    {id:"lapsi", name:"Lasten leikkaus (alle 12 v.)", min:30, price:35}]},
+  {cat:"Värit", items:[
+    {id:"tyvi", name:"Tyvivärjäys", min:90, price:89},
+    {id:"vari", name:"Värjäys ja leikkaus", min:120, price:139},
+    {id:"raidat", name:"Raidat ja leikkaus", min:150, price:159}]},
+  {cat:"Hoidot", items:[
+    {id:"fooni", name:"Pesu ja föönaus", min:30, price:39},
+    {id:"hoito", name:"Syvähoito", min:45, price:55},
+    {id:"kampaus", name:"Juhlakampaus", min:60, price:79}]}
+];
+var STYLISTS = [
+  {id:"aino", name:"Aino", role:"Värit ja raidat", hue:"#C9A227"},
+  {id:"elias", name:"Elias", role:"Lyhyet leikkaukset ja parturointi", hue:"#E3C766"},
+  {id:"sofia", name:"Sofia", role:"Juhlakampaukset ja pitkät hiukset", hue:"#b8ad95"}
+];
+var PRODUCTS = [
+  {id:"shampoo", name:"Helmi-shampoo", price:24.9, desc:"Mieto, sulfaatiton shampoo päivittäiseen käyttöön. 250 ml.", shape:"bottle"},
+  {id:"hoitoaine", name:"Helmi-hoitoaine", price:26.9, desc:"Kosteuttava hoitoaine, joka ei latista. 250 ml.", shape:"bottle2"},
+  {id:"oljy", name:"Kultainen hiusöljy", price:32, desc:"Kevyt öljy latvoille ja kiiltoon. 50 ml.", shape:"dropper"},
+  {id:"vaha", name:"Muotoiluvaha", price:22, desc:"Joustava pito, matta viimeistely. 75 ml.", shape:"jar"},
+  {id:"kampa", name:"Viuhkakampa", price:18, desc:"Käsin viimeistelty selluloosa-asetaattikampa.", shape:"comb"},
+  {id:"lahja", name:"Lahjakortti", price:50, desc:"Käy kaikkiin palveluihin ja tuotteisiin. Voimassa 12 kk.", shape:"card"}
+];
+var ALL = SERVICES.reduce(function(a,c){return a.concat(c.items)},[]);
+
+/* ---------- menu ---------- */
+var burger = $(".burger"), menu = $("#menu");
+burger.addEventListener("click",function(){var o=menu.classList.toggle("open");burger.setAttribute("aria-expanded",o)});
+menu.addEventListener("click",function(e){if(e.target.tagName==="A"){menu.classList.remove("open");burger.setAttribute("aria-expanded","false")}});
+
+/* ---------- hero: rays + parallax ---------- */
+var burst = $("#burst"), NS = "http://www.w3.org/2000/svg";
+for (var i=0;i<=24;i++){
+  var a = Math.PI + (i/24)*Math.PI, l = document.createElementNS(NS,"line");
+  l.setAttribute("x1",600+Math.cos(a)*60); l.setAttribute("y1",470+Math.sin(a)*60);
+  l.setAttribute("x2",600+Math.cos(a)*720); l.setAttribute("y2",470+Math.sin(a)*720);
+  l.setAttribute("stroke-width", i%2 ? .6 : 1.2); l.setAttribute("opacity", i%2 ? .45 : .85);
+  l.setAttribute("class","ray"); l.style.setProperty("--i", Math.abs(12-i));
+  burst.insertBefore(l, burst.firstChild);
+}
+if (!reduce){
+  var layers = document.querySelectorAll("#scene [data-depth]"), mx=0, sy=0, raf=0;
+  var apply = function(){layers.forEach(function(g){var d=+g.dataset.depth;g.style.transform="translate("+(mx*d*18)+"px,"+(sy*d*-0.12)+"px)"});raf=0};
+  var q = function(){if(!raf)raf=requestAnimationFrame(apply)};
+  addEventListener("pointermove",function(e){if(scrollY<innerHeight){mx=e.clientX/innerWidth-.5;q()}},{passive:true});
+  addEventListener("scroll",function(){if(scrollY<innerHeight*1.2){sy=scrollY;q()}},{passive:true});
+}
+
+/* ---------- services ---------- */
+$("#priceCards").innerHTML = SERVICES.map(function(c){
+  return '<article class="pcard"><h3>'+c.cat+'</h3><ul>'+c.items.map(function(s){
+    return '<li><span>'+s.name+' <small>'+s.min+' min</small></span><b>'+s.price+' €</b></li>'}).join("")+'</ul></article>'}).join("");
+
+/* ---------- stylists ---------- */
+function portrait(s,k){
+  return '<svg viewBox="0 0 300 400" role="img" aria-label="Kuvituskuva: '+s.name+'"><rect width="300" height="400" fill="#1d1a14"/>'+
+  '<g stroke="'+s.hue+'" fill="none" opacity=".35">'+[0,1,2,3,4,5,6,7,8].map(function(j){var a=Math.PI+j/8*Math.PI;return '<line x1="150" y1="400" x2="'+(150+Math.cos(a)*420)+'" y2="'+(400+Math.sin(a)*420)+'"/>'}).join("")+'</g>'+
+  '<circle cx="150" cy="400" r="120" fill="none" stroke="'+s.hue+'" opacity=".5"/>'+
+  (k===0?'<path d="M150 120c-48 0-70 40-66 90 3 38 4 70-14 110h160c-18-40-17-72-14-110 4-50-18-90-66-90z" fill="#0d0d0d"/>':
+   k===1?'<path d="M150 128c-40 0-58 26-56 58l6 50c8 26 26 40 50 40s42-14 50-40l6-50c2-32-16-58-56-58z" fill="#0d0d0d"/>':
+         '<path d="M150 118c-44 0-62 30-60 64 2 30 18 54 36 64-30 10-28 40-18 66h84c10-26 12-56-18-66 18-10 34-34 36-64 2-34-16-64-60-64z" fill="#0d0d0d"/>')+
+  '<path d="M80 400c6-60 36-92 70-92s64 32 70 92z" fill="#0d0d0d"/>'+
+  '<g fill="#F4EEE1">'+[0,1,2,3,4,5,6].map(function(j){return '<circle cx="'+(114+j*12)+'" cy="'+(334+Math.abs(3-j)*-3+9)+'" r="3.4"/>'}).join("")+'</g></svg>';
+}
+$("#stylists").innerHTML = STYLISTS.map(function(s,k){
+  return '<article class="stylist"><div class="arch"><div class="arch-in">'+portrait(s,k)+'</div></div><h3>'+s.name+'</h3><p>'+s.role+'</p><button class="linkgold" data-bookwith="'+s.id+'">Varaa minulle</button></article>'}).join("");
+
+/* ---------- booking ---------- */
+var B = {step:0, service:null, stylist:null, dateKey:null, time:null};
+var panel = $("#panel"), stepsEl = $("#steps").children;
+var DAYS = ["su","ma","ti","ke","to","pe","la"], MONTHS = ["tammi","helmi","maalis","huhti","touko","kesä","heinä","elo","syys","loka","marras","joulu"];
+var HOURS = {2:[10,19],3:[10,19],4:[10,19],5:[10,19],6:[10,16]};
+function svc(){return ALL.find(function(s){return s.id===B.service})}
+function sty(){return STYLISTS.find(function(s){return s.id===B.stylist})}
+function hash(str){var h=2166136261;for(var i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)/4294967295}
+function days(){var out=[],d=new Date();d.setHours(0,0,0,0);for(var i=0;i<21;i++){var x=new Date(d);x.setDate(d.getDate()+i);out.push(x)}return out}
+function keyOf(d){return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
+function slotsFor(d){
+  var h=HOURS[d.getDay()]; if(!h) return [];
+  var s=svc(), dur=s?s.min:45, out=[], now=Date.now();
+  for(var m=h[0]*60;m+dur<=h[1]*60;m+=30){
+    var t=new Date(d); t.setHours(0,m,0,0);
+    var taken = t.getTime() < now+60*60000 || hash(keyOf(d)+m+(B.stylist||"any")) < .38;
+    out.push({m:m,label:String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0"),taken:taken});
+  }
+  return out;
+}
+function fmtDate(d){return DAYS[d.getDay()]+" "+d.getDate()+". "+MONTHS[d.getMonth()]+"kuuta"}
+function selDate(){return days().find(function(d){return keyOf(d)===B.dateKey})}
+function summary(){
+  var p=[]; if(svc()) p.push(svc().name+" · "+svc().min+" min · "+svc().price+" €");
+  if(B.stylist) p.push(B.stylist==="any"?"Kuka tahansa":sty().name);
+  if(B.dateKey&&B.time) p.push(fmtDate(selDate())+" klo "+B.time);
+  return p.join(" · ");
+}
+function render(){
+  for(var i=0;i<stepsEl.length;i++){stepsEl[i].removeAttribute("aria-current");stepsEl[i].classList.toggle("done",i<B.step);if(i===B.step)stepsEl[i].setAttribute("aria-current","step")}
+  var html="";
+  if(B.step===0){
+    html='<h3>Valitse palvelu</h3><div class="opts">'+ALL.map(function(s){return '<button class="opt" data-svc="'+s.id+'" aria-pressed="'+(B.service===s.id)+'"><span>'+s.name+'<small>'+s.min+' min</small></span><b>'+s.price+' €</b></button>'}).join("")+'</div>';
+    html+=nav(false,!!B.service);
+  } else if(B.step===1){
+    html='<h3>Valitse kampaaja</h3><div class="opts">'+[{id:"any",name:"Kuka tahansa",role:"Ensimmäinen vapaa aika"}].concat(STYLISTS).map(function(s){return '<button class="opt" data-sty="'+s.id+'" aria-pressed="'+(B.stylist===s.id)+'"><span>'+s.name+'<small>'+s.role+'</small></span></button>'}).join("")+'</div>';
+    html+=nav(true,!!B.stylist);
+  } else if(B.step===2){
+    var ds=days();
+    if(!B.dateKey){var f=ds.find(function(d){return slotsFor(d).some(function(s){return !s.taken})});B.dateKey=f?keyOf(f):null}
+    html='<h3>Valitse aika</h3><div class="dates" role="group" aria-label="Päivät">'+ds.map(function(d){var open=slotsFor(d).some(function(s){return !s.taken});return '<button class="date" data-date="'+keyOf(d)+'" aria-pressed="'+(B.dateKey===keyOf(d))+'"'+(open?"":" disabled")+' aria-label="'+fmtDate(d)+'">'+DAYS[d.getDay()]+'<b>'+d.getDate()+'</b>'+MONTHS[d.getMonth()].slice(0,3)+'</button>'}).join("")+'</div>';
+    var sd=selDate(), sl=sd?slotsFor(sd):[];
+    html+='<div class="slots" role="group" aria-label="Vapaat ajat">'+(sl.length?sl.map(function(s){return '<button class="slot" data-time="'+s.label+'"'+(s.taken?' disabled aria-label="'+s.label+' varattu"':'')+'>'+s.label+'</button>'}).join(""):'<div class="empty">Ei vapaita aikoja tänä päivänä.</div>')+'</div>';
+    html+=nav(true,false);
+  } else if(B.step===3){
+    html='<h3>Yhteystiedot</h3><form class="form" id="bform" novalidate><div class="recap">'+summary()+'</div>'+
+      '<div><label for="bn">Nimi</label><input id="bn" autocomplete="name" required><div class="err" id="bne" hidden>Kirjoita nimesi.</div></div>'+
+      '<div><label for="be">Sähköposti</label><input id="be" type="email" autocomplete="email" inputmode="email" required><div class="err" id="bee" hidden>Tarkista sähköpostiosoite.</div></div>'+
+      '<div><label for="bp">Puhelin (vapaaehtoinen)</label><input id="bp" type="tel" autocomplete="tel"></div>'+
+      '<div><label for="bx">Lisätietoja (vapaaehtoinen)</label><textarea id="bx" rows="2"></textarea></div>'+
+      '<div class="bar"><button type="button" class="btn ghost" data-back>Takaisin</button><button class="btn dark" type="submit">Vahvista varaus</button></div></form>';
+  } else {
+    var d=selDate();
+    html='<div class="ticket"><div class="stub" aria-hidden="true">'+MONTHS[d.getMonth()].slice(0,4)+'<b>'+d.getDate()+'</b>'+DAYS[d.getDay()]+'</div><div class="tbody">'+
+      '<svg class="stamp" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="sp" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs><g fill="none" stroke="currentColor"><circle cx="60" cy="60" r="56" stroke-width="3"/><circle cx="60" cy="60" r="34" stroke-width="2"/><path d="M44 61l11 11 22-24" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g><text font-size="11" font-weight="700" letter-spacing="2" fill="currentColor" font-family="Josefin Sans"><textPath href="#sp" textLength="276">VARATTU · KAMPAAMO HELMI · </textPath></text></svg>'+
+      '<h3>Varattu!</h3><p><b>'+fmtDate(d)+' klo '+B.time+'</b></p><p>'+svc().name+', '+(B.stylist==="any"?"ensimmäinen vapaa kampaaja":sty().name)+'.</p><p>Esittelysivustolla vahvistusta ei lähetetä.</p>'+
+      '<div class="bar"><button class="btn dark" data-ics>Lisää kalenteriin</button><button class="btn ghost" data-again>Uusi varaus</button></div></div></div>';
+  }
+  panel.innerHTML=html;
+}
+function nav(back,next){return '<div class="bar">'+(back?'<button class="btn ghost" data-back>Takaisin</button>':'<span></span>')+'<span class="summary">'+summary()+'</span>'+(B.step<2?'<button class="btn dark" data-next'+(next?'':' disabled style="opacity:.4;cursor:default"')+'>Jatka</button>':'<span></span>')+'</div>'}
+function go(n){B.step=n;render();var t=$("#varaa").getBoundingClientRect().top;if(t<-40||t>innerHeight*.4)$("#varaa").scrollIntoView({behavior:reduce?"auto":"smooth"});var h=panel.querySelector("h3");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}}
+panel.addEventListener("click",function(e){
+  var b=e.target.closest("button"); if(!b) return;
+  if(b.dataset.svc){B.service=b.dataset.svc;B.dateKey=null;B.time=null;go(B.stylist?1:1)}
+  else if(b.dataset.sty){B.stylist=b.dataset.sty;B.dateKey=null;B.time=null;go(2)}
+  else if(b.dataset.date){B.dateKey=b.dataset.date;B.time=null;render();var x=panel.querySelector('[data-date="'+B.dateKey+'"]');x&&x.focus()}
+  else if(b.dataset.time){B.time=b.dataset.time;go(3)}
+  else if(b.hasAttribute("data-back")){go(Math.max(0,B.step-1))}
+  else if(b.hasAttribute("data-next")&&!b.style.opacity){go(B.step+1)}
+  else if(b.hasAttribute("data-again")){B={step:0,service:null,stylist:null,dateKey:null,time:null};go(0)}
+  else if(b.hasAttribute("data-ics")){ics()}
+});
+panel.addEventListener("submit",function(e){
+  e.preventDefault();
+  var n=$("#bn").value.trim(), m=$("#be").value.trim(), ok=true;
+  $("#bne").hidden=!!n; if(!n) ok=false;
+  var em=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m); $("#bee").hidden=em; if(!em) ok=false;
+  if(!ok){(n?$("#be"):$("#bn")).focus();return}
+  go(4);
+});
+function ics(){
+  var d=selDate(), p=B.time.split(":"), s=new Date(d); s.setHours(+p[0],+p[1],0,0);
+  var e=new Date(s.getTime()+svc().min*60000), z=function(x){return x.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"")};
+  var txt=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Kampaamo Helmi//FI","BEGIN:VEVENT","UID:"+s.getTime()+"@kampaamo-helmi","DTSTAMP:"+z(new Date()),"DTSTART:"+z(s),"DTEND:"+z(e),"SUMMARY:"+svc().name+" – Kampaamo Helmi","LOCATION:Esimerkkikatu 1\\, Helsinki","END:VEVENT","END:VCALENDAR"].join("\r\n");
+  var u=URL.createObjectURL(new Blob([txt],{type:"text/calendar"})), a=document.createElement("a");
+  a.href=u;a.download="kampaamo-helmi.ics";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},1000);
+}
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-bookwith]"); if(!b) return;
+  B.stylist=b.dataset.bookwith; B.dateKey=null; B.time=null;
+  go(B.service?2:0);
+});
+render();
+
+/* ---------- shop ---------- */
+function art(shape){
+  var g='#C9A227',k='#141414',c='#F4EEE1';
+  var lbl=function(y){return '<rect x="122" y="'+y+'" width="56" height="56" fill="'+c+'"/><path d="M130 '+(y+44)+'a20 20 0 0140 0M150 '+(y+44)+'V'+(y+16)+'M150 '+(y+44)+'l-14-14M150 '+(y+44)+'l14-14" stroke="'+g+'" fill="none" stroke-width="1.5"/>'};
+  var s={
+    bottle:'<rect x="110" y="110" width="80" height="150" rx="6" fill="'+k+'"/><rect x="132" y="84" width="36" height="28" fill="'+g+'"/>'+lbl(160),
+    bottle2:'<path d="M112 120h76l-6 140h-64z" fill="'+k+'"/><rect x="128" y="92" width="44" height="30" rx="4" fill="'+g+'"/>'+lbl(166),
+    dropper:'<rect x="118" y="150" width="64" height="110" rx="10" fill="#7a5b14"/><rect x="134" y="118" width="32" height="34" fill="'+k+'"/><ellipse cx="150" cy="112" rx="13" ry="10" fill="'+k+'"/>'+lbl(176).replace(/width="56" height="56"/,'width="56" height="44"'),
+    jar:'<rect x="100" y="170" width="100" height="80" rx="6" fill="'+k+'"/><rect x="96" y="150" width="108" height="24" rx="4" fill="'+g+'"/><path d="M118 230a32 32 0 0164 0" stroke="'+g+'" fill="none" stroke-width="1.5"/>',
+    comb:'<path d="M90 170h120v24H90z" fill="'+k+'"/>'+Array.from({length:14},function(_,i){return '<rect x="'+(94+i*8.4)+'" y="194" width="4" height="'+(i<4?28:44)+'" fill="'+k+'"/>'}).join("")+'<path d="M90 170h120" stroke="'+g+'" stroke-width="3"/>',
+    card:'<rect x="80" y="140" width="140" height="90" fill="'+k+'"/><rect x="86" y="146" width="128" height="78" fill="none" stroke="'+g+'"/><text x="150" y="196" text-anchor="middle" font-family="Poiret One" font-size="22" fill="'+c+'">HELMI</text><circle cx="150" cy="168" r="4" fill="'+c+'"/>'
+  };
+  return '<svg class="rays" viewBox="0 0 300 300" aria-hidden="true"><g stroke="'+g+'" opacity=".5">'+Array.from({length:13},function(_,i){var a=Math.PI+i/12*Math.PI;return '<line x1="150" y1="270" x2="'+(150+Math.cos(a)*300)+'" y2="'+(270+Math.sin(a)*300)+'"/>'}).join("")+'</g></svg>'+
+    '<svg class="item" viewBox="0 0 300 300" aria-hidden="true"><ellipse cx="150" cy="268" rx="70" ry="8" fill="rgba(0,0,0,.15)"/>'+s[shape]+'</svg>';
+}
+var pEl=$("#products");
+pEl.innerHTML=PRODUCTS.map(function(p,i){return '<article class="product" style="--i:'+i+'"><div class="pimg">'+art(p.shape)+'</div><div class="pinfo"><div class="pdetail">'+p.desc+'</div><h3>'+p.name+'</h3><div class="price">'+eur(p.price)+'</div><button class="btn" data-add="'+p.id+'">Lisää koriin</button></div></article>'}).join("");
+if("IntersectionObserver" in window && !reduce){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.15});
+  pEl.querySelectorAll(".product").forEach(function(el){io.observe(el)});
+} else pEl.querySelectorAll(".product").forEach(function(el){el.classList.add("in")});
+
+var cart={};
+try{cart=JSON.parse(localStorage.getItem("helmi-cart")||"{}")||{}}catch(e){cart={}}
+var drawer=$("#drawer"), toastT;
+function save(){try{localStorage.setItem("helmi-cart",JSON.stringify(cart))}catch(e){}}
+function drawCart(){
+  var ids=Object.keys(cart).filter(function(id){return cart[id]>0}), n=0, t=0;
+  $("#lines").innerHTML=ids.length?ids.map(function(id){var p=PRODUCTS.find(function(x){return x.id===id});n+=cart[id];t+=cart[id]*p.price;
+    return '<li><div><b>'+p.name+'</b><br><small>'+eur(p.price)+'</small></div><div class="qty"><button data-dec="'+id+'" aria-label="Vähennä">−</button><span>'+cart[id]+'</span><button data-inc="'+id+'" aria-label="Lisää">+</button></div></li>'}).join(""):'<li style="border:0;color:var(--muted)">Ostoskori on tyhjä.</li>';
+  $("#total").textContent=eur(t); $("#cartCount").textContent=n; $("#cartOpen").setAttribute("aria-label","Ostoskori, "+n+" tuotetta");
+}
+function toast(msg){var t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove("show")},2200)}
+function openCart(o){drawer.classList.toggle("open",o);drawer.setAttribute("aria-hidden",!o);if(o)$(".x",drawer).focus();else $("#cartOpen").focus()}
+pEl.addEventListener("click",function(e){var b=e.target.closest("[data-add]");if(!b)return;cart[b.dataset.add]=(cart[b.dataset.add]||0)+1;save();drawCart();toast(PRODUCTS.find(function(p){return p.id===b.dataset.add}).name+" lisätty koriin")});
+$("#cartOpen").addEventListener("click",function(){openCart(true)});
+drawer.addEventListener("click",function(e){
+  if(e.target.hasAttribute("data-close")) return openCart(false);
+  var b=e.target.closest("button"); if(!b) return;
+  if(b.dataset.inc){cart[b.dataset.inc]++;}
+  if(b.dataset.dec){cart[b.dataset.dec]--; if(cart[b.dataset.dec]<=0) delete cart[b.dataset.dec];}
+  save();drawCart();
+});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&drawer.classList.contains("open"))openCart(false)});
+$("#checkout").addEventListener("click",function(){$("#checkoutNote").textContent=Object.keys(cart).length?"Kiitos! Esittelysivustolla tilausta ei oikeasti tehdä.":"Lisää ensin tuotteita koriin."});
+drawCart();
+
+/* ---------- gallery ---------- */
+var tones=[["#2b2418","#C9A227"],["#1f4d3f","#E3C766"],["#141414","#b8ad95"],["#3a2a16","#E3C766"],["#1d1a14","#C9A227"],["#1f4d3f","#F4EEE1"]];
+$("#gallery").innerHTML=tones.map(function(t,i){
+  var lines=Array.from({length:9},function(_,j){var a=Math.PI+j/8*Math.PI;return '<line x1="200" y1="300" x2="'+(200+Math.cos(a)*400)+'" y2="'+(300+Math.sin(a)*400)+'"/>'}).join("");
+  return '<figure class="tile" style="margin:0"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Kuvituskuva"><rect width="400" height="300" fill="'+t[0]+'"/><g stroke="'+t[1]+'" opacity=".35">'+lines+'</g><circle cx="200" cy="300" r="'+(80+i*14)+'" fill="none" stroke="'+t[1]+'" opacity=".6"/><path d="M200 '+(110+i*6)+'c-40 0-58 34-54 76 3 30 2 60-12 114h132c-14-54-15-84-12-114 4-42-14-76-54-76z" fill="#0d0d0d" opacity=".85"/></svg><span>'+(i%2?"Jälkeen":"Ennen")+'</span></figure>'}).join("");
+})();
+</script>
+</body>
+</html>
