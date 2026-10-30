@@ -52,7 +52,7 @@ function renderQuote(animate){
     const k=Object.keys(EXTRA_FEAT).find(x=>EXTRA_FEAT[x]===fk);
     if(k&&q.extras[k]) return; // already listed above as something they asked for
     keys[fk]=1;
-    lines+='<li class="inc'+isNew(fk)+'"><span aria-hidden="true">+</span><span>'+d[fk]+'</span></li>';
+    lines+='<li class="inc'+isNew(fk)+'"><span class="plus" aria-hidden="true"></span><span>'+d[fk]+'</span></li>';
   });
   const total=price,vat=Math.round(total*VAT);
   const care=q.care?'<div class="r-row r-care'+isNew('care')+'"><span>'+m.care+'</span><span class="dots"></span><span>'+m.nfmt(CARE)+m.mo+'</span></div>':'';
