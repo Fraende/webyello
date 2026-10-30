@@ -21,6 +21,8 @@
   --destructive: oklch(0.55 0.20 27);
   --link: #0078bf;
   --radius: 0;
+  --plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 3v10M3 8h10' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='square'/%3E%3C/svg%3E");
+  --menu: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 4h12M2 8h12M2 12h12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E");
   --check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2.5 8.5l3.5 3.5 7.5-8' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='square'/%3E%3C/svg%3E");
   color-scheme: light;
 }
@@ -75,7 +77,7 @@ section[id]{scroll-margin-top:96px}
 
 /* ---- Buttons: square, no shadow ---- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:var(--radius);font-family:'Karla',system-ui,sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:2px solid var(--foreground);background:transparent;color:var(--foreground);transition:background-color .15s,color .15s,box-shadow .15s}
-.btn-yellow{background:var(--primary);color:var(--primary-foreground);border-color:var(--primary)}
+.btn-yellow{background:var(--primary);color:var(--primary-foreground);border-color:var(--primary-foreground)}
 .btn-yellow:hover{box-shadow:inset 0 0 0 2px var(--primary-foreground)}
 .btn-line:hover{background:var(--foreground);color:var(--background)}
 .btn:disabled{opacity:.65;cursor:progress}
@@ -131,7 +133,6 @@ nav{border-bottom:1px solid var(--border);background:var(--background);position:
 .hero-bg img{display:block;width:100%;height:100%;object-fit:cover}
 .hero-scene .wrap{position:relative;width:100%}
 .hero-scene .hero-copy{max-width:min(560px,44vw)}
-.hero-scene .btn-yellow{border-color:var(--primary-foreground)}
 .hero-scene .btn-line{background:var(--sky)}
 .hero-scene .btn-line:hover{background:var(--foreground)}
 .hero-scene .perf{margin-top:32px;max-width:440px;border-width:2px}
@@ -142,6 +143,8 @@ nav{border-bottom:1px solid var(--border);background:var(--background);position:
 .hero p{font-size:1.12rem;max-width:32rem;margin-bottom:28px;animation:heroFadeUp .42s cubic-bezier(.16,1,.3,1) .16s both}
 .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:18px;animation:heroFadeUp .42s cubic-bezier(.16,1,.3,1) .23s both}
 .hero p.hero-note{font-size:.92rem;margin-bottom:0;color:var(--muted-foreground)}
+.hero-note a{display:inline-flex;align-items:center;min-height:44px;color:var(--foreground);font-weight:700;text-decoration:underline;text-decoration-color:var(--link);text-decoration-thickness:2px;text-underline-offset:4px}
+.hero-note a:hover{text-decoration-thickness:3px}
 
 /* The gold panel: this page measures itself */
 /* The gold panel: a comic-panel illustration over a readout of this page's own speed */
@@ -244,7 +247,9 @@ footer{border-top:1px solid var(--border);padding:32px 0}
 .foot-brand{display:flex;flex-direction:column;align-items:center;gap:4px}
 .foot-by{font-weight:700;font-size:.85rem;line-height:1;color:var(--muted-foreground)}
 html[lang="fi"] .l-en,html[lang="en"] .l-fi{display:none}
-.legal{max-width:46rem}
+.legal>*{max-width:46rem}
+.legal a{color:var(--link);text-decoration:underline;text-underline-offset:3px}
+.legal a:hover{text-decoration-thickness:2px}
 .legal h2{font-size:1.25rem;margin:32px 0 8px}
 .legal p,.legal li{line-height:1.6}
 .legal ul{padding-left:1.2rem;margin:8px 0}
@@ -259,11 +264,13 @@ html[lang="fi"] .l-en,html[lang="en"] .l-fi{display:none}
 footer small{color:var(--muted-foreground);font-size:.88rem}
 
 /* ---- Checks: one drawn mark, never a glyph ---- */
-.chip input:checked+span::before,.size input:checked+.size-in b::before,.tick,.plan li::before{content:"";display:inline-block;flex:none;width:1em;height:1em;background:currentColor;-webkit-mask:var(--check) center/contain no-repeat;mask:var(--check) center/contain no-repeat}
+.chip input:checked+span::before,.size input:checked+.size-in b::before,.tick,.plan li::before,.plus,.ico-menu{content:"";display:inline-block;flex:none;width:1em;height:1em;background:currentColor;-webkit-mask:var(--check) center/contain no-repeat;mask:var(--check) center/contain no-repeat}
 .chip input:checked+span::before{margin-right:8px}
 .size input:checked+.size-in b::before{margin-right:8px;vertical-align:-.12em}
 .r-lines .tick{width:.95em;height:.95em;transform:translateY(.12em)}
 .success-badge .tick{width:1em;height:1em}
+.plus{-webkit-mask-image:var(--plus);mask-image:var(--plus);width:.8em;height:.8em;transform:translateY(.05em)}
+.ico-menu{-webkit-mask-image:var(--menu);mask-image:var(--menu);width:20px;height:20px}
 
 /* ---- Sketch (home) ---- */
 .sketch{background:var(--secondary);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -443,19 +450,4 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 /* ---- Language: hide until translated (see the inline script in each page) ---- */
 html.i18n-pending body{opacity:0}
 
-/* ---- Animated background (shader-bg.js): one fixed WebGL canvas behind every page ----
-   Sections, sub-page headers and the footer become veils of their own colour so the shader shows
-   through. The shader is mostly dark (luminance .02–.75), so the veil is set per theme to keep text
-   contrast: light 92% (muted text ≥4.7:1), dark 84% (muted ≥5.2:1, link ≥4.7:1). In light mode the
-   blue link would drop under 4.5:1 on a veil, so links that sit directly on one use ink text with a
-   blue underline. Cards, the nav, the dock and the home illustration stay solid. */
 html{background:var(--background)}
-.bg-shader{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;display:block;pointer-events:none}
-html.has-bg-shader{--veil:92%;--veil-link:var(--foreground)}
-html.has-bg-shader.dark{--veil:84%;--veil-link:var(--link)}
-@media (prefers-color-scheme:dark){html.has-bg-shader:not(.light){--veil:84%;--veil-link:var(--link)}}
-html.has-bg-shader body{background:transparent}
-html.has-bg-shader section,html.has-bg-shader .page-head,html.has-bg-shader footer{background:color-mix(in srgb,var(--background) var(--veil),transparent)}
-html.has-bg-shader .sketch{background:color-mix(in srgb,var(--secondary) var(--veil),transparent)}
-html.has-bg-shader .quote{background:color-mix(in srgb,var(--muted) var(--veil),transparent)}
-html.has-bg-shader .ph-jump a,html.has-bg-shader .next-link a,html.has-bg-shader .contact-list a{color:var(--veil-link);text-decoration-color:var(--link);text-decoration-thickness:2px}

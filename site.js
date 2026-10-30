@@ -19,7 +19,7 @@ const I18N={en:{},fi:{
   hero_h1:'Verkkosivut, jotka saavat ihmiset <mark>hymyilemään</mark> — ja klikkaamaan.',
   hero_lead:"WebYello suunnittelee ja rakentaa kauniita, intuitiivisia verkkosivuja, jotka muuttavat uteliaat kävijät tyytyväisiksi asiakkaiksi. Ison toimiston laatu, pienen studion sydän.",
   hero_cta1:"Luonnostele sivustosi",hero_cta2:"Katso hinnat",
-  hero_note:"Maksuton 30 minuutin kartoituspuhelu · Ei ammattislangia, koskaan",
+  hero_note_call:"Varaa maksuton 30 minuutin kartoituspuhelu",hero_note_jargon:"Ei ammattislangia, koskaan",
   sv_h2:"Kaikki mitä verkkosivusi tarvitsee, saman aurinkoisen katon alla.",
   sv_p:"Ensimmäisestä luonnoksesta julkaisupäivään (ja pitkälle sen jälkeen) hoidamme koko matkan, jotta sinä voit keskittyä liiketoimintaasi.",
   sv1_t:"Verkkosivujen suunnittelu",sv1_p:"Räätälöidyt ulkoasut, jotka vangitsevat persoonallisuutesi ja ohjaavat kävijät juuri sinne, minne haluat — ei valmispohjia.",
@@ -221,11 +221,21 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
   revealEls.forEach(function(el){ io.observe(el); });
 }
 
-// The phone dock steps aside while the contact form is on screen
+// The phone dock steps aside while the contact form is on screen, and on the home page while the
+// hero copy is on screen, so it never covers the hero's own buttons or the speed readout
 (function(){
   const dock=document.getElementById('dock'),contact=document.getElementById('contact');
   if(!dock||!contact||!('IntersectionObserver' in window)) return;
-  new IntersectionObserver(function(es){ dock.classList.toggle('hide',es[0].isIntersecting); }).observe(contact);
+  const heroCopy=document.querySelector('.hero-scene .hero-copy'),seen=new Set();
+  function watch(el,margin){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ e.isIntersecting?seen.add(e.target):seen.delete(e.target); });
+      dock.classList.toggle('hide',seen.size>0);
+    },{rootMargin:margin}).observe(el);
+  }
+  watch(contact,'0px');
+  // the top margin skips the strip under the sticky nav
+  if(heroCopy) watch(heroCopy,'-80px 0px 0px 0px');
 })();
 
 // The site proves its own speed: measure this very page in the visitor's browser (home page only)

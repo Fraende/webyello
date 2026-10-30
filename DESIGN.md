@@ -69,7 +69,7 @@ rounded:
 
 ## Components
 
-- **Buttons:** square, 48px tall, uppercase label. Primary = gold fill; ghost = 2px `foreground` outline that fills on hover.
+- **Buttons:** square, 48px tall, uppercase label. Primary = gold fill with a 2px `primary-foreground` edge (gold alone is only 1.4–1.6:1 against the light grounds); ghost = 2px `foreground` outline that fills on hover.
 - **Tickets (services / home links):** `card` with a 6px top rule cycling foreground → gold → blue.
 - **Process cards:** `card`, 44px gold square holding the step number in mono.
 - **Plans:** `card` with list rows divided by hairlines; the featured plan gets a 2px `foreground` border, a 10px gold top rule and a square "Most popular" tag above its corner.
@@ -85,7 +85,7 @@ rounded:
 - **Do** keep every corner square.
 - **Do** keep gold for fields and blue for links; don't introduce a third hue.
 - **Do** put text on gold in `primary-foreground` only.
-- **Do** draw marks (one masked SVG check) rather than using glyphs as icons.
-- **Don't** add shadows, blur, rotation or blend modes.
+- **Do** draw marks (masked SVGs: `--check`, `--plus`, `--menu`) rather than using glyphs as icons.
+- **Don't** add shadows, blur, rotation, blend modes or animated backgrounds. The page ground is always the `background` token, solid.
 - **Don't** put `link` on `muted` or `secondary`.
 - **Don't** use `border` as the only edge of an interactive control.
