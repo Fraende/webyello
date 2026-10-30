@@ -1,15 +1,4 @@
 // ---- Sketch prototype: instant homepage sketch ----
-Object.assign(I18N.fi,{
-  sk_h2:"Näe verkkosivusi jo ennen ensimmäistä puhelua.",
-  sk_p:"Kirjoita yrityksesi nimi, valitse alasi ja saat nopean luonnoksen etusivustasi. Se on tarkoituksella keskeneräinen — oikean suunnittelemme yhdessä kanssasi.",
-  sk_name:"Yrityksesi nimi",sk_name_ph:"Aamun Leipomo",
-  sk_type:"Mitä teet?",
-  sk_t_bakery:"Leipomo",sk_t_hair:"Kampaamo &amp; parturi",sk_t_trades:"Remontit &amp; korjaukset",sk_t_coach:"Valmentaja &amp; konsultti",sk_t_cafe:"Kahvila &amp; ravintola",sk_t_shop:"Pieni verkkokauppa",sk_t_other:"Jotain muuta",
-  sk_cta:"Paljonko se maksaisi?",
-  sk_note:"Mitään ei lähetetä minnekään — tämä pysyy selaimessasi.",
-  sk_stamp:"Vain luonnos"
-});
-I18N.en.sk_name_ph="Sunrise Bakery";
 
 const SK={
   bakery:{ink:'yellow',layout:'split',thumb:'',form:0,
