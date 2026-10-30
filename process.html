@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<script>/* Finnish is the default and the markup is English: hide the page until site.js has translated it, so nobody sees English flash first */(function(){try{var q=new URLSearchParams(location.search).get('lang'),s=localStorage.getItem('wy-lang'),l=(q==='en'||q==='fi')?q:s;if(l!=='en'){var d=document.documentElement;d.classList.add('i18n-pending');setTimeout(function(){d.classList.remove('i18n-pending')},2500)}}catch(e){}})()</script>
 <title>Process — WebYello</title>
-<meta name="description" content="How a WebYello project works: discover, design, build, launch and grow — four clear steps with no surprises.">
+<meta name="description" data-i18n-content="desc_process" content="How a WebYello project works: discover, design, build, launch and grow — four clear steps with no surprises.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -27,8 +26,8 @@
     </ul>
     <div class="nav-right">
       <div class="lang-toggle" role="group" aria-label="Language" data-i18n-aria="aria_lang">
-        <button id="btnEn" onclick="setLang('en')" aria-pressed="false">EN</button>
-        <button id="btnFi" onclick="setLang('fi')" aria-pressed="true">FI</button>
+        <a data-lang="en" hreflang="en" lang="en">EN</a>
+        <a data-lang="fi" hreflang="fi" lang="fi">FI</a>
       </div>
       <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" data-i18n-aria="aria_menu" aria-expanded="false" aria-controls="navLinks"><span class="ico-menu" aria-hidden="true"></span></button>
     </div>

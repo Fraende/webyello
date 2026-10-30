@@ -101,8 +101,9 @@ nav{border-bottom:1px solid var(--border);background:var(--background);position:
 .nav-links .btn{white-space:nowrap}
 .nav-right{display:flex;align-items:center;gap:12px}
 .lang-toggle{display:flex;border:2px solid var(--foreground);font-weight:700;font-size:.82rem}
-.lang-toggle button{border:none;background:transparent;padding:0 12px;min-height:40px;min-width:44px;cursor:pointer;font:inherit;color:var(--foreground)}
-.lang-toggle button.active{background:var(--foreground);color:var(--background)}
+.lang-toggle a{display:inline-flex;align-items:center;justify-content:center;padding:0 12px;min-height:40px;min-width:44px;color:var(--foreground)}
+.lang-toggle a:hover{text-decoration:underline;text-underline-offset:4px}
+.lang-toggle a[aria-current]{background:var(--foreground);color:var(--background);text-decoration:none}
 .menu-btn{display:none;background:none;border:2px solid var(--foreground);cursor:pointer;width:44px;height:44px;align-items:center;justify-content:center;color:var(--foreground);font-size:1.3rem}
 @media(max-width:900px){
   .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--background);border-bottom:1px solid var(--border);padding:16px 24px 24px;gap:8px;align-items:flex-start}
@@ -246,7 +247,6 @@ footer{border-top:1px solid var(--border);padding:32px 0}
 .foot .logo-badge{height:32px}
 .foot-brand{display:flex;flex-direction:column;align-items:center;gap:4px}
 .foot-by{font-weight:700;font-size:.85rem;line-height:1;color:var(--muted-foreground)}
-html[lang="fi"] .l-en,html[lang="en"] .l-fi{display:none}
 .legal>*{max-width:46rem}
 .legal a{color:var(--link);text-decoration:underline;text-underline-offset:3px}
 .legal a:hover{text-decoration-thickness:2px}
@@ -447,7 +447,5 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
   .dock,.dock.hide{transition:none}
 }
 
-/* ---- Language: hide until translated (see the inline script in each page) ---- */
-html.i18n-pending body{opacity:0}
 
 html{background:var(--background)}

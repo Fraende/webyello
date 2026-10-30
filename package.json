@@ -1,0 +1,12 @@
+{
+  "name": "webyello",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs && npx -y serve -l 4173 dist"
+  },
+  "devDependencies": {
+    "parse5": "^7.3.0"
+  }
+}
