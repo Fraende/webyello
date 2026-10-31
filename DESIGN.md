@@ -75,7 +75,7 @@ rounded:
 - **Plans:** `card` with list rows divided by hairlines; the featured plan gets a 2px `foreground` border, a 10px gold top rule and a square "Most popular" tag above its corner.
 - **Chips and size cards:** 2px `foreground` border; selected = gold fill plus a drawn check (selection never relies on colour alone).
 - **Receipt:** `card`, 2px border, 10px gold top rule, dashed rules between package and total, total stamped in gold.
-- **Sketch mock:** browser frame in `foreground`; inside, only gold and foreground squares.
+- **Demo builder mock:** browser frame (tab with the visitor's business name, address bar) in WebYello tokens. Inside, each of the five example sites (burger joint, café, hair salon, plumber, small online shop) carries its own client palette, set per type on `.mock[data-t]` as `--s-*` variables, and stays light in dark mode like a real client site. The examples keep the WebYello rules: square corners, no shadows, inline SVG illustrations only, and they lay themselves out with container queries on their own width.
 - **Sub-page header:** h1 + lead + two static squares (gold, foreground), hidden on phones.
 - **Inputs:** 2px `muted-foreground` border, `foreground` on focus, 3px `ring` outline.
 - **Nav:** sticky, `background`, hairline bottom; current page gets a 3px `foreground` underline.

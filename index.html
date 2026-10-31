@@ -69,24 +69,22 @@
   <div class="wrap">
     <div class="sec-head">
       <h2 data-i18n="sk_h2">See your website before we've even talked.</h2>
-      <p data-i18n="sk_p">Type your business name, pick what you do, and get a quick sketch of your homepage. It's rough on purpose — the real one is designed together with you.</p>
+      <p data-i18n="sk_p">Type your business name and pick a site type. You'll get an example site you can click through like a real one — booking, ordering and checkout included. The real one is designed together with you.</p>
     </div>
     <div class="sketch-grid">
       <div class="sketch-controls">
         <div class="sk-name">
           <label for="skName" data-i18n="sk_name">Your business name</label>
-          <input id="skName" type="text" maxlength="40" autocomplete="organization" placeholder="Aamun Leipomo" data-i18n-ph="sk_name_ph">
+          <input id="skName" type="text" maxlength="40" autocomplete="organization" placeholder="Savu Burger">
         </div>
         <fieldset class="sk-type">
-          <legend data-i18n="sk_type">What do you do?</legend>
+          <legend data-i18n="sk_type">What kind of site?</legend>
           <div class="chips" id="skChips">
-            <label class="chip"><input type="radio" name="skType" value="bakery" checked><span data-i18n="sk_t_bakery">Bakery</span></label>
-            <label class="chip"><input type="radio" name="skType" value="hair"><span data-i18n="sk_t_hair">Hair &amp; barber</span></label>
-            <label class="chip"><input type="radio" name="skType" value="trades"><span data-i18n="sk_t_trades">Trades &amp; repairs</span></label>
-            <label class="chip"><input type="radio" name="skType" value="coach"><span data-i18n="sk_t_coach">Coach &amp; consultant</span></label>
-            <label class="chip"><input type="radio" name="skType" value="cafe"><span data-i18n="sk_t_cafe">Café &amp; restaurant</span></label>
-            <label class="chip"><input type="radio" name="skType" value="shop"><span data-i18n="sk_t_shop">Small shop</span></label>
-            <label class="chip"><input type="radio" name="skType" value="other"><span data-i18n="sk_t_other">Something else</span></label>
+            <label class="chip"><input type="radio" name="skType" value="burger" checked><span data-i18n="sk_t_burger">Burger joint</span></label>
+            <label class="chip"><input type="radio" name="skType" value="cafe"><span data-i18n="sk_t_cafe">Café</span></label>
+            <label class="chip"><input type="radio" name="skType" value="hair"><span data-i18n="sk_t_hair">Hair salon</span></label>
+            <label class="chip"><input type="radio" name="skType" value="plumber"><span data-i18n="sk_t_plumber">Plumber</span></label>
+            <label class="chip"><input type="radio" name="skType" value="shop"><span data-i18n="sk_t_shop">Small online shop</span></label>
           </div>
         </fieldset>
       </div>
@@ -95,22 +93,18 @@
         <small data-i18n="sk_note">Nothing is sent anywhere — this stays in your browser.</small>
       </div>
       <div class="mock-wrap">
-        <span class="mock-stamp" aria-hidden="true" data-i18n="sk_stamp">Just a sketch</span>
-        <div class="mock" role="img" id="skMock" aria-label="">
-          <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><span class="mock-url" id="skUrl"></span></div>
-          <div class="m-page" id="skPage" aria-hidden="true">
-            <div class="m-nav"><span class="m-brand" id="skBrand"></span><span class="m-link"></span><span class="m-link"></span><span class="m-link"></span><span class="m-navbtn"></span></div>
-            <div class="m-hero">
-              <div><div class="m-h" id="skH"></div><p class="m-sub" id="skSub"></p><span class="m-cta" id="skBtn"></span></div>
-              <div class="m-art"><b></b><b></b></div>
-            </div>
-            <div class="m-cards">
-              <div class="m-card"><div class="m-thumb"></div><span id="skC1"></span></div>
-              <div class="m-card"><div class="m-thumb"></div><span id="skC2"></span></div>
-              <div class="m-card"><div class="m-thumb"></div><span id="skC3"></span></div>
-            </div>
+        <span class="mock-stamp" aria-hidden="true" data-i18n="sk_stamp">Demo</span>
+        <div class="mock" id="skMock" data-t="burger">
+          <div class="mock-bar" aria-hidden="true">
+            <div class="mock-tabs"><i></i><i></i><i></i><span class="mock-tab" id="skTab"></span></div>
+            <div class="mock-addr"><span class="mock-url" id="skUrl"></span></div>
+          </div>
+          <div class="m-view" id="skView">
+            <div class="m-scroll" id="skScroll" role="region" tabindex="0" aria-label="Example site"><div class="m-site" id="skSite"></div></div>
+            <div class="m-layer" id="skLayer"></div>
           </div>
         </div>
+        <p class="mock-note" data-i18n="sk_demo">An invented example business. Bookings, orders and payments are only mockups.</p>
       </div>
     </div>
   </div>

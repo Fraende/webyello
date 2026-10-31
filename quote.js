@@ -97,8 +97,8 @@ document.querySelector('input[name=qmCare]').addEventListener('change',function(
 
 // What the visitor typed into the sketch on the home page (this tab only)
 const TRADE={
-  bakery:{en:'Bakery',fi:'Leipomo'},hair:{en:'Hair & barber',fi:'Kampaamo & parturi'},trades:{en:'Trades & repairs',fi:'Remontit & korjaukset'},
-  coach:{en:'Coach & consultant',fi:'Valmentaja & konsultti'},cafe:{en:'Café & restaurant',fi:'Kahvila & ravintola'},shop:{en:'Small shop',fi:'Pieni verkkokauppa'},other:{en:'Something else',fi:'Jotain muuta'}
+  burger:{en:'Burger joint',fi:'Burgeripaikka'},cafe:{en:'Café',fi:'Kahvila'},hair:{en:'Hair salon',fi:'Kampaamo'},
+  plumber:{en:'Plumber',fi:'Putkimies'},shop:{en:'Small online shop',fi:'Pieni verkkokauppa'}
 };
 function stored(){ try{ return JSON.parse(sessionStorage.getItem('wy-sketch')||'{}')||{}; }catch(e){ return {}; } }
 
