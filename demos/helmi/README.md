@@ -17,3 +17,4 @@ Huomioitavaa
 - Kuvat ovat koodilla piirrettyjä kuvituksia, eivät valokuvia. Ei keksittyjä arvosteluja, asiakasnimiä tai lukuja.
 - prefers-reduced-motion pysäyttää animaatiot.
 - Tummissa osioissa (hero, kampaajat, kauppa, yhteystiedot, footer) on taustalla kullanvärinen silkki-shader (WebGL, yksi kiinteä canvas). Tummat osiot ovat läpikuultavia verhoja sen päällä, vaaleat osiot peittävät sen. Shader pysähtyy, kun yksikään tumma osio ei näy tai välilehti on piilossa, ja näyttää pysäytyskuvan, jos käyttäjä on pyytänyt vähemmän liikettä. Ilman WebGL:ää tausta on tasainen tumma.
+- Kampaajat-osio on 3D-karuselli (coverflow, mallina 21st.dev:n "Coverflow Carousel" / educalvolpz, toteutettu ilman Reactia): vaihtuu itsestään 5 s välein, pysähtyy hiiren ollessa päällä tai fokuksessa, toimii nuolinäppäimillä, pyyhkäisemällä, sivukorttia klikkaamalla ja helmipisteistä. Vähemmän liikettä -asetuksella ei 3D-efektiä eikä automaattista vaihtoa.
