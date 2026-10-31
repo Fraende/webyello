@@ -101,11 +101,34 @@ main>section:not(.dark):not(.hero){background:var(--cream)}
 .note{text-align:center;color:var(--muted);font-size:14px;margin-top:22px}
 
 /* stylists */
-.stylists{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:34px}
+/* stylist coverflow carousel (after 21st.dev "Coverflow Carousel" by educalvolpz, rebuilt without React) */
+.cf{--cw:min(270px,62vw);position:relative;outline:none}
+.cf-stage{position:relative;height:calc(var(--cw) * 4 / 3 + 150px);perspective:1200px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.cf-stage.dragging{cursor:grabbing}
+.cf:focus-visible .cf-stage{outline:1px dashed var(--gold);outline-offset:10px}
+.cf-track{position:absolute;inset:0;pointer-events:none;transform-style:preserve-3d;transition:transform .45s var(--ease)}
+.cf .stylist{pointer-events:auto;position:absolute;left:50%;top:0;width:var(--cw);margin-left:calc(var(--cw) / -2);transform-style:preserve-3d;transition:transform .75s var(--ease),opacity .55s ease,filter .55s ease;will-change:transform}
+.cf .stylist:not(.on){filter:brightness(.5) saturate(.7);cursor:pointer}
+.cf .stylist:not(.on) .linkgold{visibility:hidden}
+.cf .stylist h3,.cf .stylist p{transition:opacity .4s ease}
+#kampaajat{overflow:hidden}
+@media (max-width:640px){.cf .stylist:not(.on) h3,.cf .stylist:not(.on) p{opacity:0}}
+.cf .stylist.on .arch{box-shadow:0 30px 60px -24px rgba(0,0,0,.85),0 0 46px -12px rgba(227,199,102,.5)}
+.cf .arch svg,.cf .arch img{pointer-events:none}
+.cf-nav{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:6px}
+.cf-arrow{display:grid;place-items:center;width:42px;height:42px;padding:0;border:1px solid var(--line);background:transparent;color:var(--gold2);transform:rotate(45deg);transition:background .2s,color .2s}
+.cf-arrow svg{width:18px;height:18px;transform:rotate(-45deg)}
+.cf-arrow:hover{background:var(--gold);color:var(--ink)}
+.cf-dots{display:flex;gap:2px}
+.cf-dots button{display:grid;place-items:center;width:26px;height:26px;padding:0;border:0;background:none}
+.cf-dots button::before{content:"";width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#e9e1cf 45%,#b8ad95);opacity:.4;transition:opacity .3s,transform .3s}
+.cf-dots button[aria-current="true"]::before{opacity:1;transform:scale(1.4);background:radial-gradient(circle at 35% 30%,#fff3c4,#E3C766 45%,#9a7a1c)}
 .stylist{text-align:center}
 .arch{position:relative;aspect-ratio:3/4;border-radius:999px 999px 0 0;overflow:hidden;border:1px solid var(--gold);padding:8px;background:var(--ink)}
 .arch-in{width:100%;height:100%;border-radius:999px 999px 0 0;overflow:hidden;position:relative}
 .arch svg{width:100%;height:100%}
+.arch img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+.arch-in::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,20,20,.45),transparent 38%),radial-gradient(120% 60% at 50% 0,transparent 60%,rgba(201,162,39,.12));pointer-events:none}
 .stylist h3{font-family:var(--display);font-weight:400;font-size:30px;letter-spacing:.08em;margin:18px 0 0}
 .stylist p{margin:4px 0 14px;color:rgba(244,238,225,.7);font-size:15px}
 .linkgold{background:none;border:0;border-bottom:1px solid var(--gold);color:var(--gold2);padding:2px 0;letter-spacing:.14em;text-transform:uppercase;font-size:13px;font-weight:600}
@@ -356,9 +379,17 @@ footer{background:var(--veil);color:rgba(244,238,225,.8);padding:0 0 30px;font-s
     <div class="sec-head">
       <svg class="fan" viewBox="0 0 70 36" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M5 35a30 30 0 0160 0M15 35a20 20 0 0140 0M35 35V3M35 35L12 12M35 35l23-23M35 35L22 6M35 35l13-29"/></svg>
       <h2 id="h-kampaajat">Kampaajamme</h2>
-      <p>Kolme käsiparia, kolme erikoisalaa. Valitse oma suosikkisi tai anna meidän valita.</p>
+      <p>Viisi käsiparia, viisi erikoisalaa. Selaa kampaajia ja varaa aika suosikillesi, tai anna meidän valita.</p>
     </div>
-    <div class="stylists" id="stylists"></div>
+    <div class="cf" id="cf" role="region" aria-roledescription="karuselli" aria-label="Kampaajat" tabindex="0">
+      <div class="cf-stage" id="cfStage"><div class="cf-track" id="stylists"></div></div>
+      <div class="cf-nav">
+        <button class="cf-arrow" id="cfPrev" aria-label="Edellinen kampaaja"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="cf-dots" id="cfDots" role="group" aria-label="Valitse kampaaja"></div>
+        <button class="cf-arrow" id="cfNext" aria-label="Seuraava kampaaja"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+      <p class="sr" id="cfLive" aria-live="polite"></p>
+    </div>
   </div>
 </section>
 
@@ -447,7 +478,7 @@ footer{background:var(--veil);color:rgba(244,238,225,.8);padding:0 0 30px;font-s
     </ul>
     <span>© 2026 Kampaamo Helmi</span>
   </div>
-  <p class="made">Kuvitteellinen kampaamo ja demosivu, ei oikea yritys. Varaukset ja tilaukset eivät lähde minnekään. Sivusto: <a href="/">WebYello</a> · <a href="/demos/">Kaikki demot</a></p>
+  <p class="made">Kuvitteellinen kampaamo ja demosivu, ei oikea yritys. Varaukset ja tilaukset eivät lähde minnekään. Kampaajien kuvat on luotu tekoälyllä. Sivusto: <a href="/">WebYello</a> · <a href="/demos/">Kaikki demot</a></p>
 </footer>
 
 <!-- cart drawer -->
@@ -490,7 +521,9 @@ var SERVICES = [
 var STYLISTS = [
   {id:"aino", name:"Aino", role:"Värit ja raidat", hue:"#C9A227"},
   {id:"elias", name:"Elias", role:"Lyhyet leikkaukset ja parturointi", hue:"#E3C766"},
-  {id:"sofia", name:"Sofia", role:"Juhlakampaukset ja pitkät hiukset", hue:"#b8ad95"}
+  {id:"sofia", name:"Sofia", role:"Juhlakampaukset ja pitkät hiukset", hue:"#b8ad95"},
+  {id:"ilona", name:"Ilona", role:"Kiharat ja luonnonkiharat hiukset", hue:"#d8b44a"},
+  {id:"veikko", name:"Veikko", role:"Parturityöt ja parran muotoilu", hue:"#e8dcc0"}
 ];
 var PRODUCTS = [
   {id:"shampoo", name:"Helmi-shampoo", price:24.9, desc:"Mieto, sulfaatiton shampoo päivittäiseen käyttöön. 250 ml.", shape:"bottle"},
@@ -573,18 +606,73 @@ $("#priceCards").innerHTML = SERVICES.map(function(c){
     return '<li><span>'+s.name+' <small>'+s.min+' min</small></span><b>'+s.price+' €</b></li>'}).join("")+'</ul></article>'}).join("");
 
 /* ---------- stylists ---------- */
-function portrait(s,k){
-  return '<svg viewBox="0 0 300 400" role="img" aria-label="Kuvituskuva: '+s.name+'"><rect width="300" height="400" fill="#1d1a14"/>'+
-  '<g stroke="'+s.hue+'" fill="none" opacity=".35">'+[0,1,2,3,4,5,6,7,8].map(function(j){var a=Math.PI+j/8*Math.PI;return '<line x1="150" y1="400" x2="'+(150+Math.cos(a)*420)+'" y2="'+(400+Math.sin(a)*420)+'"/>'}).join("")+'</g>'+
-  '<circle cx="150" cy="400" r="120" fill="none" stroke="'+s.hue+'" opacity=".5"/>'+
-  (k===0?'<path d="M150 120c-48 0-70 40-66 90 3 38 4 70-14 110h160c-18-40-17-72-14-110 4-50-18-90-66-90z" fill="#0d0d0d"/>':
-   k===1?'<path d="M150 128c-40 0-58 26-56 58l6 50c8 26 26 40 50 40s42-14 50-40l6-50c2-32-16-58-56-58z" fill="#0d0d0d"/>':
-         '<path d="M150 118c-44 0-62 30-60 64 2 30 18 54 36 64-30 10-28 40-18 66h84c10-26 12-56-18-66 18-10 34-34 36-64 2-34-16-64-60-64z" fill="#0d0d0d"/>')+
-  '<path d="M80 400c6-60 36-92 70-92s64 32 70 92z" fill="#0d0d0d"/>'+
-  '<g fill="#F4EEE1">'+[0,1,2,3,4,5,6].map(function(j){return '<circle cx="'+(114+j*12)+'" cy="'+(334+Math.abs(3-j)*-3+9)+'" r="3.4"/>'}).join("")+'</g></svg>';
+function portrait(s){
+  return '<img src="/demos/helmi/assets/stylists/'+s.id+'.webp" width="600" height="800" alt="Kampaaja '+s.name+'" decoding="async" draggable="false">';
 }
 $("#stylists").innerHTML = STYLISTS.map(function(s,k){
-  return '<article class="stylist"><div class="arch"><div class="arch-in">'+portrait(s,k)+'</div></div><h3>'+s.name+'</h3><p>'+s.role+'</p><button class="linkgold" data-bookwith="'+s.id+'">Varaa minulle</button></article>'}).join("");
+  return '<article class="stylist" data-i="'+k+'" aria-roledescription="dia" aria-label="'+(k+1)+' / '+STYLISTS.length+': '+s.name+'"><div class="arch"><div class="arch-in">'+portrait(s,k)+'</div></div><h3>'+s.name+'</h3><p>'+s.role+'</p><button class="linkgold" data-bookwith="'+s.id+'">Varaa minulle</button></article>'}).join("");
+
+/* ---------- stylist coverflow carousel ---------- */
+(function(){
+  var cf=$("#cf"), stage=$("#cfStage"), track=$("#stylists"), dotsEl=$("#cfDots"), live=$("#cfLive");
+  var cards=[].slice.call(track.children), n=cards.length, active=0, last={}, timer=0, hover=false, inView=false;
+  var DEPTH=170, ROT=34, STEP=.14, DELAY=5000;
+  dotsEl.innerHTML=STYLISTS.map(function(s,i){return '<button data-go="'+i+'" aria-label="'+s.name+'"></button>'}).join("");
+  var dots=[].slice.call(dotsEl.children);
+  function off(i){var o=((i-active)%n+n)%n; return o>n/2?o-n:o}
+  function layout(announce){
+    var w=cf.clientWidth, cw=cards[0].offsetWidth, sp=Math.max(cw*.42,Math.min(cw*.8,(w-cw)/2.1));
+    cards.forEach(function(c,i){
+      var o=off(i), a=Math.abs(o);
+      var t=reduce?"translateX("+(o*sp)+"px)":"translateX("+(o*sp)+"px) translateZ("+(-a*DEPTH)+"px) rotateY("+(-o*ROT)+"deg) scale("+Math.max(1-a*STEP,.4)+")";
+      var op=reduce?(a?0:1):(a===0?1:a===1?.92:a===2?.4:0);
+      if(last[i]!==undefined&&Math.abs(o-last[i])>2){c.style.transition="none";c.style.opacity=0;c.style.transform=t;c.offsetWidth;c.style.transition=""}
+      c.style.transform=t; c.style.opacity=op; c.style.zIndex=10-a;
+      c.classList.toggle("on",a===0); c.setAttribute("aria-hidden",a?"true":"false");
+      last[i]=o;
+    });
+    dots.forEach(function(d,i){d.setAttribute("aria-current",i===active?"true":"false")});
+    if(announce) live.textContent="Kampaaja "+(active+1)+" / "+n+": "+STYLISTS[active].name+", "+STYLISTS[active].role;
+  }
+  function go(i,user){active=((i%n)+n)%n; layout(true); if(user) restart()}
+  function tick(){go(active+1)}
+  function stop(){clearInterval(timer);timer=0}
+  function start(){stop(); if(!reduce&&inView&&!hover&&!document.hidden) timer=setInterval(tick,DELAY)}
+  function restart(){start()}
+  $("#cfPrev").addEventListener("click",function(){go(active-1,true)});
+  $("#cfNext").addEventListener("click",function(){go(active+1,true)});
+  dotsEl.addEventListener("click",function(e){var b=e.target.closest("[data-go]"); if(b) go(+b.dataset.go,true)});
+  cf.addEventListener("keydown",function(e){
+    if(e.target.closest("input,textarea")) return;
+    if(e.key==="ArrowRight"){e.preventDefault();go(active+1,true)} else if(e.key==="ArrowLeft"){e.preventDefault();go(active-1,true)}
+  });
+  cf.addEventListener("mouseenter",function(){hover=true;stop()});
+  cf.addEventListener("mouseleave",function(){hover=false;start()});
+  cf.addEventListener("focusin",function(){hover=true;stop()});
+  cf.addEventListener("focusout",function(e){if(!cf.contains(e.relatedTarget)){hover=false;start()}});
+  document.addEventListener("visibilitychange",function(){document.hidden?stop():start()});
+  /* drag / swipe */
+  var sx=0, sy=0, st=0, dx=0, dragging=false, moved=false;
+  stage.addEventListener("pointerdown",function(e){if(e.button)return; dragging=true;moved=false;sx=e.clientX;sy=e.clientY;st=performance.now();dx=0;track.style.transition="none"});
+  addEventListener("pointermove",function(e){
+    if(!dragging) return; dx=e.clientX-sx;
+    if(!moved&&Math.abs(dx)>8&&Math.abs(dx)>Math.abs(e.clientY-sy)){moved=true;stage.classList.add("dragging");stop()}
+    if(moved&&!reduce) track.style.transform="translateX("+(dx*.15)+"px)";
+  },{passive:true});
+  function end(){
+    if(!dragging) return; dragging=false; track.style.transition=""; track.style.transform=""; stage.classList.remove("dragging");
+    if(!moved) return; var v=dx/Math.max(1,performance.now()-st);
+    if(dx<-70||v<-.5) go(active+1,true); else if(dx>70||v>.5) go(active-1,true); else start();
+  }
+  addEventListener("pointerup",end); addEventListener("pointercancel",end);
+  stage.addEventListener("click",function(e){
+    if(moved){e.preventDefault();e.stopPropagation();moved=false;return}
+    var c=e.target.closest(".stylist"); if(c&&!c.classList.contains("on")){e.preventDefault();e.stopPropagation();go(+c.dataset.i,true)}
+  },true);
+  if("IntersectionObserver" in window){new IntersectionObserver(function(es){inView=es[0].isIntersecting; inView?start():stop()},{threshold:.35}).observe(cf)} else {inView=true}
+  addEventListener("resize",function(){layout(false)});
+  layout(false); start();
+})();
 
 /* ---------- booking ---------- */
 var B = {step:0, service:null, stylist:null, dateKey:null, time:null};
