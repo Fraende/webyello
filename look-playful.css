@@ -1,0 +1,124 @@
+/* WebYello — "Pop" look (branch: new-look).
+   Loaded after style.css. Same tokens, same gold + blue, same copy; only shape and motion change:
+   round corners, chunky ink outlines, hard offset shadows, springy hovers, a few tilted stickers.
+   Borrows the bouncy-card and bento ideas from 21st.dev, rebuilt in plain CSS (the site is static).
+   To go back: delete this file and its <link> in the six pages. Not applied to the client mock-ups
+   inside .mock (those wear client looks). DESIGN.md still describes the square look until this merges. */
+
+:root{
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --radius:12px;
+}
+
+/* ---- Buttons: pills that lift and tilt, press flat ---- */
+.btn{border-radius:999px;box-shadow:4px 4px 0 var(--foreground);
+  transition:transform .28s var(--spring),box-shadow .28s var(--spring),background-color .15s,color .15s}
+.btn:hover,.btn-yellow:hover{transform:translate(-2px,-3px) rotate(-1.2deg);box-shadow:7px 7px 0 var(--foreground)}
+.btn:active,.btn-yellow:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--foreground)}
+.btn:disabled{box-shadow:none;transform:none}
+
+/* ---- Navigation ---- */
+nav{border-bottom:2px solid var(--foreground)}
+.lang-toggle{border-radius:999px;overflow:hidden}
+.menu-btn{border-radius:14px}
+@media(max-width:900px){.nav-links{border-bottom:2px solid var(--foreground);border-radius:0 0 24px 24px}}
+
+/* ---- Hero ---- */
+.hero-scene{border-radius:0 0 44px 44px}
+.badge{border:2px solid var(--foreground);border-radius:999px;padding:4px 16px;background:var(--card);color:var(--foreground);rotate:-1.5deg}
+.hero h1 mark{display:inline-block;border-radius:.22em;padding:0 .2em;rotate:-2deg;
+  animation:inkStamp .35s cubic-bezier(.16,1,.3,1) .6s both,wobble 3.2s ease-in-out 1.6s infinite}
+@keyframes wobble{0%,100%{rotate:-2deg}50%{rotate:1.5deg}}
+.perf{border:2px solid var(--foreground);border-radius:22px;box-shadow:6px 6px 0 var(--foreground)}
+.perf dl{border-top:2px dotted var(--muted-foreground)}
+
+/* ---- Section rhythm ---- */
+.sec-head,.ticket,.card,.plan,#contactForm,.contact-inner>div{
+  transition:opacity .5s ease,transform .5s var(--spring),rotate .35s var(--spring),box-shadow .25s ease}
+.sec-head.pre-reveal,.ticket.pre-reveal,.card.pre-reveal,.plan.pre-reveal,#contactForm.pre-reveal,.contact-inner>div.pre-reveal{transform:translateY(24px) scale(.97)}
+
+/* ---- Tickets: sticker cards, each with a coloured blob; they tilt on hover (21st.dev bounce cards) ---- */
+.ticket{position:relative;overflow:hidden;border:2px solid var(--foreground);border-radius:26px;box-shadow:5px 5px 0 var(--foreground);padding:30px 26px}
+.ticket::after{content:"";position:absolute;top:-34px;right:-34px;width:96px;height:96px;border-radius:50%;background:var(--foreground);pointer-events:none}
+.ticket.t1::after,.ticket.t4::after{background:var(--primary)}
+.ticket.t2::after,.ticket.t5::after{background:var(--link)}
+.ticket h3{padding-right:38px}
+.ticket.t1,.ticket.t4{rotate:-.8deg}
+.ticket.t2,.ticket.t5{rotate:.7deg}
+.ticket.t3,.ticket.t6{rotate:-.4deg}
+a.ticket:hover{transform:translateY(-6px);rotate:0deg;box-shadow:9px 11px 0 var(--foreground);border-color:var(--foreground)}
+a.ticket.t1:hover,a.ticket.t4:hover{rotate:-2deg}
+a.ticket.t2:hover,a.ticket.t5:hover{rotate:1.6deg}
+a.ticket.t3:hover,a.ticket.t6:hover{rotate:-1.2deg}
+
+/* ---- Process cards ---- */
+.card{border:2px solid var(--foreground);border-radius:22px;box-shadow:4px 4px 0 var(--foreground)}
+.card .n{border-radius:50%;border:2px solid var(--foreground);rotate:-6deg;transition:rotate .3s var(--spring)}
+.card:hover .n{rotate:8deg}
+.strip .card:nth-child(odd){rotate:-.5deg}
+.strip .card:nth-child(even){rotate:.5deg}
+
+/* ---- Sub-page header art: a dot and a tumbling square ---- */
+.ph1{border-radius:50%;animation:bob 4.5s ease-in-out infinite}
+.ph2{border-radius:14px;rotate:14deg;animation:bob 5.5s ease-in-out -2s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ---- Pricing ---- */
+.plan{border:2px solid var(--foreground);border-radius:26px;box-shadow:5px 5px 0 var(--foreground)}
+.plan.feat{border-top:10px solid var(--primary);box-shadow:8px 8px 0 var(--foreground);transform:translateY(-6px)}
+.plan:hover{transform:translateY(-4px);box-shadow:9px 9px 0 var(--foreground)}
+.plan.feat:hover{transform:translateY(-10px)}
+.pop{border:2px solid var(--foreground);border-radius:999px;padding:5px 14px;transform:translateY(-100%) rotate(3deg)}
+.plan ul,.plan li{border-color:var(--border)}
+.care{border:2px dashed var(--foreground);border-radius:22px}
+
+/* ---- Forms ---- */
+form{border:2px solid var(--foreground);border-top:2px solid var(--foreground);border-radius:26px;box-shadow:7px 7px 0 var(--foreground)}
+input,textarea,select{border-radius:14px}
+.form-status.err{border-radius:14px}
+.success-badge{border-radius:50%;border:2px solid var(--foreground)}
+
+/* ---- Chips and size cards ---- */
+.chip span{border-radius:999px;transition:transform .25s var(--spring),background-color .15s,box-shadow .25s var(--spring)}
+.chip:hover span{transform:translateY(-2px) rotate(-1deg)}
+.chip input:checked+span{box-shadow:3px 3px 0 var(--foreground)}
+.sk-scheme .chip span{border-radius:18px}
+.chip .sw i{border-radius:50%;width:14px;height:14px}
+.size-in{border-radius:18px;transition:transform .25s var(--spring),background-color .15s,box-shadow .25s var(--spring)}
+.size:hover .size-in{transform:translateY(-2px)}
+.size input:checked+.size-in{box-shadow:4px 4px 0 var(--foreground)}
+
+/* ---- Sketch and quote ---- */
+.mock{border-radius:18px;box-shadow:6px 6px 0 var(--foreground)}
+.mock-stamp{border-radius:999px;rotate:6deg;padding:7px 14px}
+.receipt{border-radius:24px;box-shadow:7px 7px 0 var(--foreground)}
+.r-total mark{border-radius:12px;rotate:-1.5deg;display:inline-block}
+.r-lines .tag{border-radius:999px}
+
+/* ---- Demos ---- */
+.demo{border:2px solid var(--foreground);border-radius:26px;overflow:hidden;box-shadow:5px 5px 0 var(--foreground);
+  transition:transform .3s var(--spring),box-shadow .3s var(--spring)}
+.demo:hover{transform:translateY(-6px) rotate(-.6deg);box-shadow:9px 11px 0 var(--foreground)}
+.demo-bar i{border-radius:50%}
+.demo-rule{height:12px;border-radius:999px}
+.demo-tag{border-radius:999px;border-width:2px;padding:2px 12px}
+.demo-next{border-radius:26px}
+
+/* ---- Footer and dock ---- */
+footer{border-top:2px solid var(--foreground)}
+@media(max-width:900px){.dock{border-radius:24px 24px 0 0;border-top:2px solid var(--foreground)}}
+@media(max-width:640px){
+  .ticket,.card,.plan,.demo{box-shadow:3px 3px 0 var(--foreground)}
+  .plan.feat{transform:none}
+  .hero-scene{border-radius:0 0 28px 28px}
+}
+
+/* ---- Motion off ---- */
+@media(prefers-reduced-motion:reduce){
+  .hero h1 mark{animation:none;clip-path:none}
+  .ph1,.ph2{animation:none}
+  .btn,.chip span,.size-in,.ticket,.card,.plan,.demo,.card .n{transition:none}
+  .btn:hover,.btn-yellow:hover,a.ticket:hover,.plan:hover,.plan.feat:hover,.demo:hover,.chip:hover span,.size:hover .size-in{transform:none}
+  .plan.feat{transform:none}
+  .sec-head.pre-reveal,.ticket.pre-reveal,.card.pre-reveal,.plan.pre-reveal,#contactForm.pre-reveal,.contact-inner>div.pre-reveal{transform:none}
+}
