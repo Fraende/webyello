@@ -10,7 +10,8 @@ Object.assign(I18N.fi,{
   sk_cta:"Paljonko se maksaisi?",
   sk_note:"Mitään ei lähetetä minnekään — tämä pysyy selaimessasi.",
   sk_stamp:"Demo",
-  sk_demo:"Kuvitteellinen esimerkkiyritys. Varaukset, tilaukset ja maksut ovat vain mallia."
+  sk_demo:"Kuvitteellinen esimerkkiyritys. Varaukset, tilaukset ja maksut ovat vain mallia.",
+  sk_scheme:"Värimaailma",sk_s_warm:"Lämmin ja kodikas",sk_s_clean:"Selkeä ja asiallinen",sk_s_playful:"Värikäs ja leikkisä",sk_s_industrial:"Teollinen"
 });
 
 (function(){
@@ -35,6 +36,31 @@ function skDays(n,from,noSun){
 }
 
 let skT='burger';
+// Colour schemes: one palette per mood, with a per-type accent so a café and a plumber still differ.
+// Every text pair is checked to 4.5:1 or better. Industrial puts dark text on its bright accents.
+const SCH={
+  warm:{bg:'#F7F0E6',ink:'#2B1E16',mut:'#6B5747',soft:'#EEE1CF',line:'#E0CFB8',card:'#FFFBF5',on:'#FFFFFF',alt:'#A63A1E',alton:'#FFFFFF',deep:'#3A281D',dink:'#F7EDE0',dmut:'#D8C4AE',dacc:'#E9C79E',
+    acc:{burger:'#A63A1E',cafe:'#7A4A2E',hair:'#8A3A52',plumber:'#8A4A22',shop:'#4F6B3A'}},
+  clean:{bg:'#FFFFFF',ink:'#0F172A',mut:'#4B5768',soft:'#F1F4F8',line:'#E2E8F0',card:'#FFFFFF',on:'#FFFFFF',alt:'#B91C1C',alton:'#FFFFFF',deep:'#0F172A',dink:'#F8FAFC',dmut:'#CBD5E1',dacc:'#93C5FD',
+    acc:{burger:'#B91C1C',cafe:'#334155',hair:'#6B2D5C',plumber:'#1D4ED8',shop:'#15803D'}},
+  playful:{bg:'#FFF8EC',ink:'#1E1546',mut:'#5A5078',soft:'#FFE7A8',line:'#F3D9A4',card:'#FFFFFF',on:'#FFFFFF',alt:'#D42A1C',alton:'#FFFFFF',deep:'#1E1546',dink:'#FFF8EC',dmut:'#D9D2F5',dacc:'#FFD166',
+    acc:{burger:'#D42A1C',cafe:'#B0256E',hair:'#7B3FC4',plumber:'#0D6EA8',shop:'#0F7A5F'}},
+  industrial:{bg:'#E7E6E2',ink:'#111111',mut:'#4A4A47',soft:'#D6D5D0',line:'#BDBCB6',card:'#F4F4F1',on:'#111111',alt:'#F26B1D',alton:'#111111',deep:'#161616',dink:'#F2F2EE',dmut:'#B8B8B2',dacc:'#FFB300',
+    acc:{burger:'#FF5B1F',cafe:'#E0A526',hair:'#E87FA9',plumber:'#FFB300',shop:'#8CC63F'}}
+};
+// Each type opens in the scheme that suits it; once the visitor picks one, it sticks across types
+const SCH_DEF={burger:'playful',cafe:'warm',hair:'clean',plumber:'industrial',shop:'warm'};
+let skS=null;
+const skScheme=()=>skS||SCH_DEF[skT];
+function skPaint(){
+  const m=skEl('skMock'),k=skScheme(),c=SCH[k],a=c.acc[skT];
+  m.dataset.s=k;
+  ['bg','ink','mut','soft','line','card','on','alt','alton','deep','dink','dmut','dacc'].forEach(n=>m.style.setProperty('--s-'+n,c[n]));
+  m.style.setProperty('--s-acc',a);
+  m.style.setProperty('--s-atext',k==='industrial'?c.ink:a);
+  const r=document.querySelector('input[name=skScheme][value='+k+']'); if(r) r.checked=true;
+}
+
 function skName(){ return skEl('skName').value.trim().replace(/\s+/g,' '); }
 const N=()=>esc(skName()||SK_NAME[skT][lang==='fi'?0:1]);
 function skSlug(name){
@@ -83,8 +109,8 @@ function visit(rows){
 const SVG={
   burger:`<svg class="s-ill" viewBox="0 0 220 170" aria-hidden="true"><path fill="#E8A13A" d="M30 76C30 22 190 22 190 76z"/><g fill="#FFF3DC"><ellipse cx="78" cy="48" rx="5" ry="2.5"/><ellipse cx="108" cy="38" rx="5" ry="2.5"/><ellipse cx="140" cy="46" rx="5" ry="2.5"/><ellipse cx="120" cy="58" rx="5" ry="2.5"/><ellipse cx="92" cy="62" rx="5" ry="2.5"/><ellipse cx="160" cy="62" rx="5" ry="2.5"/></g><path fill="#6BA34A" d="M22 78h176l-8 12-11-6-11 6-11-6-11 6-11-6-11 6-11-6-11 6-11-6-11 6-11-6-11 6-11-6-11 6-12-6z"/><rect fill="#4A2416" x="24" y="94" width="172" height="26" rx="10"/><path fill="#F6C945" d="M28 88h164v8l-22 14-14-12-30 12-26-12-24 14-20-14H28z"/><rect fill="#D2381E" x="34" y="120" width="152" height="9"/><path fill="#E8A13A" d="M30 129h160v10c0 11-8 16-18 16H48c-10 0-18-5-18-16z"/></svg>`,
   cup:`<svg class="s-ill" viewBox="0 0 220 170" aria-hidden="true"><path d="M92 46c-9-10 9-16 0-28M112 42c-9-10 9-16 0-28M132 46c-9-10 9-16 0-28" fill="none" stroke="#E9DFD0" stroke-width="5" stroke-linecap="round" opacity=".7"/><ellipse cx="112" cy="152" rx="80" ry="12" fill="#C9B79F"/><path d="M166 80h10c16 0 16 36 0 36h-12" fill="none" stroke="#F6F1EA" stroke-width="9"/><path d="M56 66h112v40c0 28-22 44-56 44s-56-16-56-44z" fill="#F6F1EA"/><ellipse cx="112" cy="66" rx="56" ry="10" fill="#6B4A35"/><path d="M112 72c-5-7-14-2-9 4l9 5 9-5c5-6-4-11-9-4z" fill="#E9DFD0"/></svg>`,
-  arch:`<svg class="s-ill s-arch" viewBox="0 0 160 170" aria-hidden="true"><path d="M0 170V80a80 80 0 0 1 160 0v90z" fill="#7B2E55"/><g fill="none" stroke="#F3E3EA" stroke-width="6"><circle cx="60" cy="130" r="14"/><circle cx="100" cy="130" r="14"/><path d="M68 118l44-70M92 118L48 48"/></g><path d="M118 52h20M118 64h20M118 76h20M118 88h20" stroke="#C98BA6" stroke-width="4"/></svg>`,
-  pipe:`<svg class="s-ill" viewBox="0 0 220 170" aria-hidden="true"><path fill="#DDE8F5" d="M16 40h96v34h58v80h-32v-48H80V72H16z"/><rect fill="#1D4E89" x="104" y="32" width="14" height="50"/><rect fill="#1D4E89" x="132" y="96" width="44" height="14"/><path fill="#3B82C4" d="M154 120s-14 18-14 28a14 14 0 0 0 28 0c0-10-14-28-14-28z"/><path d="M34 140l46-46" stroke="#B93C0B" stroke-width="13"/><path d="M78 84l10-10 14 4 4 14-10 10-6-12z" fill="#B93C0B"/></svg>`
+  arch:`<svg class="s-ill s-arch" viewBox="0 0 160 170" aria-hidden="true"><path d="M0 170V80a80 80 0 0 1 160 0v90z" class="fa"/><g fill="none" class="so" stroke-width="6"><circle cx="60" cy="130" r="14"/><circle cx="100" cy="130" r="14"/><path d="M68 118l44-70M92 118L48 48"/></g><path d="M118 52h20M118 64h20M118 76h20M118 88h20" class="sl" stroke-width="4"/></svg>`,
+  pipe:`<svg class="s-ill" viewBox="0 0 220 170" aria-hidden="true"><path class="fl" d="M16 40h96v34h58v80h-32v-48H80V72H16z"/><rect class="fa" x="104" y="32" width="14" height="50"/><rect class="fa" x="132" y="96" width="44" height="14"/><path fill="#3B82C4" d="M154 120s-14 18-14 28a14 14 0 0 0 28 0c0-10-14-28-14-28z"/><path d="M34 140l46-46" class="sx" stroke-width="13"/><path d="M78 84l10-10 14 4 4 14-10 10-6-12z" class="fx"/></svg>`
 };
 // Café "Instagram" strip: five tiny square photos, drawn
 const CAFE_PICS=[
@@ -212,7 +238,7 @@ function tplHair(){
     ${SVG.arch}
   </div><div class="s-book" data-sec="book"><p class="s-h">${L('Varaa aika','Book a time')}</p>${book}</div></div>
   <div class="s-sec" data-sec="svc"><p class="s-h">${L('Palvelut ja hinnat','Services and prices')}</p><ul class="s-svc">${HR_SVC.map(x=>`<li><b>${L(x[0],x[1])}</b><span>${x[2]} min</span><span class="s-pr">${eur0(x[3])}</span></li>`).join('')}</ul></div>
-  <div class="s-sec" data-sec="team"><p class="s-h">${L('Kampaajat','Our stylists')}</p><div class="s-team">${HR_STY.map((x,i)=>`<div><span class="s-mono" style="background:${x[3]}" aria-hidden="true">${x[0][0]}</span><b>${x[0]}</b><span>${L(x[1],x[2])}</span>${btn('pick',i+1,L('Varaa: ','Book ')+x[0],'ghost s-sm')}</div>`).join('')}</div></div>
+  <div class="s-sec" data-sec="team"><p class="s-h">${L('Kampaajat','Our stylists')}</p><div class="s-team">${HR_STY.map((x,i)=>`<div><span class="s-mono m${i}" aria-hidden="true">${x[0][0]}</span><b>${x[0]}</b><span>${L(x[1],x[2])}</span>${btn('pick',i+1,L('Varaa: ','Book ')+x[0],'ghost s-sm')}</div>`).join('')}</div></div>
   ${visit(HR_HRS)}${sfoot()}`;
 }
 
@@ -340,6 +366,7 @@ function skGo(sec){
 function renderSketch(){
   const name=N(),sc=skEl('skScroll'),top=sc.scrollTop;
   skEl('skMock').dataset.t=skT;
+  skPaint();
   skEl('skSite').innerHTML=TPL[skT]();
   skEl('skLayer').innerHTML=skT==='shop'?shDrawer():'';
   sc.scrollTop=top;
@@ -348,13 +375,13 @@ function renderSketch(){
   skEl('skName').placeholder=SK_NAME[skT][lang==='fi'?0:1];
   sc.setAttribute('aria-label',L('Esimerkkisivu: ','Example site: ')+skEl('skTab').textContent);
 }
-// Switching type: a quick fade so the new site arrives rather than jumps
-function skSwap(){
+// Switching type or scheme: a quick fade so the new look arrives rather than jumps (a scheme change keeps the scroll spot)
+function skSwap(keep){
   const sc=skEl('skScroll');
-  if(skReduce()){ renderSketch(); sc.scrollTop=0; return; }
+  if(skReduce()){ renderSketch(); if(!keep) sc.scrollTop=0; return; }
   sc.classList.remove('in'); sc.classList.add('out');
   clearTimeout(skSwap.t);
-  skSwap.t=setTimeout(()=>{ renderSketch(); sc.scrollTop=0; sc.classList.remove('out'); void sc.offsetWidth; sc.classList.add('in'); },150);
+  skSwap.t=setTimeout(()=>{ renderSketch(); if(!keep) sc.scrollTop=0; sc.classList.remove('out'); void sc.offsetWidth; sc.classList.add('in'); },150);
 }
 
 skEl('skView').addEventListener('click',e=>{
@@ -389,10 +416,11 @@ skEl('skView').addEventListener('keydown',e=>{
 
 // What the visitor typed follows them to the pricing page (this tab only), so the quote can say who it is for
 function skSave(){
-  try{ sessionStorage.setItem('wy-sketch',JSON.stringify({name:skName(),type:skT})); }catch(e){}
+  try{ sessionStorage.setItem('wy-sketch',JSON.stringify({name:skName(),type:skT,scheme:skS})); }catch(e){}
 }
 skEl('skName').addEventListener('input',()=>{ renderSketch(); skSave(); });
 document.querySelectorAll('input[name=skType]').forEach(r=>r.addEventListener('change',()=>{ skT=r.value; skSwap(); skSave(); }));
+document.querySelectorAll('input[name=skScheme]').forEach(r=>r.addEventListener('change',()=>{ skS=r.value; skSwap(true); skSave(); }));
 
 langHooks.push(function(l,first){
   if(first){
@@ -400,6 +428,7 @@ langHooks.push(function(l,first){
       const s=JSON.parse(sessionStorage.getItem('wy-sketch')||'{}');
       if(s.name) skEl('skName').value=String(s.name).slice(0,40);
       if(SK_NAME[s.type]){ skT=s.type; document.querySelector('input[name=skType][value='+s.type+']').checked=true; }
+      if(SCH[s.scheme]) skS=s.scheme;
     }catch(e){}
     const c=document.querySelector('input[name=skType]:checked'); if(c) skT=c.value;
   }
