@@ -5,6 +5,16 @@
    To go back: delete this file and its <link> in the six pages. Not applied to the client mock-ups
    inside .mock (those wear client looks). DESIGN.md still describes the square look until this merges. */
 
+/* Titles: Archivo Black (OFL via Fontsource, self-hosted like the other fonts). It has one weight,
+   so weight is pinned to 400 and synthetic bold is off, otherwise the 700/800 set in style.css would smear it. */
+@font-face{font-family:'Archivo Black';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/archivo-black-latin-400-normal.woff2) format('woff2')}
+h1,h2,h3,.plan .price,.demo-h,.r-title,.r-pkg,.size-in b,.r-total mark{
+  font-family:'Archivo Black','Bricolage Grotesque',system-ui,sans-serif;font-weight:400;font-synthesis:none;letter-spacing:-.005em}
+.hero h1{font-size:clamp(2.1rem,4.7vw,3.5rem);line-height:1.04}
+.page-head h1{font-size:clamp(1.95rem,4vw,2.8rem);line-height:1.06}
+.sec-head h2{font-size:clamp(1.65rem,2.7vw,2.1rem);line-height:1.08}
+.contact h2{font-size:clamp(1.7rem,3vw,2.2rem);line-height:1.08}
+
 :root{
   --spring:cubic-bezier(.34,1.56,.64,1);
   --radius:12px;
