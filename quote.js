@@ -1,20 +1,5 @@
 const skEl=id=>document.getElementById(id);
 // ---- Quote machine: real package prices only ----
-Object.assign(I18N.fi,{
-  qm_h2:"Rakenna tarjouksesi ja katso hinnan tulostuvan.",
-  qm_p:"Valitse mitä tarvitset. Käytämme vain oikeita pakettihintojamme, joten näkemäsi on puhelun lähtökohta — ei piilokuluja.",
-  qm_size:"Kuinka iso projektisi on?",
-  qm_s1:"Yksi sivu",qm_s1d:"Yksi viimeistelty sivu, joka kertoo kaiken",
-  qm_s2:"Jopa viisi sivua",qm_s2d:"Kokonainen yrityssivusto",
-  qm_s3:"Verkkokauppa",qm_s3d:"Myy tuotteitasi ja vastaanota maksuja",
-  qm_more:"Jotain extraa?",
-  qm_x_multi:"Monikielinen sivusto",qm_x_blog:"Blogi tai uutiset",qm_x_ana:"SEO &amp; analytiikka",qm_x_care:"Ylläpitopaketti",
-  qm_cta:"Lähetä tämä WebYellolle",
-  qm_fine:"Ensin maksuton 30 minuutin puhelu, sitten kiinteä tarjous. Täältä ei lähde mitään."
-});
-I18N.en.qm_cta="Send this to WebYello";
-Object.assign(I18N.fi,{qm_name:"Yrityksesi nimi (vapaaehtoinen)",qm_name_ph:"Aamun Leipomo"});
-I18N.en.qm_name_ph="Sunrise Bakery";
 
 const QM={
   en:{title:'Your quote',forWho:'for ',from:'from ',incl:'in the package',quoted:'quoted on the call',care:'Care plan',mo:'/month',total:'Total to start',vat:'excl. VAT · with 25.5% VAT ≈ ',extraQ:'Extras on top of the Store package are quoted on the call.',

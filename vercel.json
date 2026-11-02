@@ -1,3 +1,14 @@
 {
-  "regions": ["fra1"]
+  "regions": ["fra1"],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "redirects": [
+    { "source": "/", "has": [{ "type": "query", "key": "lang", "value": "en" }], "destination": "/en/", "permanent": false },
+    { "source": "/index.html", "has": [{ "type": "query", "key": "lang", "value": "en" }], "destination": "/en/", "permanent": false },
+    { "source": "/:page(services|process|pricing|privacy).html", "has": [{ "type": "query", "key": "lang", "value": "en" }], "destination": "/en/:page.html", "permanent": false },
+    { "source": "/demos/", "has": [{ "type": "query", "key": "lang", "value": "en" }], "destination": "/en/demos/", "permanent": false },
+    { "source": "/en/", "has": [{ "type": "query", "key": "lang", "value": "fi" }], "destination": "/", "permanent": false },
+    { "source": "/en/:page(services|process|pricing|privacy).html", "has": [{ "type": "query", "key": "lang", "value": "fi" }], "destination": "/:page.html", "permanent": false },
+    { "source": "/en/demos/", "has": [{ "type": "query", "key": "lang", "value": "fi" }], "destination": "/demos/", "permanent": false }
+  ]
 }
