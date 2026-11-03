@@ -132,3 +132,84 @@ footer{border-top:2px solid var(--foreground)}
   .plan.feat{transform:none}
   .sec-head.pre-reveal,.ticket.pre-reveal,.card.pre-reveal,.plan.pre-reveal,#contactForm.pre-reveal,.contact-inner>div.pre-reveal{transform:none}
 }
+
+/* =====================================================================
+   Bubble poster (inspired by the Astro Association template on 21st.dev, redrawn in WebYello gold).
+   Home page only: a giant bubble-filled wordmark with pop-able bubbles (bubbles.js), crossing
+   marquee ribbons, and issue-numbered cards. The pattern is img/bubbles.svg, one tile reused
+   for the letters and the ribbon. These two bands are posters: always ink, in both themes.
+   ===================================================================== */
+:root{
+  --ink:oklch(0.20 0.03 92);--paper:oklch(0.985 0.006 92);
+  --bubbles:url(/img/bubbles.svg);
+  --star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 1v14M1.9 4.5l12.2 7M14.1 4.5L1.9 11.5' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='square'/%3E%3C/svg%3E");
+}
+.star{display:inline-block;flex:none;width:.8em;height:.8em;background:currentColor;-webkit-mask:var(--star) center/contain no-repeat;mask:var(--star) center/contain no-repeat}
+
+/* ---- Issue numbers on cards (#01, #02 …) ---- */
+.tickets{counter-reset:issue}
+.ticket{counter-increment:issue}
+.ticket::before{content:"#0" counter(issue);content:"#0" counter(issue) / "";display:block;margin-bottom:14px;
+  font-family:'Archivo Black','Bricolage Grotesque',system-ui,sans-serif;font-size:clamp(2.2rem,4vw,3rem);line-height:1;color:var(--muted-foreground)}
+
+/* ---- Poster: bubble wordmark ---- */
+.poster{position:relative;overflow:hidden;background:var(--ink);color:var(--paper);padding:56px 0 48px;border-bottom:2px solid var(--foreground)}
+.poster::before,.poster::after{content:"";position:absolute;border:1px solid oklch(0.985 0.006 92/.22);border-radius:50%;pointer-events:none}
+.poster::before{width:62vw;height:62vw;left:-14vw;top:-30vw}
+.poster::after{width:44vw;height:44vw;right:-10vw;bottom:-26vw}
+.poster .wrap{position:relative;max-width:1280px}
+.poster-top{display:flex;justify-content:space-between;gap:16px;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:oklch(0.86 0.03 92)}
+.poster-top b{font-weight:500;color:var(--primary);font-variant-numeric:tabular-nums}
+.poster-word{margin:clamp(8px,2vw,28px) 0 clamp(4px,1.5vw,16px);text-align:center;white-space:nowrap;user-select:none;
+  font-family:'Archivo Black','Bricolage Grotesque',system-ui,sans-serif;font-weight:400;font-synthesis:none;
+  font-size:min(18.4vw,16.5rem);line-height:1.02;letter-spacing:-.02em;padding-bottom:.06em;
+  color:transparent;background:var(--bubbles) 0 0/clamp(240px,34vw,480px) auto,var(--primary);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:drift 40s linear infinite}
+.poster-word span{color:inherit}
+@keyframes drift{to{background-position:clamp(240px,34vw,480px) 0,0 0}}
+.poster-hint{text-align:center;font-size:.82rem;letter-spacing:.04em;color:oklch(0.86 0.03 92)}
+.poster-hint::before{content:"";display:inline-block;width:.7em;height:.7em;margin-right:.6em;border-radius:50%;background:var(--primary);vertical-align:-.05em}
+
+/* pop-able bubbles float over the wordmark */
+.poster-field{position:absolute;inset:0;z-index:2;pointer-events:none}
+.bub{position:absolute;display:block;border-radius:50%;pointer-events:auto;cursor:pointer;touch-action:manipulation;
+  animation:floaty var(--d,5s) ease-in-out var(--w,0s) infinite;transition:transform .25s var(--spring)}
+.bub:hover{transform:scale(1.12)}
+.bub.c-gold{background:radial-gradient(circle at 32% 30%,oklch(0.95 0.1 92),var(--primary) 62%)}
+.bub.c-cream{background:radial-gradient(circle at 32% 30%,#fff,oklch(0.9 0.07 92) 70%)}
+.bub.c-blue{background:radial-gradient(circle at 32% 30%,#7cc0f0,var(--link) 70%)}
+.bub.c-white{background:radial-gradient(circle at 32% 30%,#fff,#d9d4c4 75%)}
+.bub{box-shadow:inset -3px -4px 0 rgba(0,0,0,.18)}
+@keyframes floaty{0%,100%{translate:0 0}50%{translate:0 -14px}}
+.bub.pop{pointer-events:none;animation:popOut .32s ease-out forwards}
+@keyframes popOut{0%{transform:scale(1);opacity:1}45%{transform:scale(1.35);opacity:1;box-shadow:0 0 0 6px oklch(0.985 0.006 92/.5)}100%{transform:scale(1.7);opacity:0;box-shadow:0 0 0 14px oklch(0.985 0.006 92/0)}}
+
+/* ---- Ribbons: crossing marquee tapes ---- */
+.ribbons{position:relative;overflow:hidden;background:var(--ink);height:clamp(340px,48vw,560px);border-bottom:2px solid var(--foreground)}
+.ribbon{position:absolute;left:-12%;width:124%;top:var(--y,50%);height:clamp(54px,7.5vw,100px);display:flex;align-items:center;overflow:hidden;
+  transform:translateY(-50%) rotate(var(--r,0deg));box-shadow:0 6px 0 rgba(0,0,0,.35)}
+.rb1{--y:40%;--r:-14deg;background:var(--paper);color:var(--ink)}
+.rb2{--y:56%;--r:9deg;background:var(--bubbles) 0 0/clamp(300px,40vw,560px) auto,var(--link);height:clamp(70px,10vw,130px)}
+.rb3{--y:50%;--r:-3deg;background:var(--primary);color:var(--primary-foreground);z-index:2}
+.rb4{--y:70%;--r:12deg;background:var(--paper);color:var(--ink)}
+.rtrack{display:flex;width:max-content;flex:none;animation:ribbon 38s linear infinite}
+.rb2 .rtrack{animation-duration:70s;animation-direction:reverse}
+.rb3 .rtrack{animation-duration:46s}
+.rb4 .rtrack{animation-duration:54s;animation-direction:reverse}
+.rgroup{display:flex;flex:none;align-items:center;min-width:130vw;justify-content:space-around;gap:36px;padding-right:36px}
+.ri{display:inline-flex;align-items:center;gap:36px;white-space:nowrap;
+  font-family:'Archivo Black','Bricolage Grotesque',system-ui,sans-serif;font-size:clamp(1.05rem,3.1vw,2.3rem);line-height:1;letter-spacing:-.01em;text-transform:lowercase}
+@keyframes ribbon{to{transform:translateX(-50%)}}
+
+@media(max-width:640px){
+  .poster{padding:40px 0 36px}
+  .poster-top{font-size:.72rem}
+  .poster-word{font-size:16.8vw}
+  .ribbons{height:300px}
+}
+@media(prefers-reduced-motion:reduce){
+  .poster-word,.bub,.rtrack{animation:none}
+  .bub.pop{animation:popOut .12s linear forwards}
+  .bub,.bub:hover{transition:none;transform:none}
+}

@@ -173,5 +173,8 @@
   "desc_process": "Näin WebYello-projekti etenee: kartoitus, suunnittelu, toteutus sekä julkaisu ja kasvu — neljä selkeää vaihetta ilman yllätyksiä.",
   "desc_pricing": "Selkeät paketit ja rehelliset kiinteät hinnat: Startti alk. 690 €, Yrityssivut alk. 1 390 €, Verkkokauppa alk. 2 490 €, ylläpitopaketti 59 €/kk. Rakenna oma tarjouksesi.",
   "desc_privacy": "Miten NetYello käsittelee henkilötietoja WebYello-sivustolla: mitä keräämme, miksi, kuka tietoja käsittelee, kuinka kauan säilytämme niitä, mitkä ovat oikeutesi — ja miksi emme käytä evästeitä.",
-  "desc_demos": "WebYellon tekemiä demosivuja: katso, miltä nopea ja selkeä pienyrityksen verkkosivu näyttää ja miten se toimii, ennen kuin tilaat omasi."
+  "desc_demos": "WebYellon tekemiä demosivuja: katso, miltä nopea ja selkeä pienyrityksen verkkosivu näyttää ja miten se toimii, ennen kuin tilaat omasi.",
+  "pop_hint": "Klikkaa kuplia. Ne poksahtavat.",
+  "pop_count": "Poksautettu",
+  "rib_smile": "Verkkosivut, jotka saavat hymyilemään"
 }
