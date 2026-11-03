@@ -12,6 +12,7 @@
 <link rel="preload" href="/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/look-playful.css">
+<script>try{if(localStorage.getItem("wy-theme")==="light")document.documentElement.classList.add("light")}catch(e){}</script>
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
@@ -26,6 +27,7 @@
       <li><a class="btn btn-yellow" href="#contact" data-i18n="nav_cta">Start a project</a></li>
     </ul>
     <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle light or dark theme" data-i18n-aria="aria_theme" aria-pressed="false"><span class="ico-theme" aria-hidden="true"></span></button>
       <div class="lang-toggle" role="group" aria-label="Language" data-i18n-aria="aria_lang">
         <a data-lang="en" hreflang="en" lang="en">EN</a>
         <a data-lang="fi" hreflang="fi" lang="fi">FI</a>

@@ -176,5 +176,12 @@
   "desc_demos": "WebYellon tekemiä demosivuja: katso, miltä nopea ja selkeä pienyrityksen verkkosivu näyttää ja miten se toimii, ennen kuin tilaat omasi.",
   "pop_hint": "Klikkaa kuplia. Ne poksahtavat.",
   "pop_count": "Poksautettu",
-  "rib_smile": "Verkkosivut, jotka saavat hymyilemään"
+  "rib_smile": "Verkkosivut, jotka saavat hymyilemään",
+  "mis_h": "Ison toimiston laatu, pienen studion sydän.",
+  "mis_p": "Ei jargonia, ei yllätyksiä: kiinteä tarjous maksuttoman puhelun jälkeen ja neljä selkeää askelta ensimmäisestä luonnoksesta julkaisuun.",
+  "st1": "askelta ideasta julkaisuun",
+  "st2": "arkipäivä vastaukseen",
+  "st3": "minuuttia maksutonta kartoituspuhelua",
+  "st4": "kieltä: suomi ja englanti",
+  "aria_theme": "Vaihda vaalea tai tumma teema"
 }

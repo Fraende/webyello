@@ -114,7 +114,7 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
 (function(){
   const dock=document.getElementById('dock'),contact=document.getElementById('contact');
   if(!dock||!contact||!('IntersectionObserver' in window)) return;
-  const heroCopy=document.querySelector('.hero-scene .hero-copy'),seen=new Set();
+  const heroCopy=document.querySelector('.hero2-copy'),seen=new Set();
   function watch(el,margin){
     new IntersectionObserver(function(es){
       es.forEach(function(e){ e.isIntersecting?seen.add(e.target):seen.delete(e.target); });
@@ -159,4 +159,17 @@ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
   }
   if(document.readyState==='complete') onLoad(); else window.addEventListener('load',onLoad);
   langHooks.push(render);
+})();
+
+// Light / dark switch (dark is the default look). The choice is remembered in this browser only.
+(function(){
+  const b=document.getElementById('themeBtn'),root=document.documentElement;
+  if(!b) return;
+  const sync=()=>b.setAttribute('aria-pressed',root.classList.contains('light'));
+  sync();
+  b.addEventListener('click',()=>{
+    const light=root.classList.toggle('light');
+    try{localStorage.setItem('wy-theme',light?'light':'dark')}catch(e){}
+    sync();
+  });
 })();

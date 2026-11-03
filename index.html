@@ -12,6 +12,7 @@
 <link rel="preload" href="/fonts/archivo-black-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/look-playful.css">
+<script>try{if(localStorage.getItem("wy-theme")==="light")document.documentElement.classList.add("light")}catch(e){}</script>
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
@@ -26,6 +27,7 @@
       <li><a class="btn btn-yellow" href="#contact" data-i18n="nav_cta">Start a project</a></li>
     </ul>
     <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle light or dark theme" data-i18n-aria="aria_theme" aria-pressed="false"><span class="ico-theme" aria-hidden="true"></span></button>
       <div class="lang-toggle" role="group" aria-label="Language" data-i18n-aria="aria_lang">
         <a data-lang="en" hreflang="en" lang="en">EN</a>
         <a data-lang="fi" hreflang="fi" lang="fi">FI</a>
@@ -36,22 +38,12 @@
 </nav>
 
 <main id="main" tabindex="-1">
-<header class="hero hero-scene" id="top">
-  <picture class="hero-bg">
-    <source type="image/avif" srcset="/img/hero-gateway-640.avif 640w, /img/hero-gateway-960.avif 960w, /img/hero-gateway-1280.avif 1280w" sizes="(max-width: 900px) 100vw, min(52vw, 700px)">
-    <source type="image/webp" srcset="/img/hero-gateway-640.webp 640w, /img/hero-gateway-960.webp 960w, /img/hero-gateway-1280.webp 1280w" sizes="(max-width: 900px) 100vw, min(52vw, 700px)">
-    <img src="/img/hero-gateway-960.jpg" width="960" height="1200" fetchpriority="high" decoding="async" data-i18n-alt="hero_alt" alt="Illustration: a cloaked traveller walks across a desert toward a giant stone gateway shaped like a browser window, with a starry night sky inside it. A stone mouse pointer floats overhead and stone arches rise like Wi-Fi waves.">
-  </picture>
+<header class="poster hero2" id="top">
+  <div class="poster-field" id="popField" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="hero-copy">
-      <span class="badge" data-i18n="hero_badge">New studio · est. 2026</span>
-      <h1 data-i18n="hero_h1">Websites that make people <mark>smile</mark> — and click.</h1>
-      <p data-i18n="hero_lead">WebYello designs and builds beautiful, intuitive websites that turn curious visitors into happy customers. Big agency polish, small studio heart.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-yellow" href="#sketch" data-i18n="hero_cta1">Sketch your website</a>
-        <a class="btn btn-line" href="/pricing.html" data-i18n="hero_cta2">See pricing</a>
-      </div>
-      <p class="hero-note"><a href="#contact" data-i18n="hero_note_call">Book a free 30-minute discovery call</a> · <span data-i18n="hero_note_jargon">No jargon, ever</span></p>
+    <div class="poster-top mono"><span data-i18n="hero_badge">New studio · est. 2026</span><span class="pop-count"><span data-i18n="pop_count">Popped</span>: <b id="popN">0</b></span></div>
+    <p class="poster-word" role="img" aria-label="WebYello">WebYello<span>.</span></p>
+    <div class="hero2-grid">
       <div class="perf" id="perf">
         <h2 data-i18n="perf_h">This page, measured</h2>
         <dl>
@@ -61,18 +53,51 @@
         </dl>
         <p data-i18n="perf_note">Measured just now in your own browser. Every site we build is held to the same numbers.</p>
       </div>
+      <div class="hero2-copy">
+        <h1 data-i18n="hero_h1">Websites that make people <mark>smile</mark> — and click.</h1>
+        <p data-i18n="hero_lead">WebYello designs and builds beautiful, intuitive websites that turn curious visitors into happy customers. Big agency polish, small studio heart.</p>
+        <div class="hero-ctas">
+        <a class="btn btn-yellow" href="#sketch" data-i18n="hero_cta1">Sketch your website</a>
+        <a class="btn btn-line" href="/pricing.html" data-i18n="hero_cta2">See pricing</a>
+      </div>
+        <p class="hero-note"><a href="#contact" data-i18n="hero_note_call">Book a free 30-minute discovery call</a> · <span data-i18n="hero_note_jargon">No jargon, ever</span></p>
+        <p class="poster-hint mono" data-i18n="pop_hint">Click the bubbles. They pop.</p>
+      </div>
     </div>
   </div>
 </header>
 
-<section class="poster" id="pop">
-  <div class="poster-field" id="popField" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="poster-top mono"><span data-i18n="hero_badge">New studio · est. 2026</span><span class="pop-count"><span data-i18n="pop_count">Popped</span>: <b id="popN">0</b></span></div>
-    <p class="poster-word" role="img" aria-label="WebYello">WebYello<span>.</span></p>
-    <p class="poster-hint mono" data-i18n="pop_hint">Click the bubbles. They pop.</p>
+<section class="logo-band" aria-label="WebYello">
+  <p class="lb-name" aria-hidden="true">WebYello.</p>
+  <div class="lb-badge"><picture class="lb-pic">
+    <source type="image/avif" srcset="/img/hero-gateway-640.avif 640w, /img/hero-gateway-960.avif 960w, /img/hero-gateway-1280.avif 1280w" sizes="(max-width: 640px) 60vw, 300px">
+    <source type="image/webp" srcset="/img/hero-gateway-640.webp 640w, /img/hero-gateway-960.webp 960w, /img/hero-gateway-1280.webp 1280w" sizes="(max-width: 640px) 60vw, 300px">
+    <img src="/img/hero-gateway-960.jpg" width="960" height="1200" decoding="async" data-i18n-alt="hero_alt" alt="Illustration: a cloaked traveller walks across a desert toward a giant stone gateway shaped like a browser window, with a starry night sky inside it. A stone mouse pointer floats overhead and stone arches rise like Wi-Fi waves.">
+  </picture></div>
+</section>
+
+<section class="mission" id="mission">
+  <div class="wrap mis-grid">
+    <div>
+      <h2 data-i18n="mis_h">Big agency polish, small studio heart.</h2>
+      <p data-i18n="mis_p">No jargon, no surprises: a fixed quote after a free call, then four clear steps from first sketch to launch.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>4</b><span data-i18n="st1">steps from idea to launch</span></div>
+      <div class="stat"><b>1</b><span data-i18n="st2">business day to a reply</span></div>
+      <div class="stat"><b>30</b><span data-i18n="st3">minutes of free discovery call</span></div>
+      <div class="stat"><b>2</b><span data-i18n="st4">languages: Finnish and English</span></div>
+    </div>
   </div>
 </section>
+
+<section class="ribbons" aria-hidden="true">
+  <div class="ribbon rb1"><div class="rtrack"><div class="rgroup"><span class="ri"><span data-i18n="rib_smile">Websites that make people smile</span><i class="star"></i></span><span class="ri"><span data-i18n="rib_smile">Websites that make people smile</span><i class="star"></i></span><span class="ri"><span data-i18n="rib_smile">Websites that make people smile</span><i class="star"></i></span></div></div></div>
+  <div class="ribbon rb2"><div class="rtrack"><div class="rgroup"></div></div></div>
+  <div class="ribbon rb3"><div class="rtrack"><div class="rgroup"><span class="ri"><span data-i18n="hm_pc_t">Fixed, honest prices</span><i class="star"></i></span><span class="ri"><span data-i18n="ct_l2">Free 30-minute discovery call</span><i class="star"></i></span><span class="ri"><span data-i18n="hm_pc_t">Fixed, honest prices</span><i class="star"></i></span><span class="ri"><span data-i18n="ct_l2">Free 30-minute discovery call</span><i class="star"></i></span></div></div></div>
+  <div class="ribbon rb4"><div class="rtrack"><div class="rgroup"><span class="ri"><span data-i18n="hm_pr_t">Four steps, no surprises</span><i class="star"></i></span><span class="ri"><span data-i18n="hm_pr_t">Four steps, no surprises</span><i class="star"></i></span><span class="ri"><span data-i18n="hm_pr_t">Four steps, no surprises</span><i class="star"></i></span></div></div></div>
+</section>
+
 
 <section id="sketch" class="sketch">
   <div class="wrap">
@@ -136,12 +161,6 @@
   </div>
 </section>
 
-<section class="ribbons" aria-hidden="true">
-  <div class="ribbon rb1"><div class="rtrack"><div class="rgroup"><span class="ri"><span data-i18n="rib_smile">Websites that make people smile</span><i class="star"></i></span><span class="ri"><span data-i18n="rib_smile">Websites that make people smile</span><i class="star"></i></span><span class="ri"><span data-i18n="rib_smile">Websites that make people smile</span><i class="star"></i></span></div></div></div>
-  <div class="ribbon rb2"><div class="rtrack"><div class="rgroup"></div></div></div>
-  <div class="ribbon rb3"><div class="rtrack"><div class="rgroup"><span class="ri"><span data-i18n="hm_pc_t">Fixed, honest prices</span><i class="star"></i></span><span class="ri"><span data-i18n="ct_l2">Free 30-minute discovery call</span><i class="star"></i></span><span class="ri"><span data-i18n="hm_pc_t">Fixed, honest prices</span><i class="star"></i></span><span class="ri"><span data-i18n="ct_l2">Free 30-minute discovery call</span><i class="star"></i></span></div></div></div>
-  <div class="ribbon rb4"><div class="rtrack"><div class="rgroup"><span class="ri"><span data-i18n="hm_pr_t">Four steps, no surprises</span><i class="star"></i></span><span class="ri"><span data-i18n="hm_pr_t">Four steps, no surprises</span><i class="star"></i></span><span class="ri"><span data-i18n="hm_pr_t">Four steps, no surprises</span><i class="star"></i></span></div></div></div>
-</section>
 
 <section id="contact" class="contact">
   <div class="wrap contact-inner">
