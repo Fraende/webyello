@@ -2,11 +2,11 @@ const skEl=id=>document.getElementById(id);
 // ---- Quote machine: real package prices only ----
 
 const QM={
-  en:{title:'Your quote',forWho:'for ',from:'from ',incl:'in the package',quoted:'quoted on the call',care:'Care plan',mo:'/month',total:'Total to start',vat:'excl. VAT · with 25.5% VAT ≈ ',extraQ:'Extras on top of the Store package are quoted on the call.',
-      up:l=>l+' is part of the Business package, so we moved you up.',down:'One page can’t include those, so we unticked them.',
+  en:{title:'Your estimate',forWho:'for ',from:'from ',incl:'in the package',quoted:'quoted on the call',care:'Care plan',mo:'/month',total:'Website starting price',vat:'excl. VAT · with 25.5% VAT ≈ ',extraQ:'Extras on top of the Store package are quoted on the call.',
+      up:l=>l+' requires Business. Your estimate is now from €1,390, up from €690.',down:'You chose Launch (from €690). We removed the Business-only features.',
       live:(p,t)=>p+' package, '+t,x:{multi:'Multilingual site',blog:'Blog or news',ana:'SEO & analytics'},nfmt:n=>'€'+n.toLocaleString('en-US')},
-  fi:{title:'Tarjouksesi',forWho:'yritykselle ',from:'alk. ',incl:'paketissa',quoted:'hinnoitellaan puhelussa',care:'Ylläpitopaketti',mo:'/kk',total:'Yhteensä alkuun',vat:'alv 0 % · alv 25,5 % mukana ≈ ',extraQ:'Verkkokauppapaketin päälle tulevat lisät hinnoitellaan puhelussa.',
-      up:l=>l+' kuuluu Yrityssivut-pakettiin, joten siirsimme sinut sinne.',down:'Yhden sivun pakettiin ne eivät kuulu, joten poistimme valinnat.',
+  fi:{title:'Hinta-arviosi',forWho:'yritykselle ',from:'alk. ',incl:'paketissa',quoted:'hinnoitellaan puhelussa',care:'Ylläpitopaketti',mo:'/kk',total:'Sivuston lähtöhinta',vat:'alv 0 % · alv 25,5 % mukana ≈ ',extraQ:'Verkkokauppapaketin päälle tulevat lisät hinnoitellaan puhelussa.',
+      up:l=>l+' edellyttää Yrityssivut-pakettia. Lähtöhinta vaihtui 690 eurosta 1 390 euroon.',down:'Valitsit Startti-paketin (alk. 690 €). Poistimme vain Yrityssivut-pakettiin kuuluvat ominaisuudet.',
       live:(p,t)=>p+'-paketti, '+t,x:{multi:'Monikielinen sivusto',blog:'Blogi tai uutiset',ana:'SEO & analytiikka'},nfmt:n=>n.toLocaleString('fi-FI')+' €'}
 };
 const PRICE={launch:690,business:1390,store:2490};
@@ -19,8 +19,26 @@ const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 let qNote=null; // a function, so the note is re-worded when the language changes
 const qmNote=fn=>{ qNote=fn||null; skEl('qmNote').textContent=qNote?qNote():''; };
 const anyExtra=()=>q.extras.multi||q.extras.blog||q.extras.ana;
+function saveQuote(){
+  try{sessionStorage.setItem('wy-quote',JSON.stringify({size:q.size,extras:q.extras,care:q.care}));}catch(e){}
+}
+function restoreQuote(){
+  try{
+    const saved=JSON.parse(sessionStorage.getItem('wy-quote')||'null');
+    if(!saved||!Object.hasOwn(PRICE,saved.size)) return false;
+    q.size=saved.size;
+    Object.keys(q.extras).forEach(k=>{q.extras[k]=saved.extras?.[k]===true;});
+    q.care=saved.care===true;
+    if(q.size==='launch'&&anyExtra()) q.size='business';
+    document.querySelector('input[name=qmSize][value='+q.size+']').checked=true;
+    document.querySelectorAll('input[name=qmExtra]').forEach(c=>{c.checked=q.extras[c.value];});
+    document.querySelector('input[name=qmCare]').checked=q.care;
+    return true;
+  }catch(e){return false;}
+}
 
 function renderQuote(animate){
+  saveQuote();
   const d=I18N[lang],m=QM[lang],name=skEl('qmName').value.trim();
   const tier=q.size,price=PRICE[tier],pkgName=d[PKG[tier].name].replace(/&amp;/g,'&');
   document.querySelectorAll('[data-qm-price]').forEach(el=>{el.textContent=m.from+m.nfmt(PRICE[el.dataset.qmPrice]);});
@@ -51,7 +69,7 @@ function renderQuote(animate){
     '<p class="r-vat">'+m.vat+m.nfmt(vat)+(tier==='store'&&anyExtra()?'<br>'+m.extraQ:'')+'</p>';
   skEl('qmNote').textContent=qNote?qNote():'';
   qPrev={tier:tier,keys:keys};
-  skEl('qmLive').textContent=m.live(pkgName,m.from+m.nfmt(total)+(q.care?' + '+m.nfmt(CARE)+m.mo:''));
+  skEl('qmLive').textContent=(qNote?qNote()+' ':'')+m.live(pkgName,m.from+m.nfmt(total)+(q.care?' + '+m.nfmt(CARE)+m.mo:''));
   const dockInfo=document.getElementById('dockInfo');
   if(dockInfo){
     const name=document.createElement('span'),price=document.createElement('b');
@@ -82,10 +100,17 @@ document.querySelector('input[name=qmCare]').addEventListener('change',function(
 
 // What the visitor typed into the sketch on the home page (this tab only)
 const TRADE={
+  bakery:{en:'Bakery',fi:'Leipomo'},trades:{en:'Trades & repairs',fi:'Remontit ja korjaukset'},
+  coach:{en:'Coach & consultant',fi:'Valmennus ja konsultointi'},other:{en:'Other business',fi:'Muu yritystoiminta'},
   burger:{en:'Burger joint',fi:'Burgeripaikka'},cafe:{en:'Café',fi:'Kahvila'},hair:{en:'Hair salon',fi:'Kampaamo'},
   plumber:{en:'Plumber',fi:'Putkimies'},shop:{en:'Small online shop',fi:'Pieni verkkokauppa'}
 };
-function stored(){ try{ return JSON.parse(sessionStorage.getItem('wy-sketch')||'{}')||{}; }catch(e){ return {}; } }
+function stored(){
+  try{
+    const s=JSON.parse(sessionStorage.getItem('wy-sketch')||'{}');
+    return s&&typeof s==='object'&&!Array.isArray(s)?s:{};
+  }catch(e){return {};}
+}
 
 skEl('qmName').addEventListener('input',function(){
   try{ sessionStorage.setItem('wy-sketch',JSON.stringify(Object.assign(stored(),{name:this.value.trim()}))); }catch(e){}
@@ -100,7 +125,7 @@ document.querySelectorAll('[data-qm-size]').forEach(a=>a.addEventListener('click
 // The brief the contact form starts with, worded in the current language
 function qmBrief(){
   const d=I18N[lang],m=QM[lang],name=skEl('qmName').value.trim();
-  const trade=TRADE[stored().type],label=trade?trade[lang]:'';
+  const type=stored().type,trade=Object.hasOwn(TRADE,type)?TRADE[type]:null,label=trade?trade[lang]:'';
   const pkg=d[PKG[q.size].name].replace(/&amp;/g,'&');
   const extras=['multi','blog','ana'].filter(k=>q.extras[k]).map(k=>m.x[k]);
   const price=m.from+m.nfmt(PRICE[q.size]);
@@ -108,19 +133,22 @@ function qmBrief(){
   if(lang==='fi') who=name?'Yritykseni on '+name+(label?' ('+label+')':'')+'. ':(label?'Toimin alalla: '+label+'. ':'');
   else who=name?'My business is '+name+(label?' ('+label+')':'')+'. ':(label?'I work in: '+label+'. ':'');
   return lang==='fi'
-    ? 'Hei! '+who+'Kokosin tarjouksen: '+pkg+' ('+price+', alv 0 %)'+(extras.length?', lisäksi '+extras.join(', '):'')+(q.care?' ja ylläpitopaketti':'')+'. Jutellaan!'
-    : 'Hi! '+who+'I built a quote: '+pkg+' ('+price+', excl. VAT)'+(extras.length?' with '+extras.join(', '):'')+(q.care?' plus the care plan':'')+'. Let\u2019s talk!';
+    ? 'Hei! '+who+'Kokosin hinta-arvion: '+pkg+' ('+price+', alv 0 %)'+(extras.length?', lisäksi '+extras.join(', '):'')+(q.care?' ja ylläpitopaketti':'')+'. Jutellaan!'
+    : 'Hi! '+who+'I put together an estimate: '+pkg+' ('+price+', excl. VAT)'+(extras.length?' with '+extras.join(', '):'')+(q.care?' plus the care plan':'')+'. Let\u2019s talk!';
 }
 
 // Hand the whole thing to the contact form, so the first message is already a brief.
 // Text the visitor has typed or edited is never overwritten; only an empty box or our own untouched brief is.
 function qmHandoff(){
   const ta=skEl('msg');
+  if(!ta) return;
   if(!ta.value||(ta.dataset.auto!==undefined&&ta.value===ta.dataset.auto)){
     const msg=qmBrief(); ta.value=msg; ta.dataset.auto=msg;
   }
   skEl('type').selectedIndex=q.size==='store'?2:0;
-  setTimeout(()=>skEl('name').focus({preventScroll:true}),450);
+  ta.dispatchEvent(new Event('input',{bubbles:true}));
+  skEl('type').dispatchEvent(new Event('change',{bubbles:true}));
+  setTimeout(()=>skEl('name')?.focus({preventScroll:true}),450);
 }
 skEl('qmGo').addEventListener('click',qmHandoff);
 const dockGo=document.getElementById('dockGo');
@@ -130,7 +158,8 @@ langHooks.push(function(l,first){
   if(first){
     const s=stored();
     skEl('qmName').value=s.name?String(s.name).slice(0,40):'';
-    if(s.type==='shop'){
+    const restored=restoreQuote();
+    if(!restored&&s.type==='shop'){
       q.size='store';
       document.querySelector('input[name=qmSize][value=store]').checked=true;
     }

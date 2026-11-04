@@ -30,7 +30,7 @@ const PAGES = {
 // never copied into dist: tooling, sources and internal docs at the repo root (folders such as demos/ are copied as they are)
 const SKIP_ROOT = new Set(['.git', '.github', 'node_modules', OUT, 'api', 'i18n', 'build.mjs', 'package.json',
   'package-lock.json', 'vercel.json', '.gitignore', '.vercelignore', '.impeccable', '.claude',
-  'DESIGN.md', 'PRODUCT.md', 'README.md', 'CLAUDE.md']);
+  'DESIGN.md', 'PRODUCT.md', 'README.md', 'CLAUDE.md', 'variants']);
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const escText = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -158,7 +158,7 @@ function render(src, path, lang) {
 
 function copyTree(from, to) {
   for (const name of readdirSync(from)) {
-    if (name === '.DS_Store' || (from === '.' && SKIP_ROOT.has(name))) continue;
+    if (name === '.DS_Store' || (from === '.' && (name.startsWith('.') || SKIP_ROOT.has(name)))) continue;
     const s = join(from, name), d = join(to, name);
     if (from === '.' && name in PAGES) continue;
     if (statSync(s).isDirectory()) { mkdirSync(d, { recursive: true }); copyTree(s, d); }

@@ -61,7 +61,11 @@ rounded:
 - **Display:** Bricolage Grotesque 800 for h1, 700 for h2/h3 and prices.
 - **Body:** Karla 400; 700 for labels, nav, buttons (buttons are uppercase, tracked .06em).
 - **Mono:** IBM Plex Mono 500 for numbers that are measurements or prices in the quote: the performance readout, size-card prices, step numbers, the mock URL.
-- The source theme defines no fonts; these are carried over from the riso era and remain an open decision.
+- **Role scale:** body `1rem` / 1.65, secondary text `.875rem` / 1.5, form labels `.9375rem` / 1.4, card headings `1.375rem` / 1.2. Repeated roles use `--text-*` properties in `style.css`.
+- **Responsive headings:** hero `clamp(2.4rem, 1.6rem + 3vw, 4rem)` / 1.08; page `clamp(2.125rem, 1.35rem + 2.1vw, 3.25rem)` / 1.12; section `clamp(1.875rem, 1.45rem + 1.4vw, 2.5rem)` / 1.15. Fluid sizes combine rem and viewport units so user font settings still influence them.
+- **Prices:** Bricolage 700 for package prices (`2.125rem`) and the receipt total (`1.875rem`); Plex Mono 500 for the compact package selector and measurements. Use tabular numerals on prices.
+- **Reading widths:** leads 52–60ch; helper text up to 65ch; legal and care prose up to 68ch. Keep normal paragraphs at regular weight and reserve bold for labels and decisions.
+- **Delivery:** retain the five existing self-hosted faces with `font-display: swap`. Karla uses only the supplied 400/700 weights; Plex Mono uses 500. Do not synthesize missing weights or add unmeasured fallback metric overrides.
 
 ## Layout
 

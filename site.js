@@ -4,6 +4,11 @@ btn.addEventListener('click',()=>{
   const open=links.classList.toggle('open');
   btn.setAttribute('aria-expanded',open);
 });
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&links.classList.contains('open')){
+    links.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.focus();
+  }
+});
 links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
   links.classList.remove('open');
   btn.setAttribute('aria-expanded','false');
@@ -17,18 +22,22 @@ const I18N={
   en:{
     f_success_h:"Thanks — that's in.",
     f_success_p:"We'll read it over and get back to you within one business day with ideas, honest advice, and a fixed quote. Keep an eye on your inbox.",
-    f_err_required:"This field is required.",
-    f_err_email:"Please enter a valid email address.",
-    f_sending:"Sending…",
-    f_err_send:'Sorry, that didn’t go through. Please try again, or email <a href="mailto:info@netyello.com">info@netyello.com</a>.'
+    f_err_required:"Complete this field.",
+    f_err_name:"Enter your name.",
+    f_err_msg:"Tell us briefly what you need.",
+    f_err_email:"Enter an email address such as name@example.com.",
+    f_sending:"Sending enquiry…",
+    f_err_send:'We couldn’t confirm delivery. Your message is still here. Try again or email <a href="mailto:info@netyello.com">info@netyello.com</a>.'
   },
   fi:{
     f_success_h:"Kiitos — viesti meni perille.",
     f_success_p:"Käymme sen läpi ja palaamme asiaan yhden arkipäivän kuluessa ideoiden, rehellisten neuvojen ja kiinteän tarjouksen kera. Pidä silmällä sähköpostiasi.",
-    f_err_required:"Tämä kenttä on pakollinen.",
-    f_err_email:"Anna kelvollinen sähköpostiosoite.",
-    f_sending:"Lähetetään…",
-    f_err_send:'Valitettavasti lähetys ei onnistunut. Yritä uudelleen tai kirjoita osoitteeseen <a href="mailto:info@netyello.com">info@netyello.com</a>.'
+    f_err_required:"Täytä tämä kenttä.",
+    f_err_name:"Kirjoita nimesi.",
+    f_err_msg:"Kerro lyhyesti, mitä tarvitset.",
+    f_err_email:"Anna sähköpostiosoite muodossa nimi@esimerkki.fi.",
+    f_sending:"Lähetetään viestiä…",
+    f_err_send:'Emme voineet vahvistaa lähetystä. Viestisi on tallella. Yritä uudelleen tai lähetä sähköpostia osoitteeseen <a href="mailto:info@netyello.com">info@netyello.com</a>.'
   }
 };
 
@@ -42,14 +51,16 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 
 
-document.querySelectorAll('#contactForm [required]').forEach(function(field){
-  field.addEventListener('invalid',function(){
-    const d=I18N[lang];
-    if(field.validity.typeMismatch) field.setCustomValidity(d.f_err_email);
-    else if(field.validity.valueMissing) field.setCustomValidity(d.f_err_required);
-    else field.setCustomValidity('');
-  });
-  field.addEventListener('input',function(){ field.setCustomValidity(''); });
+// Keep browser validation and the server's trimmed-input rules aligned.
+function validateContactField(field){
+  const d=I18N[lang];
+  field.setCustomValidity('');
+  if(!field.value.trim()) field.setCustomValidity(field.id==='email'?d.f_err_email:d['f_err_'+field.id]||d.f_err_required);
+  else if(field.type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim())) field.setCustomValidity(d.f_err_email);
+}
+document.querySelectorAll('#contactForm [required]').forEach(field=>{
+  field.addEventListener('invalid',()=>validateContactField(field));
+  field.addEventListener('input',()=>validateContactField(field));
 });
 
 // Send the enquiry to /api/contact; only show the thank-you once the server has accepted it
@@ -57,14 +68,19 @@ const contactForm=document.getElementById('contactForm');
 contactForm.addEventListener('submit',async function(e){
   e.preventDefault();
   if(contactForm.dataset.sending) return;
+  contactForm.querySelectorAll('[required]').forEach(validateContactField);
+  if(!contactForm.reportValidity()) return;
   const d=I18N[lang],btn=contactForm.querySelector('button[type=submit]'),status=document.getElementById('formStatus');
   contactForm.dataset.sending='1';
   btn.disabled=true; btn.textContent=d.f_sending;
+  contactForm.setAttribute('aria-busy','true');
+  const controller=typeof AbortController==='function'?new AbortController():null;
+  const timeout=controller?setTimeout(()=>controller.abort(),15000):null;
   status.textContent=''; status.classList.remove('err');
   try{
     const res=await fetch('/api/contact',{
       method:'POST',
-      signal:window.AbortSignal&&AbortSignal.timeout?AbortSignal.timeout(15000):undefined,
+      signal:controller?controller.signal:undefined,
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         name:document.getElementById('name').value,
@@ -77,6 +93,9 @@ contactForm.addEventListener('submit',async function(e){
       })
     });
     if(!res.ok) throw new Error('HTTP '+res.status);
+    const result=await res.json();
+    if(result.ok!==true) throw new Error('No send confirmation');
+    contactForm.removeAttribute('aria-busy');
     contactForm.innerHTML='<div class="success" role="status" tabindex="-1"><div class="success-badge" aria-hidden="true"><span class="tick"></span></div><h3>'+d.f_success_h+'</h3><p>'+d.f_success_p+'</p></div>';
     contactForm.querySelector('.success').focus();
   }catch(err){
@@ -85,28 +104,29 @@ contactForm.addEventListener('submit',async function(e){
     status.classList.add('err'); status.innerHTML=now.f_err_send;
     btn.disabled=false; btn.textContent=now.f_send;
     delete contactForm.dataset.sending;
+    contactForm.removeAttribute('aria-busy');
+  }finally{
+    if(timeout!==null) clearTimeout(timeout);
   }
 });
 
-// Fade sections in as they scroll into view
-if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-  const revealEls = document.querySelectorAll('.sec-head, .ticket, .card, .plan, #contactForm, .contact-inner > div');
-  revealEls.forEach(function(el){
-    const siblingIndex = Array.prototype.indexOf.call(el.parentElement.children, el);
-    el.style.transitionDelay = (siblingIndex%3)*70 + 'ms';
+// Enhance only after the observer exists: unavailable APIs must never hide content.
+if('IntersectionObserver' in window&&window.matchMedia&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const revealEls=document.querySelectorAll('.sec-head, .ticket, .card, .plan, #contactForm, .contact-inner > div');
+  const reveal=(el,instant=false)=>{
+    if(instant){el.style.transitionDelay='0s';el.style.transitionDuration='0s';}
+    el.classList.remove('pre-reveal');io.unobserve(el);
+    setTimeout(()=>{el.style.transitionDelay='';el.style.transitionDuration='';},700);
+  };
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{if(entry.isIntersecting) reveal(entry.target);});
+  },{threshold:.15,rootMargin:'0px 0px -8% 0px'});
+  revealEls.forEach(el=>{
+    el.style.transitionDelay=(Array.prototype.indexOf.call(el.parentElement.children,el)%3)*70+'ms';
     el.classList.add('pre-reveal');
+    el.addEventListener('focusin',()=>reveal(el,true),{once:true});
+    io.observe(el);
   });
-  const io = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        const el = entry.target;
-        el.classList.remove('pre-reveal');
-        io.unobserve(el);
-        setTimeout(function(){ el.style.transitionDelay=''; },700);
-      }
-    });
-  },{threshold:.15, rootMargin:'0px 0px -8% 0px'});
-  revealEls.forEach(function(el){ io.observe(el); });
 }
 
 // The phone dock steps aside while the contact form is on screen, and on the home page while the

@@ -37,7 +37,10 @@ function skSlug(name){
   }
   return (s||(lang==='fi'?'yritys':'yourbusiness'))+'.fi';
 }
-function skType(){ return document.querySelector('input[name=skType]:checked').value; }
+function skType(){
+  const value=document.querySelector('input[name=skType]:checked')?.value;
+  return Object.hasOwn(SK,value)?value:'bakery';
+}
 
 function renderSketch(animate){
   const t=SK[skType()],c=t[lang],name=skEl('skName').value.trim();
@@ -65,7 +68,7 @@ langHooks.push(function(l,first){
     try{
       const s=JSON.parse(sessionStorage.getItem('wy-sketch')||'{}');
       if(s.name) skEl('skName').value=String(s.name).slice(0,40);
-      if(SK[s.type]) document.querySelector('input[name=skType][value='+s.type+']').checked=true;
+      if(Object.hasOwn(SK,s.type)) document.querySelector('input[name=skType][value='+s.type+']').checked=true;
     }catch(e){}
   }
   renderSketch(!!first);

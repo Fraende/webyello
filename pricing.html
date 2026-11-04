@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Pricing — WebYello</title>
-<meta name="description" data-i18n-content="desc_pricing" content="Clear packages and honest fixed prices: Launch from €690, Business from €1,390, Store from €2,490, Care plan €59/month. Build your own quote.">
+<meta name="description" data-i18n-content="desc_pricing" content="Clear packages and honest fixed prices: Launch from €690, Business from €1,390, Store from €2,490, Care plan €59/month. Estimate your starting price.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -40,7 +40,7 @@
     <div>
       <h1 data-i18n="pc_h2">Clear packages, honest prices.</h1>
       <p data-i18n="pc_p">We're a brand-new studio, and we say it out loud: no imaginary portfolio, no invented reviews. What you get instead is founder-level attention on every single project — and pricing to match.</p>
-      <p class="ph-jump"><a href="#quote" data-i18n="ph_quote">Build your own quote ↓</a></p>
+      <p class="ph-jump"><a href="#quote" data-i18n="ph_quote">Estimate your starting price ↓</a></p>
     </div>
     <div class="ph-art" aria-hidden="true"><span class="blob ph1"></span><span class="blob ph2"></span></div>
   </div>
@@ -57,10 +57,10 @@
           <li data-i18n="p1_f3">Contact form and map</li>
           <li data-i18n="p1_f4">Basic SEO setup</li>
         </ul>
-        <a class="btn btn-line" href="#quote" data-qm-size="launch" data-i18n="p_cta1">Build this quote</a>
+        <a class="btn btn-line" href="#quote" data-qm-size="launch" data-i18n="p_cta1">Choose Launch</a>
       </div>
       <div class="plan feat">
-        <span class="pop" data-i18n="p2_pop">Most popular</span>
+        <span class="pop" data-i18n="p2_pop">Company website</span>
         <h3 data-i18n="p2_t">Business</h3><div class="for" data-i18n="p2_for">For a complete company site</div><div class="price" data-i18n="p2_price">from €1,390</div>
         <ul>
           <li data-i18n="p2_f1">Up to 5 custom-designed pages</li>
@@ -68,7 +68,7 @@
           <li data-i18n="p2_f3">Blog or news section</li>
           <li data-i18n="p2_f4">SEO and analytics setup</li>
         </ul>
-        <a class="btn btn-yellow" href="#quote" data-qm-size="business" data-i18n="p_cta2">Build this quote</a>
+        <a class="btn btn-yellow" href="#quote" data-qm-size="business" data-i18n="p_cta2">Choose Business</a>
       </div>
       <div class="plan">
         <h3 data-i18n="p3_t">Store</h3><div class="for" data-i18n="p3_for">For selling online</div><div class="price" data-i18n="p3_price">from €2,490</div>
@@ -78,10 +78,10 @@
           <li data-i18n="p3_f3">Product page templates</li>
           <li data-i18n="p3_f4">Training so you can run it yourself</li>
         </ul>
-        <a class="btn btn-line" href="#quote" data-qm-size="store" data-i18n="p_cta3">Build this quote</a>
+        <a class="btn btn-line" href="#quote" data-qm-size="store" data-i18n="p_cta3">Choose Store</a>
       </div>
     </div>
-    <div class="care" data-i18n="pcare"><b>Care plan — €59/month:</b> updates, backups, security and small changes handled for you, so your site stays fresh.</div>
+    <div class="care"><p data-i18n="pcare"><b>Care plan — €59/month:</b> updates, backups, security and small changes handled for you, so your site stays fresh.</p></div>
     <p class="vat" data-i18n="pc_vat">Prices exclude VAT (25.5%). Every project starts with a free discovery call and a fixed quote — no surprises.</p>
   </div>
 </section>
@@ -89,8 +89,8 @@
 <section id="quote" class="quote">
   <div class="wrap">
     <div class="sec-head">
-      <h2 data-i18n="qm_h2">Build your quote and watch the price print.</h2>
-      <p data-i18n="qm_p">Pick what you need. We only use our real package prices, so what you see is where the call starts — no hidden extras.</p>
+      <h2 data-i18n="qm_h2">Estimate your website’s starting price.</h2>
+      <p data-i18n="qm_p">Choose a package and the features you need. The estimate uses our published starting prices. We confirm a fixed quote after the free discovery call.</p>
     </div>
     <div class="quote-grid">
       <div class="quote-controls">
@@ -105,11 +105,12 @@
           </div>
         </fieldset>
         <fieldset>
-          <legend data-i18n="qm_more">Anything extra?</legend>
+          <legend data-i18n="qm_more">Features and ongoing care</legend>
+          <p class="qm-note" id="qmExtraHint" data-i18n="qm_extra_hint">Multilingual content, a blog and SEO &amp; analytics are included in Business (from €1,390). Selecting one switches a one-page estimate to Business. Store extras are priced on the call; care is optional.</p>
           <div class="chips">
-            <label class="chip"><input type="checkbox" name="qmExtra" value="multi"><span data-i18n="qm_x_multi">Multilingual site</span></label>
-            <label class="chip"><input type="checkbox" name="qmExtra" value="blog"><span data-i18n="qm_x_blog">Blog or news</span></label>
-            <label class="chip"><input type="checkbox" name="qmExtra" value="ana"><span data-i18n="qm_x_ana">SEO &amp; analytics</span></label>
+            <label class="chip"><input aria-describedby="qmExtraHint" type="checkbox" name="qmExtra" value="multi"><span data-i18n="qm_x_multi">Multilingual site</span></label>
+            <label class="chip"><input aria-describedby="qmExtraHint" type="checkbox" name="qmExtra" value="blog"><span data-i18n="qm_x_blog">Blog or news</span></label>
+            <label class="chip"><input aria-describedby="qmExtraHint" type="checkbox" name="qmExtra" value="ana"><span data-i18n="qm_x_ana">SEO &amp; analytics</span></label>
             <label class="chip"><input type="checkbox" name="qmCare" value="care"><span data-i18n="qm_x_care">Care plan</span></label>
           </div>
         </fieldset>
@@ -118,8 +119,8 @@
       <div class="receipt-wrap">
         <div class="receipt" id="qmReceipt">
           <div id="qmBody"></div>
-          <a class="btn btn-yellow" href="#contact" id="qmGo" data-i18n="qm_cta">Send this to WebYello</a>
-          <small class="r-fine" data-i18n="qm_fine">Free 30-minute call first, then a fixed quote. Nothing is sent from here.</small>
+          <a class="btn btn-yellow" href="#contact" id="qmGo" data-i18n="qm_cta">Continue to enquiry</a>
+          <small class="r-fine" data-i18n="qm_fine">Next, review your details in the enquiry form. Nothing is sent until you select “Send enquiry”.</small>
         </div>
         <p class="sr-only" id="qmLive" aria-live="polite"></p>
       </div>
@@ -155,7 +156,7 @@
       <textarea id="msg" rows="4" maxlength="5000" placeholder="We run a small bakery and need a site that smells as good as our bread…" data-i18n-ph="f_msg_ph" required></textarea>
       <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
       <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-      <button class="btn btn-yellow" type="submit" data-i18n="f_send">Send it our way</button>
+      <button class="btn btn-yellow" type="submit" data-i18n="f_send">Send enquiry</button>
       <small class="form-fine" data-i18n="f_privacy">NetYello uses your details only to reply to you. <a href="/privacy.html">Privacy policy</a></small>
     </form>
   </div>
@@ -186,7 +187,7 @@
 
 <div class="dock" id="dock">
   <span class="dock-info" id="dockInfo" aria-hidden="true"></span>
-  <a class="btn btn-yellow" id="dockGo" href="#contact" data-i18n="dock_quote">Send this quote</a>
+  <a class="btn btn-yellow" id="dockGo" href="#contact" data-i18n="dock_quote">Continue to enquiry</a>
 </div>
 
 <script src="/site.js"></script>
