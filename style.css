@@ -660,3 +660,12 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 
 
 html{background:var(--background)}
+
+/* Shared finishing details for long bilingual copy and form controls. */
+.contact-inner>*,.sketch-grid>*,.quote-grid>*{min-width:0}
+.ticket h3,.card h3,.contact h2,.page-head h1{overflow-wrap:break-word}
+.contact-list a{max-width:100%;overflow-wrap:anywhere}
+#contactForm textarea{resize:vertical;min-height:132px}
+.plan .price,.r-total,.dock-info b{font-variant-numeric:tabular-nums}
+a.ticket{display:flex;flex-direction:column}
+a.ticket .more{margin-top:auto;padding-top:18px}
