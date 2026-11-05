@@ -110,6 +110,18 @@ contactForm.addEventListener('submit',async function(e){
   }
 });
 
+// Home demo strip: fetch the thumbnails only as the strip nears the viewport, so they stay out of the
+// page weight the hero reports. Without IntersectionObserver they load straight away.
+(function(){
+  const strip=document.querySelector('.home-demos');
+  if(!strip) return;
+  if(!('IntersectionObserver' in window)){ strip.classList.add('seen'); return; }
+  const o=new IntersectionObserver(entries=>{
+    if(entries.some(e=>e.isIntersecting)){ strip.classList.add('seen'); o.disconnect(); }
+  },{rootMargin:'400px 0px'});
+  o.observe(strip);
+})();
+
 // Enhance only after the observer exists: unavailable APIs must never hide content.
 if('IntersectionObserver' in window&&window.matchMedia&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
   const revealEls=document.querySelectorAll('.sec-head, .ticket, .card, .plan, #contactForm, .contact-inner > div');

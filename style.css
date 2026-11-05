@@ -601,6 +601,16 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 .demo-next p{color:var(--foreground)}
 .demo-next .more{color:var(--foreground)}
 @media(max-width:640px){.demos{grid-template-columns:1fr}}
+/* Home demo strip: four compact cards. The thumbnails stay off the initial load (the hero measures this
+   page's weight): each card carries --tint/--img/--pos, and site.js adds .seen as the strip nears the viewport. */
+.demos-home{grid-template-columns:repeat(4,minmax(0,1fr))}
+.demos-home .demo-shot{min-height:168px;padding-bottom:20px;background:var(--tint,linear-gradient(transparent,transparent)),var(--muted)}
+.home-demos.seen .demo-shot{background:var(--tint,linear-gradient(transparent,transparent)),var(--img) var(--pos)/cover}
+.demos-home .demo-h{margin:auto 18px 0;font-size:1.75rem}
+.demos-home .demo-rule{margin:8px 18px 0}
+.demos-home .demo-body{padding:18px}
+@media(max-width:1000px){.demos-home{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.demos-home{grid-template-columns:1fr}}
 
 /* ---- Phone dock ---- */
 .dock{display:none}
