@@ -146,8 +146,6 @@ nav{border-bottom:1px solid var(--border);background:var(--background);position:
 .hero-top{display:flex;flex-direction:column}
 .hero-scene .btn-line{background:var(--sky)}
 .hero-scene .btn-line:hover{background:var(--foreground)}
-.hero-scene .perf{margin-top:32px;max-width:440px;border-width:2px}
-.hero-scene .perf p{margin:0;max-width:none;font-size:.82rem;animation:none}
 .badge{align-self:flex-start;display:inline-block;font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:500;font-size:.85rem;color:var(--muted-foreground);margin-bottom:20px;animation:heroFadeUp .42s cubic-bezier(.16,1,.3,1) both}
 .hero h1{font-size:var(--text-hero);font-weight:800;letter-spacing:-.025em;line-height:1.08;margin-bottom:24px;animation:heroFadeUp .42s cubic-bezier(.16,1,.3,1) .07s both}
 .hero h1 mark{background:var(--primary);color:var(--primary-foreground);padding:0 .12em;box-decoration-break:clone;-webkit-box-decoration-break:clone;clip-path:inset(0 100% 0 0);animation:inkStamp .35s cubic-bezier(.16,1,.3,1) .6s both}
@@ -159,12 +157,6 @@ nav{border-bottom:1px solid var(--border);background:var(--background);position:
 
 /* The gold panel: this page measures itself */
 /* The gold panel: a comic-panel illustration over a readout of this page's own speed */
-.perf{background:var(--card);color:var(--foreground);border:3px solid var(--primary-foreground);padding:16px 18px}
-.perf h2{font-family:'Karla',system-ui,sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
-.perf dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:10px;border-top:1px solid var(--border);padding-top:10px}
-.perf dt{font-size:.8rem;line-height:1.25;color:var(--muted-foreground)}
-.perf dd{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:500;font-size:1.05rem;margin-top:4px;font-variant-numeric:tabular-nums;white-space:nowrap}
-.perf p{font-size:.82rem;line-height:1.4;color:var(--muted-foreground)}
 
 @keyframes heroFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes inkStamp{to{clip-path:inset(0 0 0 0)}}
@@ -601,8 +593,7 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 .demo-next p{color:var(--foreground)}
 .demo-next .more{color:var(--foreground)}
 @media(max-width:640px){.demos{grid-template-columns:1fr}}
-/* Home demo strip: four compact cards. The thumbnails stay off the initial load (the hero measures this
-   page's weight): each card carries --tint/--img/--pos, and site.js adds .seen as the strip nears the viewport. */
+/* Home demo strip: four compact cards. The thumbnails stay off the initial load: each card carries --tint/--img/--pos, and site.js adds .seen as the strip nears the viewport. */
 .demos-home{grid-template-columns:repeat(4,minmax(0,1fr))}
 .demos-home .demo-shot{min-height:168px;padding-bottom:20px;background:var(--tint,linear-gradient(transparent,transparent)),var(--muted)}
 .home-demos.seen .demo-shot{background:var(--tint,linear-gradient(transparent,transparent)),var(--img) var(--pos)/cover}
@@ -629,7 +620,6 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
   .hero-top{grid-area:1/1;position:relative;padding:48px 24px 48vw;max-width:none;
     background:linear-gradient(to bottom,rgba(var(--veil),.8) 0,rgba(var(--veil),.62) calc(100% - 48vw + 8px),rgba(var(--veil),0) calc(100% - 48vw + 96px))}
   .hero-top>*{max-width:640px}
-  .hero-scene .perf{grid-area:2/1;margin:0 24px 48px;max-width:640px}
   .tickets{grid-template-columns:repeat(2,minmax(0,1fr))}
   .plans{grid-template-columns:1fr;gap:40px}
   .contact-inner{grid-template-columns:1fr}
@@ -654,7 +644,6 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
   section{padding:64px 0}
   .wrap,.nav-inner{padding-left:16px;padding-right:16px}
   .hero-top{padding:36px 16px 48vw}
-  .hero-scene .perf{margin:0 16px 40px}
   .tickets,.strip{grid-template-columns:1fr}
   .page-head{padding-top:48px}
   .page-head .wrap{grid-template-columns:1fr}
@@ -724,9 +713,6 @@ a.ticket .more{margin-top:auto;padding-top:18px}
 :where(.ticket p,.card p,.sec-head p,.page-head p,.contact .lead,.legal p){text-wrap:pretty}
 .legal p,.legal li{max-width:68ch}
 .care p{max-width:68ch;line-height:1.65}
-.perf h2,.perf dt,.perf p,.hero-scene .perf p,.form-fine,.r-fine,.r-vat,footer small{font-size:var(--text-small);line-height:1.5}
-.perf h2{letter-spacing:.04em;line-height:1.3}
-.perf dd{font-size:1.0625rem;line-height:1.4;white-space:normal;overflow-wrap:anywhere}
 .mock-url{font-weight:500}
 .pop{max-width:calc(100% - 40px);font-size:var(--text-small);line-height:1.35;letter-spacing:.035em}
 .r-pkg,.r-care,.r-total{flex-wrap:wrap}

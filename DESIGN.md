@@ -35,7 +35,6 @@ rounded:
 - Square corners (`--radius: 0`). No pills, no rounded cards, no circles.
 - No shadows and no rotation. Hierarchy comes from size, weight, colour fields, hairlines (`border`) and thick top rules.
 - Light and dark are both first-class. Dark follows the visitor's system setting (`prefers-color-scheme`); `.dark` / `.light` on `<html>` force one.
-- The site measures itself: the home hero shows this page's real load time, first content and page weight, read from the browser's Performance API.
 
 ## Colors
 
@@ -60,7 +59,7 @@ rounded:
 
 - **Display:** Bricolage Grotesque 800 for h1, 700 for h2/h3 and prices.
 - **Body:** Karla 400; 700 for labels, nav, buttons (buttons are uppercase, tracked .06em).
-- **Mono:** IBM Plex Mono 500 for numbers that are measurements or prices in the quote: the performance readout, size-card prices, step numbers, the mock URL.
+- **Mono:** IBM Plex Mono 500 for numbers that are measurements or prices in the quote: size-card prices, step numbers, the mock URL.
 - **Role scale:** body `1rem` / 1.65, secondary text `.875rem` / 1.5, form labels `.9375rem` / 1.4, card headings `1.375rem` / 1.2. Repeated roles use `--text-*` properties in `style.css`.
 - **Responsive headings:** hero `clamp(2.4rem, 1.6rem + 3vw, 4rem)` / 1.08; page `clamp(2.125rem, 1.35rem + 2.1vw, 3.25rem)` / 1.12; section `clamp(1.875rem, 1.45rem + 1.4vw, 2.5rem)` / 1.15. Fluid sizes combine rem and viewport units so user font settings still influence them.
 - **Prices:** Bricolage 700 for package prices (`2.125rem`) and the receipt total (`1.875rem`); Plex Mono 500 for the compact package selector and measurements. Use tabular numerals on prices.

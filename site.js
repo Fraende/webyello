@@ -41,7 +41,7 @@ const I18N={
   }
 };
 
-// Scripts that build text (the quote, the sketch, the speed readout) register here and run once on load
+// Scripts that build text (the quote, the sketch) register here and run once on load
 const langHooks=[];
 document.addEventListener('DOMContentLoaded',function(){
   // the page's own strings (plan names and features, button labels) become available to the scripts
@@ -110,8 +110,8 @@ contactForm.addEventListener('submit',async function(e){
   }
 });
 
-// Home demo strip: fetch the thumbnails only as the strip nears the viewport, so they stay out of the
-// page weight the hero reports. Without IntersectionObserver they load straight away.
+// Home demo strip: fetch the thumbnails only as the strip nears the viewport, so they stay off the
+// initial page load. Without IntersectionObserver they load straight away.
 (function(){
   const strip=document.querySelector('.home-demos');
   if(!strip) return;
@@ -142,7 +142,7 @@ if('IntersectionObserver' in window&&window.matchMedia&&!window.matchMedia('(pre
 }
 
 // The phone dock steps aside while the contact form is on screen, and on the home page while the
-// hero copy is on screen, so it never covers the hero's own buttons or the speed readout
+// hero copy is on screen, so it never covers the hero's own buttons
 (function(){
   const dock=document.getElementById('dock'),contact=document.getElementById('contact');
   if(!dock||!contact||!('IntersectionObserver' in window)) return;
@@ -156,39 +156,4 @@ if('IntersectionObserver' in window&&window.matchMedia&&!window.matchMedia('(pre
   watch(contact,'0px');
   // the top margin skips the strip under the sticky nav
   if(heroCopy) watch(heroCopy,'-80px 0px 0px 0px');
-})();
-
-// The site proves its own speed: measure this very page in the visitor's browser (home page only)
-(function(){
-  const out={load:document.getElementById('perfLoad'),fcp:document.getElementById('perfFcp'),bytes:document.getElementById('perfBytes')};
-  if(!out.load||!window.performance||!performance.getEntriesByType) return;
-  const v={load:null,fcp:null,bytes:null};
-  const num=(n,d)=>{ const s=n.toFixed(d); return lang==='fi'?s.replace('.',','):s; };
-  const sec=ms=>ms==null?'—':num(ms/1000,2)+' s';
-  const kb=b=>b==null?'—':(b<1024*1024?num(b/1024,0)+(lang==='fi'?' kt':' KB'):num(b/1048576,2)+(lang==='fi'?' Mt':' MB'));
-  function render(){ out.load.textContent=sec(v.load); out.fcp.textContent=sec(v.fcp); out.bytes.textContent=kb(v.bytes); }
-  // compressed size of everything the page fetched (cross-origin files that hide their size count as 0)
-  function weight(){
-    let total=0;
-    const nav=performance.getEntriesByType('navigation')[0];
-    if(nav) total+=nav.encodedBodySize||0;
-    performance.getEntriesByType('resource').forEach(r=>{ total+=r.encodedBodySize||0; });
-    return total||null;
-  }
-  try{
-    new PerformanceObserver(function(list){
-      list.getEntries().forEach(e=>{ if(e.name==='first-contentful-paint'){ v.fcp=e.startTime; render(); } });
-    }).observe({type:'paint',buffered:true});
-  }catch(e){}
-  function onLoad(){
-    setTimeout(function(){
-      const nav=performance.getEntriesByType('navigation')[0];
-      v.load=nav&&nav.loadEventStart?nav.loadEventStart:null;
-      v.bytes=weight();
-      if(v.fcp==null){ const p=performance.getEntriesByName('first-contentful-paint')[0]; if(p) v.fcp=p.startTime; }
-      render();
-    },0);
-  }
-  if(document.readyState==='complete') onLoad(); else window.addEventListener('load',onLoad);
-  langHooks.push(render);
 })();
