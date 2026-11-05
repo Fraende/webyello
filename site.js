@@ -124,7 +124,7 @@ contactForm.addEventListener('submit',async function(e){
 
 // Enhance only after the observer exists: unavailable APIs must never hide content.
 if('IntersectionObserver' in window&&window.matchMedia&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-  const revealEls=document.querySelectorAll('.sec-head, .ticket, .card, .plan, #contactForm, .contact-inner > div');
+  const revealEls=document.querySelectorAll('.sec-head, .ticket, .card, .plan, .demo, #contactForm, .contact-inner > div');
   const reveal=(el,instant=false)=>{
     if(instant){el.style.transitionDelay='0s';el.style.transitionDuration='0s';}
     el.classList.remove('pre-reveal');io.unobserve(el);

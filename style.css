@@ -575,7 +575,8 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 
 /* ---- Demos ---- */
 .demos{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
-.demo{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);transition:border-color .15s}
+.demo{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);transition:border-color .15s,opacity .5s cubic-bezier(.16,1,.3,1)}
+.demo.pre-reveal{opacity:0}
 .demo:hover{border-color:var(--foreground)}
 .demo-shot{display:flex;flex-direction:column;background:var(--muted);border-bottom:1px solid var(--border);padding:0 0 28px;min-height:200px}
 .demo-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid var(--border);background:var(--card)}
@@ -654,6 +655,22 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
   .foot-links a{margin-left:0;margin-right:20px}
 }
 
+/* ---- Motion polish ----
+   Same vocabulary as the rest: short, ease-out (.16,1,.3,1), opacity and small translations only. */
+/* Link cards: the "→" label leans toward where the card goes */
+.ticket .more,.demo .more{transition:transform .2s cubic-bezier(.16,1,.3,1)}
+a.ticket:hover .more,a.ticket:focus-visible .more,a.demo:hover .more,a.demo:focus-visible .more{transform:translateX(4px)}
+.demo .more{align-self:flex-start}
+/* Buttons settle 1px when pressed */
+.btn{transition:background-color .15s,color .15s,box-shadow .15s,transform .1s}
+.btn:active:not(:disabled){transform:translateY(1px)}
+/* Selected chips and size cards draw their tick, like the hero's ink stamp */
+.chip input:checked+span::before,.size input:checked+.size-in b::before{animation:qStamp .25s cubic-bezier(.16,1,.3,1) both}
+/* Page to page: a quick crossfade; the nav stays put */
+@view-transition{navigation:auto}
+nav{view-transition-name:site-nav}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.2s;animation-timing-function:cubic-bezier(.16,1,.3,1)}
+
 /* ---- Motion off ---- */
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -664,6 +681,11 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
   .sec-head.pre-reveal,.ticket.pre-reveal,.card.pre-reveal,.plan.pre-reveal,#contactForm.pre-reveal,.contact-inner>div.pre-reveal{opacity:1}
   .dock,.dock.hide{transition:none}
   .m-scroll,.mock-tab{transition:none}
+  .demo.pre-reveal{opacity:1}
+  .ticket .more,.demo .more,.btn{transition:none}
+  a.ticket:hover .more,a.ticket:focus-visible .more,a.demo:hover .more,a.demo:focus-visible .more,.btn:active:not(:disabled){transform:none}
+  .chip input:checked+span::before,.size input:checked+.size-in b::before{animation:none}
+  @view-transition{navigation:none}
 }
 
 
