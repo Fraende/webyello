@@ -138,6 +138,11 @@ nav{border-bottom:1px solid var(--border);background:var(--background);position:
   background:linear-gradient(to top,var(--sand) 0,var(--sand) calc(var(--img-w)*.47),#ead7a4 calc(var(--img-w)*.5),var(--sky) calc(var(--img-w)*.53),var(--sky) 100%);
   min-height:calc(var(--img-w)*1.25);display:flex;align-items:center;padding:72px 0;border-bottom:1px solid #d9b25f
 }
+/* The desert floor moves: sand.js draws drifting ripples and stipple on the sand band, under the drawing.
+   It fades in over the flat CSS sand once its first frame is drawn, and fades into the horizon haze at the top. */
+.hero-sand{position:absolute;left:0;bottom:0;width:100%;height:calc(var(--img-w)*.5);pointer-events:none;opacity:0;transition:opacity .8s cubic-bezier(.16,1,.3,1);
+  -webkit-mask-image:linear-gradient(to top,#000 88%,transparent);mask-image:linear-gradient(to top,#000 88%,transparent)}
+.hero-sand.is-live{opacity:1}
 .hero-bg{position:absolute;right:0;bottom:0;width:var(--img-w);aspect-ratio:4/5;pointer-events:none;
   -webkit-mask-image:linear-gradient(to right,transparent 0,#000 10%);mask-image:linear-gradient(to right,transparent 0,#000 10%)}
 .hero-bg img{display:block;width:100%;height:100%;object-fit:cover}
@@ -616,6 +621,7 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
      can share one grid cell. */
   .hero-scene{--veil:244,233,201;display:grid;grid-template-columns:minmax(0,1fr);align-items:stretch;min-height:0;padding:0;background:var(--sand)}
   .hero-scene>.wrap,.hero-scene .hero-copy{display:contents}
+  .hero-sand{display:none}
   .hero-bg{grid-area:1/1;position:relative;right:auto;bottom:auto;width:auto;height:auto;aspect-ratio:auto;display:flex;align-items:flex-end;overflow:hidden;background:var(--sky);-webkit-mask-image:none;mask-image:none}
   .hero-bg img{height:auto;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 10%);mask-image:linear-gradient(to bottom,transparent 0,#000 10%)}
   .hero-top{grid-area:1/1;position:relative;padding:48px 24px 48vw;max-width:none;
@@ -680,6 +686,7 @@ nav{view-transition-name:site-nav}
   .hero h1 mark{animation:none;clip-path:none}
   .sec-head.pre-reveal,.ticket.pre-reveal,.card.pre-reveal,.plan.pre-reveal,#contactForm.pre-reveal,.contact-inner>div.pre-reveal{opacity:1}
   .dock,.dock.hide{transition:none}
+  .hero-sand{transition:none}
   .m-scroll,.mock-tab{transition:none}
   .demo.pre-reveal{opacity:1}
   .ticket .more,.demo .more,.btn{transition:none}

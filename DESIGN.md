@@ -79,6 +79,7 @@ rounded:
 - **Chips and size cards:** 2px `foreground` border; selected = gold fill plus a drawn check (selection never relies on colour alone).
 - **Receipt:** `card`, 2px border, 10px gold top rule, dashed rules between package and total, total stamped in gold.
 - **Demo builder mock:** browser frame (tab with the visitor's business name, address bar) in WebYello tokens. Inside, the five example sites (burger joint, café, hair salon, plumber, small online shop) wear one of four client colour schemes the visitor picks: warm & cozy, clean & professional, colourful & playful, industrial. `sketch.js` sets each scheme's palette (plus a per-type accent) as `--s-*` variables on `.mock`, and `.mock[data-s]` sets its type, corners and signature touches. Each type opens in the scheme that suits it until the visitor picks one. These are client looks, not WebYello's, so inside the mockup the playful and warm schemes may round corners and playful may use a hard offset shadow; everything outside the mockup keeps the WebYello rules. Every scheme's text pairs measure ≥4.5:1, and the examples stay light in dark mode and lay themselves out with container queries on their own width.
+- **Hero sand (the one moving surface):** on the home hero, `sand.js` draws the desert floor on the sand band under the illustration: slow wind ripples in perspective plus a fixed fine stipple, in a three-step palette sampled from the drawing (`#e9bf6d` → `--sand` `#f3ca7b` → `#f7d690`). It fades in over the flat CSS sand once its first frame is drawn, so the static gradient stays the fallback. It is capped at 30 fps and about one million pixels, stops when off screen or in a hidden tab, draws one still frame under `prefers-reduced-motion`, and is hidden on phones (≤900px), where the drawing fills the hero. Its darkest pixel keeps hero body text at ≥10:1 and `muted-foreground` at ≥5:1; any palette change must keep `muted-foreground` at 4.5:1 or better.
 - **Sub-page header:** h1 + lead + two static squares (gold, foreground), hidden on phones.
 - **Inputs:** 2px `muted-foreground` border, `foreground` on focus, 3px `ring` outline.
 - **Nav:** sticky, `background`, hairline bottom; current page gets a 3px `foreground` underline.
@@ -89,6 +90,7 @@ rounded:
 - **Do** keep gold for fields and blue for links; don't introduce a third hue.
 - **Do** put text on gold in `primary-foreground` only.
 - **Do** draw marks (masked SVGs: `--check`, `--plus`, `--menu`) rather than using glyphs as icons.
-- **Don't** add shadows, blur, rotation, blend modes or animated backgrounds. The page ground is always the `background` token, solid.
+- **Don't** add shadows, blur, rotation or blend modes.
+- **Don't** animate any background except the hero sand. Every other page ground is the `background` token, solid, and still. Motion behind text stays slow, low-contrast and readable at 4.5:1, and stops under `prefers-reduced-motion`.
 - **Don't** put `link` on `muted` or `secondary`.
 - **Don't** use `border` as the only edge of an interactive control.
