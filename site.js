@@ -157,3 +157,13 @@ if('IntersectionObserver' in window&&window.matchMedia&&!window.matchMedia('(pre
   // the top margin skips the strip under the sticky nav
   if(heroCopy) watch(heroCopy,'-80px 0px 0px 0px');
 })();
+
+// "Ask for an audit" style links pre-select the matching option in the enquiry form
+document.querySelectorAll('[data-pick-type]').forEach(function(a){
+  a.addEventListener('click',function(){
+    const sel=document.getElementById('type'),opt=document.getElementById(a.dataset.pickType);
+    if(!sel||!opt) return;
+    sel.value=opt.value;
+    sel.dispatchEvent(new Event('change',{bubbles:true}));
+  });
+});

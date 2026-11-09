@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Pricing — WebYello</title>
-<meta name="description" data-i18n-content="desc_pricing" content="Clear packages and honest fixed prices: Launch from €690, Business from €1,390, Store from €2,490, Care plan €59/month. Estimate your starting price.">
+<meta name="description" data-i18n-content="desc_pricing" content="Clear packages and honest fixed prices: Launch from €690, Business from €1,390, Store from €2,490, Care plan €59/month, website audit from €390. Estimate your starting price.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -82,6 +82,10 @@
       </div>
     </div>
     <div class="care"><p data-i18n="pcare"><b>Care plan — €59/month:</b> updates, backups, security and small changes handled for you, so your site stays fresh.</p></div>
+    <div class="care audit" id="audit">
+      <p data-i18n="paudit"><b>Website audit — from €390:</b> already have a website? We check its speed, security, privacy compliance (GDPR and cookies) and search visibility, then give you a clear list of fixes in order of importance.</p>
+      <p class="audit-go"><a href="#contact" data-pick-type="optAudit" data-i18n="paudit_cta">Ask for an audit →</a></p>
+    </div>
     <p class="vat" data-i18n="pc_vat">Prices exclude VAT (25.5%). Every project starts with a free discovery call and a fixed quote — no surprises.</p>
   </div>
 </section>
@@ -150,6 +154,7 @@
         <option data-i18n="f_o2">A redesign of my current site</option>
         <option data-i18n="f_o3">An online store</option>
         <option data-i18n="f_o4">Ongoing care &amp; support</option>
+        <option id="optAudit" data-i18n="f_o6">An audit of my current site</option>
         <option data-i18n="f_o5">Something else</option>
       </select>
       <label for="msg" data-i18n="f_msg">Tell us about your project</label>
