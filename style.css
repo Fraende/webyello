@@ -220,6 +220,10 @@ a.ticket.t2:hover,a.ticket.t5:hover{border-top-color:var(--link)}
 .plan li::before{position:absolute;left:0;top:.95em}
 .plan .btn{width:100%}
 .care{margin-top:32px;background:var(--secondary);color:var(--foreground);padding:24px 28px;font-size:1rem}
+.care+.care{margin-top:12px}
+.care p+p{margin-top:10px}
+.audit-go{font-weight:700}
+.vat+.vat{margin-top:6px}
 .vat{margin-top:16px;max-width:62ch;font-size:.9rem;color:var(--muted-foreground)}
 
 /* ---- Contact ---- */
@@ -298,6 +302,8 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 .chip:hover span{background:var(--accent)}
 .chip input:checked+span{background:var(--primary);color:var(--primary-foreground);border-color:var(--primary-foreground)}
 .chip input:focus-visible+span{outline:3px solid var(--ring);outline-offset:3px}
+.chip input:disabled{cursor:not-allowed}
+.chip input:disabled+span,.chip:hover input:disabled+span{opacity:.45;text-decoration:line-through;background:var(--card)}
 .chip .sw{display:inline-flex;gap:2px;margin-right:9px;flex:none}
 .chip .sw i{display:block;width:10px;height:18px;border:1px solid var(--foreground)}
 .chip b{font-weight:700}

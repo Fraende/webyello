@@ -4,13 +4,15 @@ const skEl=id=>document.getElementById(id);
 const QM={
   en:{title:'Your estimate',forWho:'for ',from:'from ',incl:'in the package',quoted:'quoted on the call',care:'Care plan',mo:'/month',total:'Website starting price',vat:'excl. VAT · with 25.5% VAT ≈ ',extraQ:'Extras on top of the Store package are quoted on the call.',
       up:l=>l+' requires Business. Your estimate is now from €1,390, up from €690.',down:'You chose Launch (from €690). We removed the Business-only features.',
-      live:(p,t)=>p+' package, '+t,x:{multi:'Multilingual site',blog:'Blog or news',ana:'SEO & analytics'},nfmt:n=>'€'+n.toLocaleString('en-US')},
+      live:(p,t)=>p+' package, '+t,x:{multi:'Multilingual site',blog:'Blog or news',ana:'SEO & analytics'},nfmt:n=>'€'+n.toLocaleString('en-US'),
+      audit:{name:'Website audit',f:['Speed and loading','Basic security check','Privacy (GDPR and cookies)','Search visibility (SEO)','Prioritised fix list'],total:'Audit price',credit:'Credited in full if we fix the findings or build you a new site.'}},
   fi:{title:'Hinta-arviosi',forWho:'yritykselle ',from:'alk. ',incl:'paketissa',quoted:'hinnoitellaan puhelussa',care:'Ylläpitopaketti',mo:'/kk',total:'Sivuston lähtöhinta',vat:'alv 0 % · alv 25,5 % mukana ≈ ',extraQ:'Verkkokauppapaketin päälle tulevat lisät hinnoitellaan puhelussa.',
       up:l=>l+' edellyttää Yrityssivut-pakettia. Lähtöhinta vaihtui 690 eurosta 1 390 euroon.',down:'Valitsit Startti-paketin (alk. 690 €). Poistimme vain Yrityssivut-pakettiin kuuluvat ominaisuudet.',
-      live:(p,t)=>p+'-paketti, '+t,x:{multi:'Monikielinen sivusto',blog:'Blogi tai uutiset',ana:'SEO & analytiikka'},nfmt:n=>n.toLocaleString('fi-FI')+' €'}
+      live:(p,t)=>p+'-paketti, '+t,x:{multi:'Monikielinen sivusto',blog:'Blogi tai uutiset',ana:'SEO & analytiikka'},nfmt:n=>n.toLocaleString('fi-FI')+' €',
+      audit:{name:'Sivustoauditointi',f:['Nopeus ja latausaika','Tietoturvan perustarkistus','Tietosuoja (GDPR ja evästeet)','Hakukonenäkyvyys (SEO)','Korjauslista tärkeysjärjestyksessä'],total:'Auditoinnin hinta',credit:'Hyvitetään kokonaan, jos korjaamme löydökset tai rakennamme uuden sivuston.'}}
 };
-const PRICE={launch:690,business:1390,store:2490};
-const PKG={launch:{name:'p1_t',f:['p1_f1','p1_f2','p1_f3','p1_f4']},business:{name:'p2_t',f:['p2_f1','p2_f2','p2_f3','p2_f4']},store:{name:'p3_t',f:['p3_f1','p3_f2','p3_f3','p3_f4']}};
+const PRICE={launch:690,business:1390,store:2490,audit:390};
+const PKG={launch:{name:'p1_t',f:['p1_f1','p1_f2','p1_f3','p1_f4']},business:{name:'p2_t',f:['p2_f1','p2_f2','p2_f3','p2_f4']},store:{name:'p3_t',f:['p3_f1','p3_f2','p3_f3','p3_f4','p3_f5']}};
 const EXTRA_FEAT={multi:'p2_f2',blog:'p2_f3',ana:'p2_f4'};
 const CARE=59,VAT=1.255;
 const q={size:'launch',extras:{multi:false,blog:false,ana:false},care:false,touched:false};
@@ -19,6 +21,13 @@ const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 let qNote=null; // a function, so the note is re-worded when the language changes
 const qmNote=fn=>{ qNote=fn||null; skEl('qmNote').textContent=qNote?qNote():''; };
 const anyExtra=()=>q.extras.multi||q.extras.blog||q.extras.ana;
+// the audit is not a website package: it has its own name and checks, and the website features don't apply
+const pkgLabel=tier=>tier==='audit'?QM[lang].audit.name:I18N[lang][PKG[tier].name].replace(/&amp;/g,'&');
+function syncExtras(){
+  const off=q.size==='audit';
+  if(off) q.extras={multi:false,blog:false,ana:false};
+  document.querySelectorAll('input[name=qmExtra]').forEach(c=>{c.disabled=off; if(off) c.checked=false;});
+}
 function saveQuote(){
   try{sessionStorage.setItem('wy-quote',JSON.stringify({size:q.size,extras:q.extras,care:q.care}));}catch(e){}
 }
@@ -30,9 +39,11 @@ function restoreQuote(){
     Object.keys(q.extras).forEach(k=>{q.extras[k]=saved.extras?.[k]===true;});
     q.care=saved.care===true;
     if(q.size==='launch'&&anyExtra()) q.size='business';
+    if(q.size==='audit') q.extras={multi:false,blog:false,ana:false};
     document.querySelector('input[name=qmSize][value='+q.size+']').checked=true;
     document.querySelectorAll('input[name=qmExtra]').forEach(c=>{c.checked=q.extras[c.value];});
     document.querySelector('input[name=qmCare]').checked=q.care;
+    syncExtras();
     return true;
   }catch(e){return false;}
 }
@@ -40,7 +51,7 @@ function restoreQuote(){
 function renderQuote(animate){
   saveQuote();
   const d=I18N[lang],m=QM[lang],name=skEl('qmName').value.trim();
-  const tier=q.size,price=PRICE[tier],pkgName=d[PKG[tier].name].replace(/&amp;/g,'&');
+  const tier=q.size,price=PRICE[tier],pkgName=pkgLabel(tier);
   document.querySelectorAll('[data-qm-price]').forEach(el=>{el.textContent=m.from+m.nfmt(PRICE[el.dataset.qmPrice]);});
   const isNew=k=>animate&&!qPrev.keys[k]?' new':'';
   const keys={};
@@ -51,7 +62,11 @@ function renderQuote(animate){
     const tag=tier==='store'?'<span class="tag q">'+m.quoted+'</span>':'<span class="tag">'+m.incl+'</span>';
     lines+='<li class="ask'+isNew(k)+'"><span class="tick" aria-hidden="true"></span><span>'+m.x[k]+'</span>'+tag+'</li>';
   });
-  PKG[tier].f.forEach(fk=>{
+  if(tier==='audit') m.audit.f.forEach((text,i)=>{
+    keys['a'+i]=1;
+    lines+='<li class="inc'+isNew('a'+i)+'"><span class="plus" aria-hidden="true"></span><span>'+text+'</span></li>';
+  });
+  else PKG[tier].f.forEach(fk=>{
     const k=Object.keys(EXTRA_FEAT).find(x=>EXTRA_FEAT[x]===fk);
     if(k&&q.extras[k]) return; // already listed above as something they asked for
     keys[fk]=1;
@@ -65,8 +80,8 @@ function renderQuote(animate){
     '<div class="r-head"><span class="r-title">'+m.title+'</span>'+(name?'<span class="r-for">'+m.forWho+esc(name)+'</span>':'')+'</div>'+
     '<div class="r-row r-pkg"><span>'+esc(pkgName)+'</span><span class="dots"></span><span>'+m.from+m.nfmt(price)+'</span></div>'+
     '<ul class="r-lines">'+lines+'</ul>'+care+
-    '<div class="r-total"><span>'+m.total+'</span><mark class="'+stamp.trim()+'">'+m.from+m.nfmt(total)+'</mark></div>'+
-    '<p class="r-vat">'+m.vat+m.nfmt(vat)+(tier==='store'&&anyExtra()?'<br>'+m.extraQ:'')+'</p>';
+    '<div class="r-total"><span>'+(tier==='audit'?m.audit.total:m.total)+'</span><mark class="'+stamp.trim()+'">'+m.from+m.nfmt(total)+'</mark></div>'+
+    '<p class="r-vat">'+m.vat+m.nfmt(vat)+(tier==='store'&&anyExtra()?'<br>'+m.extraQ:'')+(tier==='audit'?'<br>'+m.audit.credit:'')+'</p>';
   skEl('qmNote').textContent=qNote?qNote():'';
   qPrev={tier:tier,keys:keys};
   skEl('qmLive').textContent=(qNote?qNote()+' ':'')+m.live(pkgName,m.from+m.nfmt(total)+(q.care?' + '+m.nfmt(CARE)+m.mo:''));
@@ -80,6 +95,7 @@ function renderQuote(animate){
 
 document.querySelectorAll('input[name=qmSize]').forEach(r=>r.addEventListener('change',function(){
   q.touched=true; q.size=this.value; qmNote();
+  syncExtras();
   if(q.size==='launch'&&anyExtra()){
     q.extras={multi:false,blog:false,ana:false};
     document.querySelectorAll('input[name=qmExtra]').forEach(c=>{c.checked=false;});
@@ -126,12 +142,15 @@ document.querySelectorAll('[data-qm-size]').forEach(a=>a.addEventListener('click
 function qmBrief(){
   const d=I18N[lang],m=QM[lang],name=skEl('qmName').value.trim();
   const type=stored().type,trade=Object.hasOwn(TRADE,type)?TRADE[type]:null,label=trade?trade[lang]:'';
-  const pkg=d[PKG[q.size].name].replace(/&amp;/g,'&');
+  const pkg=pkgLabel(q.size);
   const extras=['multi','blog','ana'].filter(k=>q.extras[k]).map(k=>m.x[k]);
   const price=m.from+m.nfmt(PRICE[q.size]);
   let who;
   if(lang==='fi') who=name?'Yritykseni on '+name+(label?' ('+label+')':'')+'. ':(label?'Toimin alalla: '+label+'. ':'');
   else who=name?'My business is '+name+(label?' ('+label+')':'')+'. ':(label?'I work in: '+label+'. ':'');
+  if(q.size==='audit') return lang==='fi'
+    ? 'Hei! '+who+'Haluaisin auditoinnin nykyiselle sivustolleni ('+price+', alv 0 %)'+(q.care?' ja kiinnostaisi myös ylläpitopaketti':'')+'. Sivuston osoite: '
+    : 'Hi! '+who+'I\u2019d like an audit of my current site ('+price+', excl. VAT)'+(q.care?' and I\u2019m also interested in the care plan':'')+'. My site\u2019s address: ';
   return lang==='fi'
     ? 'Hei! '+who+'Kokosin hinta-arvion: '+pkg+' ('+price+', alv 0 %)'+(extras.length?', lisäksi '+extras.join(', '):'')+(q.care?' ja ylläpitopaketti':'')+'. Jutellaan!'
     : 'Hi! '+who+'I put together an estimate: '+pkg+' ('+price+', excl. VAT)'+(extras.length?' with '+extras.join(', '):'')+(q.care?' plus the care plan':'')+'. Let\u2019s talk!';
@@ -145,7 +164,9 @@ function qmHandoff(){
   if(!ta.value||(ta.dataset.auto!==undefined&&ta.value===ta.dataset.auto)){
     const msg=qmBrief(); ta.value=msg; ta.dataset.auto=msg;
   }
-  skEl('type').selectedIndex=q.size==='store'?2:0;
+  const audit=skEl('optAudit');
+  if(q.size==='audit'&&audit) skEl('type').value=audit.value;
+  else skEl('type').selectedIndex=q.size==='store'?2:0;
   ta.dispatchEvent(new Event('input',{bubbles:true}));
   skEl('type').dispatchEvent(new Event('change',{bubbles:true}));
   setTimeout(()=>skEl('name')?.focus({preventScroll:true}),450);
