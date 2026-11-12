@@ -181,5 +181,8 @@
   "desc_pricing": "Selkeät paketit ja rehelliset kiinteät hinnat: Startti alk. 690 €, Yrityssivut alk. 1 390 €, Verkkokauppa alk. 2 490 €, ylläpitopaketti 59 €/kk, sivustoauditointi alk. 390 €. Arvioi sivustosi lähtöhinta.",
   "desc_privacy": "Miten NetYello käsittelee henkilötietoja WebYello-sivustolla: mitä keräämme, miksi, kuka tietoja käsittelee, kuinka kauan säilytämme niitä, mitkä ovat oikeutesi — ja miksi emme käytä evästeitä.",
   "desc_demos": "WebYellon tekemiä demosivuja: katso, miltä nopea ja selkeä pienyrityksen verkkosivu näyttää ja miten se toimii, ennen kuin tilaat omasi.",
-  "qm_extra_hint": "Monikielisyys, blogi sekä SEO ja analytiikka sisältyvät Yrityssivut-pakettiin (alk. 1 390 €). Valinta vaihtaa yhden sivun hinta-arvion tähän pakettiin. Verkkokaupan lisät hinnoitellaan puhelussa; ylläpito on valinnainen. Ominaisuudet eivät koske auditointia."
+  "qm_extra_hint": "Startti-paketissa lisäkielet ovat lisäpalvelu: 199 € + alv per kieli. Yrityssivut-paketissa (alk. 1 390 €) monikielisyys sisältyy hintaan. Blogi tai SEO ja analytiikka vaihtaa yhden sivun hinta-arvion Yrityssivut-pakettiin. Verkkokaupan lisät hinnoitellaan puhelussa; ylläpito on valinnainen. Ominaisuudet eivät koske auditointia.",
+  "qm_langs": "Lisäkielten määrä",
+  "qm_langs_hint": "199 € + alv per kieli Startti-paketin päälle",
+  "plang": "<b>Lisäkieli Startti-sivustoon — 199 € + alv per kieli:</b> tee yhden sivun sivustosta kaksi- tai monikielinen ilman siirtymistä Yrityssivut-pakettiin, jossa monikielisyys sisältyy hintaan."
 }

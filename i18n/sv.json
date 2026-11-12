@@ -181,5 +181,8 @@
   "desc_pricing": "Tydliga paket och ärliga fasta priser: Start från 690 €, Företag från 1 390 €, Webbutik från 2 490 €, underhållspaket 59 €/mån, webbplatsgranskning från 390 €. Uppskatta ditt startpris.",
   "desc_privacy": "Så hanterar NetYello personuppgifter på webbplatsen WebYello: vad vi samlar in, varför, vem som behandlar dem, hur länge vi sparar dem, dina rättigheter och hur vi (inte) använder kakor.",
   "desc_demos": "Demowebbplatser byggda av WebYello: se hur en snabb och tydlig webbplats för ett litet företag ser ut och fungerar innan du beställer en.",
-  "qm_extra_hint": "Flerspråkigt innehåll, en blogg samt SEO &amp; analys ingår i Företag (från 1 390 €). Väljer du något av dem byts en uppskattning för en sida till Företag. Tillägg till Webbutik prissätts under samtalet; underhåll är valfritt. Funktionerna gäller inte granskningen."
+  "qm_extra_hint": "I Start-paketet är extra språk ett tillägg: 199 € + moms per språk. I Företag (från 1 390 €) ingår flerspråkigt innehåll. En blogg eller SEO &amp; analys byter en uppskattning för en sida till Företag. Tillägg till Webbutik prissätts under samtalet; underhåll är valfritt. Funktionerna gäller inte granskningen.",
+  "qm_langs": "Antal extra språk",
+  "qm_langs_hint": "199 € + moms per språk utöver Start-paketet",
+  "plang": "<b>Extra språk till Start — 199 € + moms per språk:</b> gör ensidessajten två- eller flerspråkig utan att gå upp till Företag, där flerspråkigt innehåll ingår."
 }

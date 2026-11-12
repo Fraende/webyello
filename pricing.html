@@ -83,7 +83,7 @@
         <a class="btn btn-line" href="#quote" data-qm-size="store" data-i18n="p_cta3">Choose Store</a>
       </div>
     </div>
-    <div class="care"><p data-i18n="pcare"><b>Care plan — €59/month:</b> updates, backups, security and small changes handled for you, so your site stays fresh.</p><p data-i18n="phour">Extra work outside the packages: €90/hour</p></div>
+    <div class="care"><p data-i18n="pcare"><b>Care plan — €59/month:</b> updates, backups, security and small changes handled for you, so your site stays fresh.</p><p data-i18n="plang"><b>Extra language for Launch — €199 + VAT per language:</b> make the one-page site bilingual or multilingual without moving up to Business, where multilingual content is included.</p><p data-i18n="phour">Extra work outside the packages: €90/hour</p></div>
     <div class="care audit" id="audit">
       <p data-i18n="paudit"><b>Website audit — from €390:</b> already have a website? We check its speed, security, privacy compliance (GDPR and cookies) and search visibility, then give you a clear list of fixes in order of importance.</p>
       <p data-i18n="paudit_scope">The security part is a basic check (for example the secure connection, outdated software and exposed admin pages), not an in-depth security test. The privacy check is technical, not legal advice.</p>
@@ -116,12 +116,19 @@
         </fieldset>
         <fieldset>
           <legend data-i18n="qm_more">Features and ongoing care</legend>
-          <p class="qm-note" id="qmExtraHint" data-i18n="qm_extra_hint">Multilingual content, a blog and SEO &amp; analytics are included in Business (from €1,390). Selecting one switches a one-page estimate to Business. Store extras are priced on the call; care is optional. Features don't apply to the audit.</p>
+          <p class="qm-note" id="qmExtraHint" data-i18n="qm_extra_hint">On the one-page package, extra languages are an add-on at €199 + VAT per language. Multilingual content is included in Business (from €1,390). A blog or SEO &amp; analytics switches a one-page estimate to Business. Store extras are priced on the call; care is optional. Features don't apply to the audit.</p>
           <div class="chips">
             <label class="chip"><input aria-describedby="qmExtraHint" type="checkbox" name="qmExtra" value="multi"><span data-i18n="qm_x_multi">Multilingual site</span></label>
             <label class="chip"><input aria-describedby="qmExtraHint" type="checkbox" name="qmExtra" value="blog"><span data-i18n="qm_x_blog">Blog or news</span></label>
             <label class="chip"><input aria-describedby="qmExtraHint" type="checkbox" name="qmExtra" value="ana"><span data-i18n="qm_x_ana">SEO &amp; analytics</span></label>
             <label class="chip"><input type="checkbox" name="qmCare" value="care"><span data-i18n="qm_x_care">Care plan</span></label>
+          </div>
+          <div class="qm-langs" id="qmLangs" hidden>
+            <label for="qmLangCount" data-i18n="qm_langs">Extra languages</label>
+            <select id="qmLangCount" aria-describedby="qmLangsHint">
+              <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            </select>
+            <small id="qmLangsHint" data-i18n="qm_langs_hint">€199 + VAT per language, on top of the one-page package</small>
           </div>
         </fieldset>
         <p class="qm-note" id="qmNote"></p>

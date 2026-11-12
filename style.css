@@ -560,6 +560,11 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 .size input:checked+.size-in{background:var(--primary);color:var(--primary-foreground)}
 .size input:checked+.size-in small{color:var(--primary-foreground)}
 .size input:focus-visible+.size-in{outline:3px solid var(--ring);outline-offset:3px}
+.qm-langs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:14px}
+.qm-langs[hidden]{display:none}
+.qm-langs label{font-weight:700;font-size:var(--text-label)}
+.qm-langs select{width:auto;min-width:5em;min-height:44px;margin:0}
+.qm-langs small{flex-basis:100%;font-size:var(--text-small);color:var(--muted-foreground)}
 .qm-note{min-height:3em;max-width:65ch;font-size:var(--text-body);font-weight:400;line-height:1.6;margin-bottom:14px}
 .receipt-wrap{position:relative}
 .receipt{background:var(--card);border:2px solid var(--foreground);border-top:10px solid var(--primary);padding:28px 26px 24px}
