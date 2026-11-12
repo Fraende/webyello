@@ -17,8 +17,8 @@ colors:
   destructive: { light: "oklch(0.55 0.20 27)", dark: "oklch(0.68 0.19 27)" }
   link: { light: "#0078BF", dark: "#4DA3E0" }
 typography:
-  display: { fontFamily: "Bricolage Grotesque, system-ui, sans-serif", fontWeight: 800 }
-  body: { fontFamily: "Karla, system-ui, sans-serif", fontSize: "1rem", fontWeight: 400, lineHeight: 1.6 }
+  display: { fontFamily: "Fraunces, Georgia, serif", fontWeight: 700 }
+  body: { fontFamily: "Inter, system-ui, sans-serif", fontSize: "1rem", fontWeight: 400, lineHeight: 1.6 }
   mono: { fontFamily: "IBM Plex Mono, ui-monospace, monospace", fontWeight: 500 }
 rounded:
   all: "0"
@@ -57,14 +57,14 @@ rounded:
 
 ## Typography
 
-- **Display:** Bricolage Grotesque 800 for h1, 700 for h2/h3 and prices.
-- **Body:** Karla 400; 700 for labels, nav, buttons (buttons are uppercase, tracked .06em).
+- **Display:** Fraunces 700 for h1, 600 for h2/h3 and prices.
+- **Body:** Inter 400; 700 for labels, nav, buttons (buttons are uppercase, tracked .04em).
 - **Mono:** IBM Plex Mono 500 for numbers that are measurements or prices in the quote: size-card prices, step numbers, the mock URL.
 - **Role scale:** body `1rem` / 1.65, secondary text `.875rem` / 1.5, form labels `.9375rem` / 1.4, card headings `1.375rem` / 1.2. Repeated roles use `--text-*` properties in `style.css`.
 - **Responsive headings:** hero `clamp(2.4rem, 1.6rem + 3vw, 4rem)` / 1.08; page `clamp(2.125rem, 1.35rem + 2.1vw, 3.25rem)` / 1.12; section `clamp(1.875rem, 1.45rem + 1.4vw, 2.5rem)` / 1.15. Fluid sizes combine rem and viewport units so user font settings still influence them.
-- **Prices:** Bricolage 700 for package prices (`2.125rem`) and the receipt total (`1.875rem`); Plex Mono 500 for the compact package selector and measurements. Use tabular numerals on prices.
+- **Prices:** Fraunces 600 for package prices (`2.125rem`) and the receipt total (`1.875rem`); Plex Mono 500 for the compact package selector and measurements. Use tabular numerals on prices.
 - **Reading widths:** leads 52–60ch; helper text up to 65ch; legal and care prose up to 68ch. Keep normal paragraphs at regular weight and reserve bold for labels and decisions.
-- **Delivery:** retain the five existing self-hosted faces with `font-display: swap`. Karla uses only the supplied 400/700 weights; Plex Mono uses 500. Do not synthesize missing weights or add unmeasured fallback metric overrides.
+- **Delivery:** five self-hosted faces (Fontsource, OFL) with `font-display: swap`: Fraunces 600/700, Inter 400/700, Plex Mono 500. Use only these weights. Do not synthesize missing weights or add unmeasured fallback metric overrides.
 
 ## Layout
 
@@ -82,7 +82,7 @@ rounded:
 - **Hero sand (the one moving surface):** on the home hero, `sand.js` draws the desert floor on the sand band under the illustration: slow wind ripples in perspective plus a fixed fine stipple, in a three-step palette sampled from the drawing (`#e9bf6d` → `--sand` `#f3ca7b` → `#f7d690`). It fades in over the flat CSS sand once its first frame is drawn, so the static gradient stays the fallback. It is capped at 30 fps and about one million pixels, stops when off screen or in a hidden tab, draws one still frame under `prefers-reduced-motion`, and is hidden on phones (≤900px), where the drawing fills the hero. Its darkest pixel keeps hero body text at ≥10:1 and `muted-foreground` at ≥5:1; any palette change must keep `muted-foreground` at 4.5:1 or better.
 - **Sub-page header:** h1 + lead + two static squares (gold, foreground), hidden on phones.
 - **Inputs:** 2px `muted-foreground` border, `foreground` on focus, 3px `ring` outline.
-- **Nav:** sticky, `background`, hairline bottom; current page gets a 3px `foreground` underline.
+- **Nav:** sticky, `background`, hairline bottom; current page gets a 3px `foreground` underline. Language switch FI · SV · EN (Finnish is the default at `/`, Swedish at `/sv/`, English at `/en/`); under 400px the logo and switch slim down so all three fit beside the menu button.
 
 ## Do's and don'ts
 

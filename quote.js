@@ -6,6 +6,10 @@ const QM={
       up:l=>l+' requires Business. Your estimate is now from €1,390, up from €690.',down:'You chose Launch (from €690). We removed the Business-only features.',
       live:(p,t)=>p+' package, '+t,x:{multi:'Multilingual site',blog:'Blog or news',ana:'SEO & analytics'},nfmt:n=>'€'+n.toLocaleString('en-US'),
       audit:{name:'Website audit',f:['Speed and loading','Basic security check','Privacy (GDPR and cookies)','Search visibility (SEO)','Prioritised fix list'],total:'Audit price',credit:'Credited in full if we fix the findings or build you a new site.'}},
+  sv:{title:'Din uppskattning',forWho:'för ',from:'från ',incl:'ingår i paketet',quoted:'prissätts under samtalet',care:'Underhållspaket',mo:'/mån',total:'Webbplatsens startpris',vat:'exkl. moms · inkl. moms 25,5 % ≈ ',extraQ:'Tillägg utöver Webbutik-paketet prissätts under samtalet.',
+      up:l=>l+' kräver paketet Företag. Startpriset ändrades från 690 € till 1 390 €.',down:'Du valde Start (från 690 €). Vi tog bort funktionerna som bara ingår i Företag.',
+      live:(p,t)=>'Paketet '+p+', '+t,x:{multi:'Flerspråkig webbplats',blog:'Blogg eller nyheter',ana:'SEO & analys'},nfmt:n=>n.toLocaleString('fi-FI')+' €',
+      audit:{name:'Webbplatsgranskning',f:['Hastighet och laddning','Grundläggande säkerhetskontroll','Dataskydd (GDPR och kakor)','Synlighet i sökmotorer (SEO)','Åtgärdslista i prioritetsordning'],total:'Granskningens pris',credit:'Krediteras i sin helhet om vi åtgärdar fynden eller bygger en ny webbplats åt dig.'}},
   fi:{title:'Hinta-arviosi',forWho:'yritykselle ',from:'alk. ',incl:'paketissa',quoted:'hinnoitellaan puhelussa',care:'Ylläpitopaketti',mo:'/kk',total:'Sivuston lähtöhinta',vat:'alv 0 % · alv 25,5 % mukana ≈ ',extraQ:'Verkkokauppapaketin päälle tulevat lisät hinnoitellaan puhelussa.',
       up:l=>l+' edellyttää Yrityssivut-pakettia. Lähtöhinta vaihtui 690 eurosta 1 390 euroon.',down:'Valitsit Startti-paketin (alk. 690 €). Poistimme vain Yrityssivut-pakettiin kuuluvat ominaisuudet.',
       live:(p,t)=>p+'-paketti, '+t,x:{multi:'Monikielinen sivusto',blog:'Blogi tai uutiset',ana:'SEO & analytiikka'},nfmt:n=>n.toLocaleString('fi-FI')+' €',
@@ -116,10 +120,10 @@ document.querySelector('input[name=qmCare]').addEventListener('change',function(
 
 // What the visitor typed into the sketch on the home page (this tab only)
 const TRADE={
-  bakery:{en:'Bakery',fi:'Leipomo'},trades:{en:'Trades & repairs',fi:'Remontit ja korjaukset'},
-  coach:{en:'Coach & consultant',fi:'Valmennus ja konsultointi'},other:{en:'Other business',fi:'Muu yritystoiminta'},
-  burger:{en:'Burger joint',fi:'Burgeripaikka'},cafe:{en:'Café',fi:'Kahvila'},hair:{en:'Hair salon',fi:'Kampaamo'},
-  plumber:{en:'Plumber',fi:'Putkimies'},shop:{en:'Small online shop',fi:'Pieni verkkokauppa'}
+  bakery:{en:'Bakery',fi:'Leipomo',sv:'Bageri'},trades:{en:'Trades & repairs',fi:'Remontit ja korjaukset',sv:'Renoveringar och reparationer'},
+  coach:{en:'Coach & consultant',fi:'Valmennus ja konsultointi',sv:'Coach och konsult'},other:{en:'Other business',fi:'Muu yritystoiminta',sv:'Annan verksamhet'},
+  burger:{en:'Burger joint',fi:'Burgeripaikka',sv:'Hamburgerställe'},cafe:{en:'Café',fi:'Kahvila',sv:'Kafé'},hair:{en:'Hair salon',fi:'Kampaamo',sv:'Frisersalong'},
+  plumber:{en:'Plumber',fi:'Putkimies',sv:'Rörmokare'},shop:{en:'Small online shop',fi:'Pieni verkkokauppa',sv:'Liten webbutik'}
 };
 function stored(){
   try{
@@ -147,7 +151,11 @@ function qmBrief(){
   const price=m.from+m.nfmt(PRICE[q.size]);
   let who;
   if(lang==='fi') who=name?'Yritykseni on '+name+(label?' ('+label+')':'')+'. ':(label?'Toimin alalla: '+label+'. ':'');
+  else if(lang==='sv') who=name?'Mitt företag heter '+name+(label?' ('+label+')':'')+'. ':(label?'Jag är verksam inom: '+label+'. ':'');
   else who=name?'My business is '+name+(label?' ('+label+')':'')+'. ':(label?'I work in: '+label+'. ':'');
+  if(lang==='sv') return q.size==='audit'
+    ? 'Hej! '+who+'Jag skulle vilja ha en granskning av min nuvarande webbplats ('+price+', exkl. moms)'+(q.care?' och är också intresserad av underhållspaketet':'')+'. Webbplatsens adress: '
+    : 'Hej! '+who+'Jag har gjort en prisuppskattning: '+pkg+' ('+price+', exkl. moms)'+(extras.length?' med '+extras.join(', '):'')+(q.care?' samt underhållspaketet':'')+'. Hör av er!';
   if(q.size==='audit') return lang==='fi'
     ? 'Hei! '+who+'Haluaisin auditoinnin nykyiselle sivustolleni ('+price+', alv 0 %)'+(q.care?' ja kiinnostaisi myös ylläpitopaketti':'')+'. Sivuston osoite: '
     : 'Hi! '+who+'I\u2019d like an audit of my current site ('+price+', excl. VAT)'+(q.care?' and I\u2019m also interested in the care plan':'')+'. My site\u2019s address: ';

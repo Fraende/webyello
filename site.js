@@ -15,9 +15,9 @@ links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
 }));
 
 
-// Each page is generated in its own language (Finnish at /, English at /en/), so nothing is translated here.
+// Each page is generated in its own language (Finnish at /, Swedish at /sv/, English at /en/), so nothing is translated here.
 // I18N holds only the messages the scripts write themselves; everything else is read from the page.
-const lang=document.documentElement.lang==='en'?'en':'fi';
+const lang=['en','sv'].includes(document.documentElement.lang)?document.documentElement.lang:'fi';
 const I18N={
   en:{
     f_success_h:"Thanks — that's in.",
@@ -28,6 +28,16 @@ const I18N={
     f_err_email:"Enter an email address such as name@example.com.",
     f_sending:"Sending enquiry…",
     f_err_send:'We couldn’t confirm delivery. Your message is still here. Try again or email <a href="mailto:info@netyello.com">info@netyello.com</a>.'
+  },
+  sv:{
+    f_success_h:"Tack — meddelandet har kommit fram.",
+    f_success_p:"Vi läser igenom det och återkommer inom en arbetsdag med idéer, ärliga råd och en fast offert. Håll ett öga på din inkorg.",
+    f_err_required:"Fyll i det här fältet.",
+    f_err_name:"Skriv ditt namn.",
+    f_err_msg:"Berätta kort vad du behöver.",
+    f_err_email:"Ange en e-postadress, till exempel namn@exempel.fi.",
+    f_sending:"Skickar förfrågan…",
+    f_err_send:'Vi kunde inte bekräfta att meddelandet skickades. Ditt meddelande finns kvar. Försök igen eller mejla <a href="mailto:info@netyello.com">info@netyello.com</a>.'
   },
   fi:{
     f_success_h:"Kiitos — viesti meni perille.",

@@ -40,7 +40,7 @@ module.exports = async function handler(req, res) {
   const email = clean(body.email, LIMITS.email);
   const type = clean(body.type, LIMITS.type);
   const msg = clean(body.msg, LIMITS.msg);
-  const lang = body.lang === 'en' ? 'en' : 'fi';
+  const lang = ['en', 'sv'].includes(body.lang) ? body.lang : 'fi';
   const page = clean(body.page, 100);
 
   const fields = [];
@@ -59,7 +59,7 @@ module.exports = async function handler(req, res) {
     `Name:     ${name}`,
     `Email:    ${email}`,
     `Needs:    ${type || '-'}`,
-    `Language: ${lang === 'fi' ? 'Finnish' : 'English'}`,
+    `Language: ${{ fi: 'Finnish', sv: 'Swedish', en: 'English' }[lang]}`,
     `Page:     ${page || '-'}`,
     '',
     msg,

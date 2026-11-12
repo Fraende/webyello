@@ -1,10 +1,11 @@
-// Builds the site into dist/: Finnish pages at the root, English pages under /en/.
+// Builds the site into dist/: Finnish pages at the root (the default), Swedish under /sv/, English under /en/.
 //
 // The page files in the repo root are the single source. Their markup is English and every
 // translatable piece is tagged (data-i18n, data-i18n-ph, -aria, -alt, -content). Finnish text
-// lives in i18n/fi.json. This script writes each page twice, edits only the tagged spots
-// (everything else stays byte-for-byte as written), and adds canonical/hreflang links,
-// the FI/EN switch targets, a sitemap and robots.txt. Vercel runs it on every deploy.
+// lives in i18n/fi.json and Swedish in i18n/sv.json. This script writes each page once per language,
+// edits only the tagged spots (everything else stays byte-for-byte as written), and adds
+// canonical/hreflang links, the FI/SV/EN switch targets, a sitemap and robots.txt.
+// Vercel runs it on every deploy.
 //
 //   npm run build   -> dist/
 //   npm run dev     -> build, then serve dist/ on http://localhost:4173
@@ -15,9 +16,16 @@ import { parse } from 'parse5';
 
 const SITE = 'https://www.webyello.fi';
 const OUT = 'dist';
-const FI = JSON.parse(readFileSync('i18n/fi.json', 'utf8'));
 
-// source file -> its path on the site (the English copy lives at /en + path)
+// language -> URL prefix. Finnish is the default and lives at the root.
+const LANGS = { fi: '', sv: '/sv', en: '/en' };
+// translated strings per language; English is the source markup itself
+const STR = {
+  fi: JSON.parse(readFileSync('i18n/fi.json', 'utf8')),
+  sv: JSON.parse(readFileSync('i18n/sv.json', 'utf8')),
+};
+
+// source file -> its path on the site (the other languages live at their prefix + path)
 const PAGES = {
   'index.html': '/',
   'services.html': '/services.html',
@@ -35,18 +43,21 @@ const SKIP_ROOT = new Set(['.git', '.github', 'node_modules', OUT, 'api', 'i18n'
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const escText = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
-// A link to one of the generated pages, rewritten for the English copy ("/pricing.html#quote" -> "/en/pricing.html#quote")
+// A link to one of the generated pages, rewritten for another language ("/pricing.html#quote" -> "/sv/pricing.html#quote")
 const PAGE_LINK = /^\/(index\.html|services\.html|process\.html|pricing\.html|privacy\.html|demos\/(?:index\.html)?)?([?#].*)?$/;
-const toEnglish = href => {
+const localize = (href, lang) => {
+  if (!LANGS[lang]) return href;
   const m = href.match(PAGE_LINK);
-  return m ? '/en/' + (m[1] || '') + (m[2] || '') : href;
+  return m ? LANGS[lang] + '/' + (m[1] || '') + (m[2] || '') : href;
 };
+// links inside a translated string (e.g. the privacy link under the form)
+const localizeHtml = (html, lang) => html.replace(/href="([^"]*)"/g, (_, h) => `href="${esc(localize(h, lang))}"`);
 
-const used = new Set();
-const fi = key => {
-  if (!(key in FI)) throw new Error(`i18n/fi.json has no "${key}"`);
-  used.add(key);
-  return FI[key];
+const used = { fi: new Set(), sv: new Set() };
+const t = (lang, key) => {
+  if (!(key in STR[lang])) throw new Error(`i18n/${lang}.json has no "${key}"`);
+  used[lang].add(key);
+  return STR[lang][key];
 };
 
 function render(src, path, lang) {
@@ -91,8 +102,7 @@ function render(src, path, lang) {
     replaced.push([s, e]);
   };
 
-  const fiUrl = SITE + path, enUrl = SITE + '/en' + path;
-  const here = lang === 'fi' ? path : '/en' + path;
+  const url = l => SITE + LANGS[l] + path;
   let head = null;
 
   (function walk(node) {
@@ -101,36 +111,37 @@ function render(src, path, lang) {
       if (inside(el.sourceCodeLocation)) continue;
       const cls = (attr(el, 'class') || '').split(/\s+/);
 
-      // the other language's block (privacy page)
-      if (cls.includes(lang === 'fi' ? 'l-en' : 'l-fi')) { remove(el); continue; }
+      // another language's block (privacy page)
+      if (cls.some(c => /^l-[a-z]{2}$/.test(c) && c !== 'l-' + lang)) { remove(el); continue; }
 
       if (el.tagName === 'html') {
         setAttr(el, 'lang', lang);
-        dropAttr(el, 'data-title-en'); dropAttr(el, 'data-title-fi');
+        for (const l of Object.keys(LANGS)) dropAttr(el, 'data-title-' + l);
       }
       if (el.tagName === 'head') head = el;
       if (el.tagName === 'title') {
-        const t = attr(doc.childNodes.find(n => n.tagName === 'html'), lang === 'fi' ? 'data-title-fi' : 'data-title-en');
-        if (t) setInner(el, escText(t));
-      }
-      if (lang === 'fi') {
-        const k = attr(el, 'data-i18n');
-        if (attr(el, 'data-i18n-ph')) setAttr(el, 'placeholder', fi(attr(el, 'data-i18n-ph')));
-        if (attr(el, 'data-i18n-aria')) setAttr(el, 'aria-label', fi(attr(el, 'data-i18n-aria')));
-        if (attr(el, 'data-i18n-alt')) setAttr(el, 'alt', fi(attr(el, 'data-i18n-alt')));
-        if (attr(el, 'data-i18n-content')) setAttr(el, 'content', fi(attr(el, 'data-i18n-content')));
-        if (k) { setInner(el, fi(k)); continue; }
+        const tt = attr(doc.childNodes.find(n => n.tagName === 'html'), 'data-title-' + lang);
+        if (tt) setInner(el, escText(tt));
       }
       if (el.tagName === 'a') {
         const target = attr(el, 'data-lang');
         if (target) {
-          // the FI/EN switch: a link to this same page in the other language
-          setAttr(el, 'href', target === 'fi' ? path : '/en' + path);
+          // the language switch: a link to this same page in the other language
+          if (!(target in LANGS)) throw new Error(`${src}: unknown data-lang="${target}"`);
+          setAttr(el, 'href', LANGS[target] + path);
           if (target === lang) setAttr(el, 'aria-current', 'true');
-        } else if (lang === 'en' && attr(el, 'href')) {
-          const h = attr(el, 'href'), n = toEnglish(h);
+        } else if (LANGS[lang] && attr(el, 'href')) {
+          const h = attr(el, 'href'), n = localize(h, lang);
           if (n !== h) setAttr(el, 'href', n);
         }
+      }
+      if (lang !== 'en') {
+        const k = attr(el, 'data-i18n');
+        if (attr(el, 'data-i18n-ph')) setAttr(el, 'placeholder', t(lang, attr(el, 'data-i18n-ph')));
+        if (attr(el, 'data-i18n-aria')) setAttr(el, 'aria-label', t(lang, attr(el, 'data-i18n-aria')));
+        if (attr(el, 'data-i18n-alt')) setAttr(el, 'alt', t(lang, attr(el, 'data-i18n-alt')));
+        if (attr(el, 'data-i18n-content')) setAttr(el, 'content', t(lang, attr(el, 'data-i18n-content')));
+        if (k) { setInner(el, localizeHtml(t(lang, k), lang)); continue; }
       }
       walk(el);
     }
@@ -139,10 +150,9 @@ function render(src, path, lang) {
   if (!head?.sourceCodeLocation.endTag) throw new Error(`${src}: no </head>`);
   edits.push({
     start: head.sourceCodeLocation.endTag.startOffset, end: head.sourceCodeLocation.endTag.startOffset,
-    text: `<link rel="canonical" href="${lang === 'fi' ? fiUrl : enUrl}">\n` +
-      `<link rel="alternate" hreflang="fi" href="${fiUrl}">\n` +
-      `<link rel="alternate" hreflang="en" href="${enUrl}">\n` +
-      `<link rel="alternate" hreflang="x-default" href="${fiUrl}">\n`,
+    text: `<link rel="canonical" href="${url(lang)}">\n` +
+      Object.keys(LANGS).map(l => `<link rel="alternate" hreflang="${l}" href="${url(l)}">\n`).join('') +
+      `<link rel="alternate" hreflang="x-default" href="${url('fi')}">\n`,
   });
 
   edits.sort((a, b) => b.start - a.start || b.end - a.end);
@@ -153,7 +163,7 @@ function render(src, path, lang) {
     out = out.slice(0, e.start) + e.text + out.slice(e.end);
     floor = e.start;
   }
-  return { out, here };
+  return out;
 }
 
 function copyTree(from, to) {
@@ -172,26 +182,29 @@ copyTree('.', OUT);
 
 const urls = [];
 for (const [src, path] of Object.entries(PAGES)) {
-  for (const lang of ['fi', 'en']) {
-    const { out } = render(src, path, lang);
-    const file = join(OUT, lang === 'en' ? 'en' : '', src);
+  for (const lang of Object.keys(LANGS)) {
+    const file = join(OUT, LANGS[lang], src);
     mkdirSync(dirname(file), { recursive: true });
-    writeFileSync(file, out);
+    writeFileSync(file, render(src, path, lang));
   }
   urls.push(path);
 }
 
-const unused = Object.keys(FI).filter(k => !used.has(k));
-if (unused.length) console.warn('Finnish strings not used on any page:', unused.join(', '));
+for (const lang of Object.keys(STR)) {
+  const unused = Object.keys(STR[lang]).filter(k => !used[lang].has(k));
+  if (unused.length) console.warn(`${lang} strings not used on any page:`, unused.join(', '));
+}
+const fiKeys = Object.keys(STR.fi), svKeys = new Set(Object.keys(STR.sv));
+const missing = fiKeys.filter(k => !svKeys.has(k));
+if (missing.length) throw new Error('i18n/sv.json is missing: ' + missing.join(', '));
 
+const alternates = p => Object.keys(LANGS).map(l =>
+  `<xhtml:link rel="alternate" hreflang="${l}" href="${SITE + LANGS[l] + p}"/>`).join('');
 writeFileSync(join(OUT, 'sitemap.xml'),
   '<?xml version="1.0" encoding="UTF-8"?>\n' +
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
-  urls.flatMap(p => [SITE + p, SITE + '/en' + p].map(u =>
-    `  <url><loc>${u}</loc>` +
-    `<xhtml:link rel="alternate" hreflang="fi" href="${SITE + p}"/>` +
-    `<xhtml:link rel="alternate" hreflang="en" href="${SITE + '/en' + p}"/></url>`)).join('\n') +
+  urls.flatMap(p => Object.values(LANGS).map(pre => `  <url><loc>${SITE + pre + p}</loc>${alternates(p)}</url>`)).join('\n') +
   '\n</urlset>\n');
 writeFileSync(join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
 
-console.log(`Built ${urls.length} pages × 2 languages into ${OUT}/`);
+console.log(`Built ${urls.length} pages × ${Object.keys(LANGS).length} languages into ${OUT}/`);

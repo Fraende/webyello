@@ -8,7 +8,7 @@ web
 
 ## Users
 
-Small business owners and entrepreneurs (Finland-based, served bilingually in Finnish and English) who need a new website, a redesign of an existing site, an online store, or ongoing site care — and are choosing a design/development studio rather than doing it themselves.
+Small business owners and entrepreneurs (Finland-based, served in Finnish, Swedish and English) who need a new website, a redesign of an existing site, an online store, or ongoing site care — and are choosing a design/development studio rather than doing it themselves.
 
 ## Product Purpose
 
@@ -20,7 +20,7 @@ A brand-new studio that says so out loud (no invented portfolio, no fake reviews
 
 ## Operating Context
 
-Client journey: free 30-minute discovery call → clickable design mockups the client reacts to → build with progress previews → launch, followed by an ongoing €59/month care plan (updates, backups, security, small changes). The site serves Finnish visitors at the root (`/`) and English visitors under `/en/`; the FI/EN switch links to the same page in the other language.
+Client journey: free 30-minute discovery call → clickable design mockups the client reacts to → build with progress previews → launch, followed by an ongoing €59/month care plan (updates, backups, security, small changes). The site serves Finnish (the default) at the root (`/`), Swedish under `/sv/` and English under `/en/`; the FI/SV/EN switch links to the same page in the other language.
 
 ## Capabilities and Constraints
 

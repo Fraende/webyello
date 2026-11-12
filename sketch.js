@@ -3,27 +3,34 @@
 const SK={
   bakery:{ink:'yellow',layout:'split',thumb:'',form:0,
     en:{h:'Fresh from the oven, every morning.',sub:'Bread, buns and cakes baked by hand, right in your neighbourhood.',c:['Our breads','Order a cake','Opening hours'],cta:'Order for Saturday'},
-    fi:{h:'Tuoretta suoraan uunista, joka aamu.',sub:'Käsintehtyä leipää, pullaa ja kakkuja aivan naapurustossasi.',c:['Leipomme','Tilaa kakku','Aukioloajat'],cta:'Tilaa lauantaiksi'}},
+    fi:{h:'Tuoretta suoraan uunista, joka aamu.',sub:'Käsintehtyä leipää, pullaa ja kakkuja aivan naapurustossasi.',c:['Leipomme','Tilaa kakku','Aukioloajat'],cta:'Tilaa lauantaiksi'},
+    sv:{h:'Färskt ur ugnen, varje morgon.',sub:'Bröd, bullar och tårtor bakade för hand, mitt i ditt kvarter.',c:['Våra bröd','Beställ en tårta','Öppettider'],cta:'Beställ till lördag'}},
   hair:{ink:'blue',layout:'center',thumb:'',form:0,
     en:{h:'Look good. Feel even better.',sub:'Cuts, colour and a proper chat.',c:['Services & prices','Meet the team','Book a time'],cta:'Book a time'},
-    fi:{h:'Näytä hyvältä. Voi vielä paremmin.',sub:'Leikkaukset, värit ja kunnon jutustelu.',c:['Palvelut ja hinnat','Tiimi','Varaa aika'],cta:'Varaa aika'}},
+    fi:{h:'Näytä hyvältä. Voi vielä paremmin.',sub:'Leikkaukset, värit ja kunnon jutustelu.',c:['Palvelut ja hinnat','Tiimi','Varaa aika'],cta:'Varaa aika'},
+    sv:{h:'Se bra ut. Må ännu bättre.',sub:'Klippning, färg och en riktig pratstund.',c:['Tjänster och priser','Teamet','Boka tid'],cta:'Boka tid'}},
   trades:{ink:'blue',layout:'split',thumb:'',form:0,
     en:{h:'Fixed right, the first time.',sub:'Reliable local help with clear prices and no surprises.',c:['What we do','Get a quote','Areas we cover'],cta:'Ask for a quote'},
-    fi:{h:'Kunnossa jo ensimmäisellä kerralla.',sub:'Luotettavaa apua läheltä, selkeillä hinnoilla ja ilman yllätyksiä.',c:['Mitä teemme','Pyydä tarjous','Toiminta-alue'],cta:'Pyydä tarjous'}},
+    fi:{h:'Kunnossa jo ensimmäisellä kerralla.',sub:'Luotettavaa apua läheltä, selkeillä hinnoilla ja ilman yllätyksiä.',c:['Mitä teemme','Pyydä tarjous','Toiminta-alue'],cta:'Pyydä tarjous'},
+    sv:{h:'Rätt gjort redan första gången.',sub:'Pålitlig hjälp nära dig, med tydliga priser och utan överraskningar.',c:['Vad vi gör','Begär offert','Verksamhetsområde'],cta:'Begär en offert'}},
   coach:{ink:'yellow',layout:'center',thumb:'',form:0,
     en:{h:'Find your next step.',sub:'One-to-one sessions that turn "maybe" into a plan.',c:['How I work','Who I help','Book a call'],cta:'Book a free intro'},
-    fi:{h:'Löydä seuraava askeleesi.',sub:'Kahdenkeskisiä tapaamisia, jotka muuttavat ”ehkä” suunnitelmaksi.',c:['Näin työskentelen','Kenelle','Varaa puhelu'],cta:'Varaa tutustumiskeskustelu'}},
+    fi:{h:'Löydä seuraava askeleesi.',sub:'Kahdenkeskisiä tapaamisia, jotka muuttavat ”ehkä” suunnitelmaksi.',c:['Näin työskentelen','Kenelle','Varaa puhelu'],cta:'Varaa tutustumiskeskustelu'},
+    sv:{h:'Hitta ditt nästa steg.',sub:'Enskilda samtal som gör ”kanske” till en plan.',c:['Så arbetar jag','Vem jag hjälper','Boka ett samtal'],cta:'Boka ett gratis introsamtal'}},
   cafe:{ink:'yellow',layout:'split',thumb:'',form:0,
     en:{h:'Come hungry. Leave happy.',sub:'Good food, a warm room and friendly faces.',c:['Menu','Find us','Book a table'],cta:'Book a table'},
-    fi:{h:'Tule nälkäisenä. Lähde tyytyväisenä.',sub:'Hyvää ruokaa, lämmin tila ja ystävälliset kasvot.',c:['Ruokalista','Löydä meille','Varaa pöytä'],cta:'Varaa pöytä'}},
+    fi:{h:'Tule nälkäisenä. Lähde tyytyväisenä.',sub:'Hyvää ruokaa, lämmin tila ja ystävälliset kasvot.',c:['Ruokalista','Löydä meille','Varaa pöytä'],cta:'Varaa pöytä'},
+    sv:{h:'Kom hungrig. Gå nöjd.',sub:'God mat, ett varmt rum och vänliga ansikten.',c:['Meny','Hitta hit','Boka bord'],cta:'Boka bord'}},
   shop:{ink:'blue',layout:'split',thumb:'tall',form:2,
     en:{h:'Made with care. Shipped with a smile.',sub:'Browse our favourites and have them delivered to your door.',c:['New in','Bestsellers','Delivery'],cta:'Shop now'},
-    fi:{h:'Tehty huolella. Lähetetty hymyllä.',sub:'Selaa suosikkejamme ja tilaa ne ovellesi.',c:['Uutuudet','Suosikit','Toimitus'],cta:'Osta nyt'}},
+    fi:{h:'Tehty huolella. Lähetetty hymyllä.',sub:'Selaa suosikkejamme ja tilaa ne ovellesi.',c:['Uutuudet','Suosikit','Toimitus'],cta:'Osta nyt'},
+    sv:{h:'Gjort med omsorg. Skickat med ett leende.',sub:'Bläddra bland våra favoriter och få dem levererade hem.',c:['Nyheter','Bästsäljare','Leverans'],cta:'Handla nu'}},
   other:{ink:'yellow',layout:'center',thumb:'',form:0,
     en:{h:'Your business, in one clear sentence.',sub:'A short line about what you do and who it is for.',c:['What we do','About us','Get in touch'],cta:'Get in touch'},
-    fi:{h:'Yrityksesi yhdessä selkeässä lauseessa.',sub:'Lyhyt rivi siitä, mitä teet ja kenelle.',c:['Mitä teemme','Meistä','Ota yhteyttä'],cta:'Ota yhteyttä'}}
+    fi:{h:'Yrityksesi yhdessä selkeässä lauseessa.',sub:'Lyhyt rivi siitä, mitä teet ja kenelle.',c:['Mitä teemme','Meistä','Ota yhteyttä'],cta:'Ota yhteyttä'},
+    sv:{h:'Ditt företag i en tydlig mening.',sub:'En kort rad om vad du gör och för vem.',c:['Vad vi gör','Om oss','Kontakta oss'],cta:'Kontakta oss'}}
 };
-const SK_FALLBACK={en:'Your business',fi:'Yrityksesi nimi'};
+const SK_FALLBACK={en:'Your business',fi:'Yrityksesi nimi',sv:'Ditt företag'};
 const skEl=id=>document.getElementById(id);
 
 function skSlug(name){
@@ -35,7 +42,7 @@ function skSlug(name){
     if(full[24]!=='-'&&cut>8) s=s.slice(0,cut); // don't leave half a word ("...-p.fi")
     s=s.replace(/-+$/,'');
   }
-  return (s||(lang==='fi'?'yritys':'yourbusiness'))+'.fi';
+  return (s||({fi:'yritys',sv:'foretaget'}[lang]||'yourbusiness'))+'.fi';
 }
 function skType(){
   const value=document.querySelector('input[name=skType]:checked')?.value;
@@ -52,7 +59,7 @@ function renderSketch(animate){
   skEl('skUrl').textContent=skSlug(name);
   skEl('skH').textContent=c.h; skEl('skSub').textContent=c.sub; skEl('skBtn').textContent=c.cta;
   ['skC1','skC2','skC3'].forEach((id,i)=>{skEl(id).textContent=c.c[i];});
-  skEl('skMock').setAttribute('aria-label',(lang==='fi'?'Etusivuluonnos: ':'Homepage sketch: ')+(name||SK_FALLBACK[lang])+' — '+c.h);
+  skEl('skMock').setAttribute('aria-label',({fi:'Etusivuluonnos: ',sv:'Skiss av startsidan: '}[lang]||'Homepage sketch: ')+(name||SK_FALLBACK[lang])+' — '+c.h);
   if(animate){ page.classList.remove('print'); void page.offsetWidth; page.classList.add('print'); }
 }
 
