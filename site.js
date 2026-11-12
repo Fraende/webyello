@@ -152,7 +152,7 @@ if('IntersectionObserver' in window&&window.matchMedia&&!window.matchMedia('(pre
 }
 
 // The phone dock steps aside while the contact form is on screen, and on the home page while the
-// hero copy is on screen, so it never covers the hero's own buttons
+// hero copy or the demo builder's example is on screen, so it never covers their own buttons
 (function(){
   const dock=document.getElementById('dock'),contact=document.getElementById('contact');
   if(!dock||!contact||!('IntersectionObserver' in window)) return;
@@ -166,6 +166,9 @@ if('IntersectionObserver' in window&&window.matchMedia&&!window.matchMedia('(pre
   watch(contact,'0px');
   // the top margin skips the strip under the sticky nav
   if(heroCopy) watch(heroCopy,'-80px 0px 0px 0px');
+  // and while the demo builder's example site is on screen, so it never covers the example's own order and call bars
+  const mock=document.getElementById('skMock');
+  if(mock) watch(mock,'-80px 0px -20% 0px');
 })();
 
 // "Ask for an audit" style links pre-select the matching option in the enquiry form

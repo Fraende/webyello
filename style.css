@@ -286,14 +286,14 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 
 /* ---- Sketch (home) ---- */
 .sketch{background:var(--secondary);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.sketch-grid{display:grid;grid-template-columns:.85fr 1.15fr;grid-template-areas:"ctrl mock" "cta mock";column-gap:56px;align-items:start;grid-template-rows:auto 1fr}
+.sketch-grid{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);grid-template-areas:"ctrl mock" "cta mock";column-gap:48px;align-items:start;grid-template-rows:auto 1fr}
 .sketch-controls{grid-area:ctrl}
 .sketch-cta{grid-area:cta;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
 .sketch-cta small{font-size:.92rem}
 .mock-wrap{grid-area:mock;position:relative;min-width:0}
 .sketch-controls label,.sketch-controls legend{display:block;font-weight:700;font-size:.95rem;margin-bottom:8px;padding:0}
-.sketch-controls fieldset{border:0;padding:0;margin:0 0 28px}
-.sk-scheme .chips{display:grid;grid-template-columns:1fr 1fr}
+.sketch-controls fieldset{border:0;padding:0;margin:0 0 28px;min-width:0;min-inline-size:0}
+.sk-scheme .chips{display:grid;grid-template-columns:1fr}
 .sk-scheme .chip span{width:100%;padding:6px 12px;line-height:1.2}
 .sketch-controls input[type=text]{margin-bottom:28px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
@@ -326,9 +326,34 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 .mock-tabs{display:flex;align-items:flex-end;gap:6px;padding:8px 12px 0}
 .mock-tabs i{width:10px;height:10px;border:2px solid var(--foreground);flex:none;margin-bottom:9px}
 .mock-tab{flex:0 1 auto;margin-left:8px;min-width:0;max-width:calc(100% - 120px);padding:5px 12px 6px;background:var(--card);border:1px solid var(--border);border-bottom:0;border-top:3px solid var(--s-acc);font-size:.76rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:border-color .3s}
-.mock-addr{background:var(--card);padding:6px 12px;border-top:1px solid var(--border)}
+.mock-addr{display:flex;align-items:center;gap:10px;background:var(--card);padding:6px 12px;border-top:1px solid var(--border)}
+.mock-addr .mock-url{flex:1;min-width:0}
+/* Desktop / phone switch at the end of the address row */
+.mock-dev{display:flex;flex:none;border:2px solid var(--foreground)}
+.mock-dev button{display:grid;place-items:center;width:40px;height:30px;padding:0;background:var(--card);color:var(--foreground);border:0;cursor:pointer;transition:background-color .15s}
+.mock-dev button+button{border-left:2px solid var(--foreground)}
+.mock-dev button:hover{background:var(--accent)}
+.mock-dev button[aria-pressed=true]{background:var(--primary);color:var(--primary-foreground)}
+.mock-dev button:focus-visible{outline:3px solid var(--ring);outline-offset:2px}
+.mock-dev i{display:block;border:2px solid currentColor;border-bottom-width:4px}
+.dv-desk{width:18px;height:13px}
+.dv-phone{width:10px;height:16px}
 .mock-url{display:block;background:var(--muted);border:1px solid var(--border);padding:1px 10px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.76rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.m-view{position:relative;height:600px;overflow:hidden;background:var(--s-bg);color:var(--s-ink);font:15px/1.45 'Inter',system-ui,sans-serif}
+.m-view{position:relative;height:640px;overflow:hidden;background:var(--s-bg);color:var(--s-ink);font:15px/1.45 'Inter',system-ui,sans-serif}
+/* Phone view: the same example on a 390px sheet, centred on the desk */
+.mock[data-dev=phone] .m-view{background:var(--muted)}
+.mock[data-dev=phone] .m-scroll{width:390px;max-width:100%;margin:0 auto;background:var(--s-bg);border-inline:2px solid var(--foreground)}
+.mock[data-dev=phone] .m-layer{left:calc(50% - 195px);right:auto;width:390px}
+/* Riso print: the new sheet feeds in under a gold roller, top to bottom, slightly off register, then snaps into place */
+.m-roller{position:absolute;inset:0;z-index:4;pointer-events:none;visibility:hidden;transform:translateY(-100%)}
+.m-roller::after{content:"";position:absolute;left:0;right:0;bottom:0;height:16px;background:var(--primary);border-block:2px solid var(--foreground)}
+.mock[data-dev=phone] .m-roller::after{left:calc(50% - 205px);right:calc(50% - 205px)}
+.m-view.printing .m-roller{visibility:visible;animation:skRoller .66s cubic-bezier(.5,0,.25,1) both}
+.m-view.printing .m-scroll{animation:skFeed .66s cubic-bezier(.5,0,.25,1) both}
+.m-view.printing .m-site{animation:skReg .86s linear both}
+@keyframes skRoller{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+@keyframes skFeed{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes skReg{0%,72%{transform:translate(5px,-3px)}84%{transform:translate(-1px,1px)}100%{transform:none}}
 .m-scroll{height:100%;overflow-y:auto;container:mv/inline-size;scrollbar-width:thin;scrollbar-color:var(--s-mut) transparent;transition:opacity .15s,transform .15s}
 .m-scroll:focus-visible{outline:3px solid var(--ring);outline-offset:-3px}
 .m-scroll.out{opacity:0;transform:translateY(8px)}
@@ -670,6 +695,12 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
   .chips{display:grid;grid-template-columns:1fr 1fr}
   .chip span{width:100%;padding:6px 14px;line-height:1.2}
   .m-view{height:540px}
+  .sk-type .chips{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px 4px;scroll-snap-type:x proximity;scroll-padding-inline:16px;
+    -webkit-mask-image:linear-gradient(to right,#000 85%,transparent);mask-image:linear-gradient(to right,#000 85%,transparent)}
+  .sk-type .chips::-webkit-scrollbar{display:none}
+  .sk-type .chip{flex:none;scroll-snap-align:start}
+  .sk-type .chip span{width:auto;white-space:nowrap}
+  .mock-dev{display:none}
   .foot-links a{margin-left:0;margin-right:20px}
 }
 
@@ -699,7 +730,9 @@ nav{view-transition-name:site-nav}
   .sec-head.pre-reveal,.ticket.pre-reveal,.card.pre-reveal,.plan.pre-reveal,#contactForm.pre-reveal,.contact-inner>div.pre-reveal{opacity:1}
   .dock,.dock.hide{transition:none}
   .hero-sand{transition:none}
-  .m-scroll,.mock-tab{transition:none}
+  .m-scroll,.mock-tab,.mock-dev button{transition:none}
+  .m-view.printing .m-roller,.m-view.printing .m-scroll,.m-view.printing .m-site{animation:none}
+  .m-roller{display:none}
   .demo.pre-reveal{opacity:1}
   .ticket .more,.demo .more,.btn{transition:none}
   a.ticket:hover .more,a.ticket:focus-visible .more,a.demo:hover .more,a.demo:focus-visible .more,.btn:active:not(:disabled){transform:none}
@@ -718,37 +751,6 @@ html{background:var(--background)}
 .plan .price,.r-total,.dock-info b{font-variant-numeric:tabular-nums}
 a.ticket{display:flex;flex-direction:column}
 a.ticket .more{margin-top:auto;padding-top:18px}
-
-/* The homepage's compact sketch is a static preview, not the interactive demo hub. */
-#skMock .mock-bar{display:flex;align-items:center;gap:6px;padding:10px 12px}
-#skMock .mock-bar i{margin:0}
-#skMock .mock-url{flex:1;min-width:0;margin-left:6px}
-#skMock .m-page{--preview-accent:var(--primary);--preview-on:var(--primary-foreground);padding:22px;background:var(--card);color:var(--foreground)}
-#skMock .m-page[data-ink=blue]{--preview-accent:var(--link);--preview-on:var(--card)}
-#skMock .m-nav{display:flex;align-items:center;gap:10px;margin-bottom:28px}
-#skMock .m-brand{flex:1;min-width:0;font-family:'Fraunces',Georgia,serif;font-weight:700;line-height:1.2;overflow-wrap:anywhere}
-#skMock .m-brand.empty{color:var(--muted-foreground)}
-#skMock .m-link{width:24px;height:5px;background:var(--border)}
-#skMock .m-navbtn{width:36px;height:18px;background:var(--preview-accent)}
-#skMock .m-hero{display:grid;grid-template-columns:minmax(0,1fr) 100px;gap:18px;align-items:center;margin-bottom:24px}
-#skMock .m-h{font-family:'Fraunces',Georgia,serif;font-size:1.5rem;font-weight:700;line-height:1.1;overflow-wrap:anywhere;margin-bottom:10px}
-#skMock .m-sub{color:var(--muted-foreground);font-size:.95rem;margin-bottom:16px}
-#skMock .m-cta{display:inline-block;padding:8px 12px;background:var(--preview-accent);color:var(--preview-on);font-weight:700;font-size:.9rem}
-#skMock .m-art{display:grid;grid-template-columns:2fr 1fr;align-items:end;gap:8px;height:110px}
-#skMock .m-art b{height:100%;background:var(--preview-accent)}
-#skMock .m-art b+b{height:60%;background:var(--foreground)}
-#skMock .m-page[data-layout=center] .m-hero{grid-template-columns:1fr;text-align:center}
-#skMock .m-page[data-layout=center] .m-art{display:none}
-#skMock .m-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-#skMock .m-card{min-width:0;border-top:3px solid var(--preview-accent);padding-top:10px;font-size:.9rem;font-weight:700;overflow-wrap:anywhere}
-#skMock .m-thumb{height:36px;background:var(--muted);margin-bottom:8px}
-#skMock .m-page[data-thumb=tall] .m-thumb{height:54px}
-@media(max-width:640px){
-  #skMock .m-page{padding:16px}
-  #skMock .m-hero{grid-template-columns:1fr}
-  #skMock .m-art,#skMock .m-link{display:none}
-  #skMock .m-h{font-size:1.35rem}
-}
 
 /* Type finishing: secondary text stays quiet; numerals remain stable; long copy can reflow. */
 :where(.ticket p,.card p,.sec-head p,.page-head p,.contact .lead,.legal p){text-wrap:pretty}
