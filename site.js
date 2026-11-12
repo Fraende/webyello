@@ -180,3 +180,62 @@ document.querySelectorAll('[data-pick-type]').forEach(function(a){
     sel.dispatchEvent(new Event('change',{bubbles:true}));
   });
 });
+
+
+// ---- Motion moments (all skipped under reduced motion) ----
+const wyMotion=!!(window.matchMedia&&!matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+// Hero headline: on the first visit in this tab the words are set one by one
+(function(){
+  const h=document.querySelector('.hero-scene h1');
+  if(!h||!wyMotion) return;
+  try{ if(sessionStorage.getItem('wy-hero')) return; sessionStorage.setItem('wy-hero','1'); }catch(e){ return; }
+  let k=0;
+  (function split(node){
+    Array.from(node.childNodes).forEach(function(n){
+      if(n.nodeType===1){ split(n); return; }
+      if(n.nodeType!==3) return;
+      const frag=document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(function(part){
+        if(!part) return;
+        if(/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(part)); return; }
+        const s=document.createElement('span'); s.className='w'; s.style.setProperty('--k',k++); s.textContent=part; frag.appendChild(s);
+      });
+      n.replaceWith(frag);
+    });
+  })(h);
+  h.parentElement.style.setProperty('--n',k);
+  h.classList.add('set');
+})();
+
+// Numbers count up to their value. The text keeps its own format ("alk. 1 390 €", "from €1,390"): only the digits run.
+function wyCount(el,from){
+  const full=el.textContent,m=full.match(/\d[\d\s.,  ]*\d|\d/);
+  if(!m||!wyMotion) return;
+  const raw=m[0],to=parseInt(raw.replace(/\D/g,''),10),sep=(raw.match(/\D/)||[''])[0];
+  from=from||0; if(!(to>0)||to===from) return;
+  const fmt=n=>sep?String(n).replace(/\B(?=(\d{3})+(?!\d))/g,sep):String(n);
+  const t0=performance.now(),dur=600;
+  cancelAnimationFrame(el._wyRaf);
+  (function tick(t){
+    const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);
+    el.textContent=p<1?full.replace(raw,fmt(Math.round(from+(to-from)*e))):full;
+    if(p<1) el._wyRaf=requestAnimationFrame(tick);
+  })(t0);
+}
+if(wyMotion&&'IntersectionObserver' in window){
+  const io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ io.unobserve(e.target); wyCount(e.target); } });
+  },{threshold:.6});
+  document.querySelectorAll('.plan .price').forEach(function(el){ io.observe(el); });
+
+  // Process: the gold line draws across the steps when they come into view
+  const strip=document.querySelector('.strip');
+  if(strip){
+    strip.classList.add('pre-draw');
+    const so=new IntersectionObserver(function(es){
+      if(es.some(function(e){return e.isIntersecting;})){ so.disconnect(); strip.classList.remove('pre-draw'); }
+    },{threshold:.3});
+    so.observe(strip);
+  }
+}

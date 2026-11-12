@@ -32,8 +32,8 @@ rounded:
 
 **Key characteristics**
 - One hue family. `primary` (gold) carries every large colour field; `link` (riso blue) is the only other colour, and only for links and small accents.
-- Square corners (`--radius: 0`). No pills, no rounded cards, no circles.
-- No shadows and no rotation. Hierarchy comes from size, weight, colour fields, hairlines (`border`) and thick top rules.
+- Square corners on the interface (`--radius: 0`): buttons, inputs, chips, cards and tags have no pills, rounded corners or circles. Illustrations are exempt: drawn objects may curve, tilt and cast a shadow.
+- No shadows and no rotation on interface elements. Hierarchy comes from size, weight, colour fields, hairlines (`border`) and thick top rules.
 - Light and dark are both first-class. Dark follows the visitor's system setting (`prefers-color-scheme`); `.dark` / `.light` on `<html>` force one.
 
 ## Colors
@@ -73,25 +73,34 @@ rounded:
 ## Components
 
 - **Buttons:** square, 48px tall, uppercase label. Primary = gold fill with a 2px `primary-foreground` edge (gold alone is only 1.4–1.6:1 against the light grounds); ghost = 2px `foreground` outline that fills on hover.
-- **Tickets (services / home links):** `card` with a 6px top rule cycling foreground → gold → blue.
-- **Process cards:** `card`, 44px gold square holding the step number in mono.
+- **Tickets (services / home links):** `card` with a 6px top rule cycling gold → blue → foreground. The rule is two inks: on hover or focus the top ink slips 3px off register and shows the second one under it (riso misregister). Demo cards do the same with their gold rule over blue.
+- **Process cards:** `card`, 44px gold square holding the step number in mono. When the row comes into view a gold line draws across the top of the four cards in turn and each number stamps in as the line reaches it.
 - **Plans:** `card` with list rows divided by hairlines; the featured plan gets a 2px `foreground` border, a 10px gold top rule and a square "Most popular" tag above its corner.
 - **Chips and size cards:** 2px `foreground` border; selected = gold fill plus a drawn check (selection never relies on colour alone).
 - **Receipt:** `card`, 2px border, 10px gold top rule, dashed rules between package and total, total stamped in gold.
 - **Demo builder mock:** browser frame (tab with the visitor's business name, address bar) in WebYello tokens. Inside, the five example sites (burger joint, café, hair salon, plumber, small online shop) wear one of four client colour schemes the visitor picks: warm & cozy, clean & professional, colourful & playful, industrial. `sketch.js` sets each scheme's palette (plus a per-type accent) as `--s-*` variables on `.mock`, and `.mock[data-s]` sets its type, corners and signature touches. Each type opens in the scheme that suits it until the visitor picks one. These are client looks, not WebYello's, so inside the mockup the playful and warm schemes may round corners and playful may use a hard offset shadow; everything outside the mockup keeps the WebYello rules. Every scheme's text pairs measure ≥4.5:1, and the examples stay light in dark mode and lay themselves out with container queries on their own width. The section is laid out like an editor: a 320px control column (name, site type, scheme, quote link) beside a large canvas (640px tall). The address row ends in a desktop/phone switch; phone view narrows the example to a 390px sheet on a `muted` desk (hidden on phones, where the canvas already is a phone). Copy is in Finnish and English inline in `sketch.js`, with Swedish from its `SV` table keyed by the English text.
 - **Riso print (demo builder):** when the type, scheme or device changes, and once when the builder first scrolls into view, the new example prints like a riso sheet: a 16px gold roller (2px `foreground` edges) sweeps top to bottom while the page is revealed behind it (`clip-path`), slightly off register (5px, −3px) until it snaps into place. 0.66s, transform and clip-path only; skipped under `prefers-reduced-motion`. It is a transition on the demo, not a moving background.
-- **Hero sand (the one moving surface):** on the home hero, `sand.js` draws the desert floor on the sand band under the illustration: slow wind ripples in perspective plus a fixed fine stipple, in a three-step palette sampled from the drawing (`#e9bf6d` → `--sand` `#f3ca7b` → `#f7d690`). It fades in over the flat CSS sand once its first frame is drawn, so the static gradient stays the fallback. It is capped at 30 fps and about one million pixels, stops when off screen or in a hidden tab, draws one still frame under `prefers-reduced-motion`, and is hidden on phones (≤900px), where the drawing fills the hero. Its darkest pixel keeps hero body text at ≥10:1 and `muted-foreground` at ≥5:1; any palette change must keep `muted-foreground` at 4.5:1 or better.
-- **Sub-page header:** h1 + lead + two static squares (gold, foreground), hidden on phones.
+- **Hero sand:** on the home hero, `sand.js` draws the desert floor on the sand band under the illustration: slow wind ripples in perspective plus a fixed fine stipple, in a three-step palette sampled from the drawing (`#e9bf6d` → `--sand` `#f3ca7b` → `#f7d690`). It fades in over the flat CSS sand once its first frame is drawn, so the static gradient stays the fallback. It is capped at 30 fps and about one million pixels, stops when off screen or in a hidden tab, draws one still frame under `prefers-reduced-motion`, and is hidden on phones (≤900px), where the drawing fills the hero. Its darkest pixel keeps hero body text at ≥10:1 and `muted-foreground` at ≥5:1; any palette change must keep `muted-foreground` at 4.5:1 or better.
+- **Sub-page header:** h1 + lead + one drawn object from the hero's desert, 300px wide, hidden on phones: the stone pointer (services), three arches (pricing), the traveller and footprints (process), the gateway (demos). They are `img/art-*.svg`, generated by `tools/draw-art.py` in the hero drawing's manner: weathered sandstone, thin ink line, flat colour, stipple and cracks, the riso blue only on the scarf. Each has one small loop (the pointer floats, the stars twinkle, the scarf moves, footprints appear) that stops under `prefers-reduced-motion`, and the ground ink lightens under a dark colour scheme.
 - **Inputs:** 2px `muted-foreground` border, `foreground` on focus, 3px `ring` outline.
 - **Nav:** sticky, `background`, hairline bottom; current page gets a 3px `foreground` underline. Language switch FI · SV · EN (Finnish is the default at `/`, Swedish at `/sv/`, English at `/en/`); under 400px the logo and switch slim down so all three fit beside the menu button.
 
+## Motion
+
+Short, ease-out `(.16,1,.3,1)`, opacity, transform and clip-path only. Everything is skipped under `prefers-reduced-motion`.
+- **Hero headline:** on the first visit in a tab the words are set one by one (55ms apart), then the gold highlight inks in and the lead and buttons follow.
+- **Counting numbers:** package prices count up when they come into view, and the quote total runs from the old figure to the new one (0.6s; tabular numerals keep the width steady).
+- **Process line, riso misregister, riso print, header art loops:** see Components.
+- Backgrounds may move. The hero sand is the only one that does today.
+
 ## Do's and don'ts
 
-- **Do** keep every corner square.
+- **Do** keep every interface corner square.
+- **Do** draw decoration as objects from the hero's world (stone, sand, the traveller) rather than bare squares, circles or triangles.
 - **Do** keep gold for fields and blue for links; don't introduce a third hue.
 - **Do** put text on gold in `primary-foreground` only.
 - **Do** draw marks (masked SVGs: `--check`, `--plus`, `--menu`) rather than using glyphs as icons.
-- **Don't** add shadows, blur, rotation or blend modes.
-- **Don't** animate any background except the hero sand. Every other page ground is the `background` token, solid, and still. Motion behind text stays slow, low-contrast and readable at 4.5:1, and stops under `prefers-reduced-motion`.
+- **Don't** add shadows, blur, rotation or blend modes to interface elements.
+- **Do** keep text over anything that moves readable at 4.5:1, and stop every animation under `prefers-reduced-motion`.
 - **Don't** put `link` on `muted` or `secondary`.
 - **Don't** use `border` as the only edge of an interactive control.

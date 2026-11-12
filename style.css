@@ -163,6 +163,12 @@ nav{border-bottom:1px solid var(--border);background:var(--background);position:
 /* The gold panel: this page measures itself */
 /* The gold panel: a comic-panel illustration over a readout of this page's own speed */
 
+/* First visit in a tab: the headline is set word by word, then the highlight inks in and the buttons follow (site.js adds .set and --n) */
+.hero h1.set{animation:none}
+.hero h1.set .w{display:inline-block;animation:heroFadeUp .34s cubic-bezier(.16,1,.3,1) calc(.08s + var(--k)*.055s) both}
+.hero h1.set mark{animation-delay:calc(.2s + var(--n)*.055s)}
+.hero h1.set~p{animation-delay:calc(.16s + var(--n)*.055s)}
+.hero h1.set~.hero-ctas{animation-delay:calc(.26s + var(--n)*.055s)}
 @keyframes heroFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes inkStamp{to{clip-path:inset(0 0 0 0)}}
 
@@ -175,12 +181,15 @@ nav{border-bottom:1px solid var(--border);background:var(--background);position:
 
 /* ---- Tickets (services, home links) ---- */
 .tickets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.ticket{display:block;background:var(--card);border:1px solid var(--border);border-top:6px solid var(--foreground);padding:28px 24px;transition:border-color .15s,opacity .5s cubic-bezier(.16,1,.3,1)}
-.ticket.t1,.ticket.t4{border-top-color:var(--primary)}
-.ticket.t2,.ticket.t5{border-top-color:var(--link)}
-a.ticket:hover{border-color:var(--foreground)}
-a.ticket.t1:hover,a.ticket.t4:hover{border-top-color:var(--primary)}
-a.ticket.t2:hover,a.ticket.t5:hover{border-top-color:var(--link)}
+.ticket{position:relative;display:block;background:var(--card);border:1px solid var(--border);border-top:6px solid var(--foreground);padding:28px 24px;transition:border-color .15s,opacity .5s cubic-bezier(.16,1,.3,1)}
+a.ticket:hover{border-color:var(--foreground);border-top-color:var(--under)}
+/* Riso misregister: a top rule is two inks. On hover (or focus) the top one slips 3px off register and shows the second ink under it */
+.ticket{--rule:var(--foreground);--under:var(--primary);border-top-color:var(--under)}
+.ticket.t1,.ticket.t4{--rule:var(--primary);--under:var(--link)}
+.ticket.t2,.ticket.t5{--rule:var(--link);--under:var(--primary)}
+.ticket::before,.demo-rule::before{content:"";position:absolute;background:var(--rule);transition:transform .18s cubic-bezier(.16,1,.3,1);pointer-events:none}
+.ticket::before{left:-1px;right:-1px;top:-6px;height:6px}
+.ticket:hover::before,a.ticket:focus-visible::before{transform:translate(3px,-2px)}
 .ticket h3{font-size:var(--text-card);line-height:1.2;font-weight:600;margin-bottom:8px}
 .ticket p{font-size:var(--text-body);color:var(--muted-foreground)}
 .ticket .more{display:inline-block;margin-top:16px;font-weight:700;color:var(--link);text-decoration:underline;text-underline-offset:4px}
@@ -189,6 +198,12 @@ a.ticket.t2:hover,a.ticket.t5:hover{border-top-color:var(--link)}
 .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
 .card{background:var(--card);border:1px solid var(--border);padding:24px;min-width:0;transition:opacity .5s cubic-bezier(.16,1,.3,1)}
 .card .n{display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--primary);color:var(--primary-foreground);font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:500;font-size:1rem;margin-bottom:16px}
+.strip .card{position:relative;--i:0}
+.strip .card:nth-child(2){--i:1}.strip .card:nth-child(3){--i:2}.strip .card:nth-child(4){--i:3}
+.strip .card::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:4px;background:var(--primary);transform-origin:left;transition:transform .32s linear calc(var(--i)*.32s)}
+.strip.pre-draw .card::before{transform:scaleX(0)}
+.strip .card .n{transition:clip-path .28s cubic-bezier(.16,1,.3,1) calc(var(--i)*.32s + .12s)}
+.strip.pre-draw .card .n{clip-path:inset(0 100% 0 0)}
 .card h3{font-size:var(--text-card);line-height:1.2;font-weight:600;margin-bottom:8px}
 .card p{font-size:var(--text-body);color:var(--muted-foreground)}
 
@@ -198,10 +213,9 @@ a.ticket.t2:hover,a.ticket.t5:hover{border-top-color:var(--link)}
 .page-head h1{font-size:var(--text-page);font-weight:700;letter-spacing:-.02em;line-height:1.12;margin-bottom:16px;max-width:18em;animation:heroFadeUp .42s cubic-bezier(.16,1,.3,1) both}
 .page-head p{font-size:var(--text-lead);line-height:1.6;max-width:60ch;animation:heroFadeUp .42s cubic-bezier(.16,1,.3,1) .1s both}
 .page-head + section{padding-top:48px}
-.ph-art{position:relative;width:216px;height:144px}
-.ph-art .blob{position:absolute;display:block}
-.ph1{width:144px;height:144px;left:0;top:0;background:var(--primary)}
-.ph2{width:72px;height:72px;right:0;bottom:0;background:var(--foreground)}
+/* Sub-page header art: one object from the hero drawing's desert per page (img/art-*.svg, drawn by tools/draw-art.py) */
+.ph-art{width:300px;flex:none;animation:heroFadeUp .5s cubic-bezier(.16,1,.3,1) .16s both}
+.ph-art img{display:block;width:100%;height:auto}
 .ph-jump{margin-top:20px}
 .ph-jump a,.next-link a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--link);text-decoration:underline;text-underline-offset:4px}
 .ph-jump a:hover,.next-link a:hover{text-decoration-thickness:3px}
@@ -625,7 +639,9 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 .demo-bar i{width:9px;height:9px;border:2px solid var(--foreground);flex:none}
 .demo-bar b{margin-left:8px;font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:500;font-size:.74rem;color:var(--muted-foreground);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .demo-h{margin:auto 24px 0;font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:2.6rem;line-height:.95;letter-spacing:-.03em}
-.demo-rule{display:block;margin:8px 24px 0;width:45%;height:10px;background:var(--primary)}
+.demo-rule{position:relative;display:block;margin:8px 24px 0;width:45%;height:10px;background:var(--link);--rule:var(--primary)}
+.demo-rule::before{inset:0}
+a.demo:hover .demo-rule::before,a.demo:focus-visible .demo-rule::before{transform:translate(4px,-3px)}
 .demo-body{display:flex;flex-direction:column;gap:8px;padding:24px;flex:1}
 .demo-tag{align-self:flex-start;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--foreground);padding:2px 8px}
 .demo h3{font-size:var(--text-card);line-height:1.2;font-weight:600}
@@ -727,6 +743,9 @@ nav{view-transition-name:site-nav}
   .m-scroll.in .m-site,.s-bar,.s-drawer,
   .r-lines li.new,.r-care.new,.r-total mark.stamp{animation:none}
   .hero h1 mark{animation:none;clip-path:none}
+  .hero h1.set .w,.ph-art{animation:none}
+  .ticket::before,.demo-rule::before,.strip .card::before,.strip .card .n{transition:none}
+  .ticket:hover::before,a.ticket:focus-visible::before,a.demo:hover .demo-rule::before,a.demo:focus-visible .demo-rule::before{transform:none}
   .sec-head.pre-reveal,.ticket.pre-reveal,.card.pre-reveal,.plan.pre-reveal,#contactForm.pre-reveal,.contact-inner>div.pre-reveal{opacity:1}
   .dock,.dock.hide{transition:none}
   .hero-sand{transition:none}
@@ -779,3 +798,7 @@ a.ticket .more{margin-top:auto;padding-top:18px}
   .nav-right{gap:8px}
   .lang-toggle a{min-width:36px;padding:0 6px}
 }
+
+/* Long single-word headings (sv "Dataskyddsbeskrivning") break instead of widening the page on phones */
+.page-head .wrap>*{min-width:0}
+.page-head h1{overflow-wrap:break-word;hyphens:auto}

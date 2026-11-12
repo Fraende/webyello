@@ -38,7 +38,7 @@ const PAGES = {
 // never copied into dist: tooling, sources and internal docs at the repo root (folders such as demos/ are copied as they are)
 const SKIP_ROOT = new Set(['.git', '.github', 'node_modules', OUT, 'api', 'i18n', 'build.mjs', 'package.json',
   'package-lock.json', 'vercel.json', '.gitignore', '.vercelignore', '.impeccable', '.claude',
-  'DESIGN.md', 'PRODUCT.md', 'README.md', 'CLAUDE.md', 'variants']);
+  'DESIGN.md', 'PRODUCT.md', 'README.md', 'CLAUDE.md', 'variants', 'tools']);
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const escText = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');

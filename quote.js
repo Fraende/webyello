@@ -102,7 +102,9 @@ function renderQuote(animate){
     '<p class="r-vat">'+m.vat+m.nfmt(vat)+(tier==='store'&&anyExtra()?'<br>'+m.extraQ:'')+(tier==='audit'?'<br>'+m.audit.credit:'')+'</p>';
   skEl('qmNote').textContent=qNote?qNote():'';
   syncLangs();
-  qPrev={tier:tier,keys:keys};
+  // the total runs from the old figure to the new one
+  if(animate&&qPrev.total&&qPrev.total!==total&&typeof wyCount==='function') wyCount(skEl('qmBody').querySelector('.r-total mark'),qPrev.total);
+  qPrev={tier:tier,keys:keys,total:total};
   skEl('qmLive').textContent=(qNote?qNote()+' ':'')+m.live(pkgName,m.from+m.nfmt(total)+(q.care?' + '+m.nfmt(CARE)+m.mo:''));
   const dockInfo=document.getElementById('dockInfo');
   if(dockInfo){
