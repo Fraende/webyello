@@ -6,17 +6,17 @@ const QM={
       up:l=>l+' requires Business. Your estimate is now from €1,390, up from €690.',down:'You chose Launch (from €690). We removed the Business-only features; extra languages stay as an add-on.',
       langs:n=>n===1?'1 extra language':n+' extra languages',
       live:(p,t)=>p+' package, '+t,x:{multi:'Multilingual site',blog:'Blog or news',ana:'SEO & analytics'},nfmt:n=>'€'+n.toLocaleString('en-US'),
-      audit:{name:'Website audit',f:['Speed and loading','Basic security check','Privacy (GDPR and cookies)','Search visibility (SEO)','Prioritised fix list'],total:'Audit price',credit:'Credited in full if we fix the findings or build you a new site.'}},
+      audit:{name:'Website audit',f:['Speed and loading','Basic security check','Privacy (GDPR and cookies)','Search visibility (SEO)','Prioritised fix list'],total:'Audit price',credit:'Credited in full against fixes or a Business or Store site ordered within 30 days (half against Launch).'}},
   sv:{title:'Din uppskattning',forWho:'för ',from:'från ',incl:'ingår i paketet',quoted:'prissätts under samtalet',care:'Underhållspaket',mo:'/mån',total:'Webbplatsens startpris',vat:'exkl. moms · inkl. moms 25,5 % ≈ ',extraQ:'Tillägg utöver Webbutik-paketet prissätts under samtalet.',
       up:l=>l+' kräver paketet Företag. Startpriset ändrades från 690 € till 1 390 €.',down:'Du valde Start (från 690 €). Vi tog bort funktionerna som bara ingår i Företag; extra språk finns kvar som tillägg.',
       langs:n=>n===1?'1 extra språk':n+' extra språk',
       live:(p,t)=>'Paketet '+p+', '+t,x:{multi:'Flerspråkig webbplats',blog:'Blogg eller nyheter',ana:'SEO & analys'},nfmt:n=>n.toLocaleString('fi-FI')+' €',
-      audit:{name:'Webbplatsgranskning',f:['Hastighet och laddning','Grundläggande säkerhetskontroll','Dataskydd (GDPR och kakor)','Synlighet i sökmotorer (SEO)','Åtgärdslista i prioritetsordning'],total:'Granskningens pris',credit:'Krediteras i sin helhet om vi åtgärdar fynden eller bygger en ny webbplats åt dig.'}},
+      audit:{name:'Webbplatsgranskning',f:['Hastighet och laddning','Grundläggande säkerhetskontroll','Dataskydd (GDPR och kakor)','Synlighet i sökmotorer (SEO)','Åtgärdslista i prioritetsordning'],total:'Granskningens pris',credit:'Krediteras i sin helhet mot åtgärder eller ett Företag- eller Webbutik-paket som beställs inom 30 dagar (hälften mot Start).'}},
   fi:{title:'Hinta-arviosi',forWho:'yritykselle ',from:'alk. ',incl:'paketissa',quoted:'hinnoitellaan puhelussa',care:'Ylläpitopaketti',mo:'/kk',total:'Sivuston lähtöhinta',vat:'alv 0 % · alv 25,5 % mukana ≈ ',extraQ:'Verkkokauppapaketin päälle tulevat lisät hinnoitellaan puhelussa.',
       up:l=>l+' edellyttää Yrityssivut-pakettia. Lähtöhinta vaihtui 690 eurosta 1 390 euroon.',down:'Valitsit Startti-paketin (alk. 690 €). Poistimme vain Yrityssivut-pakettiin kuuluvat ominaisuudet; lisäkielet säilyvät lisäpalveluna.',
       langs:n=>n===1?'1 lisäkieli':n+' lisäkieltä',
       live:(p,t)=>p+'-paketti, '+t,x:{multi:'Monikielinen sivusto',blog:'Blogi tai uutiset',ana:'SEO & analytiikka'},nfmt:n=>n.toLocaleString('fi-FI')+' €',
-      audit:{name:'Sivustoauditointi',f:['Nopeus ja latausaika','Tietoturvan perustarkistus','Tietosuoja (GDPR ja evästeet)','Hakukonenäkyvyys (SEO)','Korjauslista tärkeysjärjestyksessä'],total:'Auditoinnin hinta',credit:'Hyvitetään kokonaan, jos korjaamme löydökset tai rakennamme uuden sivuston.'}}
+      audit:{name:'Sivustoauditointi',f:['Nopeus ja latausaika','Tietoturvan perustarkistus','Tietosuoja (GDPR ja evästeet)','Hakukonenäkyvyys (SEO)','Korjauslista tärkeysjärjestyksessä'],total:'Auditoinnin hinta',credit:'Hyvitetään kokonaan korjaustöistä tai Yrityssivut- tai Verkkokauppa-paketista, jonka tilaat 30 päivän kuluessa (Startti-paketista puolet).'}}
 };
 const PRICE={launch:690,business:1390,store:2490,audit:390};
 const PKG={launch:{name:'p1_t',f:['p1_f1','p1_f2','p1_f3','p1_f4']},business:{name:'p2_t',f:['p2_f1','p2_f2','p2_f3','p2_f4']},store:{name:'p3_t',f:['p3_f1','p3_f2','p3_f3','p3_f4','p3_f5']}};
