@@ -151,12 +151,31 @@ if('IntersectionObserver' in window&&window.matchMedia&&!window.matchMedia('(pre
   });
 }
 
+// The price row's "Choose …" links open the quote on the pricing page with that package already selected
+document.querySelectorAll('[data-qm-pick]').forEach(function(a){
+  a.addEventListener('click',function(){
+    try{
+      const old=JSON.parse(sessionStorage.getItem('wy-quote')||'null')||{};
+      sessionStorage.setItem('wy-quote',JSON.stringify({size:a.dataset.qmPick,extras:old.extras||{},langs:old.langs||1,care:old.care===true}));
+    }catch(e){}
+  });
+});
+
+// The footprints at the top of the contact section walk in one by one as it nears the viewport
+(function(){
+  const t=document.querySelector('.trail');
+  if(!t||!('IntersectionObserver' in window)||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  t.classList.add('pre');
+  const o=new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ t.classList.add('seen'); o.disconnect(); } },{threshold:.5});
+  o.observe(t);
+})();
+
 // The phone dock steps aside while the contact form is on screen, and on the home page while the
 // hero copy or the demo builder's example is on screen, so it never covers their own buttons
 (function(){
   const dock=document.getElementById('dock'),contact=document.getElementById('contact');
   if(!dock||!contact||!('IntersectionObserver' in window)) return;
-  const heroCopy=document.querySelector('.hero-scene .hero-copy'),seen=new Set();
+  const heroCopy=document.querySelector('.hero-scene .hero-top'),seen=new Set();
   function watch(el,margin){
     new IntersectionObserver(function(es){
       es.forEach(function(e){ e.isIntersecting?seen.add(e.target):seen.delete(e.target); });

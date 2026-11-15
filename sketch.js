@@ -178,6 +178,8 @@ const CF_MENU=[
 const CF_TIMES=[[9,0],[10,30],[12,0],[13,30],[15,0]];
 function tplCafe(){
   const s=S.cafe,days=skDays(4,0,false),now=new Date();
+  // Open on the first day that still has a free table, unless the visitor has picked a day
+  if(!s.dayPicked){ const free=d=>CF_TIMES.some((t,i)=>!(d===0&&(t[0]*60+t[1])<=now.getHours()*60+now.getMinutes()+30)&&(d+i)%4!==3); const f=[0,1,2,3].find(free); if(f!=null) s.day=f; }
   const dayLab=(d,i)=>i===0?L('Tänään','Today'):i===1?L('Huomenna','Tomorrow'):dl(d);
   const dayLow=i=>i<2?dayLab(days[i],i).toLowerCase():dl(days[i]);
   const past=(i,t)=>i===0&&(t[0]*60+t[1])<=now.getHours()*60+now.getMinutes()+30;
@@ -548,7 +550,7 @@ const TPL={burger:tplBurger,cafe:tplCafe,hair:tplHair,plumber:tplPlumber,shop:tp
 const clampN=(v,a,b)=>Math.min(b,Math.max(a,v));
 const ACT={
   burger:{tab:v=>{S.burger.tab=+v;},add:v=>{const c=S.burger.cart;c[v]=(c[v]||0)+1;},order:()=>{S.burger.done=bgPickup();return 1;},reset:()=>{S.burger.cart={};S.burger.done=null;}},
-  cafe:{day:v=>{S.cafe.day=+v;S.cafe.time=null;},time:v=>{S.cafe.time=+v;},ppl:v=>{S.cafe.ppl=clampN(S.cafe.ppl+ +v,1,8);},book:()=>{S.cafe.done=true;return 1;},reset:()=>{S.cafe.time=null;S.cafe.done=false;}},
+  cafe:{day:v=>{S.cafe.day=+v;S.cafe.dayPicked=true;S.cafe.time=null;},time:v=>{S.cafe.time=+v;},ppl:v=>{S.cafe.ppl=clampN(S.cafe.ppl+ +v,1,8);},book:()=>{S.cafe.done=true;return 1;},reset:()=>{S.cafe.time=null;S.cafe.done=false;}},
   hair:{svc:v=>{S.hair.svc=+v;},sty:v=>{S.hair.sty=+v;S.hair.slot=null;},day:v=>{S.hair.day=+v;S.hair.slot=null;},slot:v=>{S.hair.slot=+v;},
     pick:v=>{S.hair.sty=+v;S.hair.slot=null;S.hair.done=false;return 'book';},book:()=>{S.hair.done=true;return 1;},reset:()=>{Object.assign(S.hair,{svc:null,day:null,slot:null,done:false});}},
   plumber:{job:v=>{S.plumber.job=+v;},urg:v=>{S.plumber.urg=+v;},day:v=>{S.plumber.day=+v;S.plumber.slot=null;},slot:v=>{S.plumber.slot=+v;},call:()=>{S.plumber.call=!S.plumber.call;},
@@ -591,11 +593,25 @@ function skSwap(keep){
   skPrint();
 }
 // Desktop or phone: the example sites lay themselves out by their own width, so the phone view only narrows the sheet
-document.querySelectorAll('[data-dev]').forEach(b=>b.addEventListener('click',()=>{
+// (scoped to the switch itself: the mock carries data-dev too, and must not be treated as a button)
+document.querySelectorAll('.mock-dev [data-dev]').forEach(b=>b.addEventListener('click',()=>{
   const d=b.dataset.dev; skEl('skMock').dataset.dev=d;
-  document.querySelectorAll('[data-dev]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  document.querySelectorAll('.mock-dev [data-dev]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  skEl('skScroll').scrollTop=0;
   skPrint();
 }));
+// The example scrolls only once the visitor has clicked or focused it, so the mouse wheel and a swipe
+// carry on down the page instead of getting stuck in a 640px box. It lets go again when they leave it.
+(function(){
+  const mock=skEl('skMock'),sc=skEl('skScroll');
+  sc.classList.add('lockable');
+  const live=on=>{ sc.classList.toggle('live',on); mock.closest('.mock-wrap').classList.toggle('is-live',on); };
+  sc.addEventListener('pointerdown',()=>live(true));
+  sc.addEventListener('focusin',()=>live(true));
+  mock.addEventListener('pointerleave',e=>{ if(e.pointerType==='mouse'&&!mock.contains(document.activeElement)) live(false); });
+  document.addEventListener('pointerdown',e=>{ if(!mock.contains(e.target)) live(false); });
+  mock.addEventListener('focusout',e=>{ if(!mock.contains(e.relatedTarget)) live(false); });
+})();
 // The first time the builder scrolls into view, it prints its first sheet
 if('IntersectionObserver' in window){
   const io=new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ io.disconnect(); skPrint(); } },{threshold:.35});
@@ -638,7 +654,13 @@ function skSave(){
 }
 skEl('skName').addEventListener('input',()=>{ renderSketch(); skSave(); });
 document.querySelectorAll('input[name=skType]').forEach(r=>r.addEventListener('change',()=>{ skT=r.value; skSwap(); skSave(); }));
-document.querySelectorAll('input[name=skScheme]').forEach(r=>r.addEventListener('change',()=>{ skS=r.value; skSwap(true); skSave(); }));
+// On a phone the colour chips sit below the example: bring the example back into view so the change is seen
+function skShow(){
+  if(innerWidth>900) return;
+  const r=skEl('skMock').getBoundingClientRect();
+  if(r.top<70||r.top>innerHeight*.55) skEl("skMock").closest(".mock-wrap").scrollIntoView({block:'start',behavior:skReduce()?'auto':'smooth'});
+}
+document.querySelectorAll('input[name=skScheme]').forEach(r=>r.addEventListener('change',()=>{ skS=r.value; skSwap(true); skSave(); skShow(); }));
 
 langHooks.push(function(l,first){
   if(first){
