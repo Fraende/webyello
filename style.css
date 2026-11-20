@@ -238,6 +238,14 @@ a.ticket:hover{border-color:var(--foreground);border-top-color:var(--under)}
 .care+.care{margin-top:12px}
 .care p+p{margin-top:10px}
 .audit-go{font-weight:700}
+/* Pay online (pricing page): Stripe Checkout buttons, status lines and the thank-you after returning */
+.pay-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.pay-actions .btn{flex:1 1 260px}
+.pay-msg{font-weight:700}
+#payErr{color:var(--destructive)}
+.pay-done{background:var(--card);border-left:4px solid var(--primary);padding:12px 16px}
+.pay-note{font-size:var(--text-small);color:var(--muted-foreground)}
+.pay-note a,.pay-msg a{color:var(--link)}
 .vat+.vat{margin-top:6px}
 .vat{margin-top:16px;max-width:62ch;font-size:.9rem;color:var(--muted-foreground)}
 /* AI visibility audit (services page): pitch beside the offer card */
