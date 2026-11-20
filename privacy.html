@@ -54,6 +54,7 @@
 <ul>
 <li><b>Yhteydenottolomake.</b> Nimi, sähköpostiosoite, valittu tarve, viestisi sisältö, sivuston kieli ja sivu, jolta lomake lähetettiin. Käytämme tietoja vastataksemme sinulle, laatiaksemme tarjouksen ja sopiaksemme kartoituspuhelusta. Peruste: oikeutettu etu vastata yhteydenottoihin sekä sopimusta edeltävät toimet pyynnöstäsi (GDPR 6(1)(f) ja (b)).</li>
 <li><b>Asiakassuhde.</b> Jos tilaat meiltä sivuston, käsittelemme sopimuksen hoitamiseen, laskutukseen ja kirjanpitoon tarvittavia tietoja. Peruste: sopimus ja lakisääteinen velvoite (6(1)(b) ja (c)).</li>
+<li><b>Auditointitilaus.</b> Nimi, sähköposti, puhelinnumero (vapaaehtoinen), yrityksen nimi, sivuston osoite, toimiala, alue, antamasi asiakkaiden kysymykset ja kilpailijat sekä Stripen maksussa keräämät laskutustiedot (osoite ja mahdollinen ALV-tunnus). Käytämme tietoja auditoinnin tekemiseen, raportin toimittamiseen, laskutukseen ja kirjanpitoon. Korttitiedot käsittelee vain Stripe, emme näe niitä. Peruste: sopimus ja lakisääteinen velvoite (6(1)(b) ja (c)).</li>
 <li><b>Tekniset lokitiedot.</b> Verkkosivuston palvelin tallentaa teknisen käytön aikana lyhytaikaisia lokitietoja, kuten IP-osoitteen, selaimen tyypin ja pyydetyn sivun. Käytämme niitä sivuston toimivuuden ja tietoturvan varmistamiseen. Peruste: oikeutettu etu (6(1)(f)).</li>
 </ul>
 <p>Emme käytä tietojasi markkinointiin emmekä luovuta niitä myytäväksi. Sivustolla ei ole seurantaa tai mainosanalytiikkaa.</p>
@@ -63,6 +64,7 @@
 <ul>
 <li><b>Vercel Inc.</b> — sivuston ylläpito ja palvelinlokit.</li>
 <li><b>Resend</b> — yhteydenottolomakkeen viestin lähettäminen sähköpostina meille.</li>
+<li><b>Stripe Payments Europe Ltd (Irlanti)</b> — auditointitilausten maksut, kuitit ja laskut. Tilauksen tiedot tallentuvat maksun yhteyteen Stripeen.</li>
 <li><b>Proton AG (Proton Mail, Sveitsi)</b> — viestit tallentuvat osoitteen info@netyello.com postilaatikkoon. Sveitsistä on EU:n komission riittävyyspäätös, joten siirtoon ei tarvita erillisiä suojatoimia.</li>
 </ul>
 <p>Osa palveluntarjoajista toimii EU:n ulkopuolella, esimerkiksi Yhdysvalloissa. Siirroissa käytetään EU:n tietosuoja-asetuksen mukaisia suojatoimia, kuten komission mallisopimuslausekkeita tai EU–USA-tietosuojakehystä.</p>
@@ -71,6 +73,7 @@
 <ul>
 <li>Yhteydenotot, joista ei synny projektia: poistamme enintään 12 kuukauden kuluttua.</li>
 <li>Asiakassuhteen tiedot: sopimuksen ajan. Kirjanpitoaineisto säilytetään kirjanpitolain mukaisesti (6 vuotta tilikauden päättymisestä).</li>
+<li>Auditointitilaukset: tilauksen ja raportin tiedot säilytetään asiakassuhteen ajan ja tositteina kirjanpitolain mukaisesti (6 vuotta tilikauden päättymisestä).</li>
 <li>Tekniset lokit: vain lyhyen ajan palveluntarjoajan oletusten mukaan.</li>
 </ul>
 
@@ -79,6 +82,7 @@
 <ul>
 <li><b>Luonnoksen tiedot</b> (<code>wy-sketch</code>, sessionStorage): jos kokeilet sivuston luonnostelijaa, yrityksesi nimi ja toimiala siirtyvät hinnoittelusivulle.</li>
 <li><b>Hinta-arvio</b> (<code>wy-quote</code>, sessionStorage): hinnoittelusivulla valitsemasi paketti ja lisät säilyvät, kun liikut sivujen välillä.</li>
+<li><b>Auditointitilaus</b> (<code>wy-order</code>, sessionStorage): tilauslomakkeen tiedot säilyvät, jos peruutat maksun ja palaat lomakkeelle. Tiedot poistetaan, kun maksu on valmis, ja ne häviävät viimeistään, kun suljet välilehden.</li>
 </ul>
 <p>Molemmat poistuvat, kun suljet välilehden. Esimerkkisivustomme tallentavat lisäksi demon omia asetuksia: Aamurusko valitun näkymän (<code>aamurusko-scene</code>), Helmi ostoskorin (<code>helmi-cart</code>) ja Vääntö Garage valitut palvelut (<code>vg_services</code>). Voit tyhjentää nämä milloin tahansa selaimen asetuksista.</p>
 
@@ -96,6 +100,7 @@
 <ul>
 <li><b>Contact form.</b> Name, email address, the type of need you pick, your message, the site language and the page the form was sent from. We use it to reply to you, prepare a quote and arrange a discovery call. Legal basis: legitimate interest in answering enquiries and steps taken at your request before a contract (GDPR Art. 6(1)(f) and (b)).</li>
 <li><b>Client relationship.</b> If you order a website from us, we process the data needed to perform the contract, invoice and keep accounts. Legal basis: contract and legal obligation (6(1)(b) and (c)).</li>
+<li><b>Audit orders.</b> Name, email, phone (optional), business name, website address, line of business, area, the customer questions and competitors you give us, and the billing details Stripe collects at payment (address and any VAT ID). We use them to carry out the audit, deliver the report, invoice and keep accounts. Card details are handled only by Stripe; we never see them. Legal basis: contract and legal obligation (6(1)(b) and (c)).</li>
 <li><b>Technical logs.</b> The web server keeps short-term logs such as IP address, browser type and the page requested. We use them to keep the site working and secure. Legal basis: legitimate interest (6(1)(f)).</li>
 </ul>
 <p>We don't use your data for marketing and never sell it. The site has no tracking or advertising analytics.</p>
@@ -105,6 +110,7 @@
 <ul>
 <li><b>Vercel Inc.</b> — website hosting and server logs.</li>
 <li><b>Resend</b> — delivers the contact-form message to us by email.</li>
+<li><b>Stripe Payments Europe Ltd (Ireland)</b> — payments, receipts and invoices for audit orders. The order details are stored with the payment in Stripe.</li>
 <li><b>Proton AG (Proton Mail, Switzerland)</b> — messages are stored in the info@netyello.com mailbox. Switzerland has an EU Commission adequacy decision, so no extra transfer safeguards are needed for it.</li>
 </ul>
 <p>Some providers operate outside the EU, for example in the United States. Transfers rely on safeguards required by the GDPR, such as the European Commission's standard contractual clauses or the EU–US Data Privacy Framework.</p>
@@ -113,6 +119,7 @@
 <ul>
 <li>Enquiries that don't lead to a project: deleted within 12 months at most.</li>
 <li>Client records: for the duration of the contract. Accounting records are kept as the Finnish Accounting Act requires (6 years from the end of the financial year).</li>
+<li>Audit orders: order and report details are kept for the duration of the client relationship, and as accounting records as the Finnish Accounting Act requires (6 years from the end of the financial year).</li>
 <li>Technical logs: only briefly, per the hosting provider's defaults.</li>
 </ul>
 
@@ -121,6 +128,7 @@
 <ul>
 <li><b>Sketch details</b> (<code>wy-sketch</code>, sessionStorage): if you try the site sketch, your business name and trade carry over to the pricing page.</li>
 <li><b>Estimate</b> (<code>wy-quote</code>, sessionStorage): the package and extras you pick on the pricing page stay put as you move between pages.</li>
+<li><b>Audit order</b> (<code>wy-order</code>, sessionStorage): the order form keeps your details if you cancel the payment and come back. They are cleared once the payment is done, and disappear at the latest when you close the tab.</li>
 </ul>
 <p>Both are cleared when you close the tab. Our example sites also store their own demo settings: Aamurusko the view you picked (<code>aamurusko-scene</code>), Helmi the shopping basket (<code>helmi-cart</code>) and Vääntö Garage the services you chose (<code>vg_services</code>). You can clear all of this at any time in your browser settings.</p>
 
@@ -138,6 +146,7 @@
 <ul>
 <li><b>Kontaktformuläret.</b> Namn, e-postadress, det behov du väljer, ditt meddelande, webbplatsens språk och sidan som formuläret skickades från. Vi använder uppgifterna för att svara dig, ta fram en offert och boka ett kartläggningssamtal. Rättslig grund: berättigat intresse av att besvara förfrågningar samt åtgärder på din begäran innan ett avtal ingås (GDPR art. 6.1 f och b).</li>
 <li><b>Kundförhållande.</b> Om du beställer en webbplats av oss behandlar vi de uppgifter som behövs för att fullgöra avtalet, fakturera och sköta bokföringen. Rättslig grund: avtal och rättslig förpliktelse (6.1 b och c).</li>
+<li><b>Granskningsbeställningar.</b> Namn, e-post, telefon (valfritt), företagets namn, webbplatsens adress, bransch, område, de kundfrågor och konkurrenter du anger samt de faktureringsuppgifter som Stripe samlar in vid betalningen (adress och eventuellt momsregistreringsnummer). Vi använder dem för att utföra granskningen, leverera rapporten, fakturera och sköta bokföringen. Kortuppgifterna hanteras bara av Stripe; vi ser dem aldrig. Rättslig grund: avtal och rättslig förpliktelse (6.1 b och c).</li>
 <li><b>Tekniska loggar.</b> Webbservern sparar kortvariga loggar, till exempel IP-adress, webbläsartyp och den begärda sidan. Vi använder dem för att hålla webbplatsen fungerande och säker. Rättslig grund: berättigat intresse (6.1 f).</li>
 </ul>
 <p>Vi använder inte dina uppgifter för marknadsföring och säljer dem aldrig. Webbplatsen har ingen spårning eller annonsanalys.</p>
@@ -147,6 +156,7 @@
 <ul>
 <li><b>Vercel Inc.</b> — webbhotell och serverloggar.</li>
 <li><b>Resend</b> — levererar meddelandet från kontaktformuläret till oss per e-post.</li>
+<li><b>Stripe Payments Europe Ltd (Irland)</b> — betalningar, kvitton och fakturor för granskningsbeställningar. Beställningens uppgifter sparas med betalningen hos Stripe.</li>
 <li><b>Proton AG (Proton Mail, Schweiz)</b> — meddelandena lagras i brevlådan info@netyello.com. För Schweiz finns ett beslut om adekvat skyddsnivå från EU-kommissionen, så inga extra skyddsåtgärder behövs för överföringen.</li>
 </ul>
 <p>En del leverantörer verkar utanför EU, till exempel i USA. Överföringarna bygger på skyddsåtgärder enligt dataskyddsförordningen, såsom EU-kommissionens standardavtalsklausuler eller ramverket för dataskydd mellan EU och USA.</p>
@@ -155,6 +165,7 @@
 <ul>
 <li>Förfrågningar som inte leder till ett projekt: raderas senast efter 12 månader.</li>
 <li>Kunduppgifter: under avtalets löptid. Bokföringsmaterial sparas enligt den finska bokföringslagen (6 år från räkenskapsperiodens slut).</li>
+<li>Granskningsbeställningar: uppgifterna om beställningen och rapporten sparas under kundförhållandet och som bokföringsmaterial enligt den finska bokföringslagen (6 år från räkenskapsperiodens slut).</li>
 <li>Tekniska loggar: endast en kort tid, enligt webbhotellets standardinställningar.</li>
 </ul>
 
@@ -163,6 +174,7 @@
 <ul>
 <li><b>Skissuppgifter</b> (<code>wy-sketch</code>, sessionStorage): om du provar webbplatsskissen följer ditt företagsnamn och din bransch med till prissidan.</li>
 <li><b>Prisuppskattning</b> (<code>wy-quote</code>, sessionStorage): paketet och tilläggen du väljer på prissidan finns kvar när du rör dig mellan sidorna.</li>
+<li><b>Granskningsbeställning</b> (<code>wy-order</code>, sessionStorage): beställningsformulärets uppgifter finns kvar om du avbryter betalningen och kommer tillbaka. De raderas när betalningen är klar och försvinner senast när du stänger fliken.</li>
 </ul>
 <p>Båda raderas när du stänger fliken. Våra exempelwebbplatser sparar dessutom egna demoinställningar: Aamurusko vyn du valt (<code>aamurusko-scene</code>), Helmi varukorgen (<code>helmi-cart</code>) och Vääntö Garage de tjänster du valt (<code>vg_services</code>). Du kan när som helst rensa allt detta i webbläsarens inställningar.</p>
 

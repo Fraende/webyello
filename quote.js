@@ -10,7 +10,7 @@ const QM={
         f:{site:['Speed and loading','Basic security check','Privacy (GDPR and cookies)','Search visibility (SEO)','Prioritised fix list'],
            ai:['ChatGPT tested with five customer questions','AI access and structured data checked','Details compared on Google and in directories','Top 5 fixes with ready-to-paste texts'],
            both:['Speed and loading','Basic security check','Privacy (GDPR and cookies)','Search visibility (SEO)','AI visibility: ChatGPT test and AI readiness','One report, one shared fix list']},
-        total:'Audit price',credit:'Half of the audit fee is credited against fixes or a new website ordered within 30 days.'}},
+        total:'Audit price',order:'Order and pay',orderFine:'Next, fill in your site details and pay by card. The report arrives within 3 business days.',credit:'Half of the audit fee is credited against fixes or a new website ordered within 30 days.'}},
   sv:{title:'Din uppskattning',forWho:'för ',from:'från ',incl:'ingår i paketet',quoted:'prissätts under samtalet',care:'Underhållspaket',mo:'/mån',total:'Webbplatsens startpris',vat:'exkl. moms · inkl. moms 25,5 % ≈ ',extraQ:'Tillägg utöver Webbutik-paketet prissätts under samtalet.',
       up:l=>l+' kräver paketet Företag. Startpriset ändrades från 690 € till 1 390 €.',down:'Du valde Start (från 690 €). Vi tog bort funktionerna som bara ingår i Företag; extra språk finns kvar som tillägg.',
       langs:n=>n===1?'1 extra språk':n+' extra språk',
@@ -19,7 +19,7 @@ const QM={
         f:{site:['Hastighet och laddning','Grundläggande säkerhetskontroll','Dataskydd (GDPR och kakor)','Synlighet i sökmotorer (SEO)','Åtgärdslista i prioritetsordning'],
            ai:['ChatGPT testas med fem kundfrågor','AI-åtkomst och strukturerad data kontrollerade','Uppgifter jämförda på Google och i kataloger','De 5 viktigaste åtgärderna med färdiga texter'],
            both:['Hastighet och laddning','Grundläggande säkerhetskontroll','Dataskydd (GDPR och kakor)','Synlighet i sökmotorer (SEO)','AI-synlighet: ChatGPT-test och AI-beredskap','En rapport, en gemensam åtgärdslista']},
-        total:'Granskningens pris',credit:'Hälften av granskningsavgiften krediteras mot åtgärder eller en ny webbplats som beställs inom 30 dagar.'}},
+        total:'Granskningens pris',order:'Beställ och betala',orderFine:'Fyll sedan i webbplatsens uppgifter och betala med kort. Rapporten kommer inom 3 arbetsdagar.',credit:'Hälften av granskningsavgiften krediteras mot åtgärder eller en ny webbplats som beställs inom 30 dagar.'}},
   fi:{title:'Hinta-arviosi',forWho:'yritykselle ',from:'alk. ',incl:'paketissa',quoted:'hinnoitellaan puhelussa',care:'Ylläpitopaketti',mo:'/kk',total:'Sivuston lähtöhinta',vat:'alv 0 % · alv 25,5 % mukana ≈ ',extraQ:'Verkkokauppapaketin päälle tulevat lisät hinnoitellaan puhelussa.',
       up:l=>l+' edellyttää Yrityssivut-pakettia. Lähtöhinta vaihtui 690 eurosta 1 390 euroon.',down:'Valitsit Startti-paketin (alk. 690 €). Poistimme vain Yrityssivut-pakettiin kuuluvat ominaisuudet; lisäkielet säilyvät lisäpalveluna.',
       langs:n=>n===1?'1 lisäkieli':n+' lisäkieltä',
@@ -28,7 +28,7 @@ const QM={
         f:{site:['Nopeus ja latausaika','Tietoturvan perustarkistus','Tietosuoja (GDPR ja evästeet)','Hakukonenäkyvyys (SEO)','Korjauslista tärkeysjärjestyksessä'],
            ai:['ChatGPT-testi viidellä asiakkaan kysymyksellä','Tekoälyn pääsy ja rakenteinen data tarkistettu','Tiedot verrattu Googlessa ja hakemistoissa','Top 5 -korjaukset valmiine teksteineen'],
            both:['Nopeus ja latausaika','Tietoturvan perustarkistus','Tietosuoja (GDPR ja evästeet)','Hakukonenäkyvyys (SEO)','AI-näkyvyys: ChatGPT-testi ja tekoälyvalmius','Yksi raportti, yksi yhteinen korjauslista']},
-        total:'Auditoinnin hinta',credit:'Puolet auditoinnin hinnasta hyvitetään korjaustöistä tai uudesta sivustosta, jonka tilaat 30 päivän kuluessa.'}}
+        total:'Auditoinnin hinta',order:'Tilaa ja maksa',orderFine:'Täytä seuraavaksi sivustosi tiedot ja maksa kortilla. Raportti saapuu 3 arkipäivän kuluessa.',credit:'Puolet auditoinnin hinnasta hyvitetään korjaustöistä tai uudesta sivustosta, jonka tilaat 30 päivän kuluessa.'}}
 };
 // the audit card shows the lowest audit price; the receipt uses the chosen audit
 const PRICE={launch:690,business:1390,store:2490,audit:249};
@@ -127,6 +127,12 @@ function renderQuote(animate){
   skEl('qmNote').textContent=qNote?qNote():'';
   syncLangs();
   syncAudit();
+  // an audit is ordered and paid on the order page; website packages go to the enquiry form
+  const go=skEl('qmGo'),fine=document.querySelector('#qmReceipt .r-fine'),dockGo=document.getElementById('dockGo');
+  const orderUrl={fi:'',sv:'/sv',en:'/en'}[lang]+'/order.html?audit='+q.audit;
+  if(go){ go.href=tier==='audit'?orderUrl:'#contact'; go.textContent=tier==='audit'?m.audit.order:d.qm_cta; }
+  if(fine) fine.textContent=tier==='audit'?m.audit.orderFine:d.qm_fine;
+  if(dockGo){ dockGo.href=tier==='audit'?orderUrl:'#contact'; dockGo.textContent=tier==='audit'?m.audit.order:d.dock_quote; }
   // the total runs from the old figure to the new one
   if(animate&&qPrev.total&&qPrev.total!==total&&typeof wyCount==='function') wyCount(skEl('qmBody').querySelector('.r-total mark'),qPrev.total);
   qPrev={tier:tier,keys:keys,total:total};
@@ -215,6 +221,7 @@ function qmBrief(){
 // Hand the whole thing to the contact form, so the first message is already a brief.
 // Text the visitor has typed or edited is never overwritten; only an empty box or our own untouched brief is.
 function qmHandoff(){
+  if(q.size==='audit') return; // the link itself goes to the order page
   const ta=skEl('msg');
   if(!ta) return;
   if(!ta.value||(ta.dataset.auto!==undefined&&ta.value===ta.dataset.auto)){
