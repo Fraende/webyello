@@ -263,7 +263,7 @@
   "or_tm4": "Jos sivustosi on selvästi valittua sivustotyyppiä laajempi, otamme yhteyttä ennen aloitusta. Voit maksaa erotuksen tai perua tilauksen ja saada rahat takaisin.",
   "or_tm5": "Voit perua tilauksen ja saada rahat takaisin, kunnes auditointi on aloitettu. Aloitetusta auditoinnista maksua ei palauteta.",
   "or_tm6": "Auditointi kattaa vain julkisesti näkyvät sivut, emmekä tarvitse salasanojasi. Tietoturvan osalta kyse on perustarkistuksesta, ei syvällisestä tietoturvatestauksesta, ja tietosuojan tarkistus on tekninen, ei juridista neuvontaa. Kukaan ei voi taata, että tekoäly suosittelee juuri sinun yritystäsi.",
-  "or_tm7": "Puolet maksamastasi auditoinnin hinnasta hyvitetään korjaustöistä tai uudesta sivustosta, jonka tilaat meiltä 30 päivän kuluessa raportista.",
+  "or_tm7": "Puolet maksamastasi auditoinnin hinnasta (alv 0 %) hyvitetään korjaustöistä tai uudesta sivustosta, jonka tilaat meiltä 30 päivän kuluessa maksusta. Saat sähköpostiisi kertakäyttöisen hyvityskoodin ja sen viimeisen voimassaolopäivän. Hyvitys ei ole palautus, eikä sitä makseta rahana.",
   "or_tm8": "Raportti on sinun: saat käyttää sitä ja jakaa sen esimerkiksi omalle sivustontekijällesi.",
   "or_l_more": "Lisätietoja sivustostasi (vapaaehtoinen)",
   "or_more_hint": "Nämä auttavat kohdistamaan raportin. Ohita kohdat, joista et ole varma.",

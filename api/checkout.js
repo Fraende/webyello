@@ -8,6 +8,7 @@
 //   SITE_URL             optional. Where Stripe sends the buyer back. Default: this request's own host.
 
 const { lineItems } = require('./_lib/audit');
+const { form, STRIPE_VERSION } = require('./_lib/stripe');
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // Whitespace collapsed and cut to `max` characters without splitting an emoji or other character in two.
@@ -34,17 +35,6 @@ function normUrl(v) {
     const u = new URL(v);
     return /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(u.hostname) ? u.href.slice(0, 200) : '';
   } catch (e) { return ''; }
-}
-
-// Stripe's API takes form-encoded nested keys: line_items[0][price_data][currency]=eur
-function form(obj, prefix, out = new URLSearchParams()) {
-  for (const [k, v] of Object.entries(obj)) {
-    if (v === undefined || v === null || v === '') continue;
-    const key = prefix ? `${prefix}[${k}]` : k;
-    if (typeof v === 'object') form(v, key, out);
-    else out.append(key, String(v));
-  }
-  return out;
 }
 
 module.exports = async function handler(req, res) {
@@ -146,7 +136,7 @@ module.exports = async function handler(req, res) {
   try {
     upstream = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
-      headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: { Authorization: `Bearer ${key}`, 'Stripe-Version': STRIPE_VERSION, 'Content-Type': 'application/x-www-form-urlencoded' },
       body: params.toString(),
     });
     out = await upstream.json();
@@ -161,4 +151,3 @@ module.exports = async function handler(req, res) {
   return json(res, 200, { url: out.url });
 };
 
-module.exports.form = form; // for tests
