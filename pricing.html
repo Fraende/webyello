@@ -84,23 +84,21 @@
       </div>
     </div>
     <div class="care"><p data-i18n="pcare"><b>Care plan — €59/month:</b> updates, backups, security and small changes handled for you, so your site stays fresh.</p><p data-i18n="plang"><b>Extra language for Launch — €199 + VAT per language:</b> make the one-page site bilingual or multilingual without moving up to Business, where multilingual content is included.</p><p data-i18n="phour">Extra work outside the packages: €90/hour</p></div>
+    <div class="care pay" id="pay">
+      <p class="pay-done" id="payDoneCare" role="status" hidden data-i18n="pay_done_care"><b>Thank you — your care plan is active.</b> A receipt is on its way to your email. We’ll be in touch within one business day to get your site on the care rota.</p>
+      <p data-i18n="pay_intro"><b>Start the care plan online:</b> pay by card or another payment method, monthly, cancel any time. €59/month plus VAT; business customers in other EU countries can add their VAT ID at checkout.</p>
+      <p class="pay-actions">
+        <button type="button" class="btn btn-yellow" data-checkout="care" data-i18n="pay_care_btn">Start care plan — €59/month + VAT</button>
+      </p>
+      <p class="pay-msg" id="payWait" role="status" hidden data-i18n="pay_wait">Taking you to secure checkout…</p>
+      <p class="pay-msg" id="payErr" role="alert" hidden data-i18n="pay_err">Online payment isn’t available right now. Try again in a moment or email <a href="mailto:info@netyello.com">info@netyello.com</a>.</p>
+      <p class="pay-note" data-i18n="pay_note">Payments are handled by Stripe; we never see your card details. Website projects are invoiced after a fixed quote. Already on the care plan? <a href="/api/stripe/manage">Manage billing or cancel</a>.</p>
+    </div>
     <div class="care audit" id="audit">
       <p data-i18n="paudit"><b>Website audit — from €390:</b> already have a website? We check its speed, security, privacy compliance (GDPR and cookies) and search visibility, then give you a clear list of fixes in order of importance.</p>
       <p data-i18n="paudit_scope">The security part is a basic check (for example the secure connection, outdated software and exposed admin pages), not an in-depth security test. The privacy check is technical, not legal advice.</p>
       <p data-i18n="paudit_note">After the audit you get a clear comparison of what the fixes would cost against what a new site would cost, with our honest recommendation. The audit fee is credited in full against fix work or a Business or Store site ordered within 30 days. Against a Launch site, half the fee is credited.</p>
       <p class="audit-go"><a href="#contact" data-pick-type="optAudit" data-i18n="paudit_cta">Ask for an audit →</a></p>
-    </div>
-    <div class="care pay" id="pay">
-      <p class="pay-done" id="payDoneCare" role="status" hidden data-i18n="pay_done_care"><b>Thank you — your care plan is active.</b> A receipt is on its way to your email. We’ll be in touch within one business day to get your site on the care rota.</p>
-      <p class="pay-done" id="payDoneAudit" role="status" hidden data-i18n="pay_done_audit"><b>Thank you — the audit is paid.</b> A receipt and VAT invoice are on their way to your email. We’ll contact you within one business day to book the audit.</p>
-      <p data-i18n="pay_intro"><b>Pay online:</b> start the care plan or pay for a basic website audit by card or other payment methods. Prices plus VAT; business customers in other EU countries can add their VAT ID at checkout.</p>
-      <p class="pay-actions">
-        <button type="button" class="btn btn-yellow" data-checkout="care" data-i18n="pay_care_btn">Start care plan — €59/month + VAT</button>
-        <button type="button" class="btn btn-line" data-checkout="audit" data-i18n="pay_audit_btn">Pay for an audit — €390 + VAT</button>
-      </p>
-      <p class="pay-msg" id="payWait" role="status" hidden data-i18n="pay_wait">Taking you to secure checkout…</p>
-      <p class="pay-msg" id="payErr" role="alert" hidden data-i18n="pay_err">Online payment isn’t available right now. Try again in a moment or email <a href="mailto:info@netyello.com">info@netyello.com</a>.</p>
-      <p class="pay-note" data-i18n="pay_note">Payments are handled by Stripe; we never see your card details. Larger audits and all website projects are invoiced after a fixed quote. Already on the care plan? <a href="/api/stripe/manage">Manage billing or cancel</a>.</p>
     </div>
     <p class="vat" data-i18n="pc_vat">Prices exclude VAT (25.5%). Every project starts with a free discovery call and a fixed quote — no surprises.</p>
     <p class="vat" data-i18n="pc_fees">Platform subscriptions (such as Shopify) and hosting are paid by you directly to the provider and are not included in our prices.</p>

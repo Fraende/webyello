@@ -11,8 +11,8 @@
   // Back from a completed checkout: show the matching thank-you and drop the query so a reload doesn't repeat it.
   const q = new URLSearchParams(location.search);
   if (q.get('checkout') === 'success') {
-    const done = document.getElementById(q.get('item') === 'care' ? 'payDoneCare' : 'payDoneAudit');
-    if (done) done.hidden = false;
+    const done = document.getElementById('payDoneCare');
+    if (done && q.get('item') === 'care') done.hidden = false;
     history.replaceState(null, '', location.pathname + '#pay');
   }
 

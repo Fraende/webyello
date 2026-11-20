@@ -1,15 +1,14 @@
-// POST /api/stripe/checkout — starts a Stripe-hosted Checkout for one of the fixed-price items on the pricing page.
-// Body: { item: "audit" | "care", lang: "fi" | "sv" | "en" }  →  { url } to redirect the browser to.
+// POST /api/stripe/checkout — starts a Stripe-hosted Checkout for the care plan on the pricing page.
+// Body: { item: "care", lang: "fi" | "sv" | "en" }  →  { url } to redirect the browser to.
 //
 // Prices are looked up by lookup key, so a price change in the Stripe Dashboard needs no code change:
 // create the new price, move the lookup key to it (transfer_lookup_key) and archive the old one.
-// Quoted work (website projects, custom engraving and 3D-printing jobs, extra hours) is not sold here:
-// it is invoiced from the Stripe Dashboard after the quote is accepted.
+// Audits are ordered on /order.html (/api/checkout). Quoted work (website projects, custom engraving and
+// 3D-printing jobs, extra hours) is invoiced from the Stripe Dashboard after the quote is accepted.
 
 const { stripe, json } = require('../_stripe');
 
 const ITEMS = {
-  audit: { lookupKey: 'webyello_audit', mode: 'payment' },
   care: { lookupKey: 'webyello_care_monthly', mode: 'subscription' },
 };
 const PREFIX = { fi: '', sv: '/sv', en: '/en' };
@@ -60,13 +59,7 @@ module.exports = async function handler(req, res) {
       // Labels these sessions in the Dashboard so the pricing-page flow can be told apart from other checkouts.
       integration_identifier: 'webyello_pricing_qkvtmnrz',
     };
-    if (item.mode === 'payment') {
-      // Keep a customer record (for the follow-up fix-work invoice) and issue a proper VAT invoice for the payment.
-      params.customer_creation = 'always';
-      params.invoice_creation = { enabled: true };
-    } else {
-      params.subscription_data = { metadata: { item: body.item } };
-    }
+    if (item.mode === 'subscription') params.subscription_data = { metadata: { item: body.item } };
 
     const session = await s.checkout.sessions.create(params);
     return json(res, 200, { url: session.url });

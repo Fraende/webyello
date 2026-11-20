@@ -17,7 +17,11 @@ function dash(event, path) {
   return `https://dashboard.stripe.com${event.livemode ? '' : '/test'}/${path}`;
 }
 
-const ITEM_NAME = { audit: 'Website audit', care: 'Care plan' };
+const ITEM_NAME = { care: 'Care plan' };
+
+// Audit orders from /order.html have their own webhook (/api/stripe-webhook), which sends the order brief and
+// the credit code. Skip their checkout events here so the studio doesn't get two emails per order.
+const isAuditOrder = (e) => e.data.object?.metadata?.kind === 'webyello_audit';
 
 const HANDLERS = {
   // Checkout finished. With delayed payment methods (e.g. bank debits) the money may not be in yet:
@@ -35,7 +39,7 @@ const HANDLERS = {
       `Country: ${who.address?.country || '-'}`,
       `Total: ${eur(s.amount_total, s.currency)} (VAT ${eur(s.total_details?.amount_tax, s.currency)})`,
       '',
-      s.metadata?.item === 'care' ? 'Next: add the site to the care rota.' : 'Next: book the audit with the customer.',
+      s.metadata?.item === 'care' ? 'Next: add the site to the care rota.' : 'Next: follow up with the customer.',
       dash(e, `checkout/sessions/${s.id}`),
     ]);
   },
@@ -135,6 +139,9 @@ module.exports = async function handler(req, res) {
 
   const handle = HANDLERS[event.type];
   if (!handle) return json(res, 200, { received: true, ignored: event.type });
+  if (event.type.startsWith('checkout.session.') && isAuditOrder(event)) {
+    return json(res, 200, { received: true, ignored: 'audit_order' });
+  }
   try {
     await handle(event);
   } catch (e) {
