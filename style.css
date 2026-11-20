@@ -629,6 +629,7 @@ footer small{color:var(--muted-foreground);font-size:.88rem}
 .order legend{display:block;font-weight:700;font-size:1.05rem;margin-bottom:12px;padding:0}
 .order .qm-note{min-height:0;margin:12px 0 14px;font-size:var(--text-small);color:var(--muted-foreground)}
 .order fieldset .qm-note:last-child{margin-bottom:0}
+.order legend+.qm-note{margin-top:0}
 .check{display:flex;gap:12px;align-items:flex-start;font-weight:400;font-size:var(--text-body);line-height:1.5;margin:4px 0 0;cursor:pointer}
 .check input{flex:none;width:24px;height:24px;margin:0;accent-color:var(--primary)}
 .check a{color:var(--link);text-decoration:underline;text-underline-offset:3px}

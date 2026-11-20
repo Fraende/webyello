@@ -10,7 +10,19 @@
 const { lineItems } = require('./_lib/audit');
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const clean = (v, max) => (typeof v === 'string' ? v.replace(/\s+/g, ' ').trim().slice(0, max) : '');
+// Whitespace collapsed and cut to `max` characters without splitting an emoji or other character in two.
+// Also kept within 500 UTF-16 units, so every value fits Stripe's 500-character metadata limit however it counts.
+function clean(v, max) {
+  if (typeof v !== 'string') return '';
+  let out = '';
+  let n = 0;
+  for (const ch of v.replace(/\s+/g, ' ').trim()) {
+    if (n >= max || out.length + ch.length > 500) break;
+    out += ch;
+    n += 1;
+  }
+  return out.trim();
+}
 const json = (res, status, body) => res.status(status).setHeader('Cache-Control', 'no-store').json(body);
 const PREFIX = { fi: '', sv: '/sv', en: '/en' };
 
@@ -63,6 +75,14 @@ module.exports = async function handler(req, res) {
     area: withAi ? clean(body.area, 100) : '',
     questions: withAi && Array.isArray(body.questions) ? body.questions.map((q) => clean(q, 200)).filter(Boolean).slice(0, 5) : [],
     competitors: withAi ? clean(body.competitors, 300) : '',
+    // optional background for the report
+    platform: ['wordpress', 'shopify', 'wix', 'custom', 'unknown'].includes(body.platform) ? body.platform : '',
+    maintainer: clean(body.maintainer, 100),
+    goal: clean(body.goal, 300),
+    keyServices: clean(body.keyServices, 300),
+    languages: clean(body.languages, 100),
+    gbp: ['yes', 'no', 'unknown'].includes(body.gbp) ? body.gbp : '',
+    noPublish: clean(body.noPublish, 300),
     name: clean(body.name, 100),
     email: clean(body.email, 200),
     phone: clean(body.phone, 40),
@@ -95,7 +115,10 @@ module.exports = async function handler(req, res) {
     kind: 'webyello_audit',
     audit: order.audit, site_type: order.siteType, url: order.url, business: order.business, industry: order.industry,
     area: order.area, competitors: order.competitors, name: order.name, phone: order.phone, lang: order.lang,
+    platform: order.platform, maintainer: order.maintainer, goal: order.goal, key_services: order.keyServices,
+    languages: order.languages, gbp: order.gbp, no_publish: order.noPublish,
   };
+  // empty values are left out by form() below, so unanswered optional fields don't reach Stripe
   order.questions.forEach((q, i) => { metadata[`q${i + 1}`] = q; });
 
   const params = form({

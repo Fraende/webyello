@@ -80,6 +80,36 @@
           <label for="orInd" data-i18n="or_ind">What does your business do?</label>
           <input id="orInd" type="text" maxlength="100" placeholder="For example a burger restaurant, hair salon or plumbing" data-i18n-ph="or_ind_ph" required>
         </fieldset>
+        <fieldset>
+          <legend data-i18n="or_l_more">More about your site (optional)</legend>
+          <p class="qm-note" data-i18n="or_more_hint">These help us focus the report. Skip anything you are not sure about.</p>
+          <label for="orPlat" data-i18n="or_plat">What is the site built on?</label>
+          <select id="orPlat">
+            <option value="" data-i18n="or_choose">Choose (optional)</option>
+            <option value="wordpress">WordPress</option>
+            <option value="shopify">Shopify</option>
+            <option value="wix">Wix</option>
+            <option value="custom" data-i18n="or_plat_custom">Custom-built or other</option>
+            <option value="unknown" data-i18n="or_dont_know">I don’t know</option>
+          </select>
+          <label for="orMaint" data-i18n="or_maint">Who maintains the site?</label>
+          <input id="orMaint" type="text" maxlength="100" placeholder="For example yourself, an agency or a freelancer" data-i18n-ph="or_maint_ph">
+          <label for="orGoal" data-i18n="or_goal">Your main goal or worry</label>
+          <textarea id="orGoal" rows="2" maxlength="300" placeholder="For example: we don’t show up when people search for pizza" data-i18n-ph="or_goal_ph"></textarea>
+          <label for="orKey" data-i18n="or_key">Key services or products you want to be found for</label>
+          <input id="orKey" type="text" maxlength="300" placeholder="For example lunch, catering, gluten-free pizza" data-i18n-ph="or_key_ph">
+          <label for="orLangs" data-i18n="or_langs">Language versions of the site</label>
+          <input id="orLangs" type="text" maxlength="100" placeholder="For example Finnish and English" data-i18n-ph="or_langs_ph">
+          <label for="orGbp" data-i18n="or_gbp">Do you manage your business’s Google Business Profile yourself?</label>
+          <select id="orGbp">
+            <option value="" data-i18n="or_choose">Choose (optional)</option>
+            <option value="yes" data-i18n="or_yes">Yes</option>
+            <option value="no" data-i18n="or_no">No</option>
+            <option value="unknown" data-i18n="or_dont_know">I don’t know</option>
+          </select>
+          <label for="orDnp" data-i18n="or_dnp">Anything that must not be published</label>
+          <input id="orDnp" type="text" maxlength="300" placeholder="For example a home address or a personal phone number" data-i18n-ph="or_dnp_ph">
+        </fieldset>
         <fieldset id="orAi" hidden>
           <legend data-i18n="or_l_ai">Your customers and their questions</legend>
           <label for="orArea" data-i18n="or_area">Where are your customers?</label>

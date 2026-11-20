@@ -29,7 +29,7 @@ const M={
       fmt:n=>n.toLocaleString('fi-FI',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2})+' €'}
 };
 const m=M[lang]||M.fi;
-const FIELDS=['orUrl','orBiz','orInd','orArea','orQ1','orQ2','orQ3','orQ4','orQ5','orComp','orName','orEmail','orPhone'];
+const FIELDS=['orUrl','orBiz','orInd','orPlat','orMaint','orGoal','orKey','orLangs','orGbp','orDnp','orArea','orQ1','orQ2','orQ3','orQ4','orQ5','orComp','orName','orEmail','orPhone'];
 const val=n=>(form.querySelector('input[name='+n+']:checked')||{}).value;
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const round=n=>Math.round(n*100)/100;
@@ -68,7 +68,7 @@ function check(f){
   if(f.id==='orUrl'&&v&&!normUrl(v)) f.setCustomValidity(m.url);
   if(f.id==='orEmail'&&v&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) f.setCustomValidity(I18N[lang].f_err_email);
 }
-form.querySelectorAll('input:not([type=radio])').forEach(f=>{
+form.querySelectorAll('input:not([type=radio]),textarea').forEach(f=>{
   f.addEventListener('input',()=>check(f));
   f.addEventListener('change',()=>check(f));
 });
@@ -121,6 +121,8 @@ form.addEventListener('submit',async function(e){
     area:a==='site'?'':el('orArea').value,
     questions:a==='site'?[]:['orQ1','orQ2','orQ3','orQ4','orQ5'].map(id=>el(id).value).filter(v=>v.trim()),
     competitors:a==='site'?'':el('orComp').value,
+    platform:el('orPlat').value,maintainer:el('orMaint').value,goal:el('orGoal').value,keyServices:el('orKey').value,
+    languages:el('orLangs').value,gbp:el('orGbp').value,noPublish:el('orDnp').value,
     name:el('orName').value,email:el('orEmail').value,phone:el('orPhone').value,
     terms:el('orTerms').checked,website:form.querySelector('[name=website]').value,lang:lang
   };
