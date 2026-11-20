@@ -238,6 +238,9 @@ a.ticket:hover{border-color:var(--foreground);border-top-color:var(--under)}
 .care+.care{margin-top:12px}
 .care p+p{margin-top:10px}
 .audit-go{font-weight:700}
+.audit-opts{margin:10px 0 0;padding-left:1.25em;list-style:disc;max-width:68ch}
+.audit-opts li+li{margin-top:6px}
+.audit-opts+p{margin-top:10px}
 .vat+.vat{margin-top:6px}
 .vat{margin-top:16px;max-width:62ch;font-size:.9rem;color:var(--muted-foreground)}
 /* AI visibility audit (services page): pitch beside the offer card */
@@ -247,6 +250,8 @@ a.ticket:hover{border-color:var(--foreground);border-top-color:var(--under)}
 .ai-grid .plan{margin-top:24px}
 .ai-note{margin-top:20px;font-size:var(--text-body)!important;color:var(--muted-foreground)}
 .ai-fine{margin-top:14px;font-size:.875rem;line-height:1.5;color:var(--muted-foreground)}
+.ai-fine+.ai-fine{margin-top:8px}
+.ai-fine a{color:var(--link);text-decoration:underline;text-underline-offset:3px}
 @media (max-width:900px){.ai-grid{grid-template-columns:1fr;gap:40px}}
 
 /* ---- Contact ---- */
