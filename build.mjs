@@ -32,6 +32,7 @@ const PAGES = {
   'process.html': '/process.html',
   'pricing.html': '/pricing.html',
   'privacy.html': '/privacy.html',
+  'order.html': '/order.html',
   'demos/index.html': '/demos/',
 };
 
@@ -44,7 +45,7 @@ const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replac
 const escText = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
 // A link to one of the generated pages, rewritten for another language ("/pricing.html#quote" -> "/sv/pricing.html#quote")
-const PAGE_LINK = /^\/(index\.html|services\.html|process\.html|pricing\.html|privacy\.html|demos\/(?:index\.html)?)?([?#].*)?$/;
+const PAGE_LINK = /^\/(index\.html|services\.html|process\.html|pricing\.html|privacy\.html|order\.html|demos\/(?:index\.html)?)?([?#].*)?$/;
 const localize = (href, lang) => {
   if (!LANGS[lang]) return href;
   const m = href.match(PAGE_LINK);

@@ -6,23 +6,37 @@ const QM={
       up:l=>l+' requires Business. Your estimate is now from €1,390, up from €690.',down:'You chose Launch (from €690). We removed the Business-only features; extra languages stay as an add-on.',
       langs:n=>n===1?'1 extra language':n+' extra languages',
       live:(p,t)=>p+' package, '+t,x:{multi:'Multilingual site',blog:'Blog or news',ana:'SEO & analytics'},nfmt:n=>'€'+n.toLocaleString('en-US'),
-      audit:{name:'Website audit',f:['Speed and loading','Basic security check','Privacy (GDPR and cookies)','Search visibility (SEO)','Prioritised fix list'],total:'Audit price',credit:'Credited in full against fixes or a Business or Store site ordered within 30 days (half against Launch).'}},
+      audit:{names:{site:'Website audit',ai:'AI visibility audit',both:'Website + AI visibility audit'},
+        f:{site:['Speed and loading','Basic security check','Privacy (GDPR and cookies)','Search visibility (SEO)','Prioritised fix list'],
+           ai:['ChatGPT tested with five customer questions','AI access and structured data checked','Details compared on Google and in directories','Top 5 fixes with ready-to-paste texts'],
+           both:['Speed and loading','Basic security check','Privacy (GDPR and cookies)','Search visibility (SEO)','AI visibility: ChatGPT test and AI readiness','One report, one shared fix list']},
+        total:'Audit price',order:'Order and pay',orderFine:'Next, fill in your site details and pay by card. The report arrives within 3 business days.',credit:'Half of the audit fee is credited against fixes or a new website ordered within 30 days.'}},
   sv:{title:'Din uppskattning',forWho:'för ',from:'från ',incl:'ingår i paketet',quoted:'prissätts under samtalet',care:'Underhållspaket',mo:'/mån',total:'Webbplatsens startpris',vat:'exkl. moms · inkl. moms 25,5 % ≈ ',extraQ:'Tillägg utöver Webbutik-paketet prissätts under samtalet.',
       up:l=>l+' kräver paketet Företag. Startpriset ändrades från 690 € till 1 390 €.',down:'Du valde Start (från 690 €). Vi tog bort funktionerna som bara ingår i Företag; extra språk finns kvar som tillägg.',
       langs:n=>n===1?'1 extra språk':n+' extra språk',
       live:(p,t)=>'Paketet '+p+', '+t,x:{multi:'Flerspråkig webbplats',blog:'Blogg eller nyheter',ana:'SEO & analys'},nfmt:n=>n.toLocaleString('fi-FI')+' €',
-      audit:{name:'Webbplatsgranskning',f:['Hastighet och laddning','Grundläggande säkerhetskontroll','Dataskydd (GDPR och kakor)','Synlighet i sökmotorer (SEO)','Åtgärdslista i prioritetsordning'],total:'Granskningens pris',credit:'Krediteras i sin helhet mot åtgärder eller ett Företag- eller Webbutik-paket som beställs inom 30 dagar (hälften mot Start).'}},
+      audit:{names:{site:'Webbplatsgranskning',ai:'AI-synlighetsgranskning',both:'Webbplats- och AI-synlighetsgranskning'},
+        f:{site:['Hastighet och laddning','Grundläggande säkerhetskontroll','Dataskydd (GDPR och kakor)','Synlighet i sökmotorer (SEO)','Åtgärdslista i prioritetsordning'],
+           ai:['ChatGPT testas med fem kundfrågor','AI-åtkomst och strukturerad data kontrollerade','Uppgifter jämförda på Google och i kataloger','De 5 viktigaste åtgärderna med färdiga texter'],
+           both:['Hastighet och laddning','Grundläggande säkerhetskontroll','Dataskydd (GDPR och kakor)','Synlighet i sökmotorer (SEO)','AI-synlighet: ChatGPT-test och AI-beredskap','En rapport, en gemensam åtgärdslista']},
+        total:'Granskningens pris',order:'Beställ och betala',orderFine:'Fyll sedan i webbplatsens uppgifter och betala med kort. Rapporten kommer inom 3 arbetsdagar.',credit:'Hälften av granskningsavgiften krediteras mot åtgärder eller en ny webbplats som beställs inom 30 dagar.'}},
   fi:{title:'Hinta-arviosi',forWho:'yritykselle ',from:'alk. ',incl:'paketissa',quoted:'hinnoitellaan puhelussa',care:'Ylläpitopaketti',mo:'/kk',total:'Sivuston lähtöhinta',vat:'alv 0 % · alv 25,5 % mukana ≈ ',extraQ:'Verkkokauppapaketin päälle tulevat lisät hinnoitellaan puhelussa.',
       up:l=>l+' edellyttää Yrityssivut-pakettia. Lähtöhinta vaihtui 690 eurosta 1 390 euroon.',down:'Valitsit Startti-paketin (alk. 690 €). Poistimme vain Yrityssivut-pakettiin kuuluvat ominaisuudet; lisäkielet säilyvät lisäpalveluna.',
       langs:n=>n===1?'1 lisäkieli':n+' lisäkieltä',
       live:(p,t)=>p+'-paketti, '+t,x:{multi:'Monikielinen sivusto',blog:'Blogi tai uutiset',ana:'SEO & analytiikka'},nfmt:n=>n.toLocaleString('fi-FI')+' €',
-      audit:{name:'Sivustoauditointi',f:['Nopeus ja latausaika','Tietoturvan perustarkistus','Tietosuoja (GDPR ja evästeet)','Hakukonenäkyvyys (SEO)','Korjauslista tärkeysjärjestyksessä'],total:'Auditoinnin hinta',credit:'Hyvitetään kokonaan korjaustöistä tai Yrityssivut- tai Verkkokauppa-paketista, jonka tilaat 30 päivän kuluessa (Startti-paketista puolet).'}}
+      audit:{names:{site:'Sivustoauditointi',ai:'AI-näkyvyysauditointi',both:'Sivusto- ja AI-näkyvyysauditointi'},
+        f:{site:['Nopeus ja latausaika','Tietoturvan perustarkistus','Tietosuoja (GDPR ja evästeet)','Hakukonenäkyvyys (SEO)','Korjauslista tärkeysjärjestyksessä'],
+           ai:['ChatGPT-testi viidellä asiakkaan kysymyksellä','Tekoälyn pääsy ja rakenteinen data tarkistettu','Tiedot verrattu Googlessa ja hakemistoissa','Top 5 -korjaukset valmiine teksteineen'],
+           both:['Nopeus ja latausaika','Tietoturvan perustarkistus','Tietosuoja (GDPR ja evästeet)','Hakukonenäkyvyys (SEO)','AI-näkyvyys: ChatGPT-testi ja tekoälyvalmius','Yksi raportti, yksi yhteinen korjauslista']},
+        total:'Auditoinnin hinta',order:'Tilaa ja maksa',orderFine:'Täytä seuraavaksi sivustosi tiedot ja maksa kortilla. Raportti saapuu 3 arkipäivän kuluessa.',credit:'Puolet auditoinnin hinnasta hyvitetään korjaustöistä tai uudesta sivustosta, jonka tilaat 30 päivän kuluessa.'}}
 };
-const PRICE={launch:690,business:1390,store:2490,audit:390};
+// the audit card shows the lowest audit price; the receipt uses the chosen audit
+const PRICE={launch:690,business:1390,store:2490,audit:249};
+const AUDIT={site:390,ai:249,both:639},AUDIT_FIXED={ai:true},AUDIT_OPT={site:'optAudit',ai:'optAiAudit',both:'optBothAudit'};
 const PKG={launch:{name:'p1_t',f:['p1_f1','p1_f2','p1_f3','p1_f4']},business:{name:'p2_t',f:['p2_f1','p2_f2','p2_f3','p2_f4']},store:{name:'p3_t',f:['p3_f1','p3_f2','p3_f3','p3_f4','p3_f5']}};
 const EXTRA_FEAT={multi:'p2_f2',blog:'p2_f3',ana:'p2_f4'};
 const CARE=59,VAT=1.255,LANG_ADDON=199,MAX_LANGS=5;
-const q={size:'launch',extras:{multi:false,blog:false,ana:false},langs:1,care:false,touched:false};
+const q={size:'launch',audit:'site',extras:{multi:false,blog:false,ana:false},langs:1,care:false,touched:false};
 let qPrev={tier:null,keys:{}};
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 let qNote=null; // a function, so the note is re-worded when the language changes
@@ -38,20 +52,30 @@ function syncLangs(){
   if(sel) sel.value=String(q.langs);
 }
 // the audit is not a website package: it has its own name and checks, and the website features don't apply
-const pkgLabel=tier=>tier==='audit'?QM[lang].audit.name:I18N[lang][PKG[tier].name].replace(/&amp;/g,'&');
+const pkgLabel=tier=>tier==='audit'?QM[lang].audit.names[q.audit]:I18N[lang][PKG[tier].name].replace(/&amp;/g,'&');
+const priceOf=tier=>tier==='audit'?AUDIT[q.audit]:PRICE[tier];
+// the AI visibility audit has a fixed price; everything else is a starting price
+const fromOf=tier=>tier==='audit'&&AUDIT_FIXED[q.audit]?'':QM[lang].from;
+function syncAudit(){
+  const box=skEl('qmAudit');
+  if(box) box.hidden=q.size!=='audit';
+  const sel=skEl('qmAuditType');
+  if(sel) sel.value=q.audit;
+}
 function syncExtras(){
   const off=q.size==='audit';
   if(off) q.extras={multi:false,blog:false,ana:false};
   document.querySelectorAll('input[name=qmExtra]').forEach(c=>{c.disabled=off; if(off) c.checked=false;});
 }
 function saveQuote(){
-  try{sessionStorage.setItem('wy-quote',JSON.stringify({size:q.size,extras:q.extras,langs:q.langs,care:q.care}));}catch(e){}
+  try{sessionStorage.setItem('wy-quote',JSON.stringify({size:q.size,audit:q.audit,extras:q.extras,langs:q.langs,care:q.care}));}catch(e){}
 }
 function restoreQuote(){
   try{
     const saved=JSON.parse(sessionStorage.getItem('wy-quote')||'null');
     if(!saved||!Object.hasOwn(PRICE,saved.size)) return false;
     q.size=saved.size;
+    q.audit=Object.hasOwn(AUDIT,saved.audit)?saved.audit:'site';
     Object.keys(q.extras).forEach(k=>{q.extras[k]=saved.extras?.[k]===true;});
     q.care=saved.care===true;
     const n=Number(saved.langs); q.langs=Number.isInteger(n)&&n>=1&&n<=MAX_LANGS?n:1;
@@ -68,7 +92,7 @@ function restoreQuote(){
 function renderQuote(animate){
   saveQuote();
   const d=I18N[lang],m=QM[lang],name=skEl('qmName').value.trim();
-  const tier=q.size,price=PRICE[tier],pkgName=pkgLabel(tier);
+  const tier=q.size,price=priceOf(tier),from=fromOf(tier),pkgName=pkgLabel(tier);
   document.querySelectorAll('[data-qm-price]').forEach(el=>{el.textContent=m.from+m.nfmt(PRICE[el.dataset.qmPrice]);});
   const isNew=k=>animate&&!qPrev.keys[k]?' new':'';
   const keys={};
@@ -80,7 +104,7 @@ function renderQuote(animate){
     const tag=addon?'<span class="tag">+'+m.nfmt(LANG_ADDON*q.langs)+'</span>':tier==='store'?'<span class="tag q">'+m.quoted+'</span>':'<span class="tag">'+m.incl+'</span>';
     lines+='<li class="ask'+isNew(k)+'"><span class="tick" aria-hidden="true"></span><span>'+m.x[k]+(addon?' ('+m.langs(q.langs)+')':'')+'</span>'+tag+'</li>';
   });
-  if(tier==='audit') m.audit.f.forEach((text,i)=>{
+  if(tier==='audit') m.audit.f[q.audit].forEach((text,i)=>{
     keys['a'+i]=1;
     lines+='<li class="inc'+isNew('a'+i)+'"><span class="plus" aria-hidden="true"></span><span>'+text+'</span></li>';
   });
@@ -96,20 +120,27 @@ function renderQuote(animate){
   const stamp=animate&&qPrev.tier!==tier?' stamp':'';
   skEl('qmBody').innerHTML=
     '<div class="r-head"><span class="r-title">'+m.title+'</span>'+(name?'<span class="r-for">'+m.forWho+esc(name)+'</span>':'')+'</div>'+
-    '<div class="r-row r-pkg"><span>'+esc(pkgName)+'</span><span class="dots"></span><span>'+m.from+m.nfmt(price)+'</span></div>'+
+    '<div class="r-row r-pkg"><span>'+esc(pkgName)+'</span><span class="dots"></span><span>'+from+m.nfmt(price)+'</span></div>'+
     '<ul class="r-lines">'+lines+'</ul>'+care+
-    '<div class="r-total"><span>'+(tier==='audit'?m.audit.total:m.total)+'</span><mark class="'+stamp.trim()+'">'+m.from+m.nfmt(total)+'</mark></div>'+
+    '<div class="r-total"><span>'+(tier==='audit'?m.audit.total:m.total)+'</span><mark class="'+stamp.trim()+'">'+from+m.nfmt(total)+'</mark></div>'+
     '<p class="r-vat">'+m.vat+m.nfmt(vat)+(tier==='store'&&anyExtra()?'<br>'+m.extraQ:'')+(tier==='audit'?'<br>'+m.audit.credit:'')+'</p>';
   skEl('qmNote').textContent=qNote?qNote():'';
   syncLangs();
+  syncAudit();
+  // an audit is ordered and paid on the order page; website packages go to the enquiry form
+  const go=skEl('qmGo'),fine=document.querySelector('#qmReceipt .r-fine'),dockGo=document.getElementById('dockGo');
+  const orderUrl={fi:'',sv:'/sv',en:'/en'}[lang]+'/order.html?audit='+q.audit;
+  if(go){ go.href=tier==='audit'?orderUrl:'#contact'; go.textContent=tier==='audit'?m.audit.order:d.qm_cta; }
+  if(fine) fine.textContent=tier==='audit'?m.audit.orderFine:d.qm_fine;
+  if(dockGo){ dockGo.href=tier==='audit'?orderUrl:'#contact'; dockGo.textContent=tier==='audit'?m.audit.order:d.dock_quote; }
   // the total runs from the old figure to the new one
   if(animate&&qPrev.total&&qPrev.total!==total&&typeof wyCount==='function') wyCount(skEl('qmBody').querySelector('.r-total mark'),qPrev.total);
   qPrev={tier:tier,keys:keys,total:total};
-  skEl('qmLive').textContent=(qNote?qNote()+' ':'')+m.live(pkgName,m.from+m.nfmt(total)+(q.care?' + '+m.nfmt(CARE)+m.mo:''));
+  skEl('qmLive').textContent=(qNote?qNote()+' ':'')+m.live(pkgName,from+m.nfmt(total)+(q.care?' + '+m.nfmt(CARE)+m.mo:''));
   const dockInfo=document.getElementById('dockInfo');
   if(dockInfo){
     const name=document.createElement('span'),price=document.createElement('b');
-    name.textContent=pkgName; price.textContent=m.from+m.nfmt(total);
+    name.textContent=pkgName; price.textContent=from+m.nfmt(total);
     dockInfo.replaceChildren(name,price);
   }
 }
@@ -133,6 +164,9 @@ document.querySelectorAll('input[name=qmExtra]').forEach(c=>c.addEventListener('
   }
   renderQuote(true);
 }));
+skEl('qmAuditType').addEventListener('change',function(){
+  q.audit=Object.hasOwn(AUDIT,this.value)?this.value:'site'; q.touched=true; renderQuote(true);
+});
 skEl('qmLangCount').addEventListener('change',function(){
   const n=Number(this.value); q.langs=n>=1&&n<=MAX_LANGS?n:1; q.touched=true; renderQuote(true);
 });
@@ -168,17 +202,17 @@ function qmBrief(){
   const type=stored().type,trade=Object.hasOwn(TRADE,type)?TRADE[type]:null,label=trade?trade[lang]:'';
   const pkg=pkgLabel(q.size);
   const extras=['multi','blog','ana'].filter(k=>q.extras[k]).map(k=>k==='multi'&&q.size==='launch'?m.x[k]+' ('+m.langs(q.langs)+', +'+m.nfmt(LANG_ADDON*q.langs)+')':m.x[k]);
-  const price=m.from+m.nfmt(PRICE[q.size]);
+  const price=fromOf(q.size)+m.nfmt(priceOf(q.size));
   let who;
   if(lang==='fi') who=name?'Yritykseni on '+name+(label?' ('+label+')':'')+'. ':(label?'Toimin alalla: '+label+'. ':'');
   else if(lang==='sv') who=name?'Mitt företag heter '+name+(label?' ('+label+')':'')+'. ':(label?'Jag är verksam inom: '+label+'. ':'');
   else who=name?'My business is '+name+(label?' ('+label+')':'')+'. ':(label?'I work in: '+label+'. ':'');
   if(lang==='sv') return q.size==='audit'
-    ? 'Hej! '+who+'Jag skulle vilja ha en granskning av min nuvarande webbplats ('+price+', exkl. moms)'+(q.care?' och är också intresserad av underhållspaketet':'')+'. Webbplatsens adress: '
+    ? 'Hej! '+who+'Jag skulle vilja beställa: '+pkg+' ('+price+', exkl. moms)'+(q.care?' och är också intresserad av underhållspaketet':'')+'. Webbplatsens adress: '
     : 'Hej! '+who+'Jag har gjort en prisuppskattning: '+pkg+' ('+price+', exkl. moms)'+(extras.length?' med '+extras.join(', '):'')+(q.care?' samt underhållspaketet':'')+'. Hör av er!';
   if(q.size==='audit') return lang==='fi'
-    ? 'Hei! '+who+'Haluaisin auditoinnin nykyiselle sivustolleni ('+price+', alv 0 %)'+(q.care?' ja kiinnostaisi myös ylläpitopaketti':'')+'. Sivuston osoite: '
-    : 'Hi! '+who+'I\u2019d like an audit of my current site ('+price+', excl. VAT)'+(q.care?' and I\u2019m also interested in the care plan':'')+'. My site\u2019s address: ';
+    ? 'Hei! '+who+'Haluaisin tilata: '+pkg+' ('+price+', alv 0 %)'+(q.care?' ja kiinnostaisi myös ylläpitopaketti':'')+'. Sivuston osoite: '
+    : 'Hi! '+who+'I\u2019d like to order: '+pkg+' ('+price+', excl. VAT)'+(q.care?' and I\u2019m also interested in the care plan':'')+'. My site\u2019s address: ';
   return lang==='fi'
     ? 'Hei! '+who+'Kokosin hinta-arvion: '+pkg+' ('+price+', alv 0 %)'+(extras.length?', lisäksi '+extras.join(', '):'')+(q.care?' ja ylläpitopaketti':'')+'. Jutellaan!'
     : 'Hi! '+who+'I put together an estimate: '+pkg+' ('+price+', excl. VAT)'+(extras.length?' with '+extras.join(', '):'')+(q.care?' plus the care plan':'')+'. Let\u2019s talk!';
@@ -187,12 +221,13 @@ function qmBrief(){
 // Hand the whole thing to the contact form, so the first message is already a brief.
 // Text the visitor has typed or edited is never overwritten; only an empty box or our own untouched brief is.
 function qmHandoff(){
+  if(q.size==='audit') return; // the link itself goes to the order page
   const ta=skEl('msg');
   if(!ta) return;
   if(!ta.value||(ta.dataset.auto!==undefined&&ta.value===ta.dataset.auto)){
     const msg=qmBrief(); ta.value=msg; ta.dataset.auto=msg;
   }
-  const audit=skEl('optAudit');
+  const audit=skEl(AUDIT_OPT[q.audit]);
   if(q.size==='audit'&&audit) skEl('type').value=audit.value;
   else skEl('type').selectedIndex=q.size==='store'?2:0;
   ta.dispatchEvent(new Event('input',{bubbles:true}));

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" data-title-en="Order an audit — WebYello" data-title-fi="Tilaa auditointi — WebYello" data-title-sv="Beställ en granskning — WebYello">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Order an audit — WebYello</title>
+<meta name="description" data-i18n-content="desc_order" content="Order a website audit, an AI visibility audit or both online and pay by card. Your report arrives by email within 3 business days. From €249 + VAT.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fraunces-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<nav aria-label="Main" data-i18n-aria="aria_nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="/"><img class="logo-badge" src="/logo-480.webp" width="480" height="160" alt="WebYello"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/services.html" data-i18n="nav_services">Services</a></li>
+      <li><a href="/demos/" data-i18n="nav_demos">Demos</a></li>
+      <li><a href="/process.html" data-i18n="nav_process">Process</a></li>
+      <li><a href="/pricing.html" data-i18n="nav_pricing">Pricing</a></li>
+      <li><a class="btn btn-yellow" href="#contact" data-i18n="nav_cta">Start a project</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language" data-i18n-aria="aria_lang">
+        <a data-lang="fi" hreflang="fi" lang="fi">FI</a>
+        <a data-lang="sv" hreflang="sv" lang="sv">SV</a>
+        <a data-lang="en" hreflang="en" lang="en">EN</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" data-i18n-aria="aria_menu" aria-expanded="false" aria-controls="navLinks"><span class="ico-menu" aria-hidden="true"></span></button>
+    </div>
+  </div>
+</nav>
+
+<main id="main" tabindex="-1">
+<header class="page-head">
+  <div class="wrap">
+    <div>
+      <h1 data-i18n="or_h1">Order an audit</h1>
+      <p data-i18n="or_p">Fill in a few details and pay by card. Your report arrives by email within 3 business days of payment, with no calls needed.</p>
+    </div>
+    <div class="ph-art" aria-hidden="true"><img src="/img/art-pointer.svg" width="240" height="180" alt="" decoding="async"></div>
+  </div>
+</header>
+<section id="order" class="order">
+  <div class="wrap">
+    <div class="order-done" id="orderDone" role="status" tabindex="-1" hidden>
+      <div class="success-badge" aria-hidden="true"><span class="tick"></span></div>
+      <h2 data-i18n="or_ok_h">Thank you, your order is in.</h2>
+      <p data-i18n="or_ok_p">We have received your payment. You will get a receipt and a VAT invoice by email, and your report within 3 business days. If anything about your site needs checking first, we will contact you.</p>
+    </div>
+    <div class="quote-grid order-grid" id="orderGrid">
+      <form id="orderForm" novalidate>
+        <fieldset>
+          <legend data-i18n="or_l_audit">Choose your audit</legend>
+          <div class="sizes">
+            <label class="size"><input type="radio" name="audit" value="site" checked><span class="size-in"><b data-i18n="or_a_site">Website audit</b><small data-i18n="or_a_site_d">Speed, security, privacy (GDPR) and SEO</small><em data-i18n="or_a_site_p">from €390</em></span></label>
+            <label class="size"><input type="radio" name="audit" value="ai"><span class="size-in"><b data-i18n="or_a_ai">AI visibility audit</b><small data-i18n="or_a_ai_d">ChatGPT test, AI readiness and your listings</small><em data-i18n="or_a_ai_p">€249</em></span></label>
+            <label class="size"><input type="radio" name="audit" value="both"><span class="size-in"><b data-i18n="or_a_both">Both</b><small data-i18n="or_a_both_d">One report, one shared fix list</small><em data-i18n="or_a_both_p">from €639</em></span></label>
+          </div>
+        </fieldset>
+        <fieldset id="orSiteType">
+          <legend data-i18n="or_l_type">What kind of site is it?</legend>
+          <div class="sizes">
+            <label class="size"><input type="radio" name="siteType" value="small" checked><span class="size-in"><b data-i18n="or_t_small">Small site</b><small data-i18n="or_t_small_d">Up to about 10 pages, such as a one-page or company site</small><em data-i18n="or_t_small_p">€390</em></span></label>
+            <label class="size"><input type="radio" name="siteType" value="large"><span class="size-in"><b data-i18n="or_t_large">Larger or WordPress site</b><small data-i18n="or_t_large_d">More than 10 pages, or built on WordPress</small><em data-i18n="or_t_large_p">€590</em></span></label>
+            <label class="size"><input type="radio" name="siteType" value="store"><span class="size-in"><b data-i18n="or_t_store">Online store</b><small data-i18n="or_t_store_d">Shopify, WooCommerce or another store platform</small><em data-i18n="or_t_store_p">€890</em></span></label>
+          </div>
+          <p class="qm-note" data-i18n="or_type_note">If your site turns out larger than the type you chose, we will contact you before we start: you can pay the difference or cancel for a full refund.</p>
+        </fieldset>
+        <fieldset>
+          <legend data-i18n="or_l_biz">Your business</legend>
+          <label for="orUrl" data-i18n="or_url">Website address</label>
+          <input id="orUrl" type="text" inputmode="url" maxlength="200" autocomplete="url" placeholder="www.example.fi" data-i18n-ph="or_url_ph" required>
+          <label for="orBiz" data-i18n="or_biz">Business name</label>
+          <input id="orBiz" type="text" maxlength="100" autocomplete="organization" required>
+          <label for="orInd" data-i18n="or_ind">What does your business do?</label>
+          <input id="orInd" type="text" maxlength="100" placeholder="For example a burger restaurant, hair salon or plumbing" data-i18n-ph="or_ind_ph" required>
+        </fieldset>
+        <fieldset>
+          <legend data-i18n="or_l_more">More about your site (optional)</legend>
+          <p class="qm-note" data-i18n="or_more_hint">These help us focus the report. Skip anything you are not sure about.</p>
+          <label for="orPlat" data-i18n="or_plat">What is the site built on?</label>
+          <select id="orPlat">
+            <option value="" data-i18n="or_choose">Choose (optional)</option>
+            <option value="wordpress">WordPress</option>
+            <option value="shopify">Shopify</option>
+            <option value="wix">Wix</option>
+            <option value="custom" data-i18n="or_plat_custom">Custom-built or other</option>
+            <option value="unknown" data-i18n="or_dont_know">I don’t know</option>
+          </select>
+          <label for="orMaint" data-i18n="or_maint">Who maintains the site?</label>
+          <input id="orMaint" type="text" maxlength="100" placeholder="For example yourself, an agency or a freelancer" data-i18n-ph="or_maint_ph">
+          <label for="orGoal" data-i18n="or_goal">Your main goal or worry</label>
+          <textarea id="orGoal" rows="2" maxlength="300" placeholder="For example: we don’t show up when people search for pizza" data-i18n-ph="or_goal_ph"></textarea>
+          <label for="orKey" data-i18n="or_key">Key services or products you want to be found for</label>
+          <input id="orKey" type="text" maxlength="300" placeholder="For example lunch, catering, gluten-free pizza" data-i18n-ph="or_key_ph">
+          <label for="orLangs" data-i18n="or_langs">Language versions of the site</label>
+          <input id="orLangs" type="text" maxlength="100" placeholder="For example Finnish and English" data-i18n-ph="or_langs_ph">
+          <label for="orGbp" data-i18n="or_gbp">Do you manage your business’s Google Business Profile yourself?</label>
+          <select id="orGbp">
+            <option value="" data-i18n="or_choose">Choose (optional)</option>
+            <option value="yes" data-i18n="or_yes">Yes</option>
+            <option value="no" data-i18n="or_no">No</option>
+            <option value="unknown" data-i18n="or_dont_know">I don’t know</option>
+          </select>
+          <label for="orDnp" data-i18n="or_dnp">Anything that must not be published</label>
+          <input id="orDnp" type="text" maxlength="300" placeholder="For example a home address or a personal phone number" data-i18n-ph="or_dnp_ph">
+        </fieldset>
+        <fieldset id="orAi" hidden>
+          <legend data-i18n="or_l_ai">Your customers and their questions</legend>
+          <label for="orArea" data-i18n="or_area">Where are your customers?</label>
+          <input id="orArea" type="text" maxlength="100" placeholder="For example Konala, Helsinki" data-i18n-ph="or_area_ph">
+          <p class="qm-note" id="orQHint" data-i18n="or_q_hint">Write up to five questions a customer might ask ChatGPT when looking for a business like yours. Leave them empty and we will write them for you.</p>
+          <label for="orQ1" class="sr-only" data-i18n="or_q1">Question 1</label>
+          <input id="orQ1" type="text" maxlength="200" aria-describedby="orQHint" placeholder="For example: Best burger restaurant in Konala?" data-i18n-ph="or_q_ph">
+          <label for="orQ2" class="sr-only" data-i18n="or_q2">Question 2</label>
+          <input id="orQ2" type="text" maxlength="200" aria-describedby="orQHint">
+          <label for="orQ3" class="sr-only" data-i18n="or_q3">Question 3</label>
+          <input id="orQ3" type="text" maxlength="200" aria-describedby="orQHint">
+          <label for="orQ4" class="sr-only" data-i18n="or_q4">Question 4</label>
+          <input id="orQ4" type="text" maxlength="200" aria-describedby="orQHint">
+          <label for="orQ5" class="sr-only" data-i18n="or_q5">Question 5</label>
+          <input id="orQ5" type="text" maxlength="200" aria-describedby="orQHint">
+          <label for="orComp" data-i18n="or_comp">Competitors you want compared (optional)</label>
+          <input id="orComp" type="text" maxlength="300">
+        </fieldset>
+        <fieldset>
+          <legend data-i18n="or_l_contact">Your details</legend>
+          <label for="orName" data-i18n="f_name">Your name</label>
+          <input id="orName" type="text" maxlength="100" autocomplete="name" required>
+          <label for="orEmail" data-i18n="f_email">Email</label>
+          <input id="orEmail" type="email" maxlength="200" autocomplete="email" required>
+          <label for="orPhone" data-i18n="or_phone">Phone (optional)</label>
+          <input id="orPhone" type="tel" maxlength="40" autocomplete="tel">
+        </fieldset>
+        <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <label class="check"><input type="checkbox" id="orTerms" required><span data-i18n="or_terms">I am ordering for my business and accept the <a href="#terms">order terms</a> and the <a href="/privacy.html">privacy policy</a>.</span></label>
+      </form>
+      <div class="receipt-wrap">
+        <div class="receipt" id="orReceipt">
+          <div id="orBody"></div>
+          <p class="form-status" id="orStatus" role="status" aria-live="polite"></p>
+          <button class="btn btn-yellow" type="submit" form="orderForm" id="orPay" data-i18n="or_pay">Continue to payment</button>
+          <small class="r-fine" data-i18n="or_fine">Payment is handled securely by Stripe. You will get a receipt and a VAT invoice by email.</small>
+        </div>
+      </div>
+    </div>
+    <div class="legal order-terms" id="terms">
+      <h2 data-i18n="or_terms_h">Order terms</h2>
+      <ul>
+        <li data-i18n="or_tm1">The audits are sold to businesses and organisations. The seller is NetYello (Business ID 2301971-6); WebYello is a NetYello service.</li>
+        <li data-i18n="or_tm2">Prices exclude VAT (25.5%) and are paid in advance by card through Stripe. You get a receipt and a VAT invoice by email.</li>
+        <li data-i18n="or_tm3">You get a written report by email within 3 business days of payment. If we need more information from you, the time runs from when we receive it. An optional 20-minute walkthrough by phone or video is included.</li>
+        <li data-i18n="or_tm4">If your site is clearly larger than the site type you chose, we contact you before we start. You can pay the difference or cancel and get a full refund.</li>
+        <li data-i18n="or_tm5">You can cancel with a full refund until we start the audit. Once the audit has started, the fee is not refunded.</li>
+        <li data-i18n="or_tm6">The audit covers only publicly visible pages; we never need your passwords. The security part is a basic check, not an in-depth security test, and the privacy check is technical, not legal advice. No one can guarantee that an AI will recommend your business.</li>
+        <li data-i18n="or_tm7">Half of the audit fee you paid (excluding VAT) is credited against fix work or a new website ordered from us within 30 days of payment. You get a single-use credit code by email, with its last valid date. The credit is not a refund and is not paid out in cash.</li>
+        <li data-i18n="or_tm8">The report is yours: you can use it and share it, for example with your own web developer.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap contact-inner">
+    <div>
+      <h2 data-i18n="ct_h2">Ready to give your business the website it deserves?</h2>
+      <p class="lead" data-i18n="ct_lead">Tell us a little about your project and we'll get back to you within one business day with ideas, honest advice, and a clear quote.</p>
+      <ul class="contact-list">
+        <li><a href="mailto:info@netyello.com">info@netyello.com</a></li>
+        <li data-i18n="ct_l2">Free 30-minute discovery call</li>
+        <li data-i18n="ct_l3">Clear, fixed-price quotes</li>
+      </ul>
+    </div>
+    <form id="contactForm">
+      <label for="name" data-i18n="f_name">Your name</label>
+      <input id="name" type="text" maxlength="100" placeholder="Jane Doe" data-i18n-ph="f_name_ph" autocomplete="name" required>
+      <label for="email" data-i18n="f_email">Email</label>
+      <input id="email" type="email" maxlength="200" placeholder="jane@example.com" data-i18n-ph="f_email_ph" autocomplete="email" required>
+      <label for="type" data-i18n="f_type">What do you need?</label>
+      <select id="type">
+        <option data-i18n="f_o1">A brand-new website</option>
+        <option data-i18n="f_o2">A redesign of my current site</option>
+        <option data-i18n="f_o3">An online store</option>
+        <option data-i18n="f_o4">Ongoing care &amp; support</option>
+        <option id="optAudit" data-i18n="f_o6">An audit of my current site</option>
+        <option id="optAiAudit" data-i18n="f_o7">An AI visibility audit</option>
+        <option id="optBothAudit" data-i18n="f_o8">A website + AI visibility audit</option>
+        <option data-i18n="f_o5">Something else</option>
+      </select>
+      <label for="msg" data-i18n="f_msg">Tell us about your project</label>
+      <textarea id="msg" rows="4" maxlength="5000" placeholder="We run a small bakery and need a site that smells as good as our bread…" data-i18n-ph="f_msg_ph" required></textarea>
+      <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      <button class="btn btn-yellow" type="submit" data-i18n="f_send">Send enquiry</button>
+      <small class="form-fine" data-i18n="f_privacy">NetYello uses your details only to reply to you. <a href="/privacy.html">Privacy policy</a></small>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <span class="wordmark"><img class="logo-badge" src="/logo-480.webp" width="480" height="160" alt="WebYello"></span>
+      <span class="foot-by" data-i18n="ft_by">WebYello is a NetYello service</span>
+    </div>
+    <div class="foot-links">
+      <a href="/services.html" data-i18n="nav_services">Services</a>
+      <a href="/demos/" data-i18n="nav_demos">Demos</a>
+      <a href="/process.html" data-i18n="nav_process">Process</a>
+      <a href="/pricing.html" data-i18n="nav_pricing">Pricing</a>
+      <a href="/privacy.html" data-i18n="ft_privacy">Privacy</a>
+      <a href="#contact" data-i18n="ft_contact">Contact</a>
+    </div>
+    <div class="foot-legal">
+      <small class="foot-biz">NetYello · Y-tunnus 2301971-6 · <a href="mailto:info@netyello.com">info@netyello.com</a></small>
+      <small data-i18n="ft_copy">© 2026 NetYello. Made with plenty of yellow.</small>
+    </div>
+  </div>
+</footer>
+
+<div class="dock" id="dock">
+  <a class="btn btn-yellow" id="dockGo" href="#orReceipt" data-i18n="or_pay">Continue to payment</a>
+</div>
+
+<script src="/site.js"></script>
+<script src="/order.js"></script>
+</body>
+</html>
