@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Pricing — WebYello</title>
-<meta name="description" data-i18n-content="desc_pricing" content="Clear packages and honest fixed prices: Launch from €690, Business from €1,390, Store from €2,490, Care plan €59/month, website audit from €390. Estimate your starting price.">
+<meta name="description" data-i18n-content="desc_pricing" content="Clear packages and honest fixed prices: Launch from €690, Business from €1,390, Store from €2,490, Care plan €59/month, website audit from €390, AI visibility audit €249. Estimate your starting price.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -84,11 +84,26 @@
       </div>
     </div>
     <div class="care"><p data-i18n="pcare"><b>Care plan — €59/month:</b> updates, backups, security and small changes handled for you, so your site stays fresh.</p><p data-i18n="plang"><b>Extra language for Launch — €199 + VAT per language:</b> make the one-page site bilingual or multilingual without moving up to Business, where multilingual content is included.</p><p data-i18n="phour">Extra work outside the packages: €90/hour</p></div>
+    <div class="care pay" id="pay">
+      <p class="pay-done" id="payDoneCare" role="status" hidden data-i18n="pay_done_care"><b>Thank you — your care plan is active.</b> A receipt is on its way to your email. We’ll be in touch within one business day to get your site on the care rota.</p>
+      <p data-i18n="pay_intro"><b>Start the care plan online:</b> pay by card or another payment method, monthly, cancel any time. €59/month plus VAT; business customers in other EU countries can add their VAT ID at checkout.</p>
+      <p class="pay-actions">
+        <button type="button" class="btn btn-yellow" data-checkout="care" data-i18n="pay_care_btn">Start care plan — €59/month + VAT</button>
+      </p>
+      <p class="pay-msg" id="payWait" role="status" hidden data-i18n="pay_wait">Taking you to secure checkout…</p>
+      <p class="pay-msg" id="payErr" role="alert" hidden data-i18n="pay_err">Online payment isn’t available right now. Try again in a moment or email <a href="mailto:info@netyello.com">info@netyello.com</a>.</p>
+      <p class="pay-note" data-i18n="pay_note">Payments are handled by Stripe; we never see your card details. Website projects are invoiced after a fixed quote. Already on the care plan? <a href="/api/stripe/manage">Manage billing or cancel</a>.</p>
+    </div>
     <div class="care audit" id="audit">
-      <p data-i18n="paudit"><b>Website audit — from €390:</b> already have a website? We check its speed, security, privacy compliance (GDPR and cookies) and search visibility, then give you a clear list of fixes in order of importance.</p>
-      <p data-i18n="paudit_scope">The security part is a basic check (for example the secure connection, outdated software and exposed admin pages), not an in-depth security test. The privacy check is technical, not legal advice.</p>
-      <p data-i18n="paudit_note">After the audit you get a clear comparison of what the fixes would cost against what a new site would cost, with our honest recommendation. The audit fee is credited in full against fix work or a Business or Store site ordered within 30 days. Against a Launch site, half the fee is credited.</p>
-      <p class="audit-go"><a href="#contact" data-pick-type="optAudit" data-i18n="paudit_cta">Ask for an audit →</a></p>
+      <p data-i18n="paudit"><b>Audit — from €249:</b> already have a website? Choose what we check: the website itself, how visible it is to AI assistants, or both. You get a clear list of fixes in order of importance. Order and pay online; your report arrives within 3 business days.</p>
+      <ul class="audit-opts">
+        <li data-i18n="paudit_site"><b>Website audit — from €390:</b> speed, basic security, privacy compliance (GDPR and cookies) and search visibility (SEO). €390 for a small site, €590 for a larger or WordPress site, €890 for an online store.</li>
+        <li data-i18n="paudit_ai"><b>AI visibility audit — €249:</b> we ask ChatGPT five questions your customers ask, check that AI assistants can reach and read your site, and compare your details on Google and in directories.</li>
+        <li data-i18n="paudit_both"><b>Both — from €639:</b> the website audit price plus €249, with one report and one shared fix list.</li>
+      </ul>
+      <p data-i18n="paudit_scope">The security part is a basic check (for example the secure connection, outdated software and exposed admin pages), not an in-depth security test. The privacy check is technical, not legal advice. No one can guarantee that an AI will recommend you: the AI visibility audit makes your site easy for AI assistants to reach and read.</p>
+      <p data-i18n="paudit_note">After the audit you get a clear comparison of what the fixes would cost against what a new site would cost, with our honest recommendation. Half of the audit fee you paid is credited against fix work or a new website ordered within 30 days.</p>
+      <p class="audit-go"><a href="/order.html" data-i18n="paudit_cta">Order an audit →</a></p>
     </div>
     <p class="vat" data-i18n="pc_vat">Prices exclude VAT (25.5%). Every project starts with a free discovery call and a fixed quote — no surprises.</p>
     <p class="vat" data-i18n="pc_fees">Platform subscriptions (such as Shopify) and hosting are paid by you directly to the provider and are not included in our prices.</p>
@@ -111,7 +126,15 @@
             <label class="size"><input type="radio" name="qmSize" value="launch" checked><span class="size-in"><b data-i18n="qm_s1">One page</b><small data-i18n="qm_s1d">One polished page that says it all</small><em data-qm-price="launch"></em></span></label>
             <label class="size"><input type="radio" name="qmSize" value="business"><span class="size-in"><b data-i18n="qm_s2">Up to five pages</b><small data-i18n="qm_s2d">A complete company website</small><em data-qm-price="business"></em></span></label>
             <label class="size"><input type="radio" name="qmSize" value="store"><span class="size-in"><b data-i18n="qm_s3">Online store</b><small data-i18n="qm_s3d">Sell your products, take payments</small><em data-qm-price="store"></em></span></label>
-            <label class="size"><input type="radio" name="qmSize" value="audit"><span class="size-in"><b data-i18n="qm_s4">Existing site audit</b><small data-i18n="qm_s4d">Speed, security, privacy and SEO checked</small><em data-qm-price="audit"></em></span></label>
+            <label class="size"><input type="radio" name="qmSize" value="audit"><span class="size-in"><b data-i18n="qm_s4">Audit of my current site</b><small data-i18n="qm_s4d">Website, AI visibility or both</small><em data-qm-price="audit"></em></span></label>
+          </div>
+          <div class="qm-langs" id="qmAudit" hidden>
+            <label for="qmAuditType" data-i18n="qm_audit">What should we check?</label>
+            <select id="qmAuditType">
+              <option value="site" data-i18n="qm_a_site">Website audit (from €390)</option>
+              <option value="ai" data-i18n="qm_a_ai">AI visibility audit (€249)</option>
+              <option value="both" data-i18n="qm_a_both">Both (from €639)</option>
+            </select>
           </div>
         </fieldset>
         <fieldset>
@@ -168,6 +191,8 @@
         <option data-i18n="f_o3">An online store</option>
         <option data-i18n="f_o4">Ongoing care &amp; support</option>
         <option id="optAudit" data-i18n="f_o6">An audit of my current site</option>
+        <option id="optAiAudit" data-i18n="f_o7">An AI visibility audit</option>
+        <option id="optBothAudit" data-i18n="f_o8">A website + AI visibility audit</option>
         <option data-i18n="f_o5">Something else</option>
       </select>
       <label for="msg" data-i18n="f_msg">Tell us about your project</label>
@@ -210,5 +235,6 @@
 
 <script src="/site.js"></script>
 <script src="/quote.js"></script>
+<script src="/pay.js"></script>
 </body>
 </html>
