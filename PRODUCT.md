@@ -55,3 +55,7 @@ Full marketing copy for hero, six services, four-step process, three pricing tie
 ## Accessibility & Inclusion
 
 No product-specific accessibility requirement has been established yet.
+
+## Payments
+
+Payments use Stripe (sandbox "WebYello sandbox" for testing, live account "Netyello"): the pricing page's "Pay online" block (`pay.js`) calls `api/stripe/checkout.js`, which opens Stripe-hosted Checkout for the care plan, found by price lookup key `webyello_care_monthly` (€59/month subscription), with Stripe Tax (`automatic_tax`, Finland registration, prices excl. VAT) and VAT-ID collection for EU reverse charge. `api/stripe/webhook.js` verifies Stripe signatures and emails the studio about payments, invoice payments/failures, care-plan cancellations, refunds and disputes (audit orders from `/order.html` are left to their own webhook); `api/stripe/manage.js` redirects to the Stripe customer portal login. Audits are ordered on `/order.html`. Quoted projects, custom engraving/3D-printing jobs and hourly work are invoiced from the Stripe Dashboard, not sold on the site. Env vars: `STRIPE_SECRET_KEY` (restricted key), `STRIPE_WEBHOOK_SECRET`, `STRIPE_PORTAL_LOGIN_URL`.

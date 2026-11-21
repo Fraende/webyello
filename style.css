@@ -234,6 +234,14 @@ a.ticket:hover{border-color:var(--foreground);border-top-color:var(--under)}
 .plan li{font-size:var(--text-body);padding:10px 0 10px 26px;border-bottom:1px solid var(--border);position:relative}
 .plan li::before{position:absolute;left:0;top:.95em}
 .plan .btn{width:100%}
+/* Pay online (pricing page): Stripe Checkout buttons, status lines and the thank-you after returning */
+.pay-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.pay-actions .btn{flex:1 1 260px}
+.pay-msg{font-weight:700}
+#payErr{color:var(--destructive)}
+.pay-done{background:var(--card);border-left:4px solid var(--primary);padding:12px 16px}
+.pay-note{font-size:var(--text-small);color:var(--muted-foreground)}
+.pay-note a,.pay-msg a{color:var(--link)}
 .care{margin-top:32px;background:var(--secondary);color:var(--foreground);padding:24px 28px;font-size:1rem}
 .care+.care{margin-top:12px}
 .care p+p{margin-top:10px}

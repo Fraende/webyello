@@ -84,6 +84,16 @@
       </div>
     </div>
     <div class="care"><p data-i18n="pcare"><b>Care plan — €59/month:</b> updates, backups, security and small changes handled for you, so your site stays fresh.</p><p data-i18n="plang"><b>Extra language for Launch — €199 + VAT per language:</b> make the one-page site bilingual or multilingual without moving up to Business, where multilingual content is included.</p><p data-i18n="phour">Extra work outside the packages: €90/hour</p></div>
+    <div class="care pay" id="pay">
+      <p class="pay-done" id="payDoneCare" role="status" hidden data-i18n="pay_done_care"><b>Thank you — your care plan is active.</b> A receipt is on its way to your email. We’ll be in touch within one business day to get your site on the care rota.</p>
+      <p data-i18n="pay_intro"><b>Start the care plan online:</b> pay by card or another payment method, monthly, cancel any time. €59/month plus VAT; business customers in other EU countries can add their VAT ID at checkout.</p>
+      <p class="pay-actions">
+        <button type="button" class="btn btn-yellow" data-checkout="care" data-i18n="pay_care_btn">Start care plan — €59/month + VAT</button>
+      </p>
+      <p class="pay-msg" id="payWait" role="status" hidden data-i18n="pay_wait">Taking you to secure checkout…</p>
+      <p class="pay-msg" id="payErr" role="alert" hidden data-i18n="pay_err">Online payment isn’t available right now. Try again in a moment or email <a href="mailto:info@netyello.com">info@netyello.com</a>.</p>
+      <p class="pay-note" data-i18n="pay_note">Payments are handled by Stripe; we never see your card details. Website projects are invoiced after a fixed quote. Already on the care plan? <a href="/api/stripe/manage">Manage billing or cancel</a>.</p>
+    </div>
     <div class="care audit" id="audit">
       <p data-i18n="paudit"><b>Audit — from €249:</b> already have a website? Choose what we check: the website itself, how visible it is to AI assistants, or both. You get a clear list of fixes in order of importance. Order and pay online; your report arrives within 3 business days.</p>
       <ul class="audit-opts">
@@ -225,5 +235,6 @@
 
 <script src="/site.js"></script>
 <script src="/quote.js"></script>
+<script src="/pay.js"></script>
 </body>
 </html>
