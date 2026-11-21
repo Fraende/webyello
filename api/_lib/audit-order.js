@@ -87,7 +87,12 @@ async function send(payload, idempotencyKey) {
     headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json', 'Idempotency-Key': idempotencyKey },
     body: JSON.stringify(payload),
   });
-  if (!r.ok) throw new Error(`Resend ${r.status}: ${await r.text().catch(() => '')}`);
+  if (r.ok) return;
+  const text = await r.text().catch(() => '');
+  // Same key, different body: this email was already sent on an earlier delivery of the event (a retry can carry a
+  // different credit error message). Treat it as sent, so one warning email per order doesn't block the retry.
+  if (r.status === 409 && text.includes('invalid_idempotent_request')) return;
+  throw new Error(`Resend ${r.status}: ${text}`);
 }
 
 // Returns { status, body } for the webhook to send. A non-2xx status makes Stripe retry the event later.
