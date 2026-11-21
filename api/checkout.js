@@ -94,7 +94,7 @@ module.exports = async function handler(req, res) {
   const key = process.env.STRIPE_SECRET_KEY;
   const taxRate = process.env.STRIPE_TAX_RATE_ID;
   if (!key || !taxRate) {
-    console.error('checkout: STRIPE_SECRET_KEY or STRIPE_TAX_RATE_ID is not set');
+    console.error('checkout: not set:', [!key && 'STRIPE_SECRET_KEY', !taxRate && 'STRIPE_TAX_RATE_ID'].filter(Boolean).join(', '));
     return json(res, 500, { error: 'not_configured' });
   }
 
