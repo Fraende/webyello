@@ -4,7 +4,8 @@
 //
 // Environment variables (Vercel → Project → Settings → Environment Variables):
 //   STRIPE_SECRET_KEY    required. Stripe → Developers → API keys. Use the test key (sk_test_…) for Preview.
-//   STRIPE_TAX_RATE_ID   required. Stripe → Product catalog → Tax rates: "ALV", Finland, 25.5 %, exclusive (txr_…).
+// VAT comes from Stripe Tax (automatic_tax), as for the care plan: Finnish VAT for Finnish buyers and consumers,
+// reverse charge for EU businesses that enter a valid VAT ID. Needs a Finland registration under Stripe → Tax.
 //   SITE_URL             optional. Where Stripe sends the buyer back. Default: this request's own host.
 
 const { lineItems } = require('./_lib/audit');
@@ -92,9 +93,8 @@ module.exports = async function handler(req, res) {
   if (fields.length) return json(res, 400, { error: 'invalid', fields });
 
   const key = process.env.STRIPE_SECRET_KEY;
-  const taxRate = process.env.STRIPE_TAX_RATE_ID;
-  if (!key || !taxRate) {
-    console.error('checkout: not set:', [!key && 'STRIPE_SECRET_KEY', !taxRate && 'STRIPE_TAX_RATE_ID'].filter(Boolean).join(', '));
+  if (!key) {
+    console.error('checkout: STRIPE_SECRET_KEY is not set');
     return json(res, 500, { error: 'not_configured' });
   }
 
@@ -117,6 +117,7 @@ module.exports = async function handler(req, res) {
     customer_email: order.email,
     customer_creation: 'always',
     billing_address_collection: 'required',
+    automatic_tax: { enabled: true },
     tax_id_collection: { enabled: true },
     invoice_creation: { enabled: true, invoice_data: { metadata: { kind: 'webyello_audit' }, footer: 'WebYello on NetYellon palvelu · NetYello, Y-tunnus 2301971-6' } },
     success_url: `${base}/order.html?status=paid`,
@@ -128,7 +129,6 @@ module.exports = async function handler(req, res) {
     form({
       price_data: { currency: 'eur', unit_amount: it.amount, tax_behavior: 'exclusive', product_data: { name: it.name } },
       quantity: 1,
-      tax_rates: [taxRate],
     }, `line_items[${i}]`, params);
   });
 
