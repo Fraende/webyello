@@ -1,6 +1,6 @@
 // POST /api/checkout — validates an audit order from /order.html and opens a Stripe Checkout page for it.
 // Returns { url } to redirect the buyer to. Nothing is stored here: the order details travel in the
-// Checkout Session's metadata, and /api/stripe-webhook acts on them once Stripe confirms the payment.
+// Checkout Session's metadata, and /api/stripe/webhook acts on them once Stripe confirms the payment.
 //
 // Environment variables (Vercel → Project → Settings → Environment Variables):
 //   STRIPE_SECRET_KEY    required. Stripe → Developers → API keys. Use the test key (sk_test_…) for Preview.

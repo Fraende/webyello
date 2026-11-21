@@ -1,47 +1,20 @@
-// POST /api/stripe-webhook — Stripe calls this when an audit order has been paid.
-// It verifies Stripe's signature, creates the audit fee credit (half the fee excl. VAT, single use, 30 days;
-// see _lib/credit.js), then emails the order brief to the studio and a confirmation to the buyer.
+// Paid audit orders from /order.html. Called by /api/stripe/webhook (the site's only Stripe webhook) after it has
+// verified Stripe's signature. Creates the audit fee credit (half the fee excl. VAT, single use, 30 days; see
+// credit.js), then emails the order brief to the studio and a confirmation to the buyer.
 // Stripe sends the receipt and VAT invoice itself (invoice_creation in /api/checkout).
 //
-// Stripe setup: Developers → Webhooks → Add endpoint
-//   URL:    https://<site>/api/stripe-webhook
-//   Events: checkout.session.completed, checkout.session.async_payment_succeeded
-//
 // Environment variables:
-//   STRIPE_WEBHOOK_SECRET  required. The endpoint's signing secret (whsec_…).
 //   STRIPE_SECRET_KEY      required (shared with /api/checkout). Creates the credit coupon and promotion code.
 //   RESEND_API_KEY         required (already used by /api/contact).
 //   AUDIT_ORDERS_TO        optional. Where order briefs go. Default: CONTACT_TO, then info@netyello.com.
 //   CONTACT_FROM           optional. Sender, as for /api/contact. The buyer's confirmation is only sent once this
 //                          is a verified domain sender (Resend's shared test sender can't reach outside addresses).
 
-const crypto = require('node:crypto');
-const { NAMES } = require('./_lib/audit');
-const { ensureCredit, fmtDate } = require('./_lib/credit');
+const { NAMES } = require('./audit');
+const { ensureCredit, fmtDate } = require('./credit');
 
-const TOLERANCE = 300; // seconds
-
-// Vercel's body helpers parse JSON lazily; reading the stream ourselves keeps the exact bytes Stripe signed.
-async function rawBody(req) {
-  if (Buffer.isBuffer(req.body)) return req.body;
-  const chunks = [];
-  for await (const c of req) chunks.push(typeof c === 'string' ? Buffer.from(c) : c);
-  return Buffer.concat(chunks);
-}
-
-function verify(raw, header, secret, now = Math.floor(Date.now() / 1000)) {
-  if (!header || !secret) return false;
-  const parts = Object.create(null);
-  const sigs = [];
-  for (const p of header.split(',')) {
-    const [k, v] = p.split('=');
-    if (k === 'v1') sigs.push(v); else parts[k] = v;
-  }
-  const t = Number(parts.t);
-  if (!t || Math.abs(now - t) > TOLERANCE || !sigs.length) return false;
-  const expected = crypto.createHmac('sha256', secret).update(`${t}.`).update(raw).digest('hex');
-  return sigs.some((s) => s && s.length === expected.length && crypto.timingSafeEqual(Buffer.from(s), Buffer.from(expected)));
-}
+const AUDIT_EVENTS = ['checkout.session.completed', 'checkout.session.async_payment_succeeded'];
+const isAuditOrder = (event) => ((event.data && event.data.object && event.data.object.metadata) || {}).kind === 'webyello_audit';
 
 const euros = (cents) => (cents / 100).toLocaleString('fi-FI', { minimumFractionDigits: 2 }) + ' €';
 const money = (cents, lang) => (lang === 'en' ? '€' + (cents / 100).toLocaleString('en-GB', { minimumFractionDigits: 2 }) : euros(cents));
@@ -117,27 +90,15 @@ async function send(payload, idempotencyKey) {
   if (!r.ok) throw new Error(`Resend ${r.status}: ${await r.text().catch(() => '')}`);
 }
 
-module.exports = async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
-    return res.status(405).end();
-  }
-  const raw = await rawBody(req);
-  if (!verify(raw, req.headers['stripe-signature'], process.env.STRIPE_WEBHOOK_SECRET)) {
-    return res.status(400).json({ error: 'bad_signature' });
-  }
-
-  let event;
-  try { event = JSON.parse(raw.toString('utf8')); } catch (e) { return res.status(400).json({ error: 'bad_json' }); }
-
+// Returns { status, body } for the webhook to send. A non-2xx status makes Stripe retry the event later.
+async function handleAuditOrder(event) {
   const s = event.data && event.data.object;
-  const relevant = ['checkout.session.completed', 'checkout.session.async_payment_succeeded'].includes(event.type);
-  if (!relevant || !s || (s.metadata || {}).kind !== 'webyello_audit' || s.payment_status !== 'paid') {
-    return res.status(200).json({ received: true, ignored: true });
+  if (!AUDIT_EVENTS.includes(event.type) || !isAuditOrder(event) || s.payment_status !== 'paid') {
+    return { status: 200, body: { received: true, ignored: 'not_paid' } };
   }
   if (!process.env.RESEND_API_KEY) {
-    console.error('stripe-webhook: RESEND_API_KEY is not set');
-    return res.status(500).json({ error: 'not_configured' }); // Stripe retries, so the order isn't lost
+    console.error('audit-order: RESEND_API_KEY is not set');
+    return { status: 500, body: { error: 'not_configured' } }; // Stripe retries, so the order isn't lost
   }
 
   const m = s.metadata;
@@ -150,7 +111,7 @@ module.exports = async function handler(req, res) {
     credit = await ensureCredit(s, event.created || s.created || Math.floor(Date.now() / 1000));
   } catch (e) {
     creditError = e.message;
-    console.error('stripe-webhook: credit not created', e);
+    console.error('audit-order: credit not created', e);
   }
 
   const from = process.env.CONTACT_FROM || 'WebYello <onboarding@resend.dev>';
@@ -164,20 +125,19 @@ module.exports = async function handler(req, res) {
       text: studioText(s, credit, creditError),
     }, `audit-studio-${s.id}-${credit ? 'credit' : 'nocredit'}`);
   } catch (e) {
-    console.error('stripe-webhook: studio email failed', e);
-    return res.status(502).json({ error: 'email_failed' }); // Stripe retries; the idempotency key stops duplicates
+    console.error('audit-order: studio email failed', e);
+    return { status: 502, body: { error: 'email_failed' } }; // Stripe retries; the idempotency key stops duplicates
   }
-  if (!credit) return res.status(503).json({ error: 'credit_pending' }); // Stripe retries with backoff for up to 3 days
+  if (!credit) return { status: 503, body: { error: 'credit_pending' } }; // Stripe retries with backoff for up to 3 days
   if (process.env.CONTACT_FROM && buyerEmail) {
     try {
       const msg = (BUYER[m.lang] || BUYER.fi)(m, credit);
       await send({ from, to: [buyerEmail], reply_to: process.env.AUDIT_ORDERS_TO || process.env.CONTACT_TO || 'info@netyello.com', ...msg }, `audit-buyer-${s.id}`);
     } catch (e) {
-      console.error('stripe-webhook: buyer confirmation failed', e); // the studio has the order; don't make Stripe retry
+      console.error('audit-order: buyer confirmation failed', e); // the studio has the order; don't make Stripe retry
     }
   }
-  return res.status(200).json({ received: true });
-};
+  return { status: 200, body: { received: true } };
+}
 
-module.exports.verify = verify;
-module.exports.studioText = studioText;
+module.exports = { AUDIT_EVENTS, isAuditOrder, handleAuditOrder, studioText };

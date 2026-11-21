@@ -1,14 +1,16 @@
-// POST /api/stripe/webhook — receives Stripe events. Required: payments, renewals, failed payments, refunds and
+// POST /api/stripe/webhook — the site's only Stripe webhook; receives every Stripe event. Required: payments, renewals, failed payments, refunds and
 // disputes all happen after the customer leaves the checkout page, so the success page can't be relied on.
 //
 // The site has no database, so "fulfilment" means telling the studio: every handled event emails the studio inbox
 // (via Resend, like the contact form) with what happened and a link to the object in the Stripe Dashboard.
 //
 // Register in Stripe Dashboard → Developers → Webhooks → Add endpoint: https://<site>/api/stripe/webhook with the
-// events listed in HANDLERS below, then put its signing secret in STRIPE_WEBHOOK_SECRET.
+// events listed in HANDLERS below, then put its signing secret in STRIPE_WEBHOOK_SECRET. One destination per Stripe
+// account: the sandbox one points at a Preview deployment, the live one at https://www.webyello.fi.
 // Stripe retries failed deliveries, and an event can arrive more than once: duplicates only mean a duplicate email.
 
 const { stripe, json, notifyStudio } = require('../_stripe');
+const { AUDIT_EVENTS, isAuditOrder, handleAuditOrder } = require('../_lib/audit-order');
 
 const eur = (cents, currency = 'eur') =>
   new Intl.NumberFormat('fi-FI', { style: 'currency', currency: currency.toUpperCase() }).format((cents || 0) / 100);
@@ -18,10 +20,6 @@ function dash(event, path) {
 }
 
 const ITEM_NAME = { care: 'Care plan' };
-
-// Audit orders from /order.html have their own webhook (/api/stripe-webhook), which sends the order brief and
-// the credit code. Skip their checkout events here so the studio doesn't get two emails per order.
-const isAuditOrder = (e) => e.data.object?.metadata?.kind === 'webyello_audit';
 
 const HANDLERS = {
   // Checkout finished. With delayed payment methods (e.g. bank debits) the money may not be in yet:
@@ -137,11 +135,21 @@ module.exports = async function handler(req, res) {
     return json(res, 400, { error: 'bad_signature' });
   }
 
+  // Audit orders from /order.html get the order brief and credit code (../_lib/audit-order.js) instead of the
+  // generic checkout note, so the studio gets one email per order.
+  if (event.type.startsWith('checkout.session.') && isAuditOrder(event)) {
+    if (!AUDIT_EVENTS.includes(event.type)) return json(res, 200, { received: true, ignored: event.type });
+    try {
+      const { status, body } = await handleAuditOrder(event);
+      return json(res, status, body);
+    } catch (e) {
+      console.error(`webhook: audit order ${event.id} failed`, e);
+      return json(res, 500, { error: 'handler_failed' });
+    }
+  }
+
   const handle = HANDLERS[event.type];
   if (!handle) return json(res, 200, { received: true, ignored: event.type });
-  if (event.type.startsWith('checkout.session.') && isAuditOrder(event)) {
-    return json(res, 200, { received: true, ignored: 'audit_order' });
-  }
   try {
     await handle(event);
   } catch (e) {

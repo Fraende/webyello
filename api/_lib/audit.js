@@ -1,4 +1,4 @@
-// Shared by /api/checkout and /api/stripe-webhook: prices, names and the order fields kept in Stripe metadata.
+// Shared by /api/checkout and the audit-order webhook handler: prices, names and the order fields kept in Stripe metadata.
 // The server is the only place prices are decided; the order page only displays them.
 
 const SITE_PRICES = { small: 390, large: 590, store: 890 }; // € excl. VAT
